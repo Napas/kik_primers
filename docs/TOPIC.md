@@ -145,7 +145,8 @@ Fields:
 
 Person-only optional fields:
 
-- `life[]`: 3-7 events from the primer, years ascending:
+- `life[]`: 3–7 events from the primer, years ascending; fewer only where the primer and
+  `faces.json` date nothing more:
   `{ "year": 1547, "label": "Išspausdina „Katekizmą“", "place": "Karaliaučius" }`.
   Cover (where the primer says them): born, studies, key posts, main works,
   exile or prison, death. `place` is optional.

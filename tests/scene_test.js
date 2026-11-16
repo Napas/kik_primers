@@ -108,7 +108,14 @@ Deno.test("buildWorld places every room and spot from the layout", () => {
     assert(w.camera.isPerspectiveCamera);
     assertEquals(w.camera.aspect, 1.5);
     assert(w.camera.position.x < layout.rooms[0].x0, "camera starts before the first room");
+    assertEquals(photos, [], "buildWorld leaves photo loading to the caller");
+    const jonas = w.spotMeshes.get("jonas-rastas");
+    assertEquals(w.spotMeshes.get("pirma-knyga").userData.loadPhoto, undefined, "no photo, no loader");
+    jonas.userData.loadPhoto();
     assertEquals(photos.map(([f]) => f), ["img/jonas.jpg"]);
+    const tex = new THREE.Texture({ width: 66, height: 86 });
+    photos[0][1](tex);
+    assertEquals(jonas.userData.portrait.material.map, tex, "the loaded photo goes on the portrait");
     assertEquals(w.walls.length, 3 * layout.rooms.length, "back wall and two end walls per room");
     for (const b of w.walls) assert(b.min.x <= b.max.x && b.min.y < b.max.y && b.min.z <= b.max.z);
     const inside = (p) => p.x >= w.bounds.x0 && p.x <= w.bounds.x1 && p.z >= w.bounds.z0 && p.z <= w.bounds.z1;

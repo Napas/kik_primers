@@ -15,9 +15,16 @@ const PATH_W = 1.4;
 const PATH_OFFSET = 1.4; // path centre in front of a room's z1
 const LANDMARK_D = 0.8; // depth of the strip behind the first spot row
 const WINDOW_GAP = 2.4; // windows keep this far from the room centre, where the landmark stands
+const TICK_SIDE = 0.9; // year markers stand this far beyond the path centre
+const MARKER_H = 0.5; // year marker post height
+const ARC = { r: 0.035, lift: 0.8, perMetre: 0.25, maxLift: 6, segments: 40, opacity: 0.9 };
+const LIFESPAN = { h: 0.08, d: 0.16 };
 
 /** z of the walking path along the lane of `room` (a layout room). */
 export const pathZ = (room) => room.z1 + PATH_OFFSET;
+
+/** z of the year-marker line beside the path of `room`'s lane. */
+export const yearLineZ = (room) => pathZ(room) + TICK_SIDE;
 
 /** One entry per lane: its rooms' x extent and its path's z. */
 export function pathLanes(layout) {
@@ -731,14 +738,31 @@ export function ground(THREE, { x0, x1, z0, z1 }, C) {
   return m;
 }
 
+/** Gold tube arcing from `a` to `b` ({x, y, z}); longer links arc higher. */
+export function linkArc(THREE, a, b, C) {
+  const [p0, p2] = [new THREE.Vector3(a.x, a.y, a.z), new THREE.Vector3(b.x, b.y, b.z)];
+  const lift = Math.min(ARC.maxLift, ARC.lift + ARC.perMetre * p0.distanceTo(p2));
+  const p1 = p0.clone().add(p2).multiplyScalar(0.5);
+  p1.y = Math.max(p0.y, p2.y) + lift;
+  const geo = new THREE.TubeGeometry(new THREE.QuadraticBezierCurve3(p0, p1, p2), ARC.segments, ARC.r, 6, false);
+  return new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: C.gold, transparent: true, opacity: ARC.opacity }));
+}
+
+/** Gold bar from x0 to x1 lying on the tops of the year markers at z. */
+export function lifespanBar(THREE, x0, x1, z, C) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, LIFESPAN.h, LIFESPAN.d), new THREE.MeshBasicMaterial({ color: C.gold }));
+  m.position.set((x0 + x1) / 2, MARKER_H, z);
+  return m;
+}
+
 /** Year marker: a short gold post with the year above it; origin at its foot. */
 export function yearMarker(THREE, year, C) {
   const g = new THREE.Group();
   const post = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.04, 0.04, 0.5, 8),
+    new THREE.CylinderGeometry(0.04, 0.04, MARKER_H, 8),
     new THREE.MeshStandardMaterial({ color: C.gold, metalness: 0.5, roughness: 0.4 }),
   );
-  post.position.y = 0.25;
+  post.position.y = MARKER_H / 2;
   const label = makeLabel(THREE, String(year));
   label.position.y = 0.8;
   g.add(post, label);

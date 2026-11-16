@@ -100,3 +100,18 @@ pre.licence { white-space: pre-wrap; font-size: .8rem; color: var(--muted); }
 .world-page .bar a + a { margin-left: 1rem; }
 .world { position: fixed; inset: 0; }
 .world canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+
+/* World panel and overview */
+#panel .close { float: right; margin: 0 0 .5rem .5rem; }
+#panel-body > .panel { border: 0; padding: 0; background: none; overflow: visible; }
+.overview { position: fixed; z-index: 5; top: 3.5rem; left: 1rem; width: min(22rem, calc(100% - 2rem)); }
+.overview .strip { position: relative; height: 1.4rem; background: color-mix(in srgb, var(--panel) 80%, transparent); border: 1px solid var(--path); border-radius: 4px; }
+.overview .seg { position: absolute; box-sizing: border-box; border: 1px solid var(--bg); background: var(--path); cursor: pointer; }
+.overview .seg:hover { background: var(--gold); }
+.overview .you { position: absolute; top: -3px; bottom: -3px; width: 3px; margin-left: -1px; background: var(--gold); pointer-events: none; }
+.overview details { margin-top: .4rem; background: color-mix(in srgb, var(--panel) 90%, transparent); border: 1px solid var(--path); border-radius: 6px; padding: .3rem .6rem; }
+.overview ol { list-style: none; margin: .4rem 0 0; padding: 0; max-height: 50vh; overflow-y: auto; }
+.overview li button { width: 100%; text-align: left; margin-bottom: .3rem; display: flex; justify-content: space-between; gap: .5rem; }
+.overview li button[aria-current] { border-color: var(--gold); }
+.overview .count { color: var(--muted); font-size: .85rem; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { #panel { transition: none; } }

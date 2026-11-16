@@ -138,6 +138,28 @@ Deno.test({
         assertEquals(a["data-error"], undefined);
         assertEquals(a["data-ready"], "index");
       });
+      await t.step("a spot id in the hash opens that spot", async () => {
+        const a = await page("world.html?topic=mini-test#jonas-rastas");
+        assertEquals(a["data-error"], undefined);
+        assertEquals([a["data-ready"], a["data-open"]], ["world", "jonas-rastas"]);
+      });
+      await t.step("an unknown spot id in the hash stays at the start", async () => {
+        const a = await page("world.html?topic=mini-test#no-such");
+        assertEquals(a["data-error"], undefined);
+        assertEquals([a["data-ready"], a["data-open"]], ["world", undefined]);
+      });
+      await t.step("world works when storage throws on every call", async () => {
+        const a = await page("world.html?topic=mini-test&nostore=1#jonas-rastas");
+        assertEquals(a["data-error"], undefined);
+        assertEquals([a["data-ready"], a["data-open"]], ["world", "jonas-rastas"]);
+      });
+      for (const [p, ready] of [["test.html?topic=mini-test&nostore=1", "test"], ["index.html?nostore=1", "index"]]) {
+        await t.step(`${ready} page works when storage throws on every call`, async () => {
+          const a = await page(p);
+          assertEquals(a["data-error"], undefined);
+          assertEquals(a["data-ready"], ready);
+        });
+      }
       await t.step("a failure while building the world leaves the error visible", async () => {
         const dom = await dumpDom(`${base}world.html?topic=broken`);
         assert(htmlAttrs(dom)["data-error"], "no data-error");

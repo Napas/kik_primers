@@ -4,12 +4,11 @@
 import { COLORS, SCENE } from "../theme.js";
 import { makeSpot, setPhoto } from "./spots.js";
 import { makeLabel } from "./labels.js";
-import { ground, path, pathLanes, pathZ, plainRoom, STYLES, yearMarker } from "./styles.js";
+import { ground, path, pathLanes, pathZ, plainRoom, STYLES, yearLineZ, yearMarker } from "./styles.js";
 import { addPathLights } from "./light.js";
 
 export { pathZ };
 
-const TICK_SIDE = 0.9; // year markers stand this far beyond the path centre
 const TITLE_FRONT = 0.6; // room title in front of a room's z1
 const ROOM_TITLE_Y = 2.9;
 const START_BACK = 5; // camera start before the first room
@@ -19,6 +18,7 @@ const GROUND_PAD = 20;
 
 /**
  * opts: aspect (camera); loadPhoto(file, apply(texture)) to fetch a person's photo, initials stay until apply.
+ * Photos are not fetched here: a spot with a photo gets userData.loadPhoto(), which the caller runs when it wants.
  * Returns {scene, camera, spotMeshes: Map<id, Object3D>, roomGroups: Map<n, Group>, update(dt),
  * walls: Box3[] (picks stop at them), bounds: {x0, x1, z0, z1} (walkable area)}.
  */
@@ -45,7 +45,7 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
   addPathLights(THREE, scene, layout);
   for (const t of layout.ticks) {
     const marker = yearMarker(THREE, t.year, COLORS);
-    marker.position.set(t.x, 0, pathZ(first) + TICK_SIDE);
+    marker.position.set(t.x, 0, yearLineZ(first));
     scene.add(marker);
   }
 
@@ -73,7 +73,7 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
     label.position.y = obj.userData.labelY;
     obj.add(label);
     obj.userData.label = label;
-    if (spot.photo?.file && loadPhoto) loadPhoto(spot.photo.file, (tex) => setPhoto(obj, tex));
+    if (spot.photo?.file && loadPhoto) obj.userData.loadPhoto = () => loadPhoto(spot.photo.file, (tex) => setPhoto(obj, tex));
     scene.add(obj);
     spotMeshes.set(p.id, obj);
   }

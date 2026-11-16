@@ -164,6 +164,34 @@
         1990
       ],
       "style": "dp-barrack"
+    },
+    {
+      "n": 8,
+      "title": "Sovietmetis (1944–1990): tarp ideologijos ir tautos atminties",
+      "intro": "1944–1990 m. sovietinėje Lietuvoje literatūra kūrė tarp ideologijos ir tautos atminties. Šalia Justino Marcinkevičiaus čia sudėti trys barai: proza, drama ir poezija.",
+      "why": [
+        {
+          "q": "Kaip Marcinkevičiaus dramos susijusios su raštijos pradžia?",
+          "a": "Trilogija eina nuo valstybės („Mindaugas“) per kultūrą („Katedra“) iki kalbos ir knygos („Mažvydas“). Epilogas „Daukantas“ grąžina į pirmąją lietuvišką istoriją. Taip sovietmečiu jis kalbėjo apie tautos tapatybę."
+        },
+        {
+          "q": "Kodėl tiek poezijos žinoma iš Kernagio ir kitų dainų?",
+          "a": "Daug poezijos pasiekė žmones per dainas: Binkio Tamošius Bekepuris, Gedos baltojo nieko avinėlis, Erlicko „Kaip gražu miške“, Brazdžionio „Šaukiu aš tautą“, Vienažindžio „Linksminkimos“, Baltakio „Daktarai“."
+        },
+        {
+          "q": "Kaip skirti „Ameriką pirtyje“ ir „Žaldokynę“?",
+          "a": "„Amerika pirtyje“ (1895) – pirmoji lietuviška komedija, kurią parašė Keturakis, t. y. broliai Vilkutaičiai. „Žaldokynė“ – vėlesnė Boriso Dauguviečio komedija. Dauguvietis dažnai klaidingai laikomas „Amerikos pirtyje“ autoriumi."
+        },
+        {
+          "q": "Kaip skirti Baltušį ir Avyžių?",
+          "a": "Baltušis – „Parduotos vasaros“ ir „Sakmė apie Juzą“, Avyžius – „Kaimas kryžkelėje“ ir „Sodybų tuštėjimo metas“. Abu rašė apie kaimą, todėl taip patogu juos supainioti."
+        }
+      ],
+      "span": [
+        1944,
+        1990
+      ],
+      "style": "concrete"
     }
   ],
   "spots": [
@@ -3622,8 +3650,916 @@
       "text": "Jurgis Savickis – vienas „svetimakalbių“ lietuvių; diplomatinę karjerą pradėjo Danijoje, o savo vilą Prancūzijoje pavadino „Ariogala“.",
       "links": [],
       "wikidata": "Q14835563"
+    },
+    {
+      "id": "marcinkevicius",
+      "room": 8,
+      "kind": "person",
+      "name": "Justinas Marcinkevičius",
+      "aliases": [],
+      "years": [
+        1930,
+        2011
+      ],
+      "at": 1964,
+      "text": "Justinas Marcinkevičius (1930 m. Važatkiemyje, Prienų r. – 2011) baigė Prienų „Žiburio“ gimnaziją, kaip ir filosofas Antanas Maceina. Vadinamas tautos sąžine. Poemos: „Dvidešimtas pavasaris“, „Kraujas ir pelenai“ (1944 m. įvykiams atminti); „Donelaitis“ (1964) – už ją 1965 m. tapo pirmuoju „Poezijos pavasario“ laureatu; „Devyni broliai“ (baladžių poema), mitologinės dramos „Heroica, arba Prometėjo pasmerkimas“ ir „Ikaras“. Draminė trilogija: „Mindaugas“ (1968, pirmoji), „Katedra“ (1971), „Mažvydas“ (1977, trečioji). Epilogas – drama „Daukantas“; „Donelaitis“ trilogijai nepriklauso. Kiti kūriniai: apysaka „Pušis, kuri juokėsi“, eiliuota pasaka „Grybų karas“, „Dienoraštis be datų“. Sparnuota citata: „Žmogus – kaip raidė knygoje, kurios pavadinimas – žmonija“. Jo vardu pavadinta Lietuvos mokslų akademijos premija už literatūros tyrimus. Druskininkuose – skveras ir skulptūra „Giedantis paukštis“. Apie jį sukurti dokumentiniai filmai „Lopšinė motinai“, „Prie rugių ir prie ugnies“. „Šaukiu aš tautą“ (Brazdžionio) ir „Zuikis Puikis“ (Mieželaičio) – ne jo.",
+      "links": [
+        {
+          "to": "donelaitis-poema",
+          "label": "parašė"
+        },
+        {
+          "to": "devyni-broliai",
+          "label": "parašė"
+        },
+        {
+          "to": "mindaugas",
+          "label": "parašė"
+        },
+        {
+          "to": "katedra",
+          "label": "parašė"
+        },
+        {
+          "to": "mazvydas-drama",
+          "label": "parašė"
+        },
+        {
+          "to": "daukantas-drama",
+          "label": "parašė"
+        },
+        {
+          "to": "grybu-karas",
+          "label": "parašė"
+        },
+        {
+          "to": "poezijos-pavasaris",
+          "label": "pirmasis laureatas"
+        },
+        {
+          "to": "mazvydas",
+          "label": "drama „Mažvydas“"
+        },
+        {
+          "to": "donelaitis",
+          "label": "poema „Donelaitis“"
+        },
+        {
+          "to": "maceina",
+          "label": "ta pati gimnazija"
+        }
+      ],
+      "wikidata": "Q359563"
+    },
+    {
+      "id": "donelaitis-poema",
+      "room": 8,
+      "kind": "work",
+      "name": "„Donelaitis“",
+      "aliases": [],
+      "years": [
+        1964
+      ],
+      "at": 1964,
+      "text": "Justino Marcinkevičiaus poema „Donelaitis“ (1964) – už ją 1965 m. jis tapo pirmuoju „Poezijos pavasario“ laureatu. Ji draminei trilogijai nepriklauso.",
+      "links": [
+        {
+          "to": "marcinkevicius",
+          "label": "autorius"
+        },
+        {
+          "to": "donelaitis",
+          "label": "apie jį"
+        }
+      ],
+      "by": "marcinkevicius"
+    },
+    {
+      "id": "devyni-broliai",
+      "room": 8,
+      "kind": "work",
+      "name": "„Devyni broliai“",
+      "aliases": [],
+      "years": null,
+      "at": 1964,
+      "text": "„Devyni broliai“ – Justino Marcinkevičiaus baladžių poema.",
+      "links": [
+        {
+          "to": "marcinkevicius",
+          "label": "autorius"
+        }
+      ],
+      "by": "marcinkevicius"
+    },
+    {
+      "id": "mindaugas",
+      "room": 8,
+      "kind": "work",
+      "name": "„Mindaugas“",
+      "aliases": [],
+      "years": [
+        1968
+      ],
+      "at": 1968,
+      "text": "„Mindaugas“ (1968) – pirmoji Justino Marcinkevičiaus draminės trilogijos dalis; trilogija eina nuo valstybės („Mindaugas“) per kultūrą („Katedra“) iki kalbos ir knygos („Mažvydas“).",
+      "links": [
+        {
+          "to": "marcinkevicius",
+          "label": "autorius"
+        },
+        {
+          "to": "katedra",
+          "label": "kita trilogijos dalis"
+        }
+      ],
+      "by": "marcinkevicius"
+    },
+    {
+      "id": "katedra",
+      "room": 8,
+      "kind": "work",
+      "name": "„Katedra“",
+      "aliases": [],
+      "years": [
+        1971
+      ],
+      "at": 1971,
+      "text": "„Katedra“ (1971) – antroji Justino Marcinkevičiaus draminės trilogijos dalis; pagrindinis veikėjas Laurynas Stuoka-Gucevičius.",
+      "links": [
+        {
+          "to": "marcinkevicius",
+          "label": "autorius"
+        },
+        {
+          "to": "mazvydas-drama",
+          "label": "kita trilogijos dalis"
+        }
+      ],
+      "by": "marcinkevicius"
+    },
+    {
+      "id": "mazvydas-drama",
+      "room": 8,
+      "kind": "work",
+      "name": "„Mažvydas“",
+      "aliases": [],
+      "years": [
+        1977
+      ],
+      "at": 1977,
+      "text": "„Mažvydas“ (1977) – trečioji Justino Marcinkevičiaus draminės trilogijos dalis. Jos garsus vaizdas – pirmosios raidės skiemenuojamos („el-ie“ bus „lie“).",
+      "links": [
+        {
+          "to": "marcinkevicius",
+          "label": "autorius"
+        },
+        {
+          "to": "mazvydas",
+          "label": "apie jį"
+        }
+      ],
+      "by": "marcinkevicius"
+    },
+    {
+      "id": "daukantas-drama",
+      "room": 8,
+      "kind": "work",
+      "name": "„Daukantas“",
+      "aliases": [],
+      "years": null,
+      "at": 1977,
+      "text": "Drama „Daukantas“ – Justino Marcinkevičiaus draminės trilogijos epilogas; ji grąžina į pirmąją lietuvišką istoriją.",
+      "links": [
+        {
+          "to": "marcinkevicius",
+          "label": "autorius"
+        },
+        {
+          "to": "daukantas",
+          "label": "apie jį"
+        }
+      ],
+      "by": "marcinkevicius"
+    },
+    {
+      "id": "grybu-karas",
+      "room": 8,
+      "kind": "work",
+      "name": "„Grybų karas“",
+      "aliases": [],
+      "years": null,
+      "at": 1964,
+      "text": "Justino Marcinkevičiaus eiliuota pasaka „Grybų karas“: „Ei, tai vija pinavija, visą dieną grybais lyja“.",
+      "links": [
+        {
+          "to": "marcinkevicius",
+          "label": "autorius"
+        }
+      ],
+      "by": "marcinkevicius"
+    },
+    {
+      "id": "maceina",
+      "room": 8,
+      "kind": "person",
+      "name": "Antanas Maceina",
+      "aliases": [],
+      "years": [
+        1908,
+        1987
+      ],
+      "at": 1944,
+      "aside": true,
+      "text": "Filosofas Antanas Maceina, kaip ir Justinas Marcinkevičius, baigė Prienų „Žiburio“ gimnaziją.",
+      "links": [
+        {
+          "to": "marcinkevicius",
+          "label": "ta pati gimnazija"
+        }
+      ],
+      "wikidata": "Q4770951"
+    },
+    {
+      "id": "baltusis",
+      "room": 8,
+      "kind": "person",
+      "name": "Juozas Baltušis",
+      "aliases": [
+        "Albertas Juozėnas"
+      ],
+      "years": [
+        1909,
+        1991
+      ],
+      "at": 1957,
+      "text": "Juozas Baltušis (tikrasis vardas Albertas Juozėnas; 1909–1991) gimė Rygoje. Slapyvardį sudarė iš mamos ir tėvo pavardžių. Kūriniai: „Parduotos vasaros“ (1957, 1969), romanas „Sakmė apie Juzą“ (1979), „Su kuo valgyta druska“. „Sodybų tuštėjimo metas“ ir „Kaimas kryžkelėje“ – ne jo, o Avyžiaus. „Nesėtų rugių žydėjimas“ – Vytauto Bubnio.",
+      "links": [
+        {
+          "to": "sakme-apie-juza",
+          "label": "parašė"
+        },
+        {
+          "to": "avyzius",
+          "label": "dažnai supainiojami"
+        }
+      ],
+      "wikidata": "Q2042700"
+    },
+    {
+      "id": "sakme-apie-juza",
+      "room": 8,
+      "kind": "work",
+      "name": "„Sakmė apie Juzą“",
+      "aliases": [],
+      "years": [
+        1979
+      ],
+      "at": 1979,
+      "text": "Juozo Baltušio romanas „Sakmė apie Juzą“ (1979) pateko į šimtmečio knygų šimtuką.",
+      "links": [
+        {
+          "to": "baltusis",
+          "label": "autorius"
+        }
+      ],
+      "by": "baltusis"
+    },
+    {
+      "id": "avyzius",
+      "room": 8,
+      "kind": "person",
+      "name": "Jonas Avyžius",
+      "aliases": [],
+      "years": [
+        1922,
+        1999
+      ],
+      "at": 1976,
+      "text": "Jonas Avyžius (1922–1999; tai tikroji pavardė) parašė „Kaimas kryžkelėje“, „Sodybų tuštėjimo metas“ (už jį 1976 m. gavo sovietinę Lenino premiją), „Chameleono spalvos“, „Į stiklo kalną“ ir knygą vaikams „Aštuonetas iš Trepsės namų“.",
+      "links": [
+        {
+          "to": "sodybu-tustejimo-metas",
+          "label": "parašė"
+        },
+        {
+          "to": "baltusis",
+          "label": "dažnai supainiojami"
+        }
+      ],
+      "wikidata": "Q4055889"
+    },
+    {
+      "id": "sodybu-tustejimo-metas",
+      "room": 8,
+      "kind": "work",
+      "name": "„Sodybų tuštėjimo metas“",
+      "aliases": [],
+      "years": null,
+      "at": 1976,
+      "text": "Romanas „Sodybų tuštėjimo metas“ – Jono Avyžiaus, ne Baltušio. Už jį Avyžius 1976 m. gavo sovietinę Lenino premiją.",
+      "links": [
+        {
+          "to": "avyzius",
+          "label": "autorius"
+        }
+      ],
+      "by": "avyzius"
+    },
+    {
+      "id": "bubnys",
+      "room": 8,
+      "kind": "person",
+      "name": "Vytautas Bubnys",
+      "aliases": [],
+      "years": [
+        1932,
+        2021
+      ],
+      "at": 1970,
+      "aside": true,
+      "text": "„Nesėtų rugių žydėjimas“ – Vytauto Bubnio, ne Baltušio romanas.",
+      "links": [
+        {
+          "to": "baltusis",
+          "label": "painiojamas su juo"
+        }
+      ],
+      "wikidata": "Q15728230"
+    },
+    {
+      "id": "granauskas",
+      "room": 8,
+      "kind": "person",
+      "name": "Romualdas Granauskas",
+      "aliases": [],
+      "years": [
+        1939,
+        2014
+      ],
+      "at": 1975,
+      "text": "Romualdas Granauskas (1939–2014) dirbo Mosėdyje, Skuode, Sėdoje šaltkalviu, betonuotoju, dailide, mokytoju. Parašė apysakas „Jaučio aukojimas“ (1975) ir „Gyvenimas po klevu“ (1988). Apie Biliūno skaitytojus jis sakė: kam jo kūriniai nejaudina, tam gamta vaikystėje „vietoj širdies įdėjo akmenį“.",
+      "links": [
+        {
+          "to": "gyvenimas-po-klevu",
+          "label": "parašė"
+        },
+        {
+          "to": "biliunas",
+          "label": "rašė apie jo skaitytojus"
+        }
+      ],
+      "wikidata": "Q1410933"
+    },
+    {
+      "id": "gyvenimas-po-klevu",
+      "room": 8,
+      "kind": "work",
+      "name": "„Gyvenimas po klevu“",
+      "aliases": [],
+      "years": [
+        1988
+      ],
+      "at": 1988,
+      "text": "„Gyvenimas po klevu“ (1988) – Romualdo Granausko apysaka.",
+      "links": [
+        {
+          "to": "granauskas",
+          "label": "autorius"
+        }
+      ],
+      "by": "granauskas"
+    },
+    {
+      "id": "petkevicius",
+      "room": 8,
+      "kind": "person",
+      "name": "Vytautas Petkevičius",
+      "aliases": [],
+      "years": [
+        1930,
+        2008
+      ],
+      "at": 1965,
+      "text": "Vytautas Petkevičius (1930–2008) – vaikų klasika: „Gilės nuotykiai Ydų šalyje“ (žmonių karalius Molio Motiejus), „Didysis medžiotojas Mikas Pupkus“ (arklys Lupkus), „Sieksnis, sprindžio vaikas“. Vėliau – romanas „Durnių laivas“ (2003).",
+      "links": [
+        {
+          "to": "giles-nuotykiai",
+          "label": "parašė"
+        },
+        {
+          "to": "mikas-pupkus",
+          "label": "parašė"
+        },
+        {
+          "to": "sieksnis",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q692182"
+    },
+    {
+      "id": "giles-nuotykiai",
+      "room": 8,
+      "kind": "work",
+      "name": "„Gilės nuotykiai Ydų šalyje“",
+      "aliases": [],
+      "years": null,
+      "at": 1965,
+      "text": "Vytauto Petkevičiaus „Gilės nuotykiai Ydų šalyje“ – vaikų klasika; žmonių karalius – Molio Motiejus.",
+      "links": [
+        {
+          "to": "petkevicius",
+          "label": "autorius"
+        }
+      ],
+      "by": "petkevicius"
+    },
+    {
+      "id": "mikas-pupkus",
+      "room": 8,
+      "kind": "work",
+      "name": "„Didysis medžiotojas Mikas Pupkus“",
+      "aliases": [
+        "Mikas Pupkus"
+      ],
+      "years": null,
+      "at": 1965,
+      "text": "Vytauto Petkevičiaus „Didysis medžiotojas Mikas Pupkus“ – vaikų klasika; Miko Pupkaus arklys – Lupkus.",
+      "links": [
+        {
+          "to": "petkevicius",
+          "label": "autorius"
+        }
+      ],
+      "by": "petkevicius"
+    },
+    {
+      "id": "sieksnis",
+      "room": 8,
+      "kind": "work",
+      "name": "„Sieksnis, sprindžio vaikas“",
+      "aliases": [],
+      "years": null,
+      "at": 1965,
+      "text": "„Sieksnis, sprindžio vaikas“ – Vytauto Petkevičiaus knyga vaikams.",
+      "links": [
+        {
+          "to": "petkevicius",
+          "label": "autorius"
+        }
+      ],
+      "by": "petkevicius"
+    },
+    {
+      "id": "saltenis",
+      "room": 8,
+      "kind": "person",
+      "name": "Saulius Šaltenis",
+      "aliases": [],
+      "years": [
+        1945,
+        null
+      ],
+      "at": 1972,
+      "text": "Saulius Šaltenis (g. 1945) – apysaka „Riešutų duona“ (1972; filmas 1977). Šaltenis – Kovo 11-osios Akto signataras, vienas „Šiaurės Atėnų“ įkūrėjų, Vienuolio giminaitis.",
+      "links": [
+        {
+          "to": "riesutu-duona",
+          "label": "parašė"
+        },
+        {
+          "to": "vienuolis",
+          "label": "giminaitis"
+        }
+      ],
+      "wikidata": "Q599550"
+    },
+    {
+      "id": "riesutu-duona",
+      "room": 8,
+      "kind": "work",
+      "name": "„Riešutų duona“",
+      "aliases": [],
+      "years": [
+        1972
+      ],
+      "at": 1972,
+      "text": "Sauliaus Šaltenio apysaka „Riešutų duona“ (1972; filmas 1977). Joje Šatų ir Kaminskų šeimos susipyksta dėl karvės; pirmasis skyrius – „Škac, mirtie, visados škac“.",
+      "links": [
+        {
+          "to": "saltenis",
+          "label": "autorius"
+        }
+      ],
+      "by": "saltenis"
+    },
+    {
+      "id": "sluckis",
+      "room": 8,
+      "kind": "person",
+      "name": "Mykolas Sluckis",
+      "aliases": [],
+      "years": [
+        1928,
+        2013
+      ],
+      "at": 1960,
+      "text": "Mykolas Sluckis – sovietmečio prozininkas, romano „Laiptai į dangų“ autorius.",
+      "links": [],
+      "wikidata": "Q12666100"
+    },
+    {
+      "id": "zilinskaite",
+      "room": 8,
+      "kind": "person",
+      "name": "Vytautė Žilinskaitė",
+      "aliases": [],
+      "years": [
+        1930,
+        2024
+      ],
+      "at": 1970,
+      "text": "Vytautė Žilinskaitė (1930–2024) – humoristė, pasakos „Robotas ir peteliškė“ autorė.",
+      "links": [],
+      "wikidata": "Q2161850"
+    },
+    {
+      "id": "savelis",
+      "room": 8,
+      "kind": "person",
+      "name": "Rimantas Šavelis",
+      "aliases": [],
+      "years": [
+        1942,
+        2021
+      ],
+      "at": 1970,
+      "text": "Rimantas Šavelis – „Tado Blindos“ autorius.",
+      "links": [],
+      "wikidata": "Q12671359"
+    },
+    {
+      "id": "gutauskas",
+      "room": 8,
+      "kind": "person",
+      "name": "Leonardas Gutauskas",
+      "aliases": [],
+      "years": [
+        1938,
+        2021
+      ],
+      "at": 1980,
+      "text": "Leonardas Gutauskas – „Vilko dantų karolių“ autorius.",
+      "links": [],
+      "wikidata": "Q16458444"
+    },
+    {
+      "id": "aputis",
+      "room": 8,
+      "kind": "person",
+      "name": "Juozas Aputis",
+      "aliases": [],
+      "years": [
+        1936,
+        2010
+      ],
+      "at": 1975,
+      "text": "Novelistas Juozas Aputis gyveno Zervynose.",
+      "links": [],
+      "wikidata": "Q3811354"
+    },
+    {
+      "id": "grusas",
+      "room": 8,
+      "kind": "person",
+      "name": "Juozas Grušas",
+      "aliases": [],
+      "years": [
+        1901,
+        1986
+      ],
+      "at": 1957,
+      "text": "Juozas Grušas (1901–1986) – istorinės dramos „Herkus Mantas“ (1957), „Barbora Radvilaitė“ (1972), „Švitrigaila“, „Zigmantas Sierakauskas“; Stepono Batoro neparašė. Kiti kūriniai: „Meilė, džiazas ir velnias“, tragikomedija „Pijus nebuvo protingas“, romanas „Karjeristai“.",
+      "links": [
+        {
+          "to": "herkus-mantas",
+          "label": "parašė"
+        },
+        {
+          "to": "barbora-radvilaite",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q13640180"
+    },
+    {
+      "id": "herkus-mantas",
+      "room": 8,
+      "kind": "work",
+      "name": "„Herkus Mantas“",
+      "aliases": [],
+      "years": [
+        1957
+      ],
+      "at": 1957,
+      "text": "„Herkus Mantas“ (1957) – Juozo Grušo istorinė drama.",
+      "links": [
+        {
+          "to": "grusas",
+          "label": "autorius"
+        }
+      ],
+      "by": "grusas"
+    },
+    {
+      "id": "barbora-radvilaite",
+      "room": 8,
+      "kind": "work",
+      "name": "„Barbora Radvilaitė“",
+      "aliases": [],
+      "years": [
+        1972
+      ],
+      "at": 1972,
+      "text": "„Barbora Radvilaitė“ (1972) – Juozo Grušo istorinė drama.",
+      "links": [
+        {
+          "to": "grusas",
+          "label": "autorius"
+        }
+      ],
+      "by": "grusas"
+    },
+    {
+      "id": "saja",
+      "room": 8,
+      "kind": "person",
+      "name": "Kazys Saja",
+      "aliases": [],
+      "years": [
+        1932,
+        null
+      ],
+      "at": 1970,
+      "text": "Kazys Saja (g. 1932) – pjesės „Šventežeris“, „Mamutų medžioklė“, „Ubagų sala“ (veiksmas Plateliuose); apysaka „Būrimas obuolio sėklom“. Jis taip pat Kovo 11-osios Akto signataras. Pasakų rinkinys „Dangus griūva“ – ne jo, o Borutos.",
+      "links": [],
+      "wikidata": "Q6381130"
+    },
+    {
+      "id": "dauguvietis",
+      "room": 8,
+      "kind": "person",
+      "name": "Borisas Dauguvietis",
+      "aliases": [],
+      "years": [
+        1885,
+        1949
+      ],
+      "at": 1944,
+      "text": "Borisas Dauguvietis (1885–1949), teatro režisierius, parašė komediją „Žaldokynė“, bet ne „Ameriką pirtyje“. Jis dažnai klaidingai laikomas „Amerikos pirtyje“ autoriumi.",
+      "links": [
+        {
+          "to": "zaldokyne",
+          "label": "parašė"
+        },
+        {
+          "to": "amerika-pirtyje",
+          "label": "ne jo"
+        }
+      ],
+      "wikidata": "Q4155246"
+    },
+    {
+      "id": "zaldokyne",
+      "room": 8,
+      "kind": "work",
+      "name": "„Žaldokynė“",
+      "aliases": [],
+      "years": null,
+      "at": 1944,
+      "text": "„Žaldokynė“ – Boriso Dauguviečio komedija, vėlesnė už „Ameriką pirtyje“.",
+      "links": [
+        {
+          "to": "dauguvietis",
+          "label": "autorius"
+        },
+        {
+          "to": "amerika-pirtyje",
+          "label": "dažnai supainiojama"
+        }
+      ],
+      "by": "dauguvietis"
+    },
+    {
+      "id": "geda",
+      "room": 8,
+      "kind": "person",
+      "name": "Sigitas Geda",
+      "aliases": [],
+      "years": [
+        1943,
+        2008
+      ],
+      "at": 1985,
+      "text": "Sigitas Geda (1943–2008) – „Baltojo nieko dainelės“, „Karalaitė ant svarstyklių“, „Mėlynas autobusiukas“. Išvertė Dantės „Dieviškąją komediją“ ir Koraną. 1985 m. įsteigė Jotvingių premiją už geriausią poezijos knygą (teikiama „Poetinio Druskininkų rudens“ festivalyje). Kernagis dainuoja jo „baltojo nieko avinėlį“. Baladžių apie kukutį Geda nerašė.",
+      "links": [
+        {
+          "to": "jotvingiu-premija",
+          "label": "įsteigė"
+        },
+        {
+          "to": "kernagis",
+          "label": "dainuoja jo eiles"
+        }
+      ],
+      "wikidata": "Q1289688"
+    },
+    {
+      "id": "jotvingiu-premija",
+      "room": 8,
+      "kind": "thing",
+      "name": "Jotvingių premija",
+      "aliases": [],
+      "years": [
+        1985
+      ],
+      "at": 1985,
+      "text": "Jotvingių premija – poezijai: ją 1985 m. įsteigė Sigitas Geda už geriausią poezijos knygą; teikiama „Poetinio Druskininkų rudens“ festivalyje.",
+      "links": [
+        {
+          "to": "geda",
+          "label": "įsteigė"
+        }
+      ]
+    },
+    {
+      "id": "martinaitis",
+      "room": 8,
+      "kind": "person",
+      "name": "Marcelijus Martinaitis",
+      "aliases": [],
+      "years": [
+        1936,
+        2013
+      ],
+      "at": 1977,
+      "text": "Marcelijus Martinaitis (1936–2013) – „Kukučio baladės“ (1977). Taip pat eilėraštis „Kai sirpsta vyšnios Suvalkijoj“.",
+      "links": [
+        {
+          "to": "kukucio-balades",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q4282554"
+    },
+    {
+      "id": "kukucio-balades",
+      "room": 8,
+      "kind": "work",
+      "name": "„Kukučio baladės“",
+      "aliases": [],
+      "years": [
+        1977
+      ],
+      "at": 1977,
+      "text": "Marcelijaus Martinaičio „Kukučio baladės“ (1977): Kukutis yra žemaitis; „pabudo rytą kukutis ir mato“, kad šalia guli jis pats. Baladžių apie kukutį Geda nerašė.",
+      "links": [
+        {
+          "to": "martinaitis",
+          "label": "autorius"
+        }
+      ],
+      "by": "martinaitis"
+    },
+    {
+      "id": "sirvys",
+      "room": 8,
+      "kind": "person",
+      "name": "Paulius Širvys",
+      "aliases": [],
+      "years": [
+        1920,
+        1979
+      ],
+      "at": 1960,
+      "text": "Paulius Širvys (1920–1979) – „Aš – beržas, lietuviškas beržas, su plieno dalgiu ant peties“; „Nežiūrėk, nežibėk“, „Neklauskit meilės vardo“, „Su Nemunu pateka saulė“; rinkinys „Ir nusinešė saulę miškai“.",
+      "links": [],
+      "wikidata": "Q7220079"
+    },
+    {
+      "id": "baltakis",
+      "room": 8,
+      "kind": "person",
+      "name": "Algimantas Baltakis",
+      "aliases": [],
+      "years": [
+        1930,
+        2022
+      ],
+      "at": 1970,
+      "text": "Algimantas Baltakis (1930–2022) – daugelio dainų tekstų autorius: „Daktarai“ („Hiperbolė“), „Boružėlė septyntaškė“, „Aš dar dainuosiu“, „Gimiau pačiu laiku“.",
+      "links": [
+        {
+          "to": "hiperbole",
+          "label": "dainuoja jo „Daktarus“"
+        }
+      ],
+      "wikidata": "Q2547085"
+    },
+    {
+      "id": "hiperbole",
+      "room": 8,
+      "kind": "group",
+      "name": "Hiperbolė",
+      "aliases": [],
+      "years": null,
+      "at": 1985,
+      "aside": true,
+      "text": "Roko grupė „Hiperbolė“ dainuoja Algimanto Baltakio „Daktarus“.",
+      "links": [
+        {
+          "to": "baltakis",
+          "label": "dainuoja jo „Daktarus“"
+        }
+      ],
+      "wikidata": "Q12656488"
+    },
+    {
+      "id": "erlickas",
+      "room": 8,
+      "kind": "person",
+      "name": "Juozas Erlickas",
+      "aliases": [],
+      "years": [
+        1953,
+        null
+      ],
+      "at": 1980,
+      "text": "Juozas Erlickas – „Mano meilė stikliniais kaliošais“, „Bobutė iš Paryžiaus“, „Raštai ir kt.“, pjesė „Blinkuva“; jo „Vasara“ tapo Kernagio daina „Kaip gražu miške“.",
+      "links": [
+        {
+          "to": "kernagis",
+          "label": "daina „Kaip gražu miške“"
+        }
+      ],
+      "wikidata": "Q13192275"
+    },
+    {
+      "id": "miezelaitis",
+      "room": 8,
+      "kind": "person",
+      "name": "Eduardas Mieželaitis",
+      "aliases": [],
+      "years": [
+        1919,
+        1997
+      ],
+      "at": 1960,
+      "text": "Vaikams rašė Eduardas Mieželaitis („Zuikis Puikis“, „Kastantas muzikantas“). „Kiškių sukilimas“ – ne jo, o Binkio.",
+      "links": [],
+      "wikidata": "Q738623"
+    },
+    {
+      "id": "kubilinskas",
+      "room": 8,
+      "kind": "person",
+      "name": "Kostas Kubilinskas",
+      "aliases": [],
+      "years": [
+        1923,
+        1962
+      ],
+      "at": 1955,
+      "text": "Vaikams rašė ir Kostas Kubilinskas („Bebenčiukas ir Kvailutė“); jis bendradarbiavo su saugumu.",
+      "links": [],
+      "wikidata": "Q6433503"
+    },
+    {
+      "id": "degutyte",
+      "room": 8,
+      "kind": "person",
+      "name": "Janina Degutytė",
+      "aliases": [],
+      "years": [
+        1928,
+        1990
+      ],
+      "at": 1970,
+      "text": "„Poezijos pavasario“ pirmoji laureatė moteris – Janina Degutytė.",
+      "links": [
+        {
+          "to": "poezijos-pavasaris",
+          "label": "pirmoji laureatė moteris"
+        }
+      ],
+      "wikidata": "Q16453194"
     }
   ],
   "questions": [],
-  "skipped": []
+  "skipped": [
+    {
+      "span": "Kodėl … nuolat klausiama apie Kernagio dainas",
+      "reason": "Klausimo formuluotė perrašyta, nes originale yra draudžiamas žodis; klausimas yra kambario 8 klausimuose."
+    }
+  ]
 }

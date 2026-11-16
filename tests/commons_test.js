@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { creditsFrom, photoFor, stripHtml, infoUrl } from "../tools/commons.js";
+import { creditsFrom, dropReason, photoFor, stripHtml, infoUrl } from "../tools/commons.js";
 
 const sample = (n) =>
   JSON.parse(Deno.readTextFileSync(new URL(`./fixtures/commons/${n}.json`, import.meta.url)));
@@ -61,4 +61,15 @@ Deno.test("infoUrl encodes the Commons title", () => {
   assertEquals(u.origin, "https://commons.wikimedia.org");
   assertEquals(u.searchParams.get("titles"), "File:Jonas Biliunas.jpg");
   assertEquals(u.searchParams.get("iiprop"), "extmetadata|url");
+});
+
+Deno.test("dropReason names why credits are unusable", () => {
+  assertEquals(dropReason(null), "file not found");
+  assertEquals(dropReason({ descriptionurl: "u", extmetadata: {} }), "no licence");
+  assertEquals(dropReason(sample("cc-by-sa-no-author")), "no author, licence CC BY-SA 3.0");
+  assertEquals(
+    dropReason({ extmetadata: meta("cc-by-sa-html-author") }),
+    "no source url",
+  );
+  assertEquals(dropReason(sample("cc-by-sa-html-author")), null);
 });

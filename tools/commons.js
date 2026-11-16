@@ -58,3 +58,14 @@ export function photoFor(spotId, ext, info) {
   if (!credits || !info.descriptionurl) return null;
   return { file: `img/${spotId}.${ext}`, ...credits, source_url: info.descriptionurl };
 }
+
+/** Why `photoFor` would return null for this imageinfo, or null when credits are usable. */
+export function dropReason(info) {
+  if (!info) return "file not found";
+  const ext = info.extmetadata;
+  const license = stripHtml(ext?.LicenseShortName?.value);
+  if (!license) return "no licence";
+  if (!creditsFrom(ext)) return `no author, licence ${license}`;
+  if (!info.descriptionurl) return "no source url";
+  return null;
+}

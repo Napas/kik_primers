@@ -53,7 +53,7 @@ Deno.test("import sets credits, copies files, drops uncredited photos", async ()
   assertEquals("photo" in b, false);
   assertEquals("photo" in c, false);
   assertEquals("photo" in d, false);
-  assertEquals(log.some((l) => l.startsWith("b: dropped")), true);
+  assertEquals(log.some((l) => l.startsWith("b: drop,")), true);
   assertEquals(log.includes("c: no portrait"), true);
   assertEquals(Object.keys(a), ["id", "name", "wikidata", "photo", "text"]);
 });
@@ -66,4 +66,28 @@ Deno.test("--dry-run writes nothing and reports", async () => {
   assertEquals(await Deno.readTextFile(`${topic}/topic.json`), before);
   assertEquals([...Deno.readDirSync(topic)].map((e) => e.name), ["topic.json"]);
   assertEquals(log[0], "a: would set Melancolicsphere / CC BY-SA 3.0");
+});
+
+Deno.test("dry-run reports drop reason and summary", async () => {
+  const { kit, topic } = await setup();
+  const log = [];
+  await importPhotos(kit, topic, { dryRun: true, deps: deps(log) });
+  assertEquals(log.includes("b: would drop, no author, licence CC BY-SA 3.0"), true);
+  assertEquals(log.at(-1), "would set 1, would drop 1, no portrait 1");
+});
+
+Deno.test("a failing request does not stop the run", async () => {
+  const { kit, topic } = await setup();
+  const log = [];
+  const d = deps(log);
+  const ok = d.fetchJson;
+  d.fetchJson = (url) =>
+    new URL(url).searchParams.get("titles") === "File:B.jpg"
+      ? Promise.reject(new Error("503"))
+      : ok(url);
+  await importPhotos(kit, topic, { deps: d });
+  const pack = JSON.parse(await Deno.readTextFile(`${topic}/topic.json`));
+  assertEquals(pack.spots[0].photo.file, "img/a.jpg");
+  assertEquals(log.includes("b: error 503"), true);
+  assertEquals(log.at(-1), "set 1, dropped 1, no portrait 1");
 });

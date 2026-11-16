@@ -97,6 +97,23 @@ Deno.test("end-of-room clusters inside parallel lanes stay inside their rooms", 
   noOverlap(L, 1.6);
   allInside(L, p);
 });
+Deno.test("crowded rows in touching rooms stay a gap apart at the shared year", () => {
+  const at = (r, y) => Array.from({ length: 3 }, (_, i) => spot(`r${r}-${i}`, r, y));
+  const p = pack([room(1, [1800, 1900]), room(2, [1900, 2000])], [...at(1, 1900), ...at(2, 1900)]);
+  const L = layoutTime(p);
+  noOverlap(L, 1.6);
+  allInside(L, p);
+  for (const s of L.spots) {
+    const r = roomOf(L, p.spots.find((q) => q.id === s.id).room);
+    assert(s.x >= r.x0 + 0.8 - EPS && s.x <= r.x1 - 0.8 + EPS, `${s.id} too close to a room edge`);
+  }
+});
+Deno.test("a lone spot at a shared year keeps clear of the edge", () => {
+  const p = pack([room(1, [1800, 1900]), room(2, [1900, 2000])], [spot("a", 1, 1900), spot("b", 2, 1900)]);
+  const L = layoutTime(p);
+  noOverlap(L, 1.6);
+  assert(spotX(L, "b") - spotX(L, "a") >= 1.6 - EPS);
+});
 Deno.test("a sparse century is not longer than a crowded one", () => {
   const L = layoutTime(fxSparseThenDense());
   assert(len(L, 1) < len(L, 2));

@@ -59,16 +59,19 @@ function buildScale(spanned, targets, gapLen) {
   return { xOfYear, end: x };
 }
 
+// Spots stay within [x0 + gap/2, x1 - gap/2], so spots of rooms touching at a year are a gap apart.
 // Each spot goes to the row whose last x is smallest, no closer than `gap` to its predecessor.
-// A backward pass then pulls each spot back so its row's later spots still fit before x1.
-// `needed` is the width the fullest row requires.
-function placeSpots(spots, xOfYear, x1, o) {
+// A backward pass then pulls each spot back so its row's later spots still fit before the upper bound.
+// `needed` is the room width the fullest row requires.
+function placeSpots(spots, xOfYear, x0, x1, o) {
+  const lo = x0 + o.gap / 2;
+  const hi = x1 - o.gap / 2;
   const lastX = Array(o.rows).fill(-Infinity);
   const rows = Array.from({ length: o.rows }, () => []);
   const placed = [...spots].sort((a, b) => a.at - b.at || byId(a, b)).map((s) => {
     let row = 0;
     for (let i = 1; i < o.rows; i++) if (lastX[i] < lastX[row]) row = i;
-    const x = Math.max(xOfYear(s.at), lastX[row] + o.gap);
+    const x = Math.max(xOfYear(s.at), lo, lastX[row] + o.gap);
     lastX[row] = x;
     const p = { id: s.id, x, row };
     rows[row].push(p);
@@ -76,8 +79,8 @@ function placeSpots(spots, xOfYear, x1, o) {
   });
   let needed = 0;
   for (const list of rows) {
-    needed = Math.max(needed, (list.length - 1) * o.gap);
-    let cap = x1;
+    if (list.length) needed = Math.max(needed, list.length * o.gap);
+    let cap = hi;
     for (let i = list.length - 1; i >= 0; i--) {
       list[i].x = Math.min(list[i].x, cap);
       cap = list[i].x - o.gap;
@@ -106,7 +109,7 @@ export function layoutTime(pack, opts = {}) {
     for (const r of spanned) {
       const x0 = scale.xOfYear(r.span[0]);
       const x1 = scale.xOfYear(r.span[1]);
-      const { placed: ps, needed } = placeSpots(spotsOf.get(r.n), scale.xOfYear, x1, o);
+      const { placed: ps, needed } = placeSpots(spotsOf.get(r.n), scale.xOfYear, x0, x1, o);
       placed.set(r.n, ps);
       if (needed > x1 - x0 + EPS) {
         targets.set(r.n, targets.get(r.n) * Math.max(GROWTH, needed / Math.max(x1 - x0, EPS)));

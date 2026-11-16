@@ -72,6 +72,7 @@ function checkPerson(s, w, p) {
   if (s.places !== undefined) {
     const ok = Array.isArray(s.places) && s.places.every((x) => isObj(x) && isStr(x.name) && inRange(x.lat, -90, 90) && inRange(x.lon, -180, 180));
     if (!ok) p.push(`${w}: places must be {name, lat, lon} in range`);
+    else if (s.places.some((x) => x.approx !== undefined && typeof x.approx !== "boolean")) p.push(`${w}: places approx must be a boolean`);
   }
   if (s.motif !== undefined && !Object.hasOwn(MOTIFS, s.motif)) p.push(`${w}: motif ${s.motif} is not a known motif`);
 }
@@ -192,14 +193,16 @@ export function checkCoverage(pack, primerMd) {
 
 // Terms that must never appear on the public site, matched on folded text.
 // The show's name is built from parts so this file can be scanned like any other.
-const SHOW = ["kas", "ir", "kodel"].join("\\s+");
+const SHOW = ["kas", "ir", "kodel"].join("[^a-z0-9]+");
+// Word edges are "not a letter or digit", so "_" and "-" count as separators.
+const word = (src) => new RegExp(`(?<![a-z0-9])(?:${src})(?![a-z0-9])`);
 const FORBIDDEN = [
   ["kik", /kik/],
-  ["laida", /\blaid(?:a|as|os|oje|ai|u|ose|oms|omis)\b/],
-  ["lrt", /\blrt\b/],
-  ["show name", new RegExp(`\\b${SHOW}\\b`)],
-  ["archive id", /\b\d{9,10}:\d+(?:\.\d+)?\b/],
-  ["missed", /\bmissed\b/],
+  ["laida", word("laid(?:a|as|os|oje|ai|u|ose|oms|omis)")],
+  ["lrt", word("lrt")],
+  ["show name", word(SHOW)],
+  ["archive id", word("\\d{9,10}:\\d+(?:\\.\\d+)?")],
+  ["missed", word("missed")],
 ];
 
 /** Problems for forbidden terms in file paths and (text) contents. */

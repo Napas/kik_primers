@@ -71,3 +71,18 @@ Deno.test("scan flags the show's name in three spellings", () => {
     assertNotEquals(scanSite([{ path: "a.html", text: `x ${t} y` }]), [], t);
   }
 });
+
+Deno.test("scan treats - and _ as separators", () => {
+  const hit = (path, text = "") => assertNotEquals(scanSite([{ path, text }]), [], path + text);
+  hit(SHOW.join("-").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") + ".png");
+  hit(SHOW.join("_") + ".png");
+  hit("laidos_1.png");
+  hit("a.html", "x_lrt_y");
+  hit("a.html", "x_missed_y");
+  hit("a.html", "x_1234567890:12.34_y");
+  assertEquals(scanSite([{ path: "palaidotas_perlaidoti.png", text: "dismissed_lrtx" }]), []);
+});
+Deno.test("places approx must be a boolean", () => {
+  assertEquals(checkPack(edit((p) => (p.spots[0].places[0].approx = true))), []);
+  assertMatch(problems(edit((p) => (p.spots[0].places[0].approx = "taip"))), /approx/);
+});

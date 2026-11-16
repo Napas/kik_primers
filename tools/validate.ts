@@ -61,7 +61,15 @@ for (const [slug, path] of primers) {
 const files: { path: string; text: string }[] = [];
 for await (const p of walk(root)) {
   const path = p.slice(root.replace(/\/+$/, "").length + 1);
-  files.push({ path, text: BINARY.test(p) ? "" : await Deno.readTextFile(p).catch(() => "") });
+  let text = "";
+  if (!BINARY.test(p)) {
+    try {
+      text = await Deno.readTextFile(p);
+    } catch (err) {
+      problems.push(`${path}: cannot read: ${err instanceof Error ? err.message : err}`);
+    }
+  }
+  files.push({ path, text });
 }
 problems.push(...scanSite(files));
 

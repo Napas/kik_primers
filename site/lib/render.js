@@ -36,11 +36,16 @@ export function plotExplainer(plot, { step = 0 } = {}) {
     const t = (2 * Math.PI * k) / plot.characters.length - Math.PI / 2;
     return [c.name, { x: cx + r * Math.cos(t), y: cy + r * Math.sin(t) }];
   }));
-  const lines = plot.relations.filter((l) => pos.has(l.a) && pos.has(l.b)).map((l) => {
+  // Relation lines on the map; their labels go in a list under it, where they cannot cover names.
+  const rels = plot.relations.filter((l) => pos.has(l.a) && pos.has(l.b));
+  const lines = rels.map((l) => {
     const a = pos.get(l.a), b = pos.get(l.b);
-    return `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}"/>` +
-      `<text class="rel" x="${((a.x + b.x) / 2).toFixed(1)}" y="${((a.y + b.y) / 2).toFixed(1)}" text-anchor="middle">${esc(l.label)}</text>`;
+    return `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}"/>`;
   }).join("");
+  const relList = rels.length
+    ? `<ul class="relations">` + rels.map((l) =>
+      `<li${lit.has(l.a) && lit.has(l.b) ? ' class="on"' : ""}>${esc(l.a)} – ${esc(l.b)}: ${esc(l.label)}</li>`).join("") + `</ul>`
+    : "";
   const nodes = plot.characters.map((c) => {
     const p = pos.get(c.name);
     return `<g data-char="${esc(c.name)}" class="node${lit.has(c.name) ? " on" : ""}"><circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="9"/>` +
@@ -48,7 +53,7 @@ export function plotExplainer(plot, { step = 0 } = {}) {
   }).join("");
   const sources = plot.sources.map((u, k) => `<a href="${esc(safeUrl(u))}" rel="noopener" target="_blank">šaltinis ${k + 1}</a>`).join(" ");
   return `<section class="plot"><h3>Siužetas</h3>` +
-    `<svg class="plot-map" viewBox="0 0 320 250" role="img" aria-label="Veikėjų ryšiai">${lines}${nodes}</svg>` +
+    `<svg class="plot-map" viewBox="0 0 320 250" role="img" aria-label="Veikėjų ryšiai">${lines}${nodes}</svg>` + relList +
     `<p class="beat">${esc(beat.text)}</p>` +
     `<div class="plot-nav"><button type="button" data-step="${i - 1}"${i === 0 ? " disabled" : ""}>Atgal</button>` +
     `<span>${i + 1} / ${last + 1}</span>` +

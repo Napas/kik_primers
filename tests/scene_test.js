@@ -1,6 +1,6 @@
 import { assert, assertEquals } from "@std/assert";
 import * as THREE from "../site/lib/three/three.module.min.js";
-import { COLORS } from "../site/lib/theme.js";
+import { COLORS, LIGHT_BANDS, SCENE, spotlightLevel } from "../site/lib/theme.js";
 import { layoutTime } from "../site/lib/layout.js";
 import { initials, makeSpot, setPhoto } from "../site/lib/scene/spots.js";
 import { makeLabel } from "../site/lib/scene/labels.js";
@@ -73,6 +73,25 @@ Deno.test("makeSpot builds one tagged model per kind", () => {
       shapes.add(geos.sort().join(","));
     }
     assertEquals(shapes.size, KINDS.length);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("a spot's cone and pool fade by its light band; spots in the same band share materials", () => {
+  const restore = installFakeCanvas();
+  try {
+    const parts = (o) => [o.getObjectByName("spot-cone").material, o.getObjectByName("spot-pool").material];
+    const [candle, , , , daylight] = LIGHT_BANDS;
+    const [c1, p1] = parts(makeSpot(THREE, spot("person"), COLORS, { band: candle }));
+    const [c2, p2] = parts(makeSpot(THREE, spot("work"), COLORS, { band: candle }));
+    const [c3, p3] = parts(makeSpot(THREE, spot("person"), COLORS, { band: daylight }));
+    assert(c1 === c2 && p1 === p2, "same band, same materials");
+    const k = spotlightLevel(daylight);
+    assertEquals([c1.color.r, c3.color.r], [1, k]);
+    assertEquals([p1.opacity, p3.opacity], [SCENE.spotlight.pool.opacity, SCENE.spotlight.pool.opacity * k]);
+    const [c0, p0] = parts(makeSpot(THREE, spot("person"), COLORS));
+    assert(c0 === c1 && p0 === p1, "without a band a spot gets the full spotlight");
   } finally {
     restore();
   }
@@ -254,6 +273,18 @@ Deno.test("buildWorld gives each room its named style", () => {
       assertEquals(style, room.style, `room ${room.n}`);
     }
     assertEquals(w.walls.length, 3 * layout.rooms.length);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("buildWorld dims each spot's cone by the light band at its place", () => {
+  const restore = installFakeCanvas();
+  try {
+    const w = buildWorld(THREE, STYLED, layoutTime(STYLED));
+    const cone = (id) => w.spotMeshes.get(id).getObjectByName("spot-cone").material.color.r;
+    assertEquals(cone("s1"), 1, "a 1547 spot is in candle light");
+    assertEquals(cone("s9"), spotlightLevel(LIGHT_BANDS[4]), "a 2000 spot is in daylight");
   } finally {
     restore();
   }

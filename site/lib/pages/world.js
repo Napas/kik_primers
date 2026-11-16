@@ -8,7 +8,7 @@ import { makeStore } from "../storage.js";
 import { makeProgress } from "../progress.js";
 import { buildWorld, pathZ } from "../scene/world.js";
 import { makeControls } from "../scene/controls.js";
-import { standPoint, updateNearby } from "../scene/nearby.js";
+import { sizeLabels, standPoint, updateNearby } from "../scene/nearby.js";
 import { overview, roomAt, roomCounts } from "./overview.js";
 import { makeSelection, roomVisit } from "./selection.js";
 import { hashId, loadIndex, loadPack, markReady, run, showError, storageBackend, topicFromUrl } from "./common.js";
@@ -183,7 +183,8 @@ function interact(THREE, world, pack, layout, canvas, progress) {
     room = roomVisit(room.visit, n, room.quiet, controls.moving());
     if (room.open) selection.openRoom(n, false);
     map.mark(eye.x, n);
-    updateNearby(world.spotMeshes, eye, hovered, selection.spot?.id ?? null);
+    updateNearby(world.spotMeshes, eye, hovered, selection.spot?.id ?? null, world.camera.aspect);
+    sizeLabels(world.labels, eye, world.camera.aspect);
   }
 
   return { controls, goTo, frame };

@@ -345,7 +345,7 @@ Deno.test({
 });
 
 Deno.test({
-  name: "real pack on a 390×844 phone: every room and spot built, close button stays in view, photo leaves room for text",
+  name: "real pack on a 390×844 phone: every room and spot built, close button stays in view clear of text, photo leaves room for text",
   ignore,
   sanitizeResources: false,
   sanitizeOps: false,
@@ -370,10 +370,18 @@ Deno.test({
           const c = panel.querySelector("[data-close]").getBoundingClientRect();
           const p = panel.getBoundingClientRect();
           const img = panel.querySelector("figure img").getBoundingClientRect();
-          return JSON.stringify({ scrolled: panel.scrollTop, close: [c.top, c.bottom], panel: [p.top, p.bottom], img: img.height, h: innerHeight });
+          // Panel text visible on the button's row, sampled every 10 px across the panel.
+          const y = (c.top + c.bottom) / 2;
+          const onRow = [];
+          for (let x = p.left + 4; x < p.right - 4; x += 10) {
+            const el = document.elementFromPoint(x, y);
+            if (el?.closest("#panel-body")) onRow.push(el.tagName);
+          }
+          return JSON.stringify({ scrolled: panel.scrollTop, close: [c.top, c.bottom], panel: [p.top, p.bottom], img: img.height, h: innerHeight, onRow });
         })()`));
         assert(r.scrolled > 0, "the panel scrolls");
         assert(r.close[0] >= r.panel[0] && r.close[1] <= r.panel[1], `close button out of view: ${JSON.stringify(r)}`);
+        assertEquals(r.onRow, [], "panel text shows beside or under the close button");
         assert(r.img <= 0.3 * r.h + 1, `photo ${r.img}px tall in a ${r.h}px view`);
         assertEquals(errors, []);
       }, { w: 390, h: 844 });

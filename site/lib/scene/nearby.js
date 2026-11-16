@@ -52,26 +52,44 @@ export function standPoint(target, others) {
   return best;
 }
 
-/** Factor (at most 1) on a spot label's size so it fills at most LABEL.maxView of the view height `d` metres away. */
-export function labelScale(d) {
+/** Share (at most 1) of the usual label size and range on a view of `aspect` (width / height): less when narrow. */
+export const labelFit = (aspect) => Math.min(1, aspect / LABEL.refAspect);
+
+/**
+ * Factor (at most 1) on a label's size so it fills at most LABEL.maxView × labelFit(aspect) of the view
+ * height `d` metres away.
+ */
+export function labelScale(d, aspect = 1) {
   const view = 2 * d * Math.tan((SCENE.fov * Math.PI) / 360);
-  return Math.min(1, (LABEL.maxView * view) / LABEL.height);
+  return Math.min(1, (LABEL.maxView * labelFit(aspect) * view) / LABEL.height);
+}
+
+// Sizes `label` by labelScale from its size at creation.
+function fit(label, d, aspect) {
+  const base = (label.userData.baseScale ??= label.scale.clone());
+  const k = labelScale(d, aspect);
+  label.scale.set(base.x * k, base.y * k, 1);
+}
+
+/** labels: [{sprite, x, z}] from buildWorld (room titles, year markers); sizes each like a spot label. */
+export function sizeLabels(labels, eye, aspect = 1) {
+  for (const { sprite, x, z } of labels) fit(sprite, Math.hypot(x - eye.x, z - eye.z), aspect);
 }
 
 /**
- * spotMeshes: Map<id, Object3D> from buildWorld; eye: the camera position; hovered, selected: spot ids or null.
- * A label shows within LABEL_RANGE (floor distance), while hovered or while selected, but not nearer than
- * LABEL_NEAR unless selected; labelScale sizes it. A photo loader runs once within PHOTO_RANGE.
+ * spotMeshes: Map<id, Object3D> from buildWorld; eye: the camera position; hovered, selected: spot ids or null;
+ * aspect: the view's width / height. A label shows within LABEL_RANGE × labelFit(aspect) (floor distance),
+ * while hovered or while selected, but not nearer than LABEL_NEAR unless selected; labelScale sizes it.
+ * A photo loader runs once within PHOTO_RANGE.
  */
-export function updateNearby(spotMeshes, eye, hovered, selected) {
+export function updateNearby(spotMeshes, eye, hovered, selected, aspect = 1) {
+  const range = LABEL_RANGE * labelFit(aspect);
   for (const [id, obj] of spotMeshes) {
     const d = Math.hypot(obj.position.x - eye.x, obj.position.z - eye.z);
     const { label, loadPhoto } = obj.userData;
     if (label) {
-      label.visible = id === selected || (d >= LABEL_NEAR && (d <= LABEL_RANGE || id === hovered));
-      const base = (label.userData.baseScale ??= label.scale.clone());
-      const k = labelScale(d);
-      label.scale.set(base.x * k, base.y * k, 1);
+      label.visible = id === selected || (d >= LABEL_NEAR && (d <= range || id === hovered));
+      fit(label, d, aspect);
     }
     if (loadPhoto && d <= PHOTO_RANGE) {
       delete obj.userData.loadPhoto;

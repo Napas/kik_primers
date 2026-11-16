@@ -61,8 +61,9 @@ button:disabled { opacity: .4; cursor: default; }
 /* Plot explainer */
 .plot-map { width: 100%; height: auto; background: var(--floor); border-radius: 6px; }
 .plot-map line { stroke: var(--path); stroke-width: 1.5; }
-.plot-map text { fill: var(--muted); font-size: 11px; }
-.plot-map .rel { font-size: 9px; font-style: italic; }
+.plot-map text { fill: var(--muted); font-size: 11px; paint-order: stroke; stroke: var(--floor); stroke-width: 3px; stroke-linejoin: round; } /* halo over crossing lines */
+.panel ul.relations { list-style: none; padding: 0; margin: .5rem 0 0; font-size: .85rem; color: var(--muted); }
+.relations li.on { color: var(--text); }
 .plot-map .node circle { fill: var(--path); }
 .plot-map .node.on circle { fill: var(--gold); }
 .plot-map .node.on text { fill: var(--text); font-weight: bold; }
@@ -102,7 +103,9 @@ pre.licence { white-space: pre-wrap; font-size: .8rem; color: var(--muted); }
 .world canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
 
 /* World panel and overview */
-#panel .close { position: sticky; top: 0; z-index: 1; float: right; margin: 0 0 .5rem .5rem; } /* stays in view while the panel scrolls */
+/* The close button sits in an opaque bar that sticks to the panel top; text scrolls under the bar. */
+#panel { padding-top: 0; }
+#panel .panel-bar { position: sticky; top: 0; z-index: 1; display: flex; justify-content: flex-end; margin: 0 -1.25rem; padding: .5rem .75rem .25rem; background: var(--panel); }
 #panel-body > .panel { border: 0; padding: 0; background: none; overflow: visible; }
 .overview { position: fixed; z-index: 5; top: 3.5rem; left: 1rem; width: min(22rem, calc(100% - 2rem)); }
 .overview .strip { position: relative; height: 1.4rem; background: color-mix(in srgb, var(--panel) 80%, transparent); border: 1px solid var(--path); border-radius: 4px; }

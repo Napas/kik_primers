@@ -1,11 +1,11 @@
 // Builds the 3D world from a pack and its time layout: rooms along x, a path in front of each lane,
 // year markers on the first lane, one model and label per spot. Only placement lives here;
 // the look comes from styles.js and spots.js, the light along the path from light.js. Builders take THREE as an argument.
-import { COLORS, SCENE } from "../theme.js";
+import { COLORS, lightFor, SCENE } from "../theme.js";
 import { makeSpot, setPhoto } from "./spots.js";
 import { makeLabel } from "./labels.js";
 import { ground, path, pathLanes, pathZ, plainRoom, STYLES, yearLineZ, yearMarker } from "./styles.js";
-import { addPathLights } from "./light.js";
+import { addPathLights, yearAt } from "./light.js";
 
 export { pathZ };
 
@@ -20,7 +20,8 @@ const GROUND_PAD = 20;
  * opts: aspect (camera); loadPhoto(file, apply(texture)) to fetch a person's photo, initials stay until apply.
  * Photos are not fetched here: a spot with a photo gets userData.loadPhoto(), which the caller runs when it wants.
  * Returns {scene, camera, spotMeshes: Map<id, Object3D>, roomGroups: Map<n, Group>, update(dt),
- * walls: Box3[] (picks stop at them), bounds: {x0, x1, z0, z1} (walkable area)}.
+ * walls: Box3[] (picks stop at them), bounds: {x0, x1, z0, z1} (walkable area),
+ * labels: [{sprite, x, z}] (room titles and year markers, for sizeLabels)}.
  */
 export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) {
   const scene = new THREE.Scene();
@@ -43,10 +44,12 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
     scene.add(path(THREE, { x0: l.lane === 0 ? startX : l.x0 - BOUNDS_PAD, x1: l.x1 + BOUNDS_PAD, z: l.z }, COLORS));
   }
   addPathLights(THREE, scene, layout);
+  const labels = []; // room titles and year markers: {sprite, x, z}
   for (const t of layout.ticks) {
     const marker = yearMarker(THREE, t.year, COLORS);
     marker.position.set(t.x, 0, yearLineZ(first));
     scene.add(marker);
+    labels.push({ sprite: marker.userData.label, x: t.x, z: yearLineZ(first) });
   }
 
   const roomGroups = new Map();
@@ -59,6 +62,7 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
     label.position.set(r.x0 + Math.min(2, (r.x1 - r.x0) / 2), ROOM_TITLE_Y, r.z1 + TITLE_FRONT);
     group.add(label);
     group.userData = { n: r.n, label };
+    labels.push({ sprite: label, x: label.position.x, z: label.position.z });
     scene.add(group);
     roomGroups.set(r.n, group);
   }
@@ -67,7 +71,7 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
   const byId = new Map(pack.spots.map((s) => [s.id, s]));
   for (const p of layout.spots) {
     const spot = byId.get(p.id);
-    const obj = makeSpot(THREE, spot, COLORS);
+    const obj = makeSpot(THREE, spot, COLORS, { band: lightFor(yearAt(layout, p.x)) }); // the band of the path lamps there
     obj.position.set(p.x, 0, p.z);
     const label = makeLabel(THREE, spot.name);
     label.position.y = obj.userData.labelY;
@@ -89,5 +93,5 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
   // Per-frame scene changes; the plain world has none.
   const update = () => {};
 
-  return { scene, camera, spotMeshes, roomGroups, update, walls, bounds };
+  return { scene, camera, spotMeshes, roomGroups, update, walls, bounds, labels };
 }

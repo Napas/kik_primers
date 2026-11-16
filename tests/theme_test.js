@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "@std/assert";
-import { COLORS, LIGHT_BANDS, lightFor, SCENE, STYLE_NAMES } from "../site/lib/theme.js";
+import { COLORS, LIGHT_BANDS, lightFor, SCENE, spotlightLevel, STYLE_NAMES } from "../site/lib/theme.js";
 import { MOTIFS, motifSvg } from "../site/lib/motifs.js";
 import { BASEMAP, project } from "../site/lib/basemap.js";
 import { STYLE_KEYS } from "../site/lib/scene/styles.js";
@@ -65,4 +65,12 @@ Deno.test("basemap has the fixed box and stays inside it", () => {
     }
   }
   assert(count > 500);
+});
+
+Deno.test("spotlightLevel: full spot cones in dim bands, fainter as the band gets brighter", () => {
+  const levels = LIGHT_BANDS.map(spotlightLevel);
+  assertEquals(levels.slice(0, 2), [1, 1], "candle and lantern rooms keep full cones");
+  for (let i = 1; i < levels.length; i++) assert(levels[i] <= levels[i - 1], `band ${i} is no stronger than band ${i - 1}`);
+  assert(spotlightLevel(lightFor(1960)) <= 0.5, "fluorescent rooms at most half");
+  assert(levels.every((l) => l > 0));
 });

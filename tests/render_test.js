@@ -81,6 +81,23 @@ Deno.test("plot step highlights that beat's characters", () => {
   assertMatch(h, /data-step="2"/);
   assertMatch(h, /href="https:\/\/example\.org\/a"/);
 });
+Deno.test("plot relations are listed under the map, not drawn on it, lit when both ends are lit", () => {
+  const plot = mkPlot();
+  plot.relations.push({ a: "Petras", b: "Katrė", label: "<kaimynas>" });
+  const h = plotExplainer(plot, { step: 1 });
+  const svg = h.match(/<svg[\s\S]*<\/svg>/)[0];
+  assertEquals((svg.match(/<line /g) ?? []).length, 2, "each relation keeps its line");
+  assert(!svg.includes("tėvas") && !svg.includes("kaimynas"), "no relation text on the map");
+  const list = h.match(/<ul class="relations">([\s\S]*?)<\/ul>/)?.[1] ?? "";
+  assertEquals(list.match(/<li[^>]*>/g), ["<li>", '<li class="on">']);
+  assert(list.includes("Katrė – Jonas: tėvas"));
+  assert(list.includes("Petras – Katrė: &lt;kaimynas&gt;"));
+});
+Deno.test("a plot without relations has no relation list", () => {
+  const plot = mkPlot();
+  plot.relations = [];
+  assert(!plotExplainer(plot).includes("relations"));
+});
 Deno.test("plot step is clamped", () => {
   assert(plotExplainer(mkPlot(), { step: 99 }).includes("Epilogas."));
   assert(plotExplainer(mkPlot(), { step: -3 }).includes("Pradžia."));

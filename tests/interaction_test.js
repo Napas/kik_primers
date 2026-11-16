@@ -3,7 +3,7 @@ import * as THREE from "../site/lib/three/three.module.min.js";
 import { layoutTime } from "../site/lib/layout.js";
 import { buildWorld } from "../site/lib/scene/world.js";
 import { drawLifespan, drawLinks, lifespanRange, removeDrawn } from "../site/lib/scene/arcs.js";
-import { clearance, LABEL_NEAR, LABEL_RANGE, labelScale, PHOTO_RANGE, STAND, standPoint, updateNearby } from "../site/lib/scene/nearby.js";
+import { clearance, LABEL_NEAR, LABEL_RANGE, labelFit, labelScale, PHOTO_RANGE, sizeLabels, STAND, standPoint, updateNearby } from "../site/lib/scene/nearby.js";
 import { LABEL, SCENE } from "../site/lib/theme.js";
 import { yearLineZ } from "../site/lib/scene/styles.js";
 import { markerLeft, overviewHtml, roomAt, roomCounts } from "../site/lib/pages/overview.js";
@@ -207,6 +207,51 @@ Deno.test("labelScale keeps a near label at LABEL.maxView of the view height and
   for (const d of [1, 2.5, 5]) assertAlmostEquals((LABEL.height * labelScale(d)) / viewAt(d), LABEL.maxView, 1e-9);
   assertEquals(labelScale(LABEL_RANGE), 1);
   assertEquals(labelScale(40), 1);
+});
+
+Deno.test("labelFit narrows labels on screens narrower than LABEL.refAspect", () => {
+  assertEquals([labelFit(1.75), labelFit(LABEL.refAspect)], [1, 1]);
+  assertAlmostEquals(labelFit(390 / 844), 390 / 844 / LABEL.refAspect, 1e-9);
+  const viewAt = (d) => 2 * d * Math.tan((SCENE.fov * Math.PI) / 360);
+  const phone = 390 / 844;
+  for (const d of [2.5, 8, 12]) {
+    assertAlmostEquals((LABEL.height * labelScale(d, phone)) / viewAt(d), LABEL.maxView * labelFit(phone), 1e-9);
+  }
+  assertEquals(labelScale(5, 1.75), labelScale(5));
+});
+
+Deno.test("updateNearby shows labels over a shorter range on a narrow screen", () => {
+  const restore = installFakeCanvas();
+  try {
+    const w = buildWorld(THREE, MINI, layoutTime(MINI));
+    const jonas = w.spotMeshes.get("jonas-rastas");
+    const d = (LABEL_RANGE * (1 + labelFit(0.46))) / 2; // inside the wide range, outside the narrow one
+    const eye = { x: jonas.position.x - d, y: 1.7, z: jonas.position.z };
+    updateNearby(w.spotMeshes, eye, null, null, 1.75);
+    assertEquals(jonas.userData.label.visible, true);
+    updateNearby(w.spotMeshes, eye, null, null, 0.46);
+    assertEquals(jonas.userData.label.visible, false);
+    assertAlmostEquals(jonas.userData.label.scale.y, LABEL.height * labelScale(d, 0.46), 1e-9);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("buildWorld lists room titles and year markers, and sizeLabels fits them like spot labels", () => {
+  const restore = installFakeCanvas();
+  try {
+    const layout = layoutTime(MINI);
+    const w = buildWorld(THREE, MINI, layout);
+    assertEquals(w.labels.length, MINI.rooms.length + layout.ticks.length);
+    const first = w.labels[0];
+    const y = first.sprite.scale.y;
+    const eye = { x: first.x - 3, y: 1.7, z: first.z };
+    sizeLabels(w.labels, eye, 0.46);
+    sizeLabels(w.labels, eye, 0.46);
+    assertAlmostEquals(first.sprite.scale.y, y * labelScale(3, 0.46), 1e-9);
+  } finally {
+    restore();
+  }
 });
 
 Deno.test("updateNearby sizes each label by its distance without compounding", () => {

@@ -755,7 +755,7 @@ export function lifespanBar(THREE, x0, x1, z, C) {
   return m;
 }
 
-/** Year marker: a short gold post with the year above it; origin at its foot. */
+/** Year marker: a short gold post with the year above it (userData.label); origin at its foot. */
 export function yearMarker(THREE, year, C) {
   const g = new THREE.Group();
   const post = new THREE.Mesh(
@@ -766,5 +766,6 @@ export function yearMarker(THREE, year, C) {
   const label = makeLabel(THREE, String(year));
   label.position.y = 0.8;
   g.add(post, label);
+  g.userData.label = label;
   return g;
 }

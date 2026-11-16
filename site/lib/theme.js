@@ -45,13 +45,30 @@ export const SCENE = {
   fill: { color: 0xfff0d8, intensity: 0.6 },
   lamp: { power: 6, distance: 10, pool: 0.25 },
   // Fake spotlight under each spot (no real light): warm floor pool diameter (m) and opacity, light cone
-  // height, floor radius (m) and brightness at the top.
-  spotlight: { color: 0xffd58a, pool: { size: 2.4, opacity: 0.4 }, cone: { height: 3.4, radius: 0.95, top: 0.11 } },
+  // height, floor radius (m) and brightness at the top; full strength up to band intensity `ref`, then
+  // fading with (ref / intensity) ** falloff.
+  spotlight: {
+    color: 0xffd58a,
+    pool: { size: 2.4, opacity: 0.4 },
+    cone: { height: 3.4, radius: 0.95, top: 0.11 },
+    ref: 1,
+    falloff: 3,
+  },
 };
 
 /**
+ * Strength (0 to 1) of the fake spotlights in a room lit by LIGHT_BANDS `band`: fainter in brighter bands,
+ * where many additive cones would wash the room out.
+ */
+export function spotlightLevel(band) {
+  const { ref, falloff } = SCENE.spotlight;
+  return Math.min(1, (ref / band.intensity) ** falloff);
+}
+
+/**
  * Typography of canvas-drawn labels: font stack, pixel size on the canvas, height in metres, sprite opacity,
- * and the largest share of the view height a spot label may fill up close.
+ * the largest share of the view height a label may fill up close, and the narrowest view aspect (width /
+ * height) that keeps that share and the full label range.
  */
 export const LABEL = {
   font: 'Georgia, "Times New Roman", serif',
@@ -60,4 +77,5 @@ export const LABEL = {
   height: 0.36,
   opacity: 0.92,
   maxView: 0.035,
+  refAspect: 0.75,
 };

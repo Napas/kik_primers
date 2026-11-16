@@ -1,7 +1,7 @@
 // One model per spot kind. Origin at floor level, front faces +z. Sizes in metres.
 // Pick spheres (pickY, pickRadius) stay under half the layout's 1.4 m row gap, so neighbours' spheres never overlap.
 import { textTexture } from "./labels.js";
-import { SCENE } from "../theme.js";
+import { SCENE, spotlightLevel } from "../theme.js";
 
 const css = (n) => `#${n.toString(16).padStart(6, "0")}`;
 
@@ -120,7 +120,7 @@ const MODELS = {
 
 const SHARED = new WeakMap();
 
-/** One pool/cone geometry, material and canvas texture per THREE instance, shared by every spot. */
+/** One pool/cone geometry and canvas texture per THREE instance, shared by every spot; materials per level. */
 function spotlightParts(THREE) {
   let p = SHARED.get(THREE);
   if (p) return p;
@@ -149,6 +149,7 @@ function spotlightParts(THREE) {
   p = {
     poolGeo: new THREE.PlaneGeometry(pool.size, pool.size),
     poolMat: new THREE.MeshBasicMaterial({ color, map, transparent: true, opacity: pool.opacity, depthWrite: false }),
+    levels: new Map(),
     coneGeo,
     coneMat: new THREE.MeshBasicMaterial({
       vertexColors: true,
@@ -162,9 +163,26 @@ function spotlightParts(THREE) {
   return p;
 }
 
-/** A warm floor pool and a faint light cone over the spot: cheap stand-ins for a spotlight. */
-function spotlight(THREE) {
-  const { poolGeo, poolMat, coneGeo, coneMat } = spotlightParts(THREE);
+/** Pool and cone materials at `level` (0 to 1), shared by every spot at that level. */
+function spotlightMats(THREE, level) {
+  const p = spotlightParts(THREE);
+  if (level >= 1) return p;
+  let m = p.levels.get(level);
+  if (!m) {
+    const coneMat = p.coneMat.clone();
+    coneMat.color.setScalar(level); // scales the cone's vertex colours
+    const poolMat = p.poolMat.clone();
+    poolMat.opacity *= level;
+    m = { coneMat, poolMat };
+    p.levels.set(level, m);
+  }
+  return m;
+}
+
+/** A warm floor pool and a faint light cone over the spot, at `level` strength: cheap stand-ins for a spotlight. */
+function spotlight(THREE, level) {
+  const { poolGeo, coneGeo } = spotlightParts(THREE);
+  const { poolMat, coneMat } = spotlightMats(THREE, level);
   const g = new THREE.Group();
   g.name = "spotlight";
   const pool = new THREE.Mesh(poolGeo, poolMat);
@@ -180,11 +198,14 @@ function spotlight(THREE) {
   return g;
 }
 
-/** The model for `spot.kind` (a plaque for unknown kinds), tagged with spotId, kind and its label/pick sizes. */
-export function makeSpot(THREE, spot, COLORS) {
+/**
+ * The model for `spot.kind` (a plaque for unknown kinds), tagged with spotId, kind and its label/pick sizes.
+ * opts.band: the LIGHT_BANDS entry lighting the spot, which sets its spotlight's strength (full without one).
+ */
+export function makeSpot(THREE, spot, COLORS, { band } = {}) {
   const build = MODELS[spot.kind] ?? MODELS.thing;
   const { g, labelY, pickY, pickRadius } = build(THREE, spot, COLORS);
-  g.add(spotlight(THREE));
+  g.add(spotlight(THREE, band ? spotlightLevel(band) : 1));
   Object.assign(g.userData, { spotId: spot.id, kind: spot.kind, labelY, pickY, pickRadius });
   g.name = spot.id;
   return g;

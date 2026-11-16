@@ -5,7 +5,7 @@ import { layoutTime } from "../site/lib/layout.js";
 import { initials, makeSpot, setPhoto } from "../site/lib/scene/spots.js";
 import { makeLabel } from "../site/lib/scene/labels.js";
 import { buildWorld } from "../site/lib/scene/world.js";
-import { ground, lowBackWalls, path, plainRoom, STYLES, yearLineZ, yearMarker, yearMarks } from "../site/lib/scene/styles.js";
+import { ground, lifespanBar, lowBackWalls, path, plainRoom, STYLES, yearLineZ, yearMarker, yearMarks } from "../site/lib/scene/styles.js";
 import { STYLE_NAMES } from "../site/lib/theme.js";
 import { installFakeCanvas } from "./fake_canvas.js";
 
@@ -302,10 +302,30 @@ Deno.test("lowBackWalls: a back wall is low where the next lane has a room behin
   assertEquals(lowBackWalls([]).size, 0);
 });
 
-Deno.test("yearLineZ lies between the back wall's front face and the back spot row", () => {
-  const r = { x0: 0, x1: 10, z0: -2.1, z1: 2.1 };
-  const backFace = r.z0 - 0.6 + 0.075;
-  assert(yearLineZ(r) > backFace + 0.1 && yearLineZ(r) < r.z0, String(yearLineZ(r)));
+Deno.test("year markers and the lifespan bar stand on the back wall's front face, clear of every landmark", () => {
+  const restore = installFakeCanvas();
+  try {
+    const r = { x0: 0, x1: 10, z0: -2.1, z1: 2.1 };
+    assertAlmostEquals(yearLineZ(r), r.z0 - 0.6 + 0.075, 1e-9);
+    const z = yearLineZ(r);
+    const post = yearMarker(THREE, 1800, COLORS);
+    post.position.set(5, 0, z); // at the room centre, where the landmark stands
+    const bar = lifespanBar(THREE, 0, 10, z, COLORS);
+    const solid = [];
+    for (const o of [post, bar]) {
+      o.updateMatrixWorld(true);
+      o.traverse((m) => m.isMesh && solid.push(boxOf(m)));
+    }
+    for (const name of STYLE_NAMES) {
+      const p = partsOf(STYLES[name](THREE, r, COLORS));
+      p.landmark.traverse((m) => {
+        if (!m.isMesh) return;
+        for (const b of solid) assert(!boxOf(m).intersectsBox(b), `${name}: ${m.geometry.type} cuts the year line`);
+      });
+    }
+  } finally {
+    restore();
+  }
 });
 
 Deno.test("yearMarks: each lane's ticks over its extent on its own year line, moved off end walls", () => {

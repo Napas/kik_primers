@@ -19,20 +19,20 @@ const PATH_W = 1.4;
 const PATH_OFFSET = 1.4; // path centre in front of a room's z1
 const LANDMARK_D = 0.8; // depth of the strip behind the first spot row
 const WINDOW_GAP = 2.4; // windows keep this far from the room centre, where the landmark stands
-const YEAR_IN = 0.2; // year markers stand this far in front of the back wall's front face
 const MARKER_H = LOW_WALL_H; // year marker post height
+const MARKER_R = 0.03; // year marker post radius; landmarks keep at least 0.035 m off the back wall
 const MARKER_EDGE = 0.3; // year markers keep this far from end walls
 const ARC = { r: 0.035, lift: 0.8, perMetre: 0.25, maxLift: 6, segments: 40, opacity: 0.9 };
-const LIFESPAN = { h: 0.08, d: 0.16 };
+const LIFESPAN = { h: 0.08, d: 0.06 }; // as deep as a year marker post
 
 /** z of the walking path along the lane of `room` (a layout room). */
 export const pathZ = (room) => room.z1 + PATH_OFFSET;
 
 /**
- * z of the year-marker line of `room`'s lane: along the back walls, in front of a camera that looks at a
- * spot from in front of it.
+ * z of the year-marker line of `room`'s lane: the back walls' front face, in front of a camera that looks at
+ * a spot from in front of it. Posts and the lifespan bar stand half in the wall, behind every landmark.
  */
-export const yearLineZ = (room) => room.z0 - MARGIN + WALL_T / 2 + YEAR_IN;
+export const yearLineZ = (room) => room.z0 - MARGIN + WALL_T / 2;
 
 /** One entry per lane: its rooms' x extent and its path's z. */
 export function pathLanes(layout) {
@@ -812,7 +812,7 @@ export function lifespanBar(THREE, x0, x1, z, C) {
 export function yearMarker(THREE, year, C) {
   const g = new THREE.Group();
   const post = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.04, 0.04, MARKER_H, 8),
+    new THREE.CylinderGeometry(MARKER_R, MARKER_R, MARKER_H, 8),
     new THREE.MeshStandardMaterial({ color: C.gold, metalness: 0.5, roughness: 0.4 }),
   );
   post.position.y = MARKER_H / 2;

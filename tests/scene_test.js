@@ -5,11 +5,13 @@ import { layoutTime } from "../site/lib/layout.js";
 import { initials, makeSpot, setPhoto } from "../site/lib/scene/spots.js";
 import { makeLabel } from "../site/lib/scene/labels.js";
 import { buildWorld } from "../site/lib/scene/world.js";
-import { ground, path, plainRoom, yearMarker } from "../site/lib/scene/styles.js";
+import { ground, path, plainRoom, STYLES, yearMarker } from "../site/lib/scene/styles.js";
+import { STYLE_NAMES } from "../site/lib/theme.js";
 import { installFakeCanvas } from "./fake_canvas.js";
 
 const root = new URL("../", import.meta.url).pathname;
 const MINI = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/mini/topic.json`));
+const STYLED = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/styles/topic.json`));
 const KINDS = ["person", "work", "group", "event", "place", "thing"];
 const spot = (kind, extra = {}) => ({ id: `s-${kind}`, kind, name: "Žemaitė Ąžuolė", years: [1845], at: 1845, ...extra });
 const canvases = (obj) => {
@@ -58,6 +60,44 @@ Deno.test("makeSpot builds one tagged model per kind", () => {
       shapes.add(geos.sort().join(","));
     }
     assertEquals(shapes.size, KINDS.length);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("every spot gets a fake spotlight that shares one texture and material, with no real lights", () => {
+  const restore = installFakeCanvas();
+  try {
+    const lit = (obj) => {
+      const found = { lights: 0, pools: [], cones: [] };
+      obj.traverse((o) => {
+        if (o.isLight) found.lights++;
+        if (o.name === "spot-pool") found.pools.push(o);
+        if (o.name === "spot-cone") found.cones.push(o);
+      });
+      return found;
+    };
+    const all = KINDS.map((k) => makeSpot(THREE, spot(k), COLORS));
+    const [a, b] = [lit(all[0]), lit(all[1])];
+    for (const obj of all) {
+      const f = lit(obj);
+      assertEquals(f.lights, 0);
+      assertEquals([f.pools.length, f.cones.length], [1, 1]);
+      assertEquals(obj.userData.wall, undefined);
+      assert(f.pools[0].userData.wall === undefined && f.cones[0].userData.wall === undefined);
+      for (const m of [f.pools[0], f.cones[0]]) {
+        assertEquals(m.material.depthWrite, false);
+        assertEquals(m.castShadow, false);
+      }
+      assertEquals(f.cones[0].material.blending, THREE.AdditiveBlending);
+    }
+    assert(a.pools[0].material === b.pools[0].material, "pool material is shared");
+    assert(a.pools[0].material.map === b.pools[0].material.map, "pool texture is shared");
+    assert(a.pools[0].geometry === b.pools[0].geometry, "pool geometry is shared");
+    assert(a.cones[0].material === b.cones[0].material, "cone material is shared");
+    assert(a.cones[0].geometry === b.cones[0].geometry, "cone geometry is shared");
+    // The hit sphere is set from the model alone.
+    assert(all.every((o) => o.userData.pickRadius < 0.7));
   } finally {
     restore();
   }
@@ -131,6 +171,69 @@ Deno.test("styles.js builds the plain look: walls tagged as occluders, path, gro
     const texts = [];
     m.traverse((o) => o.material?.map?.image?.texts && texts.push(...o.material.map.image.texts));
     assertEquals(texts, ["1550"]);
+  } finally {
+    restore();
+  }
+});
+
+const boxOf = (o) => new THREE.Box3().setFromObject(o, true); // precise: rotated parts measured by their vertices
+const partsOf = (room) => {
+  const out = { walls: [], meshes: [] };
+  room.updateMatrixWorld(true);
+  room.traverse((o) => {
+    if (o.userData.wall) out.walls.push(o);
+    if (o.isMesh) out.meshes.push(o);
+    if (o.userData.part) out[o.userData.part] = o;
+  });
+  return out;
+};
+
+Deno.test("every style builds walls, floor, signature, window light and a landmark inside its footprint", () => {
+  const restore = installFakeCanvas();
+  try {
+    // A minimum-size room on the second lane: nothing may reach the first lane's path behind it.
+    const r = { x0: 30, x1: 40, z0: -9.1, z1: -4.9 };
+    const backFace = r.z0 - 0.6 + 0.075; // front face of the back wall (MARGIN 0.6, WALL_T 0.15)
+    for (const name of STYLE_NAMES) {
+      const room = STYLES[name](THREE, r, COLORS);
+      const p = partsOf(room);
+      assertEquals(p.walls.length, 3, `${name}: back wall and two end walls`);
+      for (const w of p.walls) assertEquals(w.geometry.type, "BoxGeometry", `${name}: walls stay simple boxes`);
+      const wallTop = Math.max(...p.walls.map((w) => boxOf(w).max.y));
+      for (const part of ["floor", "signature", "window", "landmark"]) assert(p[part], `${name}: no ${part}`);
+      assert(boxOf(p.signature).max.y > wallTop + 0.3, `${name}: signature does not rise over the back wall`);
+      const lm = boxOf(p.landmark);
+      assert(lm.min.x >= r.x0 && lm.max.x <= r.x1, `${name}: landmark outside the room's x range`);
+      assert(lm.min.z >= backFace - 1e-6 && lm.max.z <= r.z0 + 0.35, `${name}: landmark leaves the strip behind the spots`);
+      let glows = false;
+      p.window.traverse((o) => (glows ||= o.material?.emissive?.getHex() > 0 || o.material?.isMeshBasicMaterial));
+      assert(glows, `${name}: window light does not glow`);
+      for (const m of p.meshes) {
+        const b = boxOf(m);
+        assert(b.min.z >= r.z0 - 0.6 - 0.075 - 1e-6, `${name}: ${m.name || m.geometry.type} sticks out behind the back wall`);
+        assert(b.max.z <= r.z1 + 0.6 + 1e-6, `${name}: ${m.name || m.geometry.type} sticks out in front of the floor`);
+        for (const mat of [m.material].flat()) {
+          if (mat.map) assertEquals(typeof mat.map.image.getContext, "function", `${name}: textures are drawn on canvases`);
+        }
+      }
+    }
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("buildWorld gives each room its named style", () => {
+  const restore = installFakeCanvas();
+  try {
+    const layout = layoutTime(STYLED);
+    const w = buildWorld(THREE, STYLED, layout);
+    assertEquals(w.roomGroups.size, 9);
+    for (const room of STYLED.rooms) {
+      let style;
+      w.roomGroups.get(room.n).traverse((o) => (style ??= o.userData.style));
+      assertEquals(style, room.style, `room ${room.n}`);
+    }
+    assertEquals(w.walls.length, 3 * layout.rooms.length);
   } finally {
     restore();
   }

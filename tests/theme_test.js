@@ -2,6 +2,7 @@ import { assert, assertEquals } from "@std/assert";
 import { COLORS, LIGHT_BANDS, lightFor, SCENE, STYLE_NAMES } from "../site/lib/theme.js";
 import { MOTIFS, motifSvg } from "../site/lib/motifs.js";
 import { BASEMAP, project } from "../site/lib/basemap.js";
+import { STYLE_KEYS } from "../site/lib/scene/styles.js";
 
 Deno.test("lightFor picks the band by year", () => {
   assertEquals(lightFor(1547).kind, "candle");
@@ -16,6 +17,10 @@ Deno.test("theme data is complete", () => {
   assertEquals(STYLE_NAMES.length, 9);
   assertEquals(LIGHT_BANDS.length, 5);
   assert(SCENE.eye > 1 && SCENE.fog.near < SCENE.fog.far);
+});
+
+Deno.test("styles.js builds exactly the theme's style names", () => {
+  assertEquals(STYLE_KEYS, STYLE_NAMES);
 });
 
 Deno.test("every motif is stroke-only SVG content", () => {

@@ -100,6 +100,26 @@
         1904
       ],
       "style": "barn"
+    },
+    {
+      "n": 5,
+      "title": "XX a. pradžios proza: Biliūnas, Vienuolis, Krėvė",
+      "intro": "Po spaudos draudimo panaikinimo atsirado pirmieji literatūros žurnalai. Pirmasis lietuvių literatūros žurnalas – „Vaivorykštė“ (1913), ne „Viltis“, ne „Aitvaras“ ir ne „Šaltinis“. Prozoje įsitvirtino psichologinė novelė.",
+      "why": [
+        {
+          "q": "Kaip Biliūnas, Vienuolis ir Krėvė vienas kitą papildo?",
+          "a": "Biliūnas – lyrinė, užuojautos kupina novelė. Vienuolis – realistinė kaimo drama („Paskenduolė“) ir egzotiškos Kaukazo legendos. Krėvė – senovės mitas ir dramos apie kunigaikščius („Šarūnas“, „Skirgaila“)."
+        },
+        {
+          "q": "Kaip „Skerdžius“ ir „Liūdna pasaka“ panašūs?",
+          "a": "Abiejuose žmogus ir gamta ar istorija susieti likimu: Lapinas nebegyvena be liepos, Juozapota palūžta netekusi Petro."
+        }
+      ],
+      "span": [
+        1900,
+        1918
+      ],
+      "style": "farmstead"
     }
   ],
   "spots": [
@@ -1690,6 +1710,388 @@
         }
       ],
       "by": "vaizgantas"
+    },
+    {
+      "id": "vaivorykste",
+      "room": 5,
+      "kind": "thing",
+      "name": "„Vaivorykštė“",
+      "aliases": [],
+      "years": [
+        1913
+      ],
+      "at": 1913,
+      "text": "Pirmasis lietuvių literatūros žurnalas – „Vaivorykštė“ (1913), ne „Viltis“, ne „Aitvaras“ ir ne „Šaltinis“. Literatūros žurnalai atsirado po spaudos draudimo panaikinimo.",
+      "links": []
+    },
+    {
+      "id": "biliunas",
+      "room": 5,
+      "kind": "person",
+      "name": "Jonas Biliūnas",
+      "aliases": [
+        "Jonas Bežemis",
+        "Jonas Anykštėnas",
+        "Jonas Barzdyla",
+        "Jonas Niūronis"
+      ],
+      "years": [
+        1879,
+        1907
+      ],
+      "at": 1907,
+      "text": "Jonas Biliūnas (1879 m. Niūronyse prie Anykščių – 1907 m. Zakopanėje) laikomas lietuvių lyrinės psichologinės novelės pradininku. Jis buvo realistas, ne romantikas. Gydytoju nebuvo ir romanų neparašė. 1953 m. perlaidotas Liudiškių piliakalnyje prie Anykščių. Slapyvardžiai: Jonas Bežemis, Jonas Anykštėnas, Jonas Barzdyla (taip pasirašyta knyga „Žemės gyvenimo reiškiniai“), Jonas Niūronis. Kūriniai: „Liūdna pasaka“ (1907), „Kliudžiau“, „Brisiaus galas“, „Ubagas“, „Lazda“, „Vagis“, „Žvaigždė“, pasaka „Laimės žiburys“. Apysakos „Nebylys“ ir „Išdukterė“ – ne Biliūno. Jis buvo Vasario 16-osios signataro Stepono Kairio vaikystės draugas. Jo našlė priglaudė iš tremties grįžusią žvalgę Marcelę Kubiliūtę. Romualdas Granauskas apie Biliūno skaitytojus sakė: kam jo kūriniai nejaudina, tam gamta vaikystėje „vietoj širdies įdėjo akmenį“. Nuo 2024 m. jo vardu rengiamas geros novelės konkursas. Biliūnas, Baranauskas ir Vienuolis – anykštėnai.",
+      "links": [
+        {
+          "to": "liudna-pasaka",
+          "label": "parašė"
+        },
+        {
+          "to": "kliudziau",
+          "label": "parašė"
+        },
+        {
+          "to": "brisiaus-galas",
+          "label": "parašė"
+        },
+        {
+          "to": "laimes-ziburys",
+          "label": "parašė"
+        },
+        {
+          "to": "kairys",
+          "label": "vaikystės draugas"
+        },
+        {
+          "to": "kubiliute",
+          "label": "jo našlė ją priglaudė"
+        },
+        {
+          "to": "baranauskas",
+          "label": "abu anykštėnai"
+        }
+      ],
+      "wikidata": "Q1376466"
+    },
+    {
+      "id": "liudna-pasaka",
+      "room": 5,
+      "kind": "work",
+      "name": "„Liūdna pasaka“",
+      "aliases": [],
+      "years": [
+        1907
+      ],
+      "at": 1907,
+      "text": "Jono Biliūno „Liūdna pasaka“ (1907) – apysaka apie 1863 m. sukilimą; Petras Banys išeina į sukilimą, jo žmona Juozapota ieško vyro: „Ar nežinai tamsta, kur mano Petriukas?“. Juozapota palūžta netekusi Petro.",
+      "links": [
+        {
+          "to": "biliunas",
+          "label": "autorius"
+        },
+        {
+          "to": "skerdzius",
+          "label": "panaši likimo tema"
+        }
+      ],
+      "by": "biliunas"
+    },
+    {
+      "id": "kliudziau",
+      "room": 5,
+      "kind": "work",
+      "name": "„Kliudžiau“",
+      "aliases": [],
+      "years": null,
+      "at": 1907,
+      "text": "Jono Biliūno „Kliudžiau“ prasideda „Tai buvo nedidelė balta katytė“ (apie katytę, ne šuniuką).",
+      "links": [
+        {
+          "to": "biliunas",
+          "label": "autorius"
+        }
+      ],
+      "by": "biliunas"
+    },
+    {
+      "id": "brisiaus-galas",
+      "room": 5,
+      "kind": "work",
+      "name": "„Brisiaus galas“",
+      "aliases": [],
+      "years": null,
+      "at": 1907,
+      "text": "Jono Biliūno „Brisiaus galas“ – apie šunį Brisių, kuris buvo nušautas.",
+      "links": [
+        {
+          "to": "biliunas",
+          "label": "autorius"
+        }
+      ],
+      "by": "biliunas"
+    },
+    {
+      "id": "laimes-ziburys",
+      "room": 5,
+      "kind": "work",
+      "name": "„Laimės žiburys“",
+      "aliases": [],
+      "years": null,
+      "at": 1907,
+      "text": "„Laimės žiburys“ – Jono Biliūno pasaka.",
+      "links": [
+        {
+          "to": "biliunas",
+          "label": "autorius"
+        }
+      ],
+      "by": "biliunas"
+    },
+    {
+      "id": "kairys",
+      "room": 5,
+      "kind": "person",
+      "name": "Steponas Kairys",
+      "aliases": [],
+      "years": [
+        1879,
+        1964
+      ],
+      "at": 1907,
+      "aside": true,
+      "text": "Vasario 16-osios signataras Steponas Kairys buvo Jono Biliūno vaikystės draugas.",
+      "links": [
+        {
+          "to": "biliunas",
+          "label": "vaikystės draugas"
+        }
+      ],
+      "wikidata": "Q971087"
+    },
+    {
+      "id": "kubiliute",
+      "room": 5,
+      "kind": "person",
+      "name": "Marcelė Kubiliūtė",
+      "aliases": [],
+      "years": [
+        1898,
+        1963
+      ],
+      "at": 1918,
+      "aside": true,
+      "text": "Žvalgę Marcelę Kubiliūtę, grįžusią iš tremties, priglaudė Jono Biliūno našlė.",
+      "links": [
+        {
+          "to": "biliunas",
+          "label": "jo našlė ją priglaudė"
+        }
+      ],
+      "wikidata": "Q6756675"
+    },
+    {
+      "id": "vienuolis",
+      "room": 5,
+      "kind": "person",
+      "name": "Antanas Vienuolis",
+      "aliases": [
+        "Antanas Žukauskas",
+        "Žukauskas"
+      ],
+      "years": [
+        1882,
+        1957
+      ],
+      "at": 1913,
+      "text": "Antanas Vienuolis (tikroji pavardė Žukauskas; 1882–1957) – vaistininkas (farmacininkas), ne gydytojas ir ne kunigas. Slapyvardį pasirinko paveiktas vienatvės. Dirbdamas Kaukaze vaistinėse, sukūrė „Kaukazo legendų“ ciklą (pvz., „Užkeiktieji vienuoliai“). Kiti kūriniai: „Paskenduolė“ (1913) – garsiausias jo apsakymas (ne romanas); „Puodžiūnkiemis“ (1949) – paskutinis romanas, ne Simonaitytės; apysaka „Inteligentų palata“, drama „1831 metai“; apsakymo veikėjas astronomas Šmukštaras. Pagal jo apsakymus 1981 m. sukurtas filmas apie XIX a. pabaigos kaimą. Vienuolis buvo Antano Baranausko ir Sauliaus Šaltenio giminaitis: Baranauskas buvo Vienuolio motinos dėdė. Palaidotas Anykščiuose, ten ir jo memorialinis muziejus.",
+      "links": [
+        {
+          "to": "paskenduole",
+          "label": "parašė"
+        },
+        {
+          "to": "kaukazo-legendos",
+          "label": "parašė"
+        },
+        {
+          "to": "baranauskas",
+          "label": "giminaitis (motinos dėdė)"
+        }
+      ],
+      "wikidata": "Q2008524"
+    },
+    {
+      "id": "paskenduole",
+      "room": 5,
+      "kind": "work",
+      "name": "„Paskenduolė“",
+      "aliases": [],
+      "years": [
+        1913
+      ],
+      "at": 1913,
+      "text": "Antano Vienuolio „Paskenduolė“ (1913) – garsiausias jo apsakymas (ne romanas), realistinė kaimo drama; veikėja Veronika (ne Severiutė, ne Juozapota).",
+      "links": [
+        {
+          "to": "vienuolis",
+          "label": "autorius"
+        }
+      ],
+      "by": "vienuolis"
+    },
+    {
+      "id": "kaukazo-legendos",
+      "room": 5,
+      "kind": "work",
+      "name": "„Kaukazo legendos“",
+      "aliases": [],
+      "years": null,
+      "at": 1913,
+      "text": "Dirbdamas Kaukaze vaistinėse, Antanas Vienuolis sukūrė „Kaukazo legendų“ ciklą (pvz., „Užkeiktieji vienuoliai“) – egzotiškas legendas.",
+      "links": [
+        {
+          "to": "vienuolis",
+          "label": "autorius"
+        }
+      ],
+      "by": "vienuolis"
+    },
+    {
+      "id": "kreve",
+      "room": 5,
+      "kind": "person",
+      "name": "Vincas Krėvė",
+      "aliases": [
+        "Vincas Mickevičius",
+        "Krėvė-Mickevičius",
+        "Vincas Krėvė-Mickevičius"
+      ],
+      "years": [
+        1882,
+        1954
+      ],
+      "at": 1911,
+      "text": "Vincas Krėvė (tikroji pavardė Mickevičius, dar vadinamas Krėve-Mickevičiumi; 1882 m. Subartonyse – 1954 m. JAV) – dzūkas, ne žemaitis. Jis išpopuliarino Dzūkijos pavadinimą Dainava. Kitas garsus Vincas Mickevičius pasirašinėjo Kapsuko slapyvardžiu. Kūriniai: „Dainavos šalies senų žmonių padavimai“ (1912), tarp jų „Milžinkapis“ (apie bajorą Mykį, jo keturis sūnus ir kovą su kryžiuočiais); dramos „Šarūnas“ (apie Dainavos kunigaikštį; 1911), tragedija „Skirgaila“, „Žentas“, „Mindaugo mirtis“; apsakymas „Skerdžius“; rinkinys „Šiaudinėj pastogėj“. „Mediniai stebuklai“ (Borutos), „Sukilėliai“ (Putino), „Dėdės ir dėdienės“ (Vaižganto), „Švitrigaila“, „Kęstučio mirtis“ ir „Valdovas“ – ne Krėvės. 1919 m. jis buvo paskirtas Lietuvos konsulu Azerbaidžane. Kauno studentai jį ir Balį Sruogą vadino „Patu ir Patašonu“.",
+      "links": [
+        {
+          "to": "sarunas",
+          "label": "parašė"
+        },
+        {
+          "to": "skirgaila",
+          "label": "parašė"
+        },
+        {
+          "to": "zentas",
+          "label": "parašė"
+        },
+        {
+          "to": "skerdzius",
+          "label": "parašė"
+        },
+        {
+          "to": "kapsukas",
+          "label": "kitas Vincas Mickevičius"
+        }
+      ],
+      "wikidata": "Q707346"
+    },
+    {
+      "id": "sarunas",
+      "room": 5,
+      "kind": "work",
+      "name": "„Šarūnas“",
+      "aliases": [],
+      "years": [
+        1911
+      ],
+      "at": 1911,
+      "text": "Vinco Krėvės drama „Šarūnas“ (1911) – apie Dainavos kunigaikštį.",
+      "links": [
+        {
+          "to": "kreve",
+          "label": "autorius"
+        }
+      ],
+      "by": "kreve"
+    },
+    {
+      "id": "skirgaila",
+      "room": 5,
+      "kind": "work",
+      "name": "„Skirgaila“",
+      "aliases": [],
+      "years": null,
+      "at": 1911,
+      "text": "„Skirgaila“ – Vinco Krėvės tragedija apie kunigaikštį. Ji dažnai painiojama su Sruogos dramomis: „Skirgaila“ – Krėvės, „Apyaušrio dalia“ – Sruogos.",
+      "links": [
+        {
+          "to": "kreve",
+          "label": "autorius"
+        }
+      ],
+      "by": "kreve"
+    },
+    {
+      "id": "zentas",
+      "room": 5,
+      "kind": "work",
+      "name": "„Žentas“",
+      "aliases": [],
+      "years": null,
+      "at": 1911,
+      "text": "„Žentas“ – Vinco Krėvės drama.",
+      "links": [
+        {
+          "to": "kreve",
+          "label": "autorius"
+        }
+      ],
+      "by": "kreve"
+    },
+    {
+      "id": "skerdzius",
+      "room": 5,
+      "kind": "work",
+      "name": "„Skerdžius“",
+      "aliases": [],
+      "years": null,
+      "at": 1911,
+      "text": "Vinco Krėvės apsakymas „Skerdžius“ prasideda „Du senu buvo Pagirių sodžiuje: Grainio liepa ir skerdžius Lapinas“. Lapinas miršta, kai nukertama liepa: jis nebegyvena be liepos.",
+      "links": [
+        {
+          "to": "kreve",
+          "label": "autorius"
+        },
+        {
+          "to": "liudna-pasaka",
+          "label": "panaši likimo tema"
+        }
+      ],
+      "by": "kreve"
+    },
+    {
+      "id": "kapsukas",
+      "room": 5,
+      "kind": "person",
+      "name": "Vincas Mickevičius-Kapsukas",
+      "aliases": [
+        "Kapsukas"
+      ],
+      "years": [
+        1880,
+        1935
+      ],
+      "at": 1911,
+      "aside": true,
+      "text": "Kitas garsus Vincas Mickevičius pasirašinėjo Kapsuko slapyvardžiu – tai ne Krėvė.",
+      "links": [
+        {
+          "to": "kreve",
+          "label": "ne Krėvė"
+        }
+      ],
+      "wikidata": "Q188271"
     }
   ],
   "questions": [],

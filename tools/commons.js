@@ -69,3 +69,12 @@ export function dropReason(info) {
   if (!info.descriptionurl) return "no source url";
   return null;
 }
+
+/** Milliseconds to wait before retry number `attempt` (0-based): Retry-After (seconds or HTTP date) if valid, else 5 s doubling. */
+export function retryDelayMs(retryAfter, attempt, now = Date.now()) {
+  const h = String(retryAfter ?? "").trim();
+  if (/^\d+$/.test(h)) return Number(h) * 1000;
+  const date = Date.parse(h);
+  if (h && !Number.isNaN(date)) return Math.max(0, date - now);
+  return 5000 * 2 ** attempt;
+}

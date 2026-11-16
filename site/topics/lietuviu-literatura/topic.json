@@ -707,11 +707,11 @@
             "characters": []
           },
           {
-            "text": "Toliau „Vasaros darbai“ ir ilgiausia dalis „Rudenio gėrybės“: būrų darbai pagal metų laikus.",
+            "text": "Toliau „Vasaros darbai“ ir ilgiausia dalis „Rudenio gėrybės“: būrų triūsas keičiantis metų laikams.",
             "characters": []
           },
           {
-            "text": "Vaizduojama vokiečių dvarininkų priespauda; ponai vardų neturi.",
+            "text": "Ponai vokiečiai spaudžia būrus ir lieka bevardžiai.",
             "characters": []
           },
           {
@@ -732,7 +732,7 @@
             ]
           },
           {
-            "text": "Viežlybieji moko nenaudėlius ir ragina laikytis savo kalbos ir papročių.",
+            "text": "Dorieji bara ir pamokslauja nenaudėliams, kviečia neišsižadėti gimtosios kalbos ir senųjų papročių.",
             "characters": [
               "Pričkus",
               "Slunkius",
@@ -1324,7 +1324,51 @@
           "label": "autorius"
         }
       ],
-      "by": "valancius"
+      "by": "valancius",
+      "plot": {
+        "characters": [
+          {
+            "name": "Juzė Viskantas",
+            "role": "siuvėjas, pasakotojas"
+          }
+        ],
+        "relations": [],
+        "beats": [
+          {
+            "text": "Apysaka atsiveria trumpu siuvėjo Juzės Viskanto gyvenimo aprašu.",
+            "characters": [
+              "Juzė Viskantas"
+            ]
+          },
+          {
+            "text": "Paskui Juzė pats pasakoja, kur keliavo po Lietuvą.",
+            "characters": [
+              "Juzė Viskantas"
+            ]
+          },
+          {
+            "text": "Jis pasakoja, kokie papročiai ir kasdienybė kaimuose bei miesteliuose.",
+            "characters": [
+              "Juzė Viskantas"
+            ]
+          },
+          {
+            "text": "Pasakojime skamba dainos ir žaidimai.",
+            "characters": [
+              "Juzė Viskantas"
+            ]
+          },
+          {
+            "text": "Siuvėjo žodžiai šviesūs: jam patinka kaimo žmonių sumanumas ir triūsas.",
+            "characters": [
+              "Juzė Viskantas"
+            ]
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/motiejus-valancius/"
+        ]
+      }
     },
     {
       "id": "mickevicius",
@@ -1420,11 +1464,11 @@
             "characters": []
           },
           {
-            "text": "1811–1812 m.: smulkiųjų bajorų gyvenimas Naugarduko apylinkėse, prie Nemuno.",
+            "text": "1811–1812 m.: smulkioji bajorija gyvena savo gyvenimą prie Nemuno, Naugarduko krašte.",
             "characters": []
           },
           {
-            "text": "Tadeušas ir Zosia kilę iš dviejų konkuruojančių bajorų giminių.",
+            "text": "Tadeušas ir Zosia – iš dviejų viena su kita besivaržančių bajorų giminių.",
             "characters": [
               "Tadeušas",
               "Zosia"
@@ -1435,7 +1479,7 @@
             "characters": []
           },
           {
-            "text": "Viskas vyksta prieš Napoleono žygį į Rusiją; poetizuojama gimtojo krašto gamta.",
+            "text": "Viskas vyksta prieš Napoleono žygį į Rusiją; poemoje apdainuojama tėviškės gamta.",
             "characters": []
           }
         ],
@@ -2088,7 +2132,53 @@
           "label": "autorė"
         }
       ],
-      "by": "zemaite"
+      "by": "zemaite",
+      "plot": {
+        "characters": [
+          {
+            "name": "Driežų Katrė",
+            "role": "marti, pagrindinė veikėja"
+          },
+          {
+            "name": "Vingių Jonas",
+            "role": "Katrės vyras"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Vingių Jonas",
+            "b": "Driežų Katrė",
+            "label": "vyras ir žmona"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Apsakymas iš ciklo „Laimė nutekėjimo“.",
+            "characters": []
+          },
+          {
+            "text": "Supriešinamos dvi šeimos – Vingiai ir Driežai.",
+            "characters": [
+              "Vingių Jonas",
+              "Driežų Katrė"
+            ]
+          },
+          {
+            "text": "Vingių Jonas veda Driežų Katrę – santuoka dėl naudos.",
+            "characters": [
+              "Vingių Jonas",
+              "Driežų Katrė"
+            ]
+          },
+          {
+            "text": "Godumas ir tamsumas kaime baigiasi skaudžiai.",
+            "characters": []
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/zemaite/"
+        ]
+      }
     },
     {
       "id": "jablonskis",
@@ -2376,7 +2466,43 @@
           "label": "autorė"
         }
       ],
-      "by": "satrijos-ragana"
+      "by": "satrijos-ragana",
+      "plot": {
+        "characters": [
+          {
+            "name": "Marija",
+            "role": "pagrindinė veikėja"
+          }
+        ],
+        "relations": [],
+        "beats": [
+          {
+            "text": "Senas dvaras – Užvenčio dvaras, kuriame vėliau augo autorė.",
+            "characters": []
+          },
+          {
+            "text": "Pagrindinė veikėja – Marija; autorė rėmėsi savo vaikyste.",
+            "characters": [
+              "Marija"
+            ]
+          },
+          {
+            "text": "Vaikystė dvare atrodo idiliška; atgyja XIX a. pabaigos dvaro gyvenimas.",
+            "characters": []
+          },
+          {
+            "text": "Motina pavaizduota šviesiai; kaimo žmonės idealizuoti, o savo tautos išsižadėję dvarininkai – išjuokti.",
+            "characters": []
+          },
+          {
+            "text": "Knyga – liūdnas sudiev praeičiai, kupinas amžinybės ilgesio.",
+            "characters": []
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/satrijos-ragana/"
+        ]
+      }
     },
     {
       "id": "amerika-pirtyje",
@@ -2869,7 +2995,61 @@
           "label": "panaši likimo tema"
         }
       ],
-      "by": "biliunas"
+      "by": "biliunas",
+      "plot": {
+        "characters": [
+          {
+            "name": "Petras Banys",
+            "role": "sukilėlis"
+          },
+          {
+            "name": "Juozapota",
+            "role": "Petro žmona"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Petras Banys",
+            "b": "Juozapota",
+            "label": "vyras ir žmona"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Fone – 1863–1864 m. sukilimas.",
+            "characters": []
+          },
+          {
+            "text": "Petras Banys išeina į sukilimą.",
+            "characters": [
+              "Petras Banys"
+            ]
+          },
+          {
+            "text": "Jo žmona Juozapota ieško vyro.",
+            "characters": [
+              "Juozapota",
+              "Petras Banys"
+            ]
+          },
+          {
+            "text": "Ji klausinėja: „Ar nežinai tamsta, kur mano Petriukas?“",
+            "characters": [
+              "Juozapota"
+            ]
+          },
+          {
+            "text": "Petro netekusi, Juozapota palūžta – skaudi sukilėlio žmonos dalia.",
+            "characters": [
+              "Juozapota",
+              "Petras Banys"
+            ]
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/jonas-biliunas/"
+        ]
+      }
     },
     {
       "id": "kliudziau",
@@ -2914,26 +3094,26 @@
             ]
           },
           {
-            "text": "Berniukas su lanku ir strėlėmis žaidžia Amerikos tyrlaukių gyventoją iš Kuperio knygų.",
+            "text": "Berniukas, apsiginklavęs lanku, vaidina Amerikos tyrlaukių gyventoją iš Kuperio knygų.",
             "characters": [
               "Pasakotojas"
             ]
           },
           {
-            "text": "Pamatęs suvargusią katytę, jis paleidžia strėlę ir mirtinai ją sužeidžia.",
+            "text": "Išvydęs nuvargusią katytę, jis šauna – strėlė ją mirtinai sužeidžia.",
             "characters": [
               "Pasakotojas",
               "Katytė"
             ]
           },
           {
-            "text": "Matydamas jos kančią, jis jaučia gailestį ir kaltę, meta lanką ir bėga namo.",
+            "text": "Žiūrint į kenčiantį gyvūnėlį, džiaugsmą išstumia gailestis ir kaltė; berniukas numeta lanką ir pabėga namo.",
             "characters": [
               "Pasakotojas"
             ]
           },
           {
-            "text": "Tik po trijų dienų prieina prie katytės ir sulaužo savo strėles.",
+            "text": "Prie katytės jis išdrįsta prieiti tik po trijų dienų ir sulaužo strėles.",
             "characters": [
               "Pasakotojas",
               "Katytė"
@@ -3181,21 +3361,21 @@
             ]
           },
           {
-            "text": "Juozelis išvykęs „už jūrų marių“; ji tikisi, kad jis atsiųs pinigų ir pasikvies pas save.",
+            "text": "Juozelis išvykęs „už jūrų marių“; ji vis dar laukia iš jo pinigų ir kvietimo atvykti.",
             "characters": [
               "Veronika",
               "Juozelis"
             ]
           },
           {
-            "text": "Davatka Juozaponienė ją išvadina ir išpasakoja visam kaimui.",
+            "text": "Davatka Juozaponienė ją iškoneveikia ir paskleidžia paslaptį po kaimą.",
             "characters": [
               "Juozaponienė",
               "Veronika"
             ]
           },
           {
-            "text": "Klebonas neduoda išrišimo ir ją išplūsta, tėvas ją muša; šeimininkai Kaikariai neužjaučia.",
+            "text": "Klebonas atsisako ją išrišti ir išplūsta, tėvas muša, šeimininkai Kaikariai nė kiek neužjaučia.",
             "characters": [
               "Klebonas",
               "Tėvas",
@@ -3204,13 +3384,13 @@
             ]
           },
           {
-            "text": "Atstumta Veronika paskutinį kartą eina rugių lauku, aplanko kapinaites ir pakelės kryžių.",
+            "text": "Atstumta Veronika atsisveikina: pereina per rugius, užsuka į kapinaites ir prie kryžiaus pakelėje.",
             "characters": [
               "Veronika"
             ]
           },
           {
-            "text": "Ji nusiskandina ežerėlyje; ištrauktos ant kranto niekas neapverkia.",
+            "text": "Ji nusiskandina ežerėlyje; ištrauktos į krantą niekas neapverkia.",
             "characters": [
               "Veronika"
             ]
@@ -3393,7 +3573,63 @@
           "label": "panaši likimo tema"
         }
       ],
-      "by": "kreve"
+      "by": "kreve",
+      "plot": {
+        "characters": [
+          {
+            "name": "Lapinas",
+            "role": "senas skerdžius"
+          },
+          {
+            "name": "Grainio liepa",
+            "role": "sena liepa"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Lapinas",
+            "b": "Grainio liepa",
+            "label": "susieti vienu likimu"
+          }
+        ],
+        "beats": [
+          {
+            "text": "„Du senu buvo Pagirių sodžiuje: Grainio liepa ir skerdžius Lapinas.“",
+            "characters": [
+              "Grainio liepa",
+              "Lapinas"
+            ]
+          },
+          {
+            "text": "Lapinas – išmintingas, su gamta suaugęs kaimo žmogus.",
+            "characters": [
+              "Lapinas"
+            ]
+          },
+          {
+            "text": "Kaimas jį gerbia kaip doros pavyzdį, nors autorius į jį pažvelgia ir su šypsena.",
+            "characters": [
+              "Lapinas"
+            ]
+          },
+          {
+            "text": "Grainio liepa nukertama.",
+            "characters": [
+              "Grainio liepa"
+            ]
+          },
+          {
+            "text": "Lapinas be liepos nebegyvena – miršta ir jis.",
+            "characters": [
+              "Lapinas",
+              "Grainio liepa"
+            ]
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/vincas-kreve/"
+        ]
+      }
     },
     {
       "id": "kapsukas",
@@ -3627,20 +3863,20 @@
         ],
         "beats": [
           {
-            "text": "„Bandymų dienos“: tėvų noru Liudas Vasaris stoja į kunigų seminariją.",
+            "text": "„Bandymų dienos“: tėvų paragintas, Liudas Vasaris įstoja į kunigų seminariją.",
             "characters": [
               "Liudas Vasaris"
             ]
           },
           {
-            "text": "Klebono giminaitė Liucė nori užkariauti klieriko širdį; jis atsispiria ir ima rašyti eilėraščius.",
+            "text": "Klebono giminaitė Liucė ima vilioti klieriką; jis nepasiduoda ir pradeda rašyti eilėraščius.",
             "characters": [
               "Liucė",
               "Liudas Vasaris"
             ]
           },
           {
-            "text": "Nepaisydamas abejonių jis priima įžadus ir tampa kunigu.",
+            "text": "Nors abejoja, jis duoda įžadus ir yra įšventinamas.",
             "characters": [
               "Liudas Vasaris"
             ]
@@ -3654,14 +3890,14 @@
             ]
           },
           {
-            "text": "Dvare jį globoja ir žavi baronienė Rainakienė; prasidėjus karui jis išvyksta į Peterburgą.",
+            "text": "Dvaro baronienė Rainakienė dalija jam knygas ir dėmesį, jis ja susižavi; kilus karui, išvažiuoja į Peterburgą.",
             "characters": [
               "Rainakienė",
               "Liudas Vasaris"
             ]
           },
           {
-            "text": "„Išsivadavimas“: po dešimties metų jis Kaune, vėl bendrauja su Liuce ir pamilsta pianistę Auksę.",
+            "text": "„Išsivadavimas“: grįžęs po dešimtmečio, jis gyvena Kaune, vėl artėja prie Liucės ir pamilsta pianistę Auksę.",
             "characters": [
               "Liudas Vasaris",
               "Liucė",
@@ -3669,7 +3905,7 @@
             ]
           },
           {
-            "text": "Mirus Vytukui Liucė nusižudo; Vasaris pasiryžta atsisakyti kunigystės.",
+            "text": "Vytukas miršta, sugniuždyta Liucė nusižudo; Vasaris nusprendžia mesti kunigystę.",
             "characters": [
               "Vytukas",
               "Liucė",
@@ -4107,7 +4343,41 @@
           "label": "autorius"
         }
       ],
-      "by": "binkis"
+      "by": "binkis",
+      "plot": {
+        "characters": [
+          {
+            "name": "Petras Keraitis",
+            "role": "gimnazistas, pagrindinis veikėjas"
+          }
+        ],
+        "relations": [],
+        "beats": [
+          {
+            "text": "Scenoje – gyvas, tikroviškas gimnazijos mokinių pasaulis.",
+            "characters": []
+          },
+          {
+            "text": "Gimnazistas Petras Keraitis nekaltai apkaltinamas vagyste.",
+            "characters": [
+              "Petras Keraitis"
+            ]
+          },
+          {
+            "text": "Svarbiausi klausimai – doroviniai.",
+            "characters": [
+              "Petras Keraitis"
+            ]
+          },
+          {
+            "text": "Visa pjesė persunkta tikėjimo gėriu.",
+            "characters": []
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/kazys-binkis/"
+        ]
+      }
     },
     {
       "id": "kiskiu-sukilimas",
@@ -4499,13 +4769,13 @@
         ],
         "beats": [
           {
-            "text": "Paudruvės krašte nuo neatmenamų laikų stovi Baltaragio vėjo malūnas.",
+            "text": "Paudruvės krašte nuo seno sukasi Baltaragio vėjinis malūnas.",
             "characters": [
               "Baltrus Baltaragis"
             ]
           },
           {
-            "text": "Malūnininkas Baltaragis sudaro sandėrį su tingiu velniu Pinčuku.",
+            "text": "Malūnininkas Baltaragis susitaria su velniu Pinčuku – didžiu tinginiu.",
             "characters": [
               "Baltrus Baltaragis",
               "Pinčukas"
@@ -4528,20 +4798,14 @@
             ]
           },
           {
-            "text": "Baltaragis mėgina davatką Uršulę supiršti su velniu.",
+            "text": "Baltaragis net davatką Uršulę mėgina išleisti už velnio.",
             "characters": [
               "Baltrus Baltaragis",
               "Uršulė"
             ]
           },
           {
-            "text": "Tarp kitų veikėjų – arkliavagis Raupys.",
-            "characters": [
-              "Raupys"
-            ]
-          },
-          {
-            "text": "Pasakų apie žmogaus ir velnio kovą motyvais parodoma tragiška žmogaus lemtis ir romantiška meilė.",
+            "text": "Liaudies pasakų motyvais pasakojama, kaip žmogus grumiasi su velniu; meilė čia romantiška, o lemtis – tragiška.",
             "characters": []
           }
         ],
@@ -5007,7 +5271,45 @@
           "label": "autorė"
         }
       ],
-      "by": "simonaityte"
+      "by": "simonaityte",
+      "plot": {
+        "characters": [
+          {
+            "name": "Aukštujų Šimoniai",
+            "role": "Mažosios Lietuvos lietuvių giminė"
+          }
+        ],
+        "relations": [],
+        "beats": [
+          {
+            "text": "Veiksmas – XVIII–XIX a. Mažojoje Lietuvoje, kur lietuvių laukia skaudi lemtis.",
+            "characters": []
+          },
+          {
+            "text": "Aprašoma maro epidemija.",
+            "characters": []
+          },
+          {
+            "text": "Matome, kaip per kelias kartas keičiasi vienos giminės dvasia ir ūkis.",
+            "characters": [
+              "Aukštujų Šimoniai"
+            ]
+          },
+          {
+            "text": "Vokiečių kolonizacijos spaudžiami, žmonės pamažu praranda tautinį ir dorovinį pagrindą.",
+            "characters": [
+              "Aukštujų Šimoniai"
+            ]
+          },
+          {
+            "text": "Romanas iškelia lietuvių dvasios turtus, su meile rodo savo krašto žmones ir jų buitį.",
+            "characters": []
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/ieva-simonaityte/"
+        ]
+      }
     },
     {
       "id": "vilius-karalius",
@@ -5256,6 +5558,11 @@
           "name": "Niujorkas",
           "lat": 40.71,
           "lon": -74.01
+        },
+        {
+          "name": "JAV",
+          "lat": 39.83,
+          "lon": -98.58
         }
       ],
       "motif": "city"
@@ -5279,7 +5586,43 @@
           "label": "autorius"
         }
       ],
-      "by": "skema"
+      "by": "skema",
+      "plot": {
+        "characters": [
+          {
+            "name": "Antanas Garšva",
+            "role": "poetas, liftininkas Niujorke"
+          }
+        ],
+        "relations": [],
+        "beats": [
+          {
+            "text": "Romanas (pirminis pavadinimas „Keltuvas“) prasideda epigrafu apie palaimintus idiotus.",
+            "characters": []
+          },
+          {
+            "text": "Antanas Garšva, kaip ir autorius, dirba liftininku Niujorke.",
+            "characters": [
+              "Antanas Garšva"
+            ]
+          },
+          {
+            "text": "Romanas svarsto, kaip po karo, egzode, klostosi menininko gyvenimas.",
+            "characters": [
+              "Antanas Garšva"
+            ]
+          },
+          {
+            "text": "Klausiama, kas yra poetas ir už ką jis atsako.",
+            "characters": [
+              "Antanas Garšva"
+            ]
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/antanas-skema/"
+        ]
+      }
     },
     {
       "id": "katiliskis",
@@ -6266,13 +6609,13 @@
         ],
         "beats": [
           {
-            "text": "Juza savo noru gyvena nuošaliai, pelkėje, kaip atsiskyrėlis.",
+            "text": "Juza pasirinko gyventi vienas, atokioje pelkėje.",
             "characters": [
               "Juza"
             ]
           },
           {
-            "text": "Ūkiui reikalingų prekių jis perka Konelio krautuvėlėje – su juo vienu iš nedaugelio rimtai kalbasi.",
+            "text": "Konelio krautuvėlėje jis apsiperka ūkiui; tai vienas retų Juzos rimtų pašnekovų.",
             "characters": [
               "Juza",
               "Konelis"
@@ -6285,7 +6628,7 @@
             ]
           },
           {
-            "text": "Per Holokaustą Juza bando paslėpti Konelio šeimą, bet jam nepavyksta.",
+            "text": "Per Holokaustą Juza slepia Konelio šeimą, tačiau išsaugoti jos nepavyksta.",
             "characters": [
               "Juza",
               "Konelis"
@@ -7534,7 +7877,52 @@
           "label": "autorė"
         }
       ],
-      "by": "sabaliauskaite"
+      "by": "sabaliauskaite",
+      "plot": {
+        "characters": [
+          {
+            "name": "Norvaišos",
+            "role": "Žemaitijos bajorų giminė"
+          }
+        ],
+        "relations": [],
+        "beats": [
+          {
+            "text": "Keturių dalių saga apie Žemaitijos bajorų Norvaišų giminę.",
+            "characters": [
+              "Norvaišos"
+            ]
+          },
+          {
+            "text": "Pirmoji dalis (2008): XVII a. antrosios pusės Tvano laikotarpis Lietuvoje.",
+            "characters": [
+              "Norvaišos"
+            ]
+          },
+          {
+            "text": "Antroji dalis – 1707–1710 m. Didysis maras.",
+            "characters": [
+              "Norvaišos"
+            ]
+          },
+          {
+            "text": "Trečioji – XVIII a. vidurio rokoko metai; čia gimsta Vilniaus Teisiojo konvertito legenda.",
+            "characters": [
+              "Norvaišos"
+            ]
+          },
+          {
+            "text": "Ketvirtoji, paskutinė, – XVIII a. antroji pusė; joje veikia Norvaiša, jėzuitas ir matematikas Vilniaus universitete.",
+            "characters": [
+              "Norvaišos"
+            ]
+          }
+        ],
+        "sources": [
+          "https://www.vle.lt/straipsnis/kristina-sabaliauskaite/",
+          "https://lt.wikipedia.org/wiki/Silva_rerum"
+        ]
+      }
     },
     {
       "id": "parulskis",

@@ -657,7 +657,97 @@
           "label": "išleido ir pavadino (1818)"
         }
       ],
-      "by": "donelaitis"
+      "by": "donelaitis",
+      "plot": {
+        "characters": [
+          {
+            "name": "Pričkus",
+            "role": "kaimo šaltyšius, viežlybasis būras"
+          },
+          {
+            "name": "Krizas",
+            "role": "turtingas ūkininkas, viežlybasis"
+          },
+          {
+            "name": "Selmas",
+            "role": "religingas, tautiškas būras"
+          },
+          {
+            "name": "Lauras",
+            "role": "būras mąstytojas"
+          },
+          {
+            "name": "Slunkius",
+            "role": "tinginys"
+          },
+          {
+            "name": "Dočys",
+            "role": "mušeika, ponus keikiantis būras"
+          },
+          {
+            "name": "Plaučiūnas",
+            "role": "girtuoklis"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Pričkus",
+            "b": "Slunkius",
+            "label": "moko nenaudėlį"
+          },
+          {
+            "a": "Pričkus",
+            "b": "Dočys",
+            "label": "moko nenaudėlį"
+          }
+        ],
+        "beats": [
+          {
+            "text": "„Pavasario linksmybės“ pradeda poemą: „Jau saulelė vėl atkopdama budino svietą“.",
+            "characters": []
+          },
+          {
+            "text": "Toliau „Vasaros darbai“ ir ilgiausia dalis „Rudenio gėrybės“: būrų darbai pagal metų laikus.",
+            "characters": []
+          },
+          {
+            "text": "Vaizduojama vokiečių dvarininkų priespauda; ponai vardų neturi.",
+            "characters": []
+          },
+          {
+            "text": "Viežlybieji – šaltyšius Pričkus, Krizas, Selmas, Lauras – dori, darbštūs ir tautiški.",
+            "characters": [
+              "Pričkus",
+              "Krizas",
+              "Selmas",
+              "Lauras"
+            ]
+          },
+          {
+            "text": "Nenaudėliai: Slunkius tingi, Plaučiūnas girtuokliauja, Dočys peštukas ir keikia ponus.",
+            "characters": [
+              "Slunkius",
+              "Plaučiūnas",
+              "Dočys"
+            ]
+          },
+          {
+            "text": "Viežlybieji moko nenaudėlius ir ragina laikytis savo kalbos ir papročių.",
+            "characters": [
+              "Pričkus",
+              "Slunkius",
+              "Dočys"
+            ]
+          },
+          {
+            "text": "„Žiemos rūpesčiai“ baigiasi žodžiais „Ir mes vėlei ant laukų trūsinėdami vargsim“.",
+            "characters": []
+          }
+        ],
+        "sources": [
+          "https://lt.wikipedia.org/wiki/Metai_(Donelaitis)"
+        ]
+      }
     },
     {
       "id": "donelaicio-pasakecios",
@@ -1305,7 +1395,54 @@
           "label": "mini"
         }
       ],
-      "by": "mickevicius"
+      "by": "mickevicius",
+      "plot": {
+        "characters": [
+          {
+            "name": "Tadeušas",
+            "role": "bajorų giminės atstovas, pagrindinis veikėjas"
+          },
+          {
+            "name": "Zosia",
+            "role": "kitos bajorų giminės atstovė, pagrindinė veikėja"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Tadeušas",
+            "b": "Zosia",
+            "label": "iš dviejų varžovių giminių"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Poema prasideda žodžiais „Tėvyne Lietuva, mielesnė už sveikatą!“",
+            "characters": []
+          },
+          {
+            "text": "1811–1812 m.: smulkiųjų bajorų gyvenimas Naugarduko apylinkėse, prie Nemuno.",
+            "characters": []
+          },
+          {
+            "text": "Tadeušas ir Zosia kilę iš dviejų konkuruojančių bajorų giminių.",
+            "characters": [
+              "Tadeušas",
+              "Zosia"
+            ]
+          },
+          {
+            "text": "Dvylika knygų pasakoja apie „paskutinį antpuolį Lietuvoje“ – bajorų nuotykius.",
+            "characters": []
+          },
+          {
+            "text": "Viskas vyksta prieš Napoleono žygį į Rusiją; poetizuojama gimtojo krašto gamta.",
+            "characters": []
+          }
+        ],
+        "sources": [
+          "https://lt.wikipedia.org/wiki/Ponas_Tadas_(poema)"
+        ]
+      }
     },
     {
       "id": "baranauskas",
@@ -2749,7 +2886,70 @@
           "label": "autorius"
         }
       ],
-      "by": "biliunas"
+      "by": "biliunas",
+      "plot": {
+        "characters": [
+          {
+            "name": "Pasakotojas",
+            "role": "suaugęs vyras, prisimenantis vaikystę"
+          },
+          {
+            "name": "Katytė",
+            "role": "beglobė balta katytė"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Pasakotojas",
+            "b": "Katytė",
+            "label": "kaltės istorija"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Suaugęs pasakotojas prisimena vaikystės įvykį: „Tai buvo nedidelė balta katytė“.",
+            "characters": [
+              "Pasakotojas",
+              "Katytė"
+            ]
+          },
+          {
+            "text": "Berniukas su lanku ir strėlėmis žaidžia Amerikos tyrlaukių gyventoją iš Kuperio knygų.",
+            "characters": [
+              "Pasakotojas"
+            ]
+          },
+          {
+            "text": "Pamatęs suvargusią katytę, jis paleidžia strėlę ir mirtinai ją sužeidžia.",
+            "characters": [
+              "Pasakotojas",
+              "Katytė"
+            ]
+          },
+          {
+            "text": "Matydamas jos kančią, jis jaučia gailestį ir kaltę, meta lanką ir bėga namo.",
+            "characters": [
+              "Pasakotojas"
+            ]
+          },
+          {
+            "text": "Tik po trijų dienų prieina prie katytės ir sulaužo savo strėles.",
+            "characters": [
+              "Pasakotojas",
+              "Katytė"
+            ]
+          },
+          {
+            "text": "Tą vienintelį šūvį jis iki šiol nešioja savo krūtinėje.",
+            "characters": [
+              "Pasakotojas"
+            ]
+          }
+        ],
+        "sources": [
+          "https://lt.wikipedia.org/wiki/Kliudžiau"
+        ]
+      }
     },
     {
       "id": "brisiaus-galas",
@@ -2928,7 +3128,98 @@
           "label": "autorius"
         }
       ],
-      "by": "vienuolis"
+      "by": "vienuolis",
+      "plot": {
+        "characters": [
+          {
+            "name": "Veronika",
+            "role": "samdinė mergina"
+          },
+          {
+            "name": "Juozelis",
+            "role": "ją suvedžiojęs mylimasis"
+          },
+          {
+            "name": "Juozaponienė",
+            "role": "dievobaiminga moteriškė"
+          },
+          {
+            "name": "Klebonas",
+            "role": "parapijos klebonas"
+          },
+          {
+            "name": "Tėvas",
+            "role": "žiaurus Veronikos tėvas"
+          },
+          {
+            "name": "Kaikariai",
+            "role": "ūkininkai, pas kuriuos Veronika tarnauja"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Veronika",
+            "b": "Juozelis",
+            "label": "mylimieji"
+          },
+          {
+            "a": "Veronika",
+            "b": "Kaikariai",
+            "label": "samdinė ir šeimininkai"
+          },
+          {
+            "a": "Tėvas",
+            "b": "Veronika",
+            "label": "tėvas ir duktė"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Tarp Sekminių ir rugiapjūtės samdinė Veronika jau žino, kad laukiasi kūdikio.",
+            "characters": [
+              "Veronika"
+            ]
+          },
+          {
+            "text": "Juozelis išvykęs „už jūrų marių“; ji tikisi, kad jis atsiųs pinigų ir pasikvies pas save.",
+            "characters": [
+              "Veronika",
+              "Juozelis"
+            ]
+          },
+          {
+            "text": "Davatka Juozaponienė ją išvadina ir išpasakoja visam kaimui.",
+            "characters": [
+              "Juozaponienė",
+              "Veronika"
+            ]
+          },
+          {
+            "text": "Klebonas neduoda išrišimo ir ją išplūsta, tėvas ją muša; šeimininkai Kaikariai neužjaučia.",
+            "characters": [
+              "Klebonas",
+              "Tėvas",
+              "Kaikariai",
+              "Veronika"
+            ]
+          },
+          {
+            "text": "Atstumta Veronika paskutinį kartą eina rugių lauku, aplanko kapinaites ir pakelės kryžių.",
+            "characters": [
+              "Veronika"
+            ]
+          },
+          {
+            "text": "Ji nusiskandina ežerėlyje; ištrauktos ant kranto niekas neapverkia.",
+            "characters": [
+              "Veronika"
+            ]
+          }
+        ],
+        "sources": [
+          "https://lt.wikipedia.org/wiki/Paskenduolė"
+        ]
+      }
     },
     {
       "id": "kaukazo-legendos",
@@ -3289,7 +3580,107 @@
           "label": "atsakas – „Tiesiu keliu“"
         }
       ],
-      "by": "putinas"
+      "by": "putinas",
+      "plot": {
+        "characters": [
+          {
+            "name": "Liudas Vasaris",
+            "role": "klierikas, vėliau kunigas ir poetas"
+          },
+          {
+            "name": "Liucė",
+            "role": "klebono giminaitė, pirmoji jį įsimylėjusi moteris"
+          },
+          {
+            "name": "Rainakienė",
+            "role": "baronienė"
+          },
+          {
+            "name": "Auksė",
+            "role": "iš Amerikos grįžusi pianistė"
+          },
+          {
+            "name": "Brazgys",
+            "role": "daktaras, Liucės vyras"
+          },
+          {
+            "name": "Vytukas",
+            "role": "Liucės sūnus"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Liucė",
+            "b": "Brazgys",
+            "label": "žmona ir vyras"
+          },
+          {
+            "a": "Liucė",
+            "b": "Vytukas",
+            "label": "motina ir sūnus"
+          },
+          {
+            "a": "Liudas Vasaris",
+            "b": "Auksė",
+            "label": "mylimieji"
+          }
+        ],
+        "beats": [
+          {
+            "text": "„Bandymų dienos“: tėvų noru Liudas Vasaris stoja į kunigų seminariją.",
+            "characters": [
+              "Liudas Vasaris"
+            ]
+          },
+          {
+            "text": "Klebono giminaitė Liucė nori užkariauti klieriko širdį; jis atsispiria ir ima rašyti eilėraščius.",
+            "characters": [
+              "Liucė",
+              "Liudas Vasaris"
+            ]
+          },
+          {
+            "text": "Nepaisydamas abejonių jis priima įžadus ir tampa kunigu.",
+            "characters": [
+              "Liudas Vasaris"
+            ]
+          },
+          {
+            "text": "„Eina gyvenimas“: vikaras Kalnynuose; Liucė išteka už daktaro Brazgio.",
+            "characters": [
+              "Liudas Vasaris",
+              "Liucė",
+              "Brazgys"
+            ]
+          },
+          {
+            "text": "Dvare jį globoja ir žavi baronienė Rainakienė; prasidėjus karui jis išvyksta į Peterburgą.",
+            "characters": [
+              "Rainakienė",
+              "Liudas Vasaris"
+            ]
+          },
+          {
+            "text": "„Išsivadavimas“: po dešimties metų jis Kaune, vėl bendrauja su Liuce ir pamilsta pianistę Auksę.",
+            "characters": [
+              "Liudas Vasaris",
+              "Liucė",
+              "Auksė"
+            ]
+          },
+          {
+            "text": "Mirus Vytukui Liucė nusižudo; Vasaris pasiryžta atsisakyti kunigystės.",
+            "characters": [
+              "Vytukas",
+              "Liucė",
+              "Liudas Vasaris"
+            ]
+          }
+        ],
+        "sources": [
+          "https://lt.wikipedia.org/wiki/Altorių_šešėly"
+        ]
+      }
     },
     {
       "id": "sukileliai",
@@ -4043,7 +4434,122 @@
           "label": "autorius"
         }
       ],
-      "by": "boruta"
+      "by": "boruta",
+      "plot": {
+        "characters": [
+          {
+            "name": "Baltrus Baltaragis",
+            "role": "malūnininkas"
+          },
+          {
+            "name": "Pinčukas",
+            "role": "tingus velnias"
+          },
+          {
+            "name": "Marcelė Jaudegytė",
+            "role": "Baltaragio žmona"
+          },
+          {
+            "name": "Jurga",
+            "role": "Baltaragio duktė"
+          },
+          {
+            "name": "Jurgis Girdvainis",
+            "role": "Jurgos sužadėtinis"
+          },
+          {
+            "name": "Anupras Visgirda",
+            "role": "Girdvainio piršlys"
+          },
+          {
+            "name": "Uršulė",
+            "role": "davatka"
+          },
+          {
+            "name": "Raupys",
+            "role": "arkliavagis"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Baltrus Baltaragis",
+            "b": "Pinčukas",
+            "label": "sandėris"
+          },
+          {
+            "a": "Baltrus Baltaragis",
+            "b": "Marcelė Jaudegytė",
+            "label": "vyras ir žmona"
+          },
+          {
+            "a": "Baltrus Baltaragis",
+            "b": "Jurga",
+            "label": "tėvas ir duktė"
+          },
+          {
+            "a": "Jurga",
+            "b": "Jurgis Girdvainis",
+            "label": "sužadėtiniai"
+          },
+          {
+            "a": "Anupras Visgirda",
+            "b": "Jurgis Girdvainis",
+            "label": "piršlys"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Paudruvės krašte nuo neatmenamų laikų stovi Baltaragio vėjo malūnas.",
+            "characters": [
+              "Baltrus Baltaragis"
+            ]
+          },
+          {
+            "text": "Malūnininkas Baltaragis sudaro sandėrį su tingiu velniu Pinčuku.",
+            "characters": [
+              "Baltrus Baltaragis",
+              "Pinčukas"
+            ]
+          },
+          {
+            "text": "Baltaragio žmona – Marcelė Jaudegytė, jų duktė – Jurga.",
+            "characters": [
+              "Marcelė Jaudegytė",
+              "Jurga",
+              "Baltrus Baltaragis"
+            ]
+          },
+          {
+            "text": "Jurgos sužadėtinis – Jurgis Girdvainis, jo piršlys – Anupras Visgirda.",
+            "characters": [
+              "Jurga",
+              "Jurgis Girdvainis",
+              "Anupras Visgirda"
+            ]
+          },
+          {
+            "text": "Baltaragis mėgina davatką Uršulę supiršti su velniu.",
+            "characters": [
+              "Baltrus Baltaragis",
+              "Uršulė"
+            ]
+          },
+          {
+            "text": "Tarp kitų veikėjų – arkliavagis Raupys.",
+            "characters": [
+              "Raupys"
+            ]
+          },
+          {
+            "text": "Pasakų apie žmogaus ir velnio kovą motyvais parodoma tragiška žmogaus lemtis ir romantiška meilė.",
+            "characters": []
+          }
+        ],
+        "sources": [
+          "https://lt.wikipedia.org/wiki/Baltaragio_malūnas",
+          "https://www.vle.lt/straipsnis/kazys-boruta/"
+        ]
+      }
     },
     {
       "id": "neris",
@@ -5712,7 +6218,90 @@
           "label": "autorius"
         }
       ],
-      "by": "baltusis"
+      "by": "baltusis",
+      "plot": {
+        "characters": [
+          {
+            "name": "Juza",
+            "role": "atsiskyrėlis, pagrindinis veikėjas"
+          },
+          {
+            "name": "Adomas",
+            "role": "Juzos brolis"
+          },
+          {
+            "name": "Uršulė",
+            "role": "Juzos sesuo"
+          },
+          {
+            "name": "Jokūbas",
+            "role": "Juzos senelis"
+          },
+          {
+            "name": "Konelis",
+            "role": "žydas prekeivis"
+          }
+        ],
+        "relations": [
+          {
+            "a": "Juza",
+            "b": "Adomas",
+            "label": "broliai"
+          },
+          {
+            "a": "Juza",
+            "b": "Uršulė",
+            "label": "brolis ir sesuo"
+          },
+          {
+            "a": "Jokūbas",
+            "b": "Juza",
+            "label": "senelis ir anūkas"
+          },
+          {
+            "a": "Juza",
+            "b": "Konelis",
+            "label": "vienas nedaugelio jo pašnekovų"
+          }
+        ],
+        "beats": [
+          {
+            "text": "Juza savo noru gyvena nuošaliai, pelkėje, kaip atsiskyrėlis.",
+            "characters": [
+              "Juza"
+            ]
+          },
+          {
+            "text": "Ūkiui reikalingų prekių jis perka Konelio krautuvėlėje – su juo vienu iš nedaugelio rimtai kalbasi.",
+            "characters": [
+              "Juza",
+              "Konelis"
+            ]
+          },
+          {
+            "text": "Karas ir genocidas pasiekia ir jo nuošalų kampą.",
+            "characters": [
+              "Juza"
+            ]
+          },
+          {
+            "text": "Per Holokaustą Juza bando paslėpti Konelio šeimą, bet jam nepavyksta.",
+            "characters": [
+              "Juza",
+              "Konelis"
+            ]
+          },
+          {
+            "text": "Pasislėpti nuo istorijos nelaimių neįmanoma.",
+            "characters": [
+              "Juza"
+            ]
+          }
+        ],
+        "sources": [
+          "https://lt.wikipedia.org/wiki/Sakmė_apie_Juzą"
+        ]
+      }
     },
     {
       "id": "avyzius",

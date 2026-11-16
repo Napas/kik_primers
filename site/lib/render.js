@@ -1,0 +1,145 @@
+// Pure HTML-string renderers for the spot panel, room panel and text view.
+// Every pack string goes through esc(). Clicks are wired by the page code via data-* attributes.
+import { esc } from "./text.js";
+import { motifSvg } from "./motifs.js";
+import { BASEMAP, project } from "./basemap.js";
+
+const byAtThenId = (a, b) => (a.at ?? Infinity) - (b.at ?? Infinity) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+const imgUrl = (pack, file) => `topics/${encodeURIComponent(pack.slug)}/img/${encodeURIComponent(file)}`;
+const safeUrl = (u) => (/^https?:\/\//i.test(u ?? "") ? u : "#");
+const pct = (f) => `${+(f * 100).toFixed(2)}%`;
+
+/** Works by `personId`, ordered by `at`. */
+export function worksOf(pack, personId) {
+  return pack.spots.filter((s) => s.kind === "work" && s.by === personId).sort(byAtThenId);
+}
+
+function yearsText(years) {
+  if (!years?.length) return "";
+  if (years.length === 1) return String(years[0]);
+  return `${years[0]}–${years[1] ?? ""}`;
+}
+
+/** Characters on a circle, relations as labelled lines, the current beat's characters lit. */
+export function plotExplainer(plot, { step = 0 } = {}) {
+  const last = plot.beats.length - 1;
+  const i = Math.min(Math.max(step, 0), last);
+  const beat = plot.beats[i];
+  const lit = new Set(beat.characters);
+  const [cx, cy, r] = [160, 120, 90];
+  const pos = new Map(plot.characters.map((c, k) => {
+    const t = (2 * Math.PI * k) / plot.characters.length - Math.PI / 2;
+    return [c.name, { x: cx + r * Math.cos(t), y: cy + r * Math.sin(t) }];
+  }));
+  const lines = plot.relations.filter((l) => pos.has(l.a) && pos.has(l.b)).map((l) => {
+    const a = pos.get(l.a), b = pos.get(l.b);
+    return `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}"/>` +
+      `<text class="rel" x="${((a.x + b.x) / 2).toFixed(1)}" y="${((a.y + b.y) / 2).toFixed(1)}" text-anchor="middle">${esc(l.label)}</text>`;
+  }).join("");
+  const nodes = plot.characters.map((c) => {
+    const p = pos.get(c.name);
+    return `<g data-char="${esc(c.name)}" class="node${lit.has(c.name) ? " on" : ""}"><circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="9"/>` +
+      `<text x="${p.x.toFixed(1)}" y="${(p.y + 22).toFixed(1)}" text-anchor="middle">${esc(c.name)}</text></g>`;
+  }).join("");
+  const sources = plot.sources.map((u, k) => `<a href="${esc(safeUrl(u))}" rel="noopener" target="_blank">šaltinis ${k + 1}</a>`).join(" ");
+  return `<section class="plot"><h3>Siužetas</h3>` +
+    `<svg class="plot-map" viewBox="0 0 320 250" role="img" aria-label="Veikėjų ryšiai">${lines}${nodes}</svg>` +
+    `<p class="beat">${esc(beat.text)}</p>` +
+    `<div class="plot-nav"><button type="button" data-step="${i - 1}"${i === 0 ? " disabled" : ""}>Atgal</button>` +
+    `<span>${i + 1} / ${last + 1}</span>` +
+    `<button type="button" data-step="${i + 1}"${i === last ? " disabled" : ""}>Toliau</button></div>` +
+    `<p class="sources">${sources}</p></section>`;
+}
+
+/** Life events on a track, a basemap with the person's places, and a shelf of their works. */
+export function lifeStrip(spot, pack) {
+  const life = spot.life ?? [];
+  const places = spot.places ?? [];
+  const works = worksOf(pack, spot.id);
+  if (!life.length && !places.length && !works.length) return "";
+  const style = pack.rooms.find((r) => r.n === spot.room)?.style;
+  let html = `<section class="life${style ? ` style-${esc(style)}` : ""}">`;
+  if (spot.motif) html += `<span class="motif">${motifSvg(spot.motif, 40)}</span>`;
+  if (life.length) {
+    const first = life[0].year, span = life[life.length - 1].year - first;
+    const events = life.map((e) => {
+      const f = span ? (e.year - first) / span : 0.5;
+      return `<li class="event" style="left:${pct(f)}"><b>${esc(e.year)}</b><span class="lbl">${esc(e.label)}</span>${e.place ? ` <i>${esc(e.place)}</i>` : ""}</li>`;
+    }).join("");
+    html += `<h3>Gyvenimas</h3><ol class="track">${events}</ol>`;
+  }
+  if (places.length) {
+    const pts = places.map((p) => ({ ...p, ...project(p.lat, p.lon) }));
+    const dots = pts.filter((p) => p.inside)
+      .map((p) => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="6"><title>${esc(p.name)}</title></circle>`).join("");
+    const outside = pts.filter((p) => !p.inside).map((p) => esc(p.name));
+    if (dots) {
+      html += `<svg class="basemap" viewBox="0 0 ${BASEMAP.width} ${BASEMAP.height}" role="img" aria-label="Žemėlapis">` +
+        `<path d="${BASEMAP.path}"/>${dots}</svg>`;
+    }
+    if (outside.length) html += `<p class="outside">Toliau: ${outside.join(", ")}</p>`;
+  }
+  if (works.length) {
+    html += `<h3>Kūriniai</h3><ul class="spines">` +
+      works.map((w) => `<li><button type="button" class="spine" data-spot="${esc(w.id)}">${esc(w.name)}</button></li>`).join("") + `</ul>`;
+  }
+  return html + `</section>`;
+}
+
+/** The panel for one spot. Sections without data are left out. */
+export function spotPanel(spot, pack, { opened = false } = {}) {
+  const years = yearsText(spot.years);
+  let html = `<article class="panel${opened ? " is-open" : ""}" data-spot="${esc(spot.id)}" id="spot-${esc(spot.id)}">`;
+  html += `<h2>${esc(spot.name)}</h2>`;
+  if (years) html += `<p class="years">${esc(years)}</p>`;
+  if (spot.aliases?.length) html += `<p class="aliases">Dar: ${spot.aliases.map(esc).join(", ")}</p>`;
+  const ph = spot.photo;
+  if (ph) {
+    html += `<figure><img src="${esc(imgUrl(pack, ph.file))}" alt="${esc(spot.name)}" loading="lazy">` +
+      `<figcaption><a href="${esc(safeUrl(ph.source_url))}" rel="noopener" target="_blank">Nuotrauka: ${esc(ph.author)}, ${esc(ph.license)}</a></figcaption></figure>`;
+  }
+  if (spot.illustration?.approved) {
+    html += `<figure><img src="${esc(imgUrl(pack, spot.illustration.file))}" alt="${esc(spot.name)}" loading="lazy"></figure>`;
+  }
+  html += String(spot.text ?? "").split(/\n+/).filter(Boolean).map((p) => `<p>${esc(p)}</p>`).join("");
+  if (spot.kind === "person") html += lifeStrip(spot, pack);
+  if (spot.kind === "work" && spot.plot) html += plotExplainer(spot.plot, { step: 0 });
+  if (spot.links?.length) {
+    html += `<h3>Ryšiai</h3><ul class="links">` +
+      spot.links.map((l) => `<li><a href="#spot-${esc(l.to)}" data-spot="${esc(l.to)}">${esc(l.label)}</a></li>`).join("") + `</ul>`;
+  }
+  return html + `</article>`;
+}
+
+/** The panel for one room: intro, its spots, and its why questions (answers hidden until revealed). */
+export function roomPanel(room, pack, revealed) {
+  const spots = pack.spots.filter((s) => s.room === room.n).sort(byAtThenId);
+  const why = room.why ?? [];
+  let html = `<article class="panel room" data-room="${esc(room.n)}"><h2>${esc(room.title)}</h2><p>${esc(room.intro)}</p>`;
+  if (spots.length) {
+    html += `<ul class="spots">` + spots.map((s) => `<li><button type="button" data-spot="${esc(s.id)}">${esc(s.name)}</button></li>`).join("") + `</ul>`;
+  }
+  if (why.length) {
+    html += `<h3>Kodėl?</h3><ul class="questions">` + why.map((w, i) => {
+      const key = `${room.n}:${i}`;
+      return `<li><p>${esc(w.q)}</p>` + (revealed.has(key)
+        ? `<p class="answer">${esc(w.a)}</p>`
+        : `<button type="button" data-reveal="${esc(key)}">Rodyti atsakymą</button>`) + `</li>`;
+    }).join("") + `</ul>`;
+  }
+  return html + `</article>`;
+}
+
+/** The whole topic as plain HTML, for browsers without WebGL. */
+export function textView(pack) {
+  const first = (r) => r.span ? r.span[0] : Infinity;
+  const rooms = [...pack.rooms].sort((a, b) => first(a) - first(b) || a.n - b.n);
+  let html = `<h1>${esc(pack.title)}</h1><p>${esc(pack.intro)}</p>`;
+  for (const room of rooms) {
+    html += `<section class="room-text" data-room="${esc(room.n)}"><h2>${esc(room.title)}</h2><p>${esc(room.intro)}</p>`;
+    for (const w of room.why ?? []) html += `<details><summary>${esc(w.q)}</summary><p>${esc(w.a)}</p></details>`;
+    html += pack.spots.filter((s) => s.room === room.n).sort(byAtThenId).map((s) => spotPanel(s, pack)).join("");
+    html += `</section>`;
+  }
+  return html;
+}

@@ -13,6 +13,12 @@ export function move(arr, from, to) {
   return out;
 }
 
+/** Moves the item with `id` by `delta` places from where it currently is; unknown ids change nothing. */
+export function shift(arr, id, delta) {
+  const from = arr.indexOf(id);
+  return from < 0 ? [...arr] : move(arr, from, from + delta);
+}
+
 export const orderRight = (given, answer) => given.join("\n") === answer.join("\n");
 
 /** results: [{item, right}] -> {right, total, wrong: [{text, spots}]}. */
@@ -90,27 +96,23 @@ async function main() {
             order = move(order, from, to);
             list.insertBefore(li, to > from ? over.nextSibling : over);
           };
-          grip.onpointerup = () => {
+          const stop = () => {
             grip.onpointermove = null;
           };
+          grip.onpointerup = stop;
+          grip.onpointercancel = stop;
         };
       }
     };
     const draw = () => {
       html(`${header()}<div class="card"><p>Išdėstyk nuo seniausio pagal ${by}:</p>
-        <ol class="order">${order.map((id, k) => `<li data-id="${esc(id)}"><span class="grip" aria-hidden="true">⠿</span> ${esc(spotName(id))}
-          <button data-up="${k}" aria-label="Aukštyn">↑</button><button data-down="${k}" aria-label="Žemyn">↓</button></li>`).join("")}</ol></div>
+        <ol class="order">${order.map((id) => `<li data-id="${esc(id)}"><span class="grip" aria-hidden="true">⠿</span> ${esc(spotName(id))}
+          <button data-step="-1" aria-label="Aukštyn">↑</button><button data-step="1" aria-label="Žemyn">↓</button></li>`).join("")}</ol></div>
         <p><button id="check">Tikrinti</button></p>`);
       const list = app.querySelector("ol");
-      for (const b of list.querySelectorAll("[data-up]")) {
+      for (const b of list.querySelectorAll("[data-step]")) {
         b.onclick = () => {
-          order = move(order, +b.dataset.up, +b.dataset.up - 1);
-          draw();
-        };
-      }
-      for (const b of list.querySelectorAll("[data-down]")) {
-        b.onclick = () => {
-          order = move(order, +b.dataset.down, +b.dataset.down + 1);
+          order = shift(order, b.closest("li").dataset.id, +b.dataset.step);
           draw();
         };
       }

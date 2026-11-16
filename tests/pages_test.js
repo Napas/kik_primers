@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert";
 import { lastScore, topicFromUrl } from "../site/lib/pages/common.js";
-import { move, orderRight, summarize } from "../site/lib/pages/test.js";
+import { move, orderRight, shift, summarize } from "../site/lib/pages/test.js";
 
 const root = new URL("../", import.meta.url).pathname;
 const idx = { topics: [{ slug: "mini-test" }, { slug: "kita" }] };
@@ -87,4 +87,12 @@ Deno.test("build-index fails when there is no topics folder", async () => {
   } finally {
     await Deno.remove(dir, { recursive: true });
   }
+});
+
+Deno.test("shift moves the item with the given id by its current position", () => {
+  const a = ["x", "y", "z"];
+  assertEquals(shift(a, "z", -1), ["x", "z", "y"]);
+  assertEquals(shift(a, "x", 1), ["y", "x", "z"]);
+  assertEquals(shift(a, "x", -1), ["x", "y", "z"]);
+  assertEquals(shift(a, "nera", 1), ["x", "y", "z"]);
 });

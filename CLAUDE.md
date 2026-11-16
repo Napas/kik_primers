@@ -40,11 +40,11 @@ site/index.html, world.html, test.html, about.html
 site/topics/index.json                  built by tools/build-index.ts
 site/topics/<slug>/topic.json, img/     one content pack per topic
 site/lib/                               our ES modules: layout, render, quiz, progress, storage, theme, text, motifs, basemap, site.css
-site/lib/scene/                         Three.js world: world, lanes, styles, spots, light, controls, labels, arcs, nearby
+site/lib/scene/                         Three.js world: world, lanes, styles, spots, light, controls, rays, labels, declutter, arcs, nearby
 site/lib/pages/                         page wiring: index, overview, selection, world, test, about, common
 site/lib/three/                         vendored pinned Three.js + licence
 coverage/<slug>.json                    private skip entries for masked primer spans (not deployed)
-tools/                                  Deno: validate, rules, import-photos, commons, import-cards, build-index, make-basemap
+tools/                                  Deno: validate, rules, import-photos, commons, import-cards, build-index, make-basemap, chrome, shoot
 tests/                                  deno test (+ fixtures, fake canvas)
 docs/TOPIC.md                           how an agent writes a topic.json
 docs/illustrations.md                   illustration house style and decisions
@@ -84,6 +84,7 @@ deno run -A tools/import-photos.ts [--dry-run] ~/www/kik/kik_out/study/<slug> si
 deno run -A tools/build-index.ts site                     # rebuild site/topics/index.json
 deno task validate --primer <slug>=$HOME/www/kik/kik_out/study/<slug>/primer.md
 deno task serve                                           # serve site/ locally
+deno run -A tools/shoot.ts http://localhost:8000 <slug> <out-dir>   # screenshot the start view and one spot per room
 ```
 
 - In the Claude Code sandbox, tests need `DENO_DIR=$TMPDIR/deno`; the first run

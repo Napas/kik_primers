@@ -24,3 +24,10 @@ export function isSlug(s) {
 
 /** True for an http(s) URL; false for other schemes and missing values. */
 export const isHttp = (u) => /^https?:\/\//i.test(u ?? "");
+
+/** A spot's years as text: "1845", "1845–1921", or "1950–" while still living; "" without years. */
+export function yearsText(years) {
+  if (!years?.length) return "";
+  if (years.length === 1) return String(years[0]);
+  return `${years[0]}–${years[1] ?? ""}`;
+}

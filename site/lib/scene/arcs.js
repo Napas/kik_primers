@@ -1,16 +1,20 @@
-// What a selected spot draws in the world: gold arcs to the spots it links to, and a person's lifespan
+// What a selected spot draws in the world: gold arcs to the nearest spots it links to, and a person's lifespan
 // on the year markers of their lane. The shapes come from styles.js; this module places them and removes them again.
 import { COLORS } from "../theme.js";
 import { lifespanBar, linkArc } from "./styles.js";
 import { yearLineZ } from "./lanes.js";
 
 const MIN_BAR = 0.3; // metres; a lifespan of one known year still shows
+/** Most arcs one spot draws; the panel lists every link. */
+export const MAX_ARCS = 4;
 
-/** Arcs from fromPos to each of toPositions ({x, y, z}), added to scene as one Group. */
+/** Arcs from fromPos to the MAX_ARCS nearest of toPositions ({x, y, z}), added to scene as one Group. */
 export function drawLinks(THREE, scene, fromPos, toPositions) {
   const group = new THREE.Group();
   group.name = "links";
-  for (const to of toPositions) group.add(linkArc(THREE, fromPos, to, COLORS));
+  const d = (p) => Math.hypot(p.x - fromPos.x, p.y - fromPos.y, p.z - fromPos.z);
+  const nearest = [...toPositions].sort((a, b) => d(a) - d(b)).slice(0, MAX_ARCS);
+  for (const to of nearest) group.add(linkArc(THREE, fromPos, to, COLORS));
   scene.add(group);
   return group;
 }

@@ -1,18 +1,20 @@
-// Light that follows the year: lamps beside each lane's path, every ~6 m, in the colour and strength of
-// lightFor(year at that x). Overlapping lanes cover the same years, so they share their light. Every lamp
-// glows and casts a pool on the floor; only MAX_REAL_LIGHTS of them, spread along the lanes, are real
-// lights, since each real light adds shader cost to every lit pixel. No path light casts shadows.
+// The world's light. Base light: sky/ground and a fill, dimmed while a spot is chosen and lit by the focus
+// spotlight. Path light that follows the year: lamps beside each lane's path, every ~6 m, in the colour and
+// strength of lightFor(year at that x). Overlapping lanes cover the same years, so they share their light.
+// Every lamp glows and casts a pool on the floor. Each real (point or spot) light adds shader cost to every
+// lit pixel, so the world has at most MAX_REAL_LIGHTS: MAX_REAL_LIGHTS - 1 path lamps, spread along the
+// lanes, and the focus spotlight. No light casts shadows.
 import { COLORS, lightFor, SCENE } from "../theme.js";
 import { lightPool, pathLamp, poolTexture } from "./styles.js";
 import { pathLanes } from "./lanes.js";
 
 const LAMP_STEP = 6; // metres between lamps, about
-const LAMP_INSET = 1.05; // lamps stand this far from the path centre, towards the rooms
-const POOL = { w: 4.4, d: 2.0, back: 0.2 }; // floor pool size, shifted towards the rooms
+const LAMP_OUT = 1.05; // lamps stand this far from the path centre on the visitor's side, shining onto the rooms
+const POOL = { w: 4.4, d: 2.0, back: 0.9 }; // floor pool size, shifted from the lamp towards the rooms
 const YEAR_RANGE = [-10000, 10000];
 const BISECT_STEPS = 60;
 
-/** Real lights in the whole world, at most. */
+/** Real (point and spot) lights in the whole world, at most. */
 export const MAX_REAL_LIGHTS = 8;
 
 // Smallest year in [lo, hi] for which test(year) holds; test must be monotonic.
@@ -46,7 +48,7 @@ export function pathLamps(layout) {
     for (let i = 0; i < n; i++) {
       const x = lane.x0 + step * (i + 0.5);
       const year = yearAt(layout, x);
-      out.push({ x, z: lane.z - LAMP_INSET, lane: lane.lane, year, band: lightFor(year) });
+      out.push({ x, z: lane.z + LAMP_OUT, lane: lane.lane, year, band: lightFor(year) });
     }
   }
   return out;
@@ -59,9 +61,8 @@ export function addPathLights(THREE, scene, layout) {
   group.name = "path-lights";
   const tex = poolTexture(THREE);
   const real = new Set();
-  for (let k = 0; k < Math.min(MAX_REAL_LIGHTS, lamps.length); k++) {
-    real.add(Math.floor(((k + 0.5) * lamps.length) / Math.min(MAX_REAL_LIGHTS, lamps.length)));
-  }
+  const n = Math.min(MAX_REAL_LIGHTS - 1, lamps.length); // the focus spotlight is the last real light
+  for (let k = 0; k < n; k++) real.add(Math.floor(((k + 0.5) * lamps.length) / n));
   lamps.forEach(({ x, z, band }, i) => {
     const lamp = pathLamp(THREE, band, COLORS);
     lamp.position.set(x, 0, z);
@@ -73,4 +74,37 @@ export function addPathLights(THREE, scene, layout) {
     }
   });
   scene.add(group);
+}
+
+/**
+ * Adds the base light and the focus spotlight to `scene`. Returns {focus(obj | null), update(dt)}: focus
+ * aims the spotlight above and in front of a spot (null turns it off); update eases the spotlight on or off
+ * and the base light down to SCENE.focus.dim or back, at SCENE.focus.rate per second.
+ */
+export function addBaseLights(THREE, scene) {
+  const hemi = new THREE.HemisphereLight(SCENE.ambient.sky, SCENE.ambient.ground, SCENE.ambient.intensity);
+  const fill = new THREE.DirectionalLight(SCENE.fill.color, SCENE.fill.intensity);
+  fill.position.set(-2, 8, 6);
+  const F = SCENE.focus;
+  const beam = new THREE.SpotLight(F.color, 0, F.distance, F.angle, F.penumbra, 1);
+  scene.add(hemi, fill, beam, beam.target);
+
+  let focused = null;
+  function focus(obj) {
+    focused = obj;
+    if (!obj) return;
+    const p = obj.position;
+    beam.position.set(p.x, obj.userData.pickY + F.up, p.z + F.out);
+    beam.target.position.set(p.x, obj.userData.pickY, p.z);
+    beam.target.updateMatrixWorld();
+  }
+  function update(dt) {
+    const k = 1 - Math.exp(-F.rate * dt);
+    const ease = (from, to) => from + (to - from) * k;
+    const dim = focused ? F.dim : 1;
+    beam.intensity = ease(beam.intensity, focused ? F.intensity : 0);
+    hemi.intensity = ease(hemi.intensity, SCENE.ambient.intensity * dim);
+    fill.intensity = ease(fill.intensity, SCENE.fill.intensity * dim);
+  }
+  return { focus, update };
 }

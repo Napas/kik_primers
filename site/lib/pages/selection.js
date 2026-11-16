@@ -27,6 +27,7 @@ export function makeSelection(THREE, { world, pack, layout, progress, view }) {
   function deselect() {
     if (!selected) return;
     for (const o of selected.drawn) removeDrawn(world.scene, o);
+    world.focus(null);
     selected = null;
     view.opened(null);
   }
@@ -40,6 +41,7 @@ export function makeSelection(THREE, { world, pack, layout, progress, view }) {
     const drawn = [drawLinks(THREE, world.scene, top(obj), ends)];
     if (spot.kind === "person") drawn.push(drawLifespan(THREE, world.scene, layout, spot.years, spot.room));
     selected = { spot, drawn: drawn.filter(Boolean) };
+    world.focus(obj);
     view.opened(id);
     progress.openSpot(slug, id);
   }

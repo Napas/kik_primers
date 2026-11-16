@@ -1,5 +1,6 @@
 // First-person controls: keys walk and turn, drag looks, click/tap picks a spot or a floor point.
 // Eased moves jump when the user prefers reduced motion. Pure helpers are exported for tests.
+import { floorHit, rayBox, raySphere } from "./rays.js";
 
 export const MAX_PITCH = (35 * Math.PI) / 180;
 export const MAX_MOVE = 1.5; // seconds, longest eased move or turn
@@ -29,40 +30,6 @@ export function ease(t) {
 /** Seconds an eased walk of `dist` metres takes: grows with distance, at most MAX_MOVE. */
 export function moveDuration(dist) {
   return dist <= 0 ? 0 : Math.min(MAX_MOVE, 0.4 + dist / GLIDE_SPEED);
-}
-
-/** Where the ray meets the plane y = floorY in front of the origin, or null. */
-export function floorHit(o, d, floorY) {
-  if (d.y >= 0) return null;
-  const t = (floorY - o.y) / d.y;
-  if (t <= 0) return null;
-  return { x: o.x + d.x * t, y: floorY, z: o.z + d.z * t };
-}
-
-// Distance along unit ray d to the sphere's surface, or null if it misses or lies behind.
-function raySphere(o, d, c, r) {
-  const oc = { x: c.x - o.x, y: c.y - o.y, z: c.z - o.z };
-  const along = oc.x * d.x + oc.y * d.y + oc.z * d.z;
-  if (along < 0) return null;
-  const off2 = oc.x ** 2 + oc.y ** 2 + oc.z ** 2 - along ** 2;
-  if (off2 > r * r) return null;
-  return along - Math.sqrt(r * r - off2);
-}
-
-/** Distance along ray d to the first face of the axis-aligned box {min, max}; 0 from inside; null on a miss. */
-export function rayBox(o, d, { min, max }) {
-  let near = 0, far = Infinity;
-  for (const a of ["x", "y", "z"]) {
-    if (d[a] === 0) {
-      if (o[a] < min[a] || o[a] > max[a]) return null;
-      continue;
-    }
-    const t1 = (min[a] - o[a]) / d[a], t2 = (max[a] - o[a]) / d[a];
-    near = Math.max(near, Math.min(t1, t2));
-    far = Math.min(far, Math.max(t1, t2));
-    if (near > far) return null;
-  }
-  return near;
 }
 
 /** p's x/z clamped into bounds {x0, x1, z0, z1}; p unchanged without bounds. */
@@ -113,7 +80,8 @@ const isTyping = (el) => el?.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.te
  * and again only when the map's entries change); occluders: [{min, max}] wall boxes that block picks;
  * bounds: {x0, x1, z0, z1} the camera stays inside; ignore(target): true for a keydown target whose keys
  * are not walk keys (such as page panels).
- * Returns {walkTo, lookAt, update(dt), moving() (an eased walk is running), dispose}.
+ * Returns {walkTo(v, {instant}), lookAt(v, {instant}), update(dt), moving() (an eased walk is running), dispose};
+ * instant moves or turns at once instead of easing.
  */
 export function makeControls(
   camera,
@@ -219,12 +187,12 @@ export function makeControls(
   globalThis.addEventListener("keyup", onKeyUp);
   globalThis.addEventListener("blur", onBlur);
 
-  function walkTo(v) {
+  function walkTo(v, { instant = false } = {}) {
     const from = { x: camera.position.x, z: camera.position.z };
     const to = clampToBounds(v, bounds);
     const dur = moveDuration(Math.hypot(to.x - from.x, to.z - from.z));
     camera.position.y = floorY + eye;
-    if (reduceMotion() || dur === 0) {
+    if (instant || reduceMotion() || dur === 0) {
       glide = null;
       camera.position.x = to.x;
       camera.position.z = to.z;
@@ -234,12 +202,12 @@ export function makeControls(
   }
 
   // Aims from where a running walk ends, so walkTo then lookAt faces v on arrival.
-  function lookAt(v) {
+  function lookAt(v, { instant = false } = {}) {
     const from = glide ? { x: glide.to.x, y: camera.position.y, z: glide.to.z } : camera.position;
     const want = yawPitchTo(from, v);
     const dyaw = wrapAngle(want.yaw - yaw);
     const dur = Math.min(MAX_MOVE, 0.3 + Math.abs(dyaw) / Math.PI);
-    if (reduceMotion()) {
+    if (instant || reduceMotion()) {
       turn = null;
       yaw = want.yaw;
       pitch = want.pitch;

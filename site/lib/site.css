@@ -93,7 +93,7 @@ ol.order li button:first-of-type { margin-left: auto; }
 .choices button { margin: 0 .4rem .4rem 0; }
 pre.licence { white-space: pre-wrap; font-size: .8rem; color: var(--muted); }
 
-.world-page .bar { position: relative; z-index: 2; background: color-mix(in srgb, var(--bg) 75%, transparent); }
+.world-page .bar { position: relative; z-index: 2; background: var(--bg); }
 .world-page .bar a + a { margin-left: 1rem; }
 .world { position: fixed; inset: 0; }
 .world canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }

@@ -4,13 +4,14 @@
 import { imgUrl, plotExplainer, textView } from "../render.js";
 import { layoutTime } from "../layout.js";
 import { SCENE } from "../theme.js";
-import { buildWorld } from "../scene/world.js";
+import { buildWorld, configureRenderer } from "../scene/world.js";
 import { pathZ } from "../scene/lanes.js";
 import { makeControls } from "../scene/controls.js";
-import { sizeLabels, standPoint, updateNearby } from "../scene/nearby.js";
+import { loadNearPhotos, standPoint } from "../scene/nearby.js";
+import { updateLabels } from "../scene/declutter.js";
 import { overview, roomAt, roomCounts } from "./overview.js";
 import { makeSelection, roomVisit } from "./selection.js";
-import { focusReturn, hashSpot, loadIndex, loadPack, markReady, pageProgress, run, showError, textAnchor, textOnly, topicFromUrl } from "./common.js";
+import { focusReturn, hashSpot, loadIndex, loadPack, markReady, pageProgress, run, showError, textAnchor, textOnly, topicFromUrl, viewShift } from "./common.js";
 
 const MAX_DT = 0.1; // seconds; longer frame gaps (hidden tab) don't jump the camera
 
@@ -71,7 +72,7 @@ async function main() {
   try {
     ui = interact(THREE, world, pack, layout, renderer.domElement, pageProgress(url));
     const start = hashSpot(location.hash, (id) => world.spotMeshes.has(id));
-    if (start) ui.goTo(start);
+    if (start) ui.goTo(start, { instant: true }); // a link to a spot arrives there, without the walk
   } catch (e) {
     ui?.controls.dispose();
     teardown();
@@ -95,7 +96,7 @@ async function main() {
   });
 }
 
-// Controls, the side panel, the overview and progress. Returns {controls, goTo(id), frame()}.
+// Controls, the side panel, the overview and progress. Returns {controls, goTo(id, {instant}), frame()}.
 function interact(THREE, world, pack, layout, canvas, progress) {
   const root = document.documentElement;
   const panel = document.getElementById("panel");
@@ -151,19 +152,23 @@ function interact(THREE, world, pack, layout, canvas, progress) {
     },
   });
 
-  function goTo(id) {
+  const roomOf = (n) => layout.rooms.find((r) => r.n === n);
+
+  function goTo(id, move = {}) {
     if (!world.spotMeshes.has(id)) return;
     const obj = world.spotMeshes.get(id);
     const p = obj.position;
-    const at = standPoint(p, spotsAt.filter((s) => s.id !== id));
-    controls.walkTo({ x: at.x, y: 0, z: at.z });
-    controls.lookAt({ x: p.x, y: p.y + obj.userData.pickY, z: p.z });
+    const r = roomOf(pack.spots.find((s) => s.id === id)?.room);
+    const line = r ? { minZ: pathZ(r), maxZ: pathZ(r) } : {}; // on the path: in front of the rows and the lamps
+    const at = standPoint(p, spotsAt.filter((s) => s.id !== id), line);
+    controls.walkTo({ x: at.x, y: 0, z: at.z }, move);
+    controls.lookAt({ x: p.x, y: p.y + obj.userData.pickY, z: p.z }, move);
     room.quiet = true;
     selection.openSpot(id);
   }
 
   function jumpTo(n) {
-    const r = layout.rooms.find((l) => l.n === n);
+    const r = roomOf(n);
     const x = (r.x0 + r.x1) / 2;
     controls.walkTo({ x, z: pathZ(r) });
     controls.lookAt({ x, y: SCENE.eye - 0.6, z: (r.z0 + r.z1) / 2 });
@@ -202,14 +207,28 @@ function interact(THREE, world, pack, layout, canvas, progress) {
     if (e.key === "Escape" && panel.classList.contains("is-open")) selection.close();
   });
 
+  // Screen areas the page draws over the world, in pixels: labels keep out of them.
+  const chrome = [document.querySelector(".bar"), overviewEl, panel];
+  function covered() {
+    return chrome.filter((el) => el && !el.hidden && (el !== panel || panel.classList.contains("is-open")))
+      .map((el) => el.getBoundingClientRect())
+      .map((b) => ({ x0: b.left, y0: b.top, x1: b.right, y1: b.bottom }));
+  }
+
+  // Layout reads (panel and chrome rects) come before the DOM writes below, so the browser lays out once a frame.
   function frame() {
+    const view = { width: innerWidth, height: innerHeight };
+    const blockers = covered();
+    const shift = viewShift(panel.getBoundingClientRect(), view);
+    if (shift.x || shift.y) world.camera.setViewOffset(view.width, view.height, shift.x, shift.y, view.width, view.height);
+    else if (world.camera.view?.enabled) world.camera.clearViewOffset();
     const eye = world.camera.position;
     const n = roomAt(layout, eye.x, eye.z);
     room = roomVisit(room.visit, n, room.quiet, controls.moving());
     if (room.open) selection.openRoom(n, false);
     map.mark(eye.x, n);
-    updateNearby(world.spotMeshes, eye, hovered, selection.spot?.id ?? null, world.camera.aspect);
-    sizeLabels(world.labels, eye, world.camera.aspect);
+    loadNearPhotos(world.spotMeshes, eye);
+    updateLabels(world, world.camera, view, { hovered, selected: selection.spot?.id ?? null, room: n, blockers });
   }
 
   return { controls, goTo, frame };
@@ -230,8 +249,9 @@ function buildScene(THREE, renderer, pack, layout) {
       loader.load(imgUrl(pack, file), (tex) => {
         tex.colorSpace = THREE.SRGBColorSpace;
         apply(tex);
-      }, undefined, () => {}), // a missing photo keeps the initials
+      }, undefined, () => {}), // a missing photo keeps the placeholder
   });
+  configureRenderer(THREE, renderer);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   sizeTo(renderer, world.camera);
   return world;

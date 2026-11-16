@@ -1,6 +1,6 @@
 // Pure HTML-string renderers for the spot panel, room panel and text view.
 // Every pack string goes through esc(). Clicks are wired by the page code via data-* attributes.
-import { esc, isHttp } from "./text.js";
+import { esc, isHttp, yearsText } from "./text.js";
 import { motifSvg } from "./motifs.js";
 import { BASEMAP, project } from "./basemap.js";
 
@@ -21,12 +21,6 @@ export const licenseHtml = (photo) => (isHttp(photo.license_url) ? extLink(photo
 /** Works by `personId`, ordered by `at`. */
 export function worksOf(pack, personId) {
   return pack.spots.filter((s) => s.kind === "work" && s.by === personId).sort(byAtThenId);
-}
-
-function yearsText(years) {
-  if (!years?.length) return "";
-  if (years.length === 1) return String(years[0]);
-  return `${years[0]}–${years[1] ?? ""}`;
 }
 
 /**

@@ -10,6 +10,7 @@ import {
   textOnly,
   topicFromUrl,
   visitedCount,
+  viewShift,
 } from "../site/lib/pages/common.js";
 import { aboutHtml } from "../site/lib/pages/about.js";
 import { makeStore } from "../site/lib/storage.js";
@@ -203,4 +204,14 @@ Deno.test("focusReturn gives focus back to a keyboard opener that is still in th
   r.opened(gone, true, false);
   r.closed();
   assertEquals(gone.focused, 0, "a removed opener is skipped");
+});
+
+Deno.test("viewShift centres the view on the part of the window the panel leaves free", () => {
+  const view = { width: 1400, height: 800 };
+  const side = { left: 984, top: 0, right: 1400, bottom: 800 };
+  assertEquals(viewShift(side, view), { x: 208, y: 0 }, "a right column shifts the view left by half its width");
+  const sheet = { left: 0, top: 360, right: 1400, bottom: 800 };
+  assertEquals(viewShift(sheet, view), { x: 0, y: 220 }, "a bottom sheet shifts it up by half its height");
+  assertEquals(viewShift({ left: 1400, top: 0, right: 1816, bottom: 800 }, view), { x: 0, y: 0 }, "a closed panel is off screen");
+  assertEquals(viewShift(null, view), { x: 0, y: 0 });
 });

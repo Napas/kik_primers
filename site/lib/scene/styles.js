@@ -21,8 +21,10 @@ const WINDOW_GAP = 2.4; // windows keep this far from the room centre, where the
 const MARKER_H = LOW_WALL_H; // year marker post height
 const MARKER_R = 0.03; // year marker post radius; landmarks keep at least 0.035 m off the back wall
 const MARKER_LABEL = { y: MARKER_H + 0.3, out: 0.15 }; // the year above its post, in front of the wall face
-const ARC = { r: 0.035, lift: 0.8, perMetre: 0.25, maxLift: 6, segments: 40, opacity: 0.9 };
-const LIFESPAN = { h: 0.08, d: 0.06 }; // as deep as a year marker post
+const ARC = { r: 0.01, lift: 0.5, perMetre: 0.18, maxLift: 4, segments: 40, opacity: 0.4 };
+const LIFESPAN = { h: 0.035, d: 0.04 };
+const WINDOW_GLOW = 0.5; // window panes glow at this share of their light colour, so they read as lit, not blank
+const paneColor = (THREE, color) => new THREE.Color(color).multiplyScalar(WINDOW_GLOW);
 
 
 /** Deterministic pseudo-random numbers in [0, 1), so textures look the same on every load. */
@@ -97,9 +99,9 @@ const TEX = {
       g.fillRect(0, 0, w, h);
       for (let i = 0; i < n; i++) {
         g.fillStyle = cssColor(spots[i % spots.length]);
-        g.globalAlpha = 0.15 + r() * 0.2;
+        g.globalAlpha = 0.05 + r() * 0.08;
         g.beginPath();
-        g.arc(r() * w, r() * h, 4 + r() * 14, 0, Math.PI * 2);
+        g.arc(r() * w, r() * h, 10 + r() * 30, 0, Math.PI * 2);
         g.fill();
       }
       g.globalAlpha = 1;
@@ -109,6 +111,16 @@ const TEX = {
         g.fillRect(0, 0, 3, h);
       }
     }, tile);
+  },
+  // Glass lit from behind: bright in the middle, darker towards the frame.
+  pane(THREE) {
+    return canvasTex(THREE, 64, 64, (g, w, h) => {
+      const grad = g.createRadialGradient(w / 2, h * 0.45, 2, w / 2, h / 2, w * 0.75);
+      grad.addColorStop(0, "#ffffff");
+      grad.addColorStop(1, "#4a4a4a");
+      g.fillStyle = grad;
+      g.fillRect(0, 0, w, h);
+    });
   },
   // A white disc fading to clear: light pools on the floor.
   pool(THREE) {
@@ -431,15 +443,28 @@ const LANDMARKS = {
  */
 function windows(THREE, f, xs, pts, y, color, { bars = [], barMat, opacity = 1 } = {}) {
   const { glow, pane, box, group } = kit(THREE);
-  const mat = glow(color, { transparent: opacity < 1, opacity });
+  const map = TEX.pane(THREE);
+  const mat = glow(paneColor(THREE, color), { map, transparent: opacity < 1, opacity });
   const g = group();
   for (const x of xs) {
     const p = pane(pts, mat);
+    fitUv(p.geometry);
     p.position.set(x, y, f.zf + 0.01);
     g.add(p);
     for (const [w, h, dx, dy] of bars) g.add(box(w, h, 0.03, barMat, x + dx, y + dy, f.zf + 0.02));
   }
   return g;
+}
+
+/** Stretches a flat shape's uv (metres by default) to 0–1 over its bounds, so one texture covers it once. */
+function fitUv(geo) {
+  geo.computeBoundingBox();
+  const { min, max } = geo.boundingBox;
+  const uv = geo.attributes.uv;
+  for (let i = 0; i < uv.count; i++) {
+    uv.setXY(i, (uv.getX(i) - min.x) / (max.x - min.x || 1), (uv.getY(i) - min.y) / (max.y - min.y || 1));
+  }
+  uv.needsUpdate = true;
 }
 
 /** Pool of window light on the floor in front of the back wall, stretched along it. */
@@ -649,11 +674,11 @@ export const STYLES = {
         const bw = Math.min(f.w * 0.7, 12), h = 1.5;
         const g = group(box(bw, h, WALL_T * 0.9, std(0xffffff, { map: tiled(panels, bw, h) }), 0, h / 2, 0));
         const lit = rng(37);
+        const [on, off] = [glow(paneColor(THREE, 0xd8f0ff)), std(0x1c1e22)];
         const cols = Math.floor(bw / 1.2);
         for (let row = 0; row < 2; row++) {
           for (let c = 0; c < cols; c++) {
-            const on = lit() < 0.3;
-            g.add(box(0.5, 0.4, 0.02, on ? glow(0xd8f0ff) : std(0x1c1e22), -bw / 2 + 1.2 * (c + 0.5) + (bw - cols * 1.2) / 2, 0.45 + row * 0.65, WALL_T * 0.45 + 0.01));
+            g.add(box(0.5, 0.4, 0.02, lit() < 0.3 ? on : off, -bw / 2 + 1.2 * (c + 0.5) + (bw - cols * 1.2) / 2, 0.45 + row * 0.65, WALL_T * 0.45 + 0.01));
           }
         }
         return g;
@@ -746,7 +771,10 @@ export function linkArc(THREE, a, b, C) {
 
 /** Gold bar from x0 to x1 lying on the tops of the year markers at z. */
 export function lifespanBar(THREE, x0, x1, z, C) {
-  const m = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, LIFESPAN.h, LIFESPAN.d), new THREE.MeshBasicMaterial({ color: C.gold }));
+  const m = new THREE.Mesh(
+    new THREE.BoxGeometry(x1 - x0, LIFESPAN.h, LIFESPAN.d),
+    new THREE.MeshStandardMaterial({ color: C.gold, metalness: 0.5, roughness: 0.45 }),
+  );
   m.position.set((x0 + x1) / 2, MARKER_H, z);
   return m;
 }

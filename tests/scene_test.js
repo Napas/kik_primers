@@ -1,10 +1,10 @@
 import { assert, assertAlmostEquals, assertEquals } from "@std/assert";
 import * as THREE from "../site/lib/three/three.module.min.js";
-import { COLORS, LIGHT_BANDS, SCENE, spotlightLevel } from "../site/lib/theme.js";
-import { layoutTime } from "../site/lib/layout.js";
-import { initials, makeSpot, setPhoto } from "../site/lib/scene/spots.js";
+import { COLORS, LIGHT_BANDS, poolLevel, SCENE } from "../site/lib/theme.js";
+import { DEFAULTS, layoutTime } from "../site/lib/layout.js";
+import { makeSpot, setPhoto } from "../site/lib/scene/spots.js";
 import { makeLabel } from "../site/lib/scene/labels.js";
-import { buildWorld } from "../site/lib/scene/world.js";
+import { buildWorld, configureRenderer } from "../site/lib/scene/world.js";
 import { ground, lifespanBar, path, plainRoom, STYLES, yearMarker } from "../site/lib/scene/styles.js";
 import { lowBackWalls, pathLanes, pathZ, yearLineZ, yearMarks } from "../site/lib/scene/lanes.js";
 import { STYLE_NAMES } from "../site/lib/theme.js";
@@ -23,13 +23,6 @@ const canvases = (obj) => {
   return out;
 };
 
-Deno.test("initials take the first letters of the first and last name", () => {
-  assertEquals(initials("Jonas Rašytojas"), "JR");
-  assertEquals(initials("Žemaitė"), "Ž");
-  assertEquals(initials("vyskupas Motiejus Valančius"), "VV");
-  assertEquals(initials("  "), "?");
-});
-
 Deno.test("makeLabel draws the text, diacritics kept, on a sprite sized by its width", () => {
   const restore = installFakeCanvas();
   try {
@@ -44,14 +37,13 @@ Deno.test("makeLabel draws the text, diacritics kept, on a sprite sized by its w
   }
 });
 
-Deno.test("labels draw after the spotlight cones and pools, so the additive light does not wash them out", () => {
+Deno.test("labels draw after the floor pools and over the scene", () => {
   const restore = installFakeCanvas();
   try {
     const label = makeLabel(THREE, "Ąž");
     const spot = makeSpot(THREE, { id: "a", kind: "person", name: "A B" }, COLORS);
-    for (const name of ["spot-cone", "spot-pool"]) {
-      assert(label.renderOrder > spot.getObjectByName(name).renderOrder, name);
-    }
+    assert(label.renderOrder > spot.getObjectByName("spot-pool").renderOrder);
+    assertEquals(label.material.depthTest, false);
   } finally {
     restore();
   }
@@ -66,7 +58,7 @@ Deno.test("makeSpot builds one tagged model per kind", () => {
       assert(obj.isObject3D, kind);
       assertEquals(obj.userData.spotId, `s-${kind}`);
       assertEquals(obj.userData.kind, kind);
-      assert(obj.userData.pickRadius > 0 && obj.userData.pickRadius < 0.7, `${kind}: pick sphere overlaps neighbours`);
+      assert(obj.userData.pickRadius > 0 && obj.userData.pickRadius < DEFAULTS.rowGap / 2, `${kind}: pick sphere overlaps neighbours`);
       assert(obj.userData.labelY > 0, kind);
       const geos = [];
       obj.traverse((o) => o.isMesh && geos.push(o.geometry.type));
@@ -79,34 +71,31 @@ Deno.test("makeSpot builds one tagged model per kind", () => {
   }
 });
 
-Deno.test("a spot's cone and pool fade by its light band; spots in the same band share materials", () => {
+Deno.test("a spot's pool fades by its light band; spots in the same band share materials", () => {
   const restore = installFakeCanvas();
   try {
-    const parts = (o) => [o.getObjectByName("spot-cone").material, o.getObjectByName("spot-pool").material];
+    const pool = (o) => o.getObjectByName("spot-pool").material;
     const [candle, , , , daylight] = LIGHT_BANDS;
-    const [c1, p1] = parts(makeSpot(THREE, spot("person"), COLORS, { band: candle }));
-    const [c2, p2] = parts(makeSpot(THREE, spot("work"), COLORS, { band: candle }));
-    const [c3, p3] = parts(makeSpot(THREE, spot("person"), COLORS, { band: daylight }));
-    assert(c1 === c2 && p1 === p2, "same band, same materials");
-    const k = spotlightLevel(daylight);
-    assertEquals([c1.color.r, c3.color.r], [1, k]);
-    assertEquals([p1.opacity, p3.opacity], [SCENE.spotlight.pool.opacity, SCENE.spotlight.pool.opacity * k]);
-    const [c0, p0] = parts(makeSpot(THREE, spot("person"), COLORS));
-    assert(c0 === c1 && p0 === p1, "without a band a spot gets the full spotlight");
+    const p1 = pool(makeSpot(THREE, spot("person"), COLORS, { band: candle }));
+    const p2 = pool(makeSpot(THREE, spot("work"), COLORS, { band: candle }));
+    const p3 = pool(makeSpot(THREE, spot("person"), COLORS, { band: daylight }));
+    assert(p1 === p2, "same band, same material");
+    const k = poolLevel(daylight);
+    assertEquals([p1.opacity, p3.opacity], [SCENE.pool.opacity, SCENE.pool.opacity * k]);
+    assert(pool(makeSpot(THREE, spot("person"), COLORS)) === p1, "without a band a spot gets the full pool");
   } finally {
     restore();
   }
 });
 
-Deno.test("every spot gets a fake spotlight that shares one texture and material, with no real lights", () => {
+Deno.test("every spot gets a floor pool that shares one texture and material, with no real lights", () => {
   const restore = installFakeCanvas();
   try {
     const lit = (obj) => {
-      const found = { lights: 0, pools: [], cones: [] };
+      const found = { lights: 0, pools: [] };
       obj.traverse((o) => {
         if (o.isLight) found.lights++;
         if (o.name === "spot-pool") found.pools.push(o);
-        if (o.name === "spot-cone") found.cones.push(o);
       });
       return found;
     };
@@ -115,34 +104,29 @@ Deno.test("every spot gets a fake spotlight that shares one texture and material
     for (const obj of all) {
       const f = lit(obj);
       assertEquals(f.lights, 0);
-      assertEquals([f.pools.length, f.cones.length], [1, 1]);
+      assertEquals(f.pools.length, 1);
       assertEquals(obj.userData.wall, undefined);
-      assert(f.pools[0].userData.wall === undefined && f.cones[0].userData.wall === undefined);
-      for (const m of [f.pools[0], f.cones[0]]) {
-        assertEquals(m.material.depthWrite, false);
-        assertEquals(m.castShadow, false);
-      }
-      assertEquals(f.cones[0].material.blending, THREE.AdditiveBlending);
+      assertEquals(f.pools[0].userData.wall, undefined);
+      assertEquals(f.pools[0].material.depthWrite, false);
+      assertEquals(f.pools[0].castShadow, false);
     }
     assert(a.pools[0].material === b.pools[0].material, "pool material is shared");
     assert(a.pools[0].material.map === b.pools[0].material.map, "pool texture is shared");
     assert(a.pools[0].geometry === b.pools[0].geometry, "pool geometry is shared");
-    assert(a.cones[0].material === b.cones[0].material, "cone material is shared");
-    assert(a.cones[0].geometry === b.cones[0].geometry, "cone geometry is shared");
     // The hit sphere is set from the model alone.
-    assert(all.every((o) => o.userData.pickRadius < 0.7));
+    assert(all.every((o) => o.userData.pickRadius < DEFAULTS.rowGap / 2));
   } finally {
     restore();
   }
 });
 
-Deno.test("spots share their plain materials; each portrait and year plate keeps its own", () => {
+Deno.test("spots share their plain materials; each portrait, plaque and year plate keeps its own", () => {
   const restore = installFakeCanvas();
   try {
     const plain = (obj) => {
       const out = new Set();
       obj.traverse((o) => {
-        if (o.isMesh && o.parent === obj && !o.material.map) out.add(o.material);
+        if (o.isMesh && o.name !== "spot-pool" && !o.material.map) out.add(o.material);
       });
       return out;
     };
@@ -154,28 +138,45 @@ Deno.test("spots share their plain materials; each portrait and year plate keeps
     });
     const [p1, p2] = [makeSpot(THREE, spot("person"), COLORS), makeSpot(THREE, spot("person"), COLORS)];
     assert(p1.userData.portrait.material !== p2.userData.portrait.material, "portraits get their own material");
-    const other = { ...COLORS, gold: "#ff0000" };
-    const g = [...plain(makeSpot(THREE, spot("work"), other))].find((m) => m.metalness > 0);
-    assertEquals(g.color.getHexString(), "ff0000", "other colours get other materials");
+    const plaque = (o) => o.getObjectByName("plaque").material;
+    assert(plaque(p1) !== plaque(p2), "plaques get their own material");
   } finally {
     restore();
   }
 });
 
-Deno.test("a person shows initials until a photo is set; an event shows its year", () => {
+Deno.test("a long name on a placeholder portrait keeps its lines clear of the years", () => {
   const restore = installFakeCanvas();
   try {
-    const person = makeSpot(THREE, spot("person"), COLORS);
-    assert(canvases(person).some((c) => c.texts.includes("ŽĄ")));
+    const person = makeSpot(THREE, spot("person", { name: "Jonas Petras Antanas Kazys Juozas Vincas", years: [1845, 1921] }), COLORS);
+    const fills = person.userData.portrait.material.map.image.fills;
+    const years = fills.find((f) => f.text === "1845–1921");
+    const names = fills.filter((f) => f !== years).map((f) => f.y);
+    assertEquals(names.length, 6);
+    const lineH = names[1] - names[0];
+    assert(names.at(-1) + lineH / 2 < years.y, `last name line at ${names.at(-1)}, line ${lineH}, years at ${years.y}`);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("a person shows a placeholder with the name and years until a photo is set; an event shows its year", () => {
+  const restore = installFakeCanvas();
+  try {
+    const person = makeSpot(THREE, spot("person", { years: [1845, 1921] }), COLORS);
+    const placeholder = person.userData.portrait.material.map.image.texts;
+    assertEquals(placeholder, ["Žemaitė", "Ąžuolė", "1845–1921"]);
     const tex = new THREE.Texture({ width: 100, height: 100 });
     let disposed = false;
     person.userData.portrait.material.map.addEventListener("dispose", () => (disposed = true));
     setPhoto(person, tex);
-    assert(disposed, "the initials texture is released");
+    assert(disposed, "the placeholder texture is released");
     assertEquals(person.userData.portrait.material.map, tex);
+    assertEquals(person.userData.portrait.material.emissiveMap, tex, "the photo glows a little, so it stays readable in a dim room");
+    assert(person.userData.portrait.material.isMeshStandardMaterial, "the portrait takes the room's light");
     // A square photo on the taller frame is cropped at the sides, centred.
     assertEquals(tex.repeat.y, 1);
-    assert(Math.abs(tex.repeat.x - 0.66 / 0.86) < 1e-9);
+    assert(Math.abs(tex.repeat.x - 0.5 / 0.66) < 1e-9);
     assert(Math.abs(tex.offset.x - (1 - tex.repeat.x) / 2) < 1e-9);
     // A tall photo is cropped at the bottom, keeping the face at the top.
     const tall = new THREE.Texture({ width: 100, height: 300 });
@@ -307,13 +308,14 @@ Deno.test("buildWorld gives each room its named style", () => {
   }
 });
 
-Deno.test("buildWorld dims each spot's cone by the light band at its place", () => {
+Deno.test("buildWorld dims each spot's pool by the light band at its place", () => {
   const restore = installFakeCanvas();
   try {
     const w = buildWorld(THREE, STYLED, layoutTime(STYLED));
-    const cone = (id) => w.spotMeshes.get(id).getObjectByName("spot-cone").material.color.r;
-    assertEquals(cone("s1"), 1, "a 1547 spot is in candle light");
-    assertEquals(cone("s9"), spotlightLevel(LIGHT_BANDS[4]), "a 2000 spot is in daylight");
+    const pool = (id) => w.spotMeshes.get(id).getObjectByName("spot-pool").material.opacity;
+    const full = SCENE.pool.opacity;
+    assertEquals(pool("s1"), full, "a 1547 spot is in candle light");
+    assertEquals(pool("s9"), full * poolLevel(LIGHT_BANDS[4]), "a 2000 spot is in daylight");
   } finally {
     restore();
   }
@@ -452,4 +454,121 @@ Deno.test("buildWorld lowers the back wall in front of a parallel lane and puts 
   } finally {
     restore();
   }
+});
+
+Deno.test("every kind but place and event carries its name on a plaque; place shows it on its sign", () => {
+  const restore = installFakeCanvas();
+  try {
+    for (const kind of KINDS) {
+      const obj = makeSpot(THREE, spot(kind), COLORS);
+      if (kind === "event") continue;
+      const plaque = obj.getObjectByName("plaque");
+      assert(plaque, kind);
+      assert(plaque.material.map.image.texts.includes("Žemaitė Ąžuolė"), kind);
+    }
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("a lifted spot stands on a riser: model, pool, label and pick heights all move up by the lift", () => {
+  const restore = installFakeCanvas();
+  try {
+    const flat = makeSpot(THREE, spot("person"), COLORS);
+    const raised = makeSpot(THREE, spot("person"), COLORS, { lift: 0.35 });
+    assertEquals(flat.getObjectByName("riser"), undefined);
+    const riser = raised.getObjectByName("riser");
+    assertAlmostEquals(riser.position.y, 0.175, 1e-9);
+    assertAlmostEquals(raised.userData.labelY - flat.userData.labelY, 0.35, 1e-9);
+    assertAlmostEquals(raised.userData.pickY - flat.userData.pickY, 0.35, 1e-9);
+    assertAlmostEquals(raised.getObjectByName("pool").position.y, 0.35, 1e-9);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("a scaled spot shrinks its model, label and pick heights, but not its riser", () => {
+  const restore = installFakeCanvas();
+  try {
+    const full = makeSpot(THREE, spot("person"), COLORS);
+    const small = makeSpot(THREE, spot("person"), COLORS, { scale: 0.8 });
+    assertAlmostEquals(small.userData.labelY, full.userData.labelY * 0.8, 1e-9);
+    assertAlmostEquals(small.userData.pickY, full.userData.pickY * 0.8, 1e-9);
+    assertAlmostEquals(small.userData.pickRadius, full.userData.pickRadius * 0.8, 1e-9);
+    const box = (o) => new THREE.Box3().setFromObject(o.getObjectByName("plaque").parent);
+    assert(box(small).max.y < box(full).max.y);
+    const both = makeSpot(THREE, spot("person"), COLORS, { scale: 0.8, lift: 0.35 });
+    assertAlmostEquals(both.getObjectByName("riser").geometry.parameters.height, 0.35, 1e-9);
+    assertAlmostEquals(both.userData.pickY, full.userData.pickY * 0.8 + 0.35, 1e-9);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("buildWorld raises the back row by SCENE.rowLift and leaves the front row on the floor", () => {
+  const restore = installFakeCanvas();
+  try {
+    const layout = layoutTime(STYLED);
+    const w = buildWorld(THREE, STYLED, layout);
+    for (const p of layout.spots) {
+      const riser = w.spotMeshes.get(p.id).getObjectByName("riser");
+      const lift = SCENE.rowLift * (layout.rows - 1 - p.row);
+      if (lift === 0) assertEquals(riser, undefined, p.id);
+      else assertAlmostEquals(riser.geometry.parameters.height, lift, 1e-9, p.id);
+      const front = p.row === layout.rows - 1;
+      assertEquals(w.spotMeshes.get(p.id).getObjectByName("model").scale.x, front ? SCENE.frontScale : 1, p.id);
+    }
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("buildWorld tags each label entry as a room title with its room number, or a year marker", () => {
+  const restore = installFakeCanvas();
+  try {
+    const layout = layoutTime(MINI);
+    const w = buildWorld(THREE, MINI, layout);
+    const titles = w.labels.filter((l) => l.kind === "title");
+    assertEquals(titles.map((l) => l.room).sort(), MINI.rooms.map((r) => r.n).sort());
+    for (const t of titles) assertEquals(t.sprite, w.roomGroups.get(t.room).userData.label);
+    const markers = w.labels.filter((l) => l.kind === "marker");
+    assertEquals(markers.length, layout.ticks.length);
+    assert(markers.every((m) => m.room === undefined));
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("world.focus lights the chosen spot with a spotlight and dims the room; focus(null) restores the light", () => {
+  const restore = installFakeCanvas();
+  try {
+    const w = buildWorld(THREE, MINI, layoutTime(MINI));
+    const lights = [];
+    w.scene.traverse((o) => o.isLight && lights.push(o));
+    const spot = lights.find((l) => l.isSpotLight);
+    const hemi = lights.find((l) => l.isHemisphereLight);
+    assertEquals(spot.intensity, 0, "no spotlight until something is chosen");
+    const jonas = w.spotMeshes.get("jonas-rastas");
+    w.focus(jonas);
+    w.update(10);
+    assertAlmostEquals(spot.intensity, SCENE.focus.intensity, 1e-6);
+    assertAlmostEquals(hemi.intensity, SCENE.ambient.intensity * SCENE.focus.dim, 1e-6);
+    assertAlmostEquals(spot.target.position.x, jonas.position.x, 1e-9);
+    assert(spot.position.y > jonas.userData.pickY + 1, "shines from above");
+    assert(spot.position.z > jonas.position.z, "and from the visitor's side");
+    w.focus(null);
+    w.update(10);
+    assertAlmostEquals(spot.intensity, 0, 1e-6);
+    assertAlmostEquals(hemi.intensity, SCENE.ambient.intensity, 1e-6);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("configureRenderer applies the look's tone mapping operator and exposure", () => {
+  assert(THREE[`${SCENE.toneMapping}ToneMapping`] !== undefined, `no THREE.${SCENE.toneMapping}ToneMapping`);
+  const renderer = {};
+  configureRenderer(THREE, renderer);
+  assertEquals(renderer.toneMapping, THREE[`${SCENE.toneMapping}ToneMapping`]);
+  assertEquals(renderer.toneMappingExposure, SCENE.exposure);
 });

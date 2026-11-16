@@ -2,10 +2,10 @@ import { assert, assertAlmostEquals, assertEquals, assertMatch } from "@std/asse
 import * as THREE from "../site/lib/three/three.module.min.js";
 import { layoutTime } from "../site/lib/layout.js";
 import { buildWorld } from "../site/lib/scene/world.js";
-import { drawLifespan, drawLinks, lifespanRange, removeDrawn } from "../site/lib/scene/arcs.js";
-import { clearance, LABEL_NEAR, LABEL_RANGE, labelFit, labelScale, PHOTO_RANGE, sizeLabels, STAND, standPoint, updateNearby } from "../site/lib/scene/nearby.js";
-import { LABEL, SCENE } from "../site/lib/theme.js";
-import { yearLineZ } from "../site/lib/scene/lanes.js";
+import { drawLifespan, drawLinks, lifespanRange, MAX_ARCS, removeDrawn } from "../site/lib/scene/arcs.js";
+import { clearance, loadNearPhotos, PHOTO_RANGE, STAND, standPoint } from "../site/lib/scene/nearby.js";
+import { pathZ, yearLineZ } from "../site/lib/scene/lanes.js";
+import { pathLamps } from "../site/lib/scene/light.js";
 import { markerLeft, overviewHtml, roomAt, roomCounts } from "../site/lib/pages/overview.js";
 import { makeSelection, roomVisit } from "../site/lib/pages/selection.js";
 import { makeStore } from "../site/lib/storage.js";
@@ -100,6 +100,19 @@ Deno.test("drawLinks adds one gold arc per target, rising above both ends; remov
   assertEquals(drawLinks(THREE, scene, from, []).children.length, 0);
 });
 
+Deno.test("drawLinks draws at most MAX_ARCS arcs, to the nearest targets", () => {
+  const scene = new THREE.Scene();
+  const from = { x: 0, y: 1, z: 0 };
+  const targets = [9, 2, 7, 1, 5, 3].map((x) => ({ x, y: 1, z: 0 }));
+  const g = drawLinks(THREE, scene, from, targets);
+  assertEquals(g.children.length, MAX_ARCS);
+  const ends = g.children.map((m) => {
+    m.geometry.computeBoundingBox();
+    return Math.round(m.geometry.boundingBox.max.x);
+  });
+  assertEquals(ends.sort((a, b) => a - b), [1, 2, 3, 5].slice(0, MAX_ARCS));
+});
+
 Deno.test("drawLifespan lays a bar on the year line of the person's own lane, over the life's years", () => {
   const layout = layoutTime(LANES);
   const scene = new THREE.Scene();
@@ -120,36 +133,25 @@ Deno.test("drawLifespan lays a bar on the year line of the person's own lane, ov
   assertEquals(drawLifespan(THREE, scene, layout, null, 1), null);
 });
 
-Deno.test("updateNearby shows labels within 12 m or on hover and loads each photo once within 30 m", () => {
+Deno.test("loadNearPhotos loads each photo once, when the visitor comes within PHOTO_RANGE", () => {
   const restore = installFakeCanvas();
   try {
     const layout = layoutTime(MINI);
     const loads = [];
     const w = buildWorld(THREE, MINI, layout, { loadPhoto: (file) => loads.push(file) });
     assertEquals(loads, [], "photos wait until the visitor comes near");
-    assertEquals([LABEL_RANGE, PHOTO_RANGE], [12, 30]);
+    assertEquals(PHOTO_RANGE, 30);
     const jonas = w.spotMeshes.get("jonas-rastas");
-    const event = w.spotMeshes.get("didysis-sukilimas");
-    const far = { x: jonas.position.x - 40, y: 1.7, z: jonas.position.z };
-    updateNearby(w.spotMeshes, far, null);
+    loadNearPhotos(w.spotMeshes, { x: jonas.position.x - 40, y: 1.7, z: jonas.position.z });
     assertEquals(loads, []);
-    assertEquals(jonas.userData.label.visible, false);
-    updateNearby(w.spotMeshes, far, "jonas-rastas");
-    assertEquals(jonas.userData.label.visible, true, "a hovered spot shows its label");
     const near = { x: jonas.position.x - 20, y: 1.7, z: jonas.position.z };
-    updateNearby(w.spotMeshes, near, null);
-    updateNearby(w.spotMeshes, near, null);
+    loadNearPhotos(w.spotMeshes, near);
+    loadNearPhotos(w.spotMeshes, near);
     assertEquals(loads, ["img/jonas.jpg"], "loaded once");
-    assertEquals(jonas.userData.label.visible, false);
-    const close = { x: jonas.position.x - 5, y: 1.7, z: jonas.position.z };
-    updateNearby(w.spotMeshes, close, null);
-    assertEquals(jonas.userData.label.visible, true);
-    assertEquals(event.userData.label.visible, Math.hypot(event.position.x - close.x, event.position.z - close.z) <= 12);
   } finally {
     restore();
   }
 });
-
 Deno.test("roomAt: a room's x-range is half-open, so a spot on a shared border belongs to the later room", () => {
   const pack = { slug: "adj", rooms: [{ n: 1, title: "A", span: [1500, 1600] }, { n: 2, title: "B", span: [1600, 1700] }], spots: [] };
   const layout = layoutTime(pack);
@@ -182,7 +184,7 @@ Deno.test("roomVisit opens a room once per visit, never for rooms passed on a ch
   assertEquals(frame(2), true, "walking on into another room opens it");
 });
 
-Deno.test("standPoint keeps the default 2.5 m in front when clear, else finds a point with clearance", () => {
+Deno.test("standPoint keeps the default STAND.front in front when clear, else finds a point with clearance", () => {
   const t = { x: 10, z: 0 };
   assertEquals(standPoint(t, []), { x: 10, z: STAND.front });
   const blocked = [{ x: 10, z: 1.2 }, { x: 10, z: 2.5 }];
@@ -191,6 +193,33 @@ Deno.test("standPoint keeps the default 2.5 m in front when clear, else finds a 
   assert(c.point >= STAND.point && c.sight >= STAND.sight, JSON.stringify({ p, c }));
   const far = [{ x: 30, z: 0 }];
   assertEquals(standPoint(t, far), { x: 10, z: STAND.front }, "far spots don't matter");
+});
+
+Deno.test("standPoint stays in the aisle: never behind minZ, even when a nearer point is clear", () => {
+  const t = { x: 0, z: 0 };
+  assertEquals(standPoint(t, [], { minZ: 4.5 }), { x: 0, z: 4.5 }, "the default point is pushed out to the aisle");
+  const p = standPoint(t, [{ x: 0, z: 4.5 }], { minZ: 4.5 });
+  assert(p.z >= 4.5, JSON.stringify(p));
+});
+
+Deno.test("standPoint never stands beyond maxZ", () => {
+  const t = { x: 0, z: 0 };
+  assertEquals(standPoint(t, [], { maxZ: 2.5 }), { x: 0, z: 2.5 });
+  const p = standPoint(t, [{ x: 0, z: 1.5 }], { minZ: 2.5, maxZ: 2.5 });
+  assertEquals(p.z, 2.5, "on the line, whatever the clearance");
+});
+
+Deno.test("on the real pack, no path lamp stands within 0.3 m of the line of sight from a spot's stand point", () => {
+  const pack = JSON.parse(Deno.readTextFileSync(`${root}site/topics/lietuviu-literatura/topic.json`));
+  const layout = layoutTime(pack);
+  const lamps = pathLamps(layout);
+  const roomOfSpot = new Map(pack.spots.map((s) => [s.id, layout.rooms.find((r) => r.n === s.room)]));
+  for (const p of layout.spots) {
+    const z = pathZ(roomOfSpot.get(p.id));
+    const at = standPoint(p, layout.spots.filter((s) => s.id !== p.id), { minZ: z, maxZ: z }); // as the world page does
+    const { sight } = clearance(at, p, lamps);
+    assert(sight >= 0.3, `${p.id}: a lamp ${sight.toFixed(2)} m from the line of sight`);
+  }
 });
 
 Deno.test("standPoint in a crowd returns the candidate with the most clearance", () => {
@@ -207,94 +236,6 @@ Deno.test("clearance measures distances to the stand point and to the sight segm
   assertAlmostEquals(c.sight, 0.3, 1e-9, "beside the segment");
   assertAlmostEquals(c.point, 1, 1e-9, "the spot behind the stand point is off the segment but 1 m from the point");
   assertEquals(clearance({ x: 0, z: 2 }, { x: 0, z: 0 }, []), { point: Infinity, sight: Infinity });
-});
-
-Deno.test("labelScale keeps a near label at LABEL.maxView of the view height and a far one at full size", () => {
-  const viewAt = (d) => 2 * d * Math.tan((SCENE.fov * Math.PI) / 360);
-  for (const d of [1, 2.5, 5]) assertAlmostEquals((LABEL.height * labelScale(d)) / viewAt(d), LABEL.maxView, 1e-9);
-  assertEquals(labelScale(LABEL_RANGE), 1);
-  assertEquals(labelScale(40), 1);
-});
-
-Deno.test("labelFit narrows labels on screens narrower than LABEL.refAspect", () => {
-  assertEquals([labelFit(1.75), labelFit(LABEL.refAspect)], [1, 1]);
-  assertAlmostEquals(labelFit(390 / 844), 390 / 844 / LABEL.refAspect, 1e-9);
-  const viewAt = (d) => 2 * d * Math.tan((SCENE.fov * Math.PI) / 360);
-  const phone = 390 / 844;
-  for (const d of [2.5, 8, 12]) {
-    assertAlmostEquals((LABEL.height * labelScale(d, phone)) / viewAt(d), LABEL.maxView * labelFit(phone), 1e-9);
-  }
-  assertEquals(labelScale(5, 1.75), labelScale(5));
-});
-
-Deno.test("updateNearby shows labels over a shorter range on a narrow screen", () => {
-  const restore = installFakeCanvas();
-  try {
-    const w = buildWorld(THREE, MINI, layoutTime(MINI));
-    const jonas = w.spotMeshes.get("jonas-rastas");
-    const d = (LABEL_RANGE * (1 + labelFit(0.46))) / 2; // inside the wide range, outside the narrow one
-    const eye = { x: jonas.position.x - d, y: 1.7, z: jonas.position.z };
-    updateNearby(w.spotMeshes, eye, null, null, 1.75);
-    assertEquals(jonas.userData.label.visible, true);
-    updateNearby(w.spotMeshes, eye, null, null, 0.46);
-    assertEquals(jonas.userData.label.visible, false);
-    assertAlmostEquals(jonas.userData.label.scale.y, LABEL.height * labelScale(d, 0.46), 1e-9);
-  } finally {
-    restore();
-  }
-});
-
-Deno.test("buildWorld lists room titles and year markers, and sizeLabels fits them like spot labels", () => {
-  const restore = installFakeCanvas();
-  try {
-    const layout = layoutTime(MINI);
-    const w = buildWorld(THREE, MINI, layout);
-    assertEquals(w.labels.length, MINI.rooms.length + layout.ticks.length);
-    const first = w.labels[0];
-    const y = first.sprite.scale.y;
-    const eye = { x: first.x - 3, y: 1.7, z: first.z };
-    sizeLabels(w.labels, eye, 0.46);
-    sizeLabels(w.labels, eye, 0.46);
-    assertAlmostEquals(first.sprite.scale.y, y * labelScale(3, 0.46), 1e-9);
-  } finally {
-    restore();
-  }
-});
-
-Deno.test("updateNearby sizes each label by its distance without compounding", () => {
-  const restore = installFakeCanvas();
-  try {
-    const w = buildWorld(THREE, MINI, layoutTime(MINI));
-    const label = w.spotMeshes.get("jonas-rastas").userData.label;
-    const [x, y] = [label.scale.x, label.scale.y];
-    const jonas = w.spotMeshes.get("jonas-rastas").position;
-    const eye = { x: jonas.x - 3, y: 1.7, z: jonas.z };
-    updateNearby(w.spotMeshes, eye, null, null);
-    updateNearby(w.spotMeshes, eye, null, null);
-    assertAlmostEquals(label.scale.y, y * labelScale(3), 1e-9);
-    assertAlmostEquals(label.scale.x, x * labelScale(3), 1e-9);
-    updateNearby(w.spotMeshes, { x: jonas.x - 11, y: 1.7, z: jonas.z }, null, null);
-    assertAlmostEquals(label.scale.y, y * labelScale(11), 1e-9);
-  } finally {
-    restore();
-  }
-});
-
-Deno.test("updateNearby hides labels of spots right next to the eye, except the selected one", () => {
-  const restore = installFakeCanvas();
-  try {
-    const w = buildWorld(THREE, MINI, layoutTime(MINI));
-    const jonas = w.spotMeshes.get("jonas-rastas");
-    const eye = { x: jonas.position.x + LABEL_NEAR / 2, y: 1.7, z: jonas.position.z };
-    updateNearby(w.spotMeshes, eye, null, null);
-    assertEquals(jonas.userData.label.visible, false);
-    updateNearby(w.spotMeshes, eye, "jonas-rastas", null);
-    assertEquals(jonas.userData.label.visible, false, "hover does not bring back a label in the face");
-    updateNearby(w.spotMeshes, eye, null, "jonas-rastas");
-    assertEquals(jonas.userData.label.visible, true);
-  } finally {
-    restore();
-  }
 });
 
 Deno.test("makeSelection: one open thing at a time; reopening and closing leave no drawings behind", () => {

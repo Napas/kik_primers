@@ -170,7 +170,7 @@ User-Agent.
 
 **Layout `time` (built now).** A walkable path runs forward in time along one
 axis. Each room is a walled area with its title at the entrance and its own
-floor colour. Year markers line the path.
+floor colour. Year markers stand along each lane's back walls.
 
 - Scale is piecewise: each room's length grows with its spot count, and
   inside a room years map linearly onto its span. So the sparse XVI century
@@ -180,7 +180,11 @@ floor colour. Year markers line the path.
 - A spot stands at its `at` year (a person: debut or main work in the room's
   era); selecting a person draws their lifespan on the year markers, which
   may reach into earlier rooms. Spots too close together
-  spread across the room's width (sub-areas), never overlapping.
+  spread across the room's width, never overlapping: two rows, staggered so
+  no spot stands right behind another, the back row on a low riser and the
+  front row's exhibits a size smaller. Walking
+  to a spot stops in the aisle in front of the front row, never between
+  spots (user feedback, 2026-11-16: three rows hid each other).
 - Rooms with `span: null` are annexes after the end of the path.
 
 **Look: "night museum" with a distinct room per section (user, 2026-11-16).**
@@ -221,10 +225,21 @@ room styles follow region instead; there is no light-by-year layer.
 their coordinates; entering a room zooms in. Defined now so the schema holds;
 built with the countries topic.
 
-**Spots.** One simple model per kind: a plinth with a framed portrait
-(person; initials on a plain frame when there is no photo), a book or plaque
-(work), a banner (group), a stone with its year (event), a signpost (place).
-A name label shows on approach or hover.
+**Spots.** One simple model per kind, each a museum exhibit with its name on
+a brass plaque: a plinth with a framed portrait (person; a dark panel with
+the name and years engraved when there is no photo), a book on a reading stand (work), a
+banner (group), a stone stele with its year (event), a signpost (place), a
+vitrine (thing). A soft pool of light lies under each; there are no visible
+light beams. The path lamps stand on the visitor's side of the path, shining
+onto the rooms. The chosen spot gets a warm spotlight while the room's base
+light dims. Floating name labels show on approach or hover, at most a few
+at once: a label hides when it would overlap a more important one (hovered,
+room titles, then nearest first), the page's own panels, the screen
+edge, or stands behind a wall. While a spot is chosen, only room titles and a
+hovered name show, and its arcs go to its four nearest links (the panel lists
+them all). A link to a spot (`#id`) opens it in place, without the walk from
+the entrance. With the panel open, the view centres on the
+part of the screen it leaves free.
 
 **Opening a spot.** A flat side panel (HTML over the canvas): name, aliases,
 years, photo with credit, text, and its links. Selecting a spot draws arcs to

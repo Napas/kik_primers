@@ -1,0 +1,69 @@
+/* CSS side of site/lib/theme.js: keep these values in step with COLORS. */
+:root {
+  --bg: #0e1726;
+  --floor: #141e33;
+  --path: #26355a;
+  --gold: #d9b25f;
+  --text: #e9e4d8;
+  --panel: #0b1220;
+  --muted: #9aa3b8;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 Georgia, "Times New Roman", serif; }
+a { color: var(--gold); }
+h1, h2, h3 { font-weight: 600; line-height: 1.25; }
+h2 { margin: 0 0 .25rem; color: var(--gold); }
+h3 { margin: 1.25rem 0 .5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+button { font: inherit; color: var(--text); background: var(--floor); border: 1px solid var(--path); border-radius: 6px; padding: .35rem .7rem; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--gold); }
+button:disabled { opacity: .4; cursor: default; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Panel: right column from 768px, bottom sheet below. */
+.panel { background: var(--panel); border: 1px solid var(--path); padding: 1rem 1.25rem; overflow-y: auto; }
+#panel { position: fixed; z-index: 10; left: 0; right: 0; bottom: 0; max-height: 55vh; border-radius: 12px 12px 0 0; transform: translateY(100%); transition: transform .2s; }
+#panel.is-open, .panel.is-open { transform: none; }
+@media (min-width: 768px) {
+  #panel { left: auto; top: 0; width: 26rem; max-height: none; border-radius: 0; transform: translateX(100%); }
+  #panel.is-open, .panel.is-open { transform: none; }
+}
+.panel .years, .panel .aliases, .panel .sources { margin: 0 0 .5rem; color: var(--muted); font-size: .9rem; }
+.panel figure { margin: .75rem 0; }
+.panel img { max-width: 100%; height: auto; border-radius: 4px; }
+.panel figcaption { font-size: .8rem; color: var(--muted); }
+.panel ul { padding-left: 1.1rem; }
+.panel ul.spines, .panel ul.spots { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.spine { border-left: 4px solid var(--gold); }
+
+/* Life strip */
+.life { position: relative; }
+.life .motif { position: absolute; top: 0; right: 0; color: var(--gold); opacity: .8; }
+.track { position: relative; list-style: none; margin: 2.5rem .75rem 4rem; padding: 0; height: 2px; background: var(--path); }
+.track .event { position: absolute; top: -4px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--gold); font-size: 0; }
+.track .event b, .track .event i { font-size: .75rem; font-style: normal; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--text); }
+.track .event i { color: var(--muted); top: 3.2rem; }
+.track .event b { top: 1rem; }
+.basemap { width: 100%; height: auto; background: var(--floor); border-radius: 6px; }
+.basemap path { fill: var(--path); stroke: none; }
+.basemap circle { fill: var(--gold); stroke: var(--bg); stroke-width: 2; }
+.outside { font-size: .9rem; color: var(--muted); }
+
+/* Plot explainer */
+.plot-map { width: 100%; height: auto; background: var(--floor); border-radius: 6px; }
+.plot-map line { stroke: var(--path); stroke-width: 1.5; }
+.plot-map text { fill: var(--muted); font-size: 11px; }
+.plot-map .rel { font-size: 9px; font-style: italic; }
+.plot-map .node circle { fill: var(--path); }
+.plot-map .node.on circle { fill: var(--gold); }
+.plot-map .node.on text { fill: var(--text); font-weight: bold; }
+.beat { min-height: 4.5em; }
+.plot-nav { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+
+/* Room panel and text view */
+.questions { list-style: none; padding: 0; }
+.questions li { margin-bottom: .75rem; }
+.answer { color: var(--gold); }
+details { margin: .5rem 0; }
+summary { cursor: pointer; }
+.room-text { max-width: 44rem; margin: 2rem auto; padding: 0 1rem; }
+.room-text .panel { margin: 1rem 0; transform: none; position: static; }

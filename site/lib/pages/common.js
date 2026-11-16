@@ -1,5 +1,7 @@
 // Helpers shared by the page scripts. Pure parts first, DOM wiring last.
 import { esc, isSlug } from "../text.js";
+import { makeStore } from "../storage.js";
+import { makeProgress } from "../progress.js";
 
 const BACK = '<a href="index.html">Temų sąrašas</a>';
 
@@ -29,6 +31,9 @@ const BLOCKED = new Proxy({}, {
 export function storageBackend(url) {
   return url.searchParams.get("nostore") === "1" ? BLOCKED : undefined;
 }
+
+/** The visitor's progress, stored as the page URL allows (see storageBackend). */
+export const pageProgress = (url) => makeProgress(makeStore(storageBackend(url)));
 
 /** The id named by a location hash, decoded; "" when absent or badly escaped. */
 export function hashId(hash) {

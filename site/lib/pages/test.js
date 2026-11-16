@@ -1,10 +1,8 @@
 // Test page: one question at a time, then a score with links to spots to revisit.
-import { makeStore } from "../storage.js";
-import { makeProgress } from "../progress.js";
 import { buildSession } from "../quiz.js";
 import { esc } from "../text.js";
 import { imgUrl } from "../render.js";
-import { loadIndex, loadPack, markReady, run, showError, storageBackend, topicFromUrl } from "./common.js";
+import { loadIndex, loadPack, markReady, pageProgress, run, showError, topicFromUrl } from "./common.js";
 
 /** Copy of arr with the item at `from` moved to `to`; out-of-range moves change nothing. */
 export function move(arr, from, to) {
@@ -51,7 +49,7 @@ async function main() {
   const items = buildSession(pack, { room });
   if (!items.length) return showError("Šioje temoje nėra klausimų.");
 
-  const progress = makeProgress(makeStore(storageBackend(url)));
+  const progress = pageProgress(url);
   const spotName = (id) => pack.spots.find((s) => s.id === id)?.name ?? id;
   const app = document.getElementById("app");
   const results = [];

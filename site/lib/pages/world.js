@@ -4,15 +4,13 @@
 import { imgUrl, plotExplainer, textView } from "../render.js";
 import { layoutTime } from "../layout.js";
 import { SCENE } from "../theme.js";
-import { makeStore } from "../storage.js";
-import { makeProgress } from "../progress.js";
 import { buildWorld } from "../scene/world.js";
 import { pathZ } from "../scene/lanes.js";
 import { makeControls } from "../scene/controls.js";
 import { sizeLabels, standPoint, updateNearby } from "../scene/nearby.js";
 import { overview, roomAt, roomCounts } from "./overview.js";
 import { makeSelection, roomVisit } from "./selection.js";
-import { focusReturn, hashId, loadIndex, loadPack, markReady, run, showError, storageBackend, textAnchor, topicFromUrl } from "./common.js";
+import { focusReturn, hashId, loadIndex, loadPack, markReady, pageProgress, run, showError, textAnchor, topicFromUrl } from "./common.js";
 
 const MAX_DT = 0.1; // seconds; longer frame gaps (hidden tab) don't jump the camera
 
@@ -69,7 +67,7 @@ async function main() {
   markReady("world", { rooms: world.roomGroups.size, spots: world.spotMeshes.size });
 
   addEventListener("resize", () => sizeTo(renderer, world.camera));
-  const ui = interact(THREE, world, pack, layout, renderer.domElement, makeProgress(makeStore(storageBackend(url))));
+  const ui = interact(THREE, world, pack, layout, renderer.domElement, pageProgress(url));
   const start = hashId(location.hash);
   if (world.spotMeshes.has(start)) ui.goTo(start);
 

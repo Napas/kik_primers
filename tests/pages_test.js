@@ -1,5 +1,5 @@
 import { assertEquals, assertMatch, assertThrows } from "@std/assert";
-import { focusReturn, hashId, lastScore, storageBackend, textAnchor, topicFromUrl } from "../site/lib/pages/common.js";
+import { focusReturn, hashId, lastScore, pageProgress, storageBackend, textAnchor, topicFromUrl } from "../site/lib/pages/common.js";
 import { makeStore } from "../site/lib/storage.js";
 import { facePrompt, move, orderRight, shift, summarize } from "../site/lib/pages/test.js";
 
@@ -19,6 +19,12 @@ Deno.test("topicFromUrl rejects traversal, unknown, missing and unlisted input",
   }
   assertEquals(typeof topicFromUrl(url("?topic=mini-test"), null).error, "string");
   assertEquals(typeof topicFromUrl(url("?topic=mini-test"), {}).error, "string");
+});
+
+Deno.test("pageProgress: progress over the page's storage, kept in memory with ?nostore=1", () => {
+  const p = pageProgress(url("?topic=mini-test&nostore=1"));
+  p.openSpot("mini-test", "s1");
+  assertEquals(p.opened("mini-test"), new Set(["s1"]));
 });
 
 Deno.test("storageBackend: the default storage, or with ?nostore=1 one that throws on every call", () => {

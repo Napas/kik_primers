@@ -1,12 +1,10 @@
 // Topic list page.
-import { makeStore } from "../storage.js";
-import { makeProgress } from "../progress.js";
 import { esc } from "../text.js";
-import { lastScore, loadIndex, markReady, run, storageBackend } from "./common.js";
+import { lastScore, loadIndex, markReady, pageProgress, run } from "./common.js";
 
 run(async () => {
   const { topics } = await loadIndex();
-  const progress = makeProgress(makeStore(storageBackend(new URL(location.href))));
+  const progress = pageProgress(new URL(location.href));
   const rows = topics.map((t) => {
     const score = lastScore(progress.sessions(t.slug));
     const q = encodeURIComponent(t.slug);

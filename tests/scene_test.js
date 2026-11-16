@@ -5,11 +5,13 @@ import { layoutTime } from "../site/lib/layout.js";
 import { initials, makeSpot, setPhoto } from "../site/lib/scene/spots.js";
 import { makeLabel } from "../site/lib/scene/labels.js";
 import { buildWorld } from "../site/lib/scene/world.js";
-import { ground, path, plainRoom, yearMarker } from "../site/lib/scene/styles.js";
+import { ground, path, plainRoom, STYLES, yearMarker } from "../site/lib/scene/styles.js";
+import { STYLE_NAMES } from "../site/lib/theme.js";
 import { installFakeCanvas } from "./fake_canvas.js";
 
 const root = new URL("../", import.meta.url).pathname;
 const MINI = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/mini/topic.json`));
+const STYLED = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/styles/topic.json`));
 const KINDS = ["person", "work", "group", "event", "place", "thing"];
 const spot = (kind, extra = {}) => ({ id: `s-${kind}`, kind, name: "Žemaitė Ąžuolė", years: [1845], at: 1845, ...extra });
 const canvases = (obj) => {
@@ -131,6 +133,69 @@ Deno.test("styles.js builds the plain look: walls tagged as occluders, path, gro
     const texts = [];
     m.traverse((o) => o.material?.map?.image?.texts && texts.push(...o.material.map.image.texts));
     assertEquals(texts, ["1550"]);
+  } finally {
+    restore();
+  }
+});
+
+const boxOf = (o) => new THREE.Box3().setFromObject(o, true); // precise: rotated parts measured by their vertices
+const partsOf = (room) => {
+  const out = { walls: [], meshes: [] };
+  room.updateMatrixWorld(true);
+  room.traverse((o) => {
+    if (o.userData.wall) out.walls.push(o);
+    if (o.isMesh) out.meshes.push(o);
+    if (o.userData.part) out[o.userData.part] = o;
+  });
+  return out;
+};
+
+Deno.test("every style builds walls, floor, signature, window light and a landmark inside its footprint", () => {
+  const restore = installFakeCanvas();
+  try {
+    // A minimum-size room on the second lane: nothing may reach the first lane's path behind it.
+    const r = { x0: 30, x1: 40, z0: -9.1, z1: -4.9 };
+    const backFace = r.z0 - 0.6 + 0.075; // front face of the back wall (MARGIN 0.6, WALL_T 0.15)
+    for (const name of STYLE_NAMES) {
+      const room = STYLES[name](THREE, r, COLORS);
+      const p = partsOf(room);
+      assertEquals(p.walls.length, 3, `${name}: back wall and two end walls`);
+      for (const w of p.walls) assertEquals(w.geometry.type, "BoxGeometry", `${name}: walls stay simple boxes`);
+      const wallTop = Math.max(...p.walls.map((w) => boxOf(w).max.y));
+      for (const part of ["floor", "signature", "window", "landmark"]) assert(p[part], `${name}: no ${part}`);
+      assert(boxOf(p.signature).max.y > wallTop + 0.3, `${name}: signature does not rise over the back wall`);
+      const lm = boxOf(p.landmark);
+      assert(lm.min.x >= r.x0 && lm.max.x <= r.x1, `${name}: landmark outside the room's x range`);
+      assert(lm.min.z >= backFace - 1e-6 && lm.max.z <= r.z0 + 0.35, `${name}: landmark leaves the strip behind the spots`);
+      let glows = false;
+      p.window.traverse((o) => (glows ||= o.material?.emissive?.getHex() > 0 || o.material?.isMeshBasicMaterial));
+      assert(glows, `${name}: window light does not glow`);
+      for (const m of p.meshes) {
+        const b = boxOf(m);
+        assert(b.min.z >= r.z0 - 0.6 - 0.075 - 1e-6, `${name}: ${m.name || m.geometry.type} sticks out behind the back wall`);
+        assert(b.max.z <= r.z1 + 0.6 + 1e-6, `${name}: ${m.name || m.geometry.type} sticks out in front of the floor`);
+        for (const mat of [m.material].flat()) {
+          if (mat.map) assertEquals(typeof mat.map.image.getContext, "function", `${name}: textures are drawn on canvases`);
+        }
+      }
+    }
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("buildWorld gives each room its named style", () => {
+  const restore = installFakeCanvas();
+  try {
+    const layout = layoutTime(STYLED);
+    const w = buildWorld(THREE, STYLED, layout);
+    assertEquals(w.roomGroups.size, 9);
+    for (const room of STYLED.rooms) {
+      let style;
+      w.roomGroups.get(room.n).traverse((o) => (style ??= o.userData.style));
+      assertEquals(style, room.style, `room ${room.n}`);
+    }
+    assertEquals(w.walls.length, 3 * layout.rooms.length);
   } finally {
     restore();
   }

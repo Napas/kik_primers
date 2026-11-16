@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "slug": "styles-test",
+  "title": "Visi kambarių stiliai",
+  "intro": "Devyni kambariai, po vieną kiekvienam stiliui; 7 ir 8 kambariai eina lygiagrečiai.",
+  "layout": "time",
+  "rooms": [
+    {"n": 1, "title": "Spaustuvė", "intro": "Akmeninis skliautas.", "why": [], "span": [1540, 1700], "style": "print-shop"},
+    {"n": 2, "title": "Mūro bažnyčia", "intro": "Raudonos plytos.", "why": [], "span": [1700, 1790], "style": "brick-church"},
+    {"n": 3, "title": "Medinė koplyčia", "intro": "Rąstai ir mėnulio šviesa.", "why": [], "span": [1790, 1860], "style": "log-chapel"},
+    {"n": 4, "title": "Daržinė", "intro": "Žibintas ir vežimas.", "why": [], "span": [1860, 1904], "style": "barn"},
+    {"n": 5, "title": "Sodyba", "intro": "Balintos sienos.", "why": [], "span": [1904, 1920], "style": "farmstead"},
+    {"n": 6, "title": "Kauno modernizmas", "intro": "Apvalūs kampai.", "why": [], "span": [1920, 1940], "style": "kaunas-modern"},
+    {"n": 7, "title": "Barakas", "intro": "Lagaminai.", "why": [], "span": [1944, 1990], "style": "dp-barrack"},
+    {"n": 8, "title": "Betonas", "intro": "Šalta šviesa.", "why": [], "span": [1940, 1990], "style": "concrete"},
+    {"n": 9, "title": "Stiklas", "intro": "Dienos šviesa.", "why": [], "span": [1990, 2020], "style": "glass"}
+  ],
+  "spots": [
+    {"id": "s1", "room": 1, "kind": "work", "name": "Pirmoji knyga", "aliases": [], "years": [1547], "at": 1547, "text": "Knyga.", "links": []},
+    {"id": "s2", "room": 2, "kind": "person", "name": "Kunigas Poetas", "aliases": [], "years": [1714, 1780], "at": 1750, "text": "Poetas.", "links": []},
+    {"id": "s3", "room": 3, "kind": "person", "name": "Vyskupas Rašytojas", "aliases": [], "years": [1801, 1875], "at": 1830, "text": "Vyskupas.", "links": []},
+    {"id": "s4", "room": 4, "kind": "event", "name": "Spaudos draudimas", "aliases": [], "years": [1864], "at": 1864, "text": "Draudimas.", "links": []},
+    {"id": "s5", "room": 5, "kind": "group", "name": "Rašytojų būrys", "aliases": [], "years": [1910], "at": 1910, "text": "Būrys.", "links": []},
+    {"id": "s6", "room": 6, "kind": "place", "name": "Laikinoji sostinė", "aliases": [], "years": [1920], "at": 1930, "text": "Miestas.", "links": []},
+    {"id": "s7", "room": 7, "kind": "thing", "name": "Lagaminas", "aliases": [], "years": [1949], "at": 1949, "text": "Daiktas.", "links": []},
+    {"id": "s8", "room": 8, "kind": "work", "name": "Romanas", "aliases": [], "years": [1966], "at": 1966, "text": "Romanas.", "links": []},
+    {"id": "s9", "room": 9, "kind": "person", "name": "Šiandienos Autorė", "aliases": [], "years": [1965], "at": 2000, "text": "Autorė.", "links": []}
+  ],
+  "questions": [],
+  "skipped": []
+}

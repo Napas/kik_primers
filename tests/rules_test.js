@@ -21,6 +21,8 @@ const problems = (p) => checkPack(p).join("\n");
 const SHOW = ["Kas", "ir", "kodėl"];
 
 Deno.test("mini pack is valid", () => assertEquals(checkPack(mini()), []));
+Deno.test("styles fixture pack is valid", () =>
+  assertEquals(checkPack(JSON.parse(Deno.readTextFileSync(new URL("./fixtures/styles/topic.json", import.meta.url)))), []));
 Deno.test("duplicate spot id", () => assertMatch(problems(withDupSpot()), /duplicate spot id/));
 Deno.test("at outside room span", () => assertMatch(problems(withAt(1650)), /at 1650 outside room 1/));
 Deno.test("link to unknown spot", () => assertMatch(problems(withLink("nope")), /unknown spot nope/));

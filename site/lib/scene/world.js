@@ -1,12 +1,14 @@
 // Builds the 3D world from a pack and its time layout: rooms along x, a path in front of each lane,
 // year markers on the first lane, one model and label per spot. Only placement lives here;
-// the look comes from styles.js and spots.js. Builders take THREE as an argument.
+// the look comes from styles.js and spots.js, the light along the path from light.js. Builders take THREE as an argument.
 import { COLORS, SCENE } from "../theme.js";
 import { makeSpot, setPhoto } from "./spots.js";
 import { makeLabel } from "./labels.js";
-import { ground, path, plainRoom, yearMarker } from "./styles.js";
+import { ground, path, pathLanes, pathZ, plainRoom, STYLES, yearMarker } from "./styles.js";
+import { addPathLights } from "./light.js";
 
-const PATH_OFFSET = 1.4; // path centre in front of a room's z1
+export { pathZ };
+
 const TICK_SIDE = 0.9; // year markers stand this far beyond the path centre
 const TITLE_FRONT = 0.6; // room title in front of a room's z1
 const ROOM_TITLE_Y = 2.9;
@@ -14,9 +16,6 @@ const START_BACK = 5; // camera start before the first room
 const START_LOOK = 10; // the start view aims this far along the path, at the room front
 const BOUNDS_PAD = 2; // paths and the walkable area reach this far beyond the rooms
 const GROUND_PAD = 20;
-
-/** z of the walking path along the lane of `room` (a layout room). */
-export const pathZ = (room) => room.z1 + PATH_OFFSET;
 
 /**
  * opts: aspect (camera); loadPhoto(file, apply(texture)) to fetch a person's photo, initials stay until apply.
@@ -40,14 +39,10 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
   const bounds = { x0: startX - BOUNDS_PAD, x1: layout.length + BOUNDS_PAD, z0: zMin - BOUNDS_PAD, z1: zMax + BOUNDS_PAD };
   scene.add(ground(THREE, { x0: startX - GROUND_PAD, x1: layout.length + GROUND_PAD, z0: zMin - GROUND_PAD, z1: zMax + GROUND_PAD }, COLORS));
 
-  const lanes = new Map();
-  for (const r of layout.rooms) {
-    const l = lanes.get(r.lane) ?? { x0: Infinity, x1: -Infinity, z: pathZ(r) };
-    lanes.set(r.lane, { ...l, x0: Math.min(l.x0, r.x0), x1: Math.max(l.x1, r.x1) });
+  for (const l of pathLanes(layout)) {
+    scene.add(path(THREE, { x0: l.lane === 0 ? startX : l.x0 - BOUNDS_PAD, x1: l.x1 + BOUNDS_PAD, z: l.z }, COLORS));
   }
-  for (const [lane, l] of lanes) {
-    scene.add(path(THREE, { x0: lane === 0 ? startX : l.x0 - BOUNDS_PAD, x1: l.x1 + BOUNDS_PAD, z: l.z }, COLORS));
-  }
+  addPathLights(THREE, scene, layout);
   for (const t of layout.ticks) {
     const marker = yearMarker(THREE, t.year, COLORS);
     marker.position.set(t.x, 0, pathZ(first) + TICK_SIDE);
@@ -59,7 +54,7 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
     const room = pack.rooms.find((p) => p.n === r.n);
     const group = new THREE.Group();
     group.name = `room-${r.n}`;
-    group.add(plainRoom(THREE, r, COLORS));
+    group.add((STYLES[room.style] ?? plainRoom)(THREE, r, COLORS));
     const label = makeLabel(THREE, room.title);
     label.position.set(r.x0 + Math.min(2, (r.x1 - r.x0) / 2), ROOM_TITLE_Y, r.z1 + TITLE_FRONT);
     group.add(label);

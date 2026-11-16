@@ -96,7 +96,8 @@ export function showError(msg) {
 export async function run(main) {
   try {
     await main();
-  } catch {
+  } catch (e) {
+    console.error(e);
     showError("Nepavyko įkelti turinio.");
   }
 }

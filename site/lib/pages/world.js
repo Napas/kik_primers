@@ -47,7 +47,7 @@ async function main() {
   } catch {
     return showText(pack);
   }
-  // The 3D layer stays hidden until its first frame renders, so a failure leaves the error in #app visible.
+  // The 3D layer stays hidden until its first frame renders; if the scene fails, the text view takes its place.
   const host = document.getElementById("world");
   const layout = layoutTime(pack);
   let world;
@@ -58,7 +58,8 @@ async function main() {
   } catch (e) {
     renderer.dispose();
     host.replaceChildren();
-    throw e;
+    console.error(e);
+    return showText(pack);
   }
   host.hidden = false;
   const link = document.getElementById("text-link");

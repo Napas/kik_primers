@@ -74,3 +74,7 @@ Deno.test("spotlightLevel: full spot cones in dim bands, fainter as the band get
   assert(spotlightLevel(lightFor(1960)) <= 0.5, "fluorescent rooms at most half");
   assert(levels.every((l) => l > 0));
 });
+
+Deno.test("the camera sees a little past the fog, no farther", () => {
+  assert(SCENE.far > SCENE.fog.far && SCENE.far <= SCENE.fog.far + 15, String(SCENE.far));
+});

@@ -177,6 +177,7 @@ Deno.test("buildWorld places every room and spot from the layout", () => {
     }
     assert(w.camera.isPerspectiveCamera);
     assertEquals(w.camera.aspect, 1.5);
+    assertEquals(w.camera.far, SCENE.far);
     assert(w.camera.position.x < layout.rooms[0].x0, "camera starts before the first room");
     assertEquals(photos, [], "buildWorld leaves photo loading to the caller");
     const jonas = w.spotMeshes.get("jonas-rastas");

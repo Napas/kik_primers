@@ -41,6 +41,7 @@ export const SCENE = {
   eye: 1.7,
   fov: 60, // camera's vertical field of view, degrees
   fog: { near: 16, far: 55 },
+  far: 65, // camera far plane: a little past the fog, which hides everything beyond it
   ambient: { sky: 0xc8d4f0, ground: 0x141e33, intensity: 0.85 },
   fill: { color: 0xfff0d8, intensity: 0.6 },
   lamp: { power: 6, distance: 10, pool: 0.25 },

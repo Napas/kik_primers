@@ -106,7 +106,10 @@ Deno.test({
   fn: async (t) => {
     // A listed pack without rooms passes the topic check, then fails while the world is built.
     const BROKEN = { slug: "broken", title: "Sugadinta", spots: [] };
-    await withSite([MINI, STYLED, BROKEN], async (base) => {
+    // A spot kind that the 3D models cannot build (an Object.prototype key) while the text view renders it.
+    const ODD = { ...structuredClone(MINI), slug: "odd-kind" };
+    ODD.spots[2].kind = "constructor";
+    await withSite([MINI, STYLED, BROKEN, ODD], async (base) => {
       const page = async (path, size) => htmlAttrs(await dumpDom(base + path, size));
 
       await t.step("world renders both rooms and all spots", async () => {
@@ -167,6 +170,12 @@ Deno.test({
         assertEquals(htmlAttrs(dom)["data-ready"], undefined);
         assert("hidden" in elementAttrs(dom, "world"), "the 3D layer covers the error");
         assert(!/<canvas/i.test(dom), "the canvas stays in the page");
+      });
+      await t.step("a failure while building the 3D scene falls back to the text view", async () => {
+        const dom = await dumpDom(`${base}world.html?topic=odd-kind`);
+        assertEquals([htmlAttrs(dom)["data-error"], htmlAttrs(dom)["data-ready"]], [undefined, "text"]);
+        assert("hidden" in elementAttrs(dom, "world"), "the 3D layer stays hidden");
+        assert(dom.includes('id="spot-didysis-sukilimas"'), "the text view lists the spots");
       });
       for (const p of ["world", "test"]) {
         await t.step(`${p} with an unknown topic shows an error`, async () => {

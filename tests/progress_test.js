@@ -122,3 +122,24 @@ Deno.test("progress works over a throwing backend", () => {
   assertEquals(p.opened("t"), new Set(["s1"]));
   assertEquals(p.sessions("t").length, 1);
 });
+
+Deno.test("progress reads wrong-shape stored values as empty", () => {
+  const b = fakeStorage();
+  b.m.set("pw:opened:t", "null");
+  b.m.set("pw:revealed:t", "{}");
+  b.m.set("pw:sessions:t", '"x"');
+  b.m.set("pw:answers:t", "[1, 2]");
+  b.m.set("pw:answers:u", "5");
+  const p = makeProgress(makeStore(b));
+  assertEquals(p.opened("t"), new Set());
+  assertEquals(p.revealed("t"), new Set());
+  assertEquals(p.sessions("t"), []);
+  assertEquals(p.lastAnswers("t"), {});
+  assertEquals(p.lastAnswers("u"), {});
+  p.openSpot("t", "a");
+  assertEquals(p.opened("t"), new Set(["a"]));
+  p.answer("t", "q1", true);
+  assertEquals(p.lastAnswers("t"), { q1: true });
+  p.session("t", { scope: "all", right: 1, total: 2 });
+  assertEquals(p.sessions("t").length, 1);
+});

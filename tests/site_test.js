@@ -99,3 +99,15 @@ Deno.test("a room panel's test link opens a non-empty session for every real roo
     }
   }
 });
+
+Deno.test("site/topics/index.json lists every pack with its slug, title, layout and counts", async () => {
+  const index = JSON.parse(await Deno.readTextFile(`${root}site/topics/index.json`));
+  const packs = [];
+  for await (const e of Deno.readDir(`${root}site/topics`)) {
+    if (e.isDirectory) packs.push(JSON.parse(await Deno.readTextFile(`${root}site/topics/${e.name}/topic.json`)));
+  }
+  const entry = (p) => ({
+    slug: p.slug, title: p.title, layout: p.layout, rooms: p.rooms.length, spots: p.spots.length, questions: p.questions.length,
+  });
+  assertEquals(index.topics, packs.map(entry).sort((a, b) => a.slug.localeCompare(b.slug)));
+});

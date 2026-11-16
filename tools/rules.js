@@ -212,7 +212,7 @@ export function checkCoverage(pack, primerMd, privateSkips = []) {
 
 // Terms that must never appear on the public site, matched on folded text.
 // The show's name is built from parts so this file can be scanned like any other.
-const SHOW = ["kas", "ir", "kodel"].join("[^a-z0-9]+");
+const SHOW = ["kas", "ir", "kodel"].join("[^a-z0-9]*");
 // Word edges are "not a letter or digit", so "_" and "-" count as separators.
 const word = (src) => new RegExp(`(?<![a-z0-9])(?:${src})(?![a-z0-9])`);
 const FORBIDDEN = [

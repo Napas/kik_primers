@@ -83,7 +83,7 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
     spotMeshes.set(p.id, obj);
   }
 
-  const camera = new THREE.PerspectiveCamera(SCENE.fov, aspect, 0.1, 200);
+  const camera = new THREE.PerspectiveCamera(SCENE.fov, aspect, 0.1, SCENE.far);
   camera.position.set(startX, SCENE.eye, pathZ(first));
   camera.lookAt(first.x0 + START_LOOK, SCENE.eye - 0.6, first.z1);
 

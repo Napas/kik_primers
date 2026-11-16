@@ -92,6 +92,11 @@ Deno.test("scan flags the show's name in three spellings", () => {
   }
 });
 
+Deno.test("scan flags the show's name written without separators", () => {
+  const joined = SHOW.join("").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  assertNotEquals(scanSite([{ path: "a.html", text: `x ${joined} y` }]), [], joined);
+  assertNotEquals(scanSite([{ path: `${joined}.png`, text: "" }]), []);
+});
 Deno.test("scan treats - and _ as separators", () => {
   const hit = (path, text = "") => assertNotEquals(scanSite([{ path, text }]), [], path + text);
   hit(SHOW.join("-").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") + ".png");

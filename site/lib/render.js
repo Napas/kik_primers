@@ -5,7 +5,7 @@ import { motifSvg } from "./motifs.js";
 import { BASEMAP, project } from "./basemap.js";
 
 const byAtThenId = (a, b) => (a.at ?? Infinity) - (b.at ?? Infinity) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
-const imgUrl = (pack, file) => `topics/${encodeURIComponent(pack.slug)}/img/${encodeURIComponent(file)}`;
+export const imgUrl = (pack, file) => `topics/${encodeURIComponent(pack.slug)}/img/${encodeURIComponent(file)}`;
 const safeUrl = (u) => (/^https?:\/\//i.test(u ?? "") ? u : "#");
 const pct = (f) => `${+(f * 100).toFixed(2)}%`;
 

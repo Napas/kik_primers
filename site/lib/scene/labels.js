@@ -30,9 +30,10 @@ export function textTexture(THREE, text, opts = {}) {
 /** Name label that always faces the camera; LABEL.height tall, width from the text. */
 export function makeLabel(THREE, text) {
   const map = textTexture(THREE, text);
-  const material = new THREE.SpriteMaterial({ map, transparent: true, opacity: LABEL.opacity, depthWrite: false });
+  // Drawn over the scene: declutter.js hides labels that stand behind a wall.
+  const material = new THREE.SpriteMaterial({ map, transparent: true, opacity: LABEL.opacity, depthWrite: false, depthTest: false });
   const sprite = new THREE.Sprite(material);
-  sprite.renderOrder = 1; // after the spotlights' additive cones and pools (0), so their light stays off the text
+  sprite.renderOrder = 1; // after the floor pools (0), so their light stays off the text
   const { width, height } = map.image;
   sprite.scale.set((LABEL.height * width) / height, LABEL.height, 1);
   return sprite;

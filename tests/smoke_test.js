@@ -1,9 +1,9 @@
 // Headless Chrome smoke tests. Run only with PRIMER_CHROME=1 (needs Chrome and a local port).
 import { assert, assertEquals } from "@std/assert";
 import { imgUrl } from "../site/lib/render.js";
+import { CHROME, headlessArgs, runChrome, withProfile } from "../tools/chrome.ts";
 
 const root = new URL("../", import.meta.url).pathname;
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const ignore = !Deno.env.get("PRIMER_CHROME");
 const MINI = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/mini/topic.json`));
 const STYLED = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/styles/topic.json`));
@@ -64,29 +64,8 @@ export async function withSite(packs, fn) {
 
 /** Chrome's DOM of `url` after the virtual time budget, in a fresh profile. */
 export async function dumpDom(url, { w = 1280, h = 800 } = {}) {
-  const profile = await Deno.makeTempDir();
-  try {
-    const out = await new Deno.Command(CHROME, {
-      args: [
-        "--headless=new",
-        "--use-angle=swiftshader",
-        "--enable-unsafe-swiftshader",
-        "--virtual-time-budget=8000",
-        `--window-size=${w},${h}`,
-        `--user-data-dir=${profile}`,
-        "--no-first-run",
-        "--no-default-browser-check",
-        "--dump-dom",
-        url,
-      ],
-      stdout: "piped",
-      stderr: "piped",
-      signal: AbortSignal.timeout(60_000),
-    }).output();
-    return new TextDecoder().decode(out.stdout);
-  } finally {
-    await Deno.remove(profile, { recursive: true });
-  }
+  const { stdout } = await runChrome((profile) => headlessArgs({ w, h, profile, extra: ["--virtual-time-budget=8000", "--dump-dom", url] }));
+  return stdout;
 }
 
 const attrsOf = (tag = "") => Object.fromEntries([...tag.matchAll(/([\w-]+)(?:="([^"]*)")?/g)].slice(1).map((m) => [m[1], m[2] ?? ""]));
@@ -211,61 +190,50 @@ Deno.test({
 
 /** Opens `url` in headless Chrome (w×h, reduced motion) and runs fn({ev, sleep, errors}) over the DevTools protocol. */
 async function withPage(url, fn, { w = 1280, h = 800 } = {}) {
-  const profile = await Deno.makeTempDir();
-  const chrome = new Deno.Command(CHROME, {
-    args: [
-      "--headless=new",
-      "--use-angle=swiftshader",
-      "--enable-unsafe-swiftshader",
-      "--force-prefers-reduced-motion",
-      "--remote-debugging-port=0",
-      `--window-size=${w},${h}`,
-      `--user-data-dir=${profile}`,
-      "--no-first-run",
-      "--no-default-browser-check",
-      "about:blank",
-    ],
-    stdout: "null",
-    stderr: "null",
-  }).spawn();
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-  let ws;
-  try {
-    let port;
-    for (let i = 0; i < 100 && !port; i++) {
-      port = await Deno.readTextFile(`${profile}/DevToolsActivePort`).then((t) => t.split("\n")[0]).catch(() => null);
-      if (!port) await sleep(100);
+  await withProfile(async (profile) => {
+    const chrome = new Deno.Command(CHROME, {
+      args: headlessArgs({ w, h, profile, extra: ["--force-prefers-reduced-motion", "--remote-debugging-port=0", "about:blank"] }),
+      stdout: "null",
+      stderr: "null",
+    }).spawn();
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    let ws;
+    try {
+      let port;
+      for (let i = 0; i < 100 && !port; i++) {
+        port = await Deno.readTextFile(`${profile}/DevToolsActivePort`).then((t) => t.split("\n")[0]).catch(() => null);
+        if (!port) await sleep(100);
+      }
+      const targets = await (await fetch(`http://127.0.0.1:${port}/json`)).json();
+      ws = new WebSocket(targets.find((t) => t.type === "page").webSocketDebuggerUrl);
+      await new Promise((r, j) => ((ws.onopen = r), (ws.onerror = j)));
+      let seq = 0;
+      const pending = new Map();
+      const errors = [];
+      ws.onmessage = (m) => {
+        const d = JSON.parse(m.data);
+        pending.get(d.id)?.(d);
+        if (d.method === "Runtime.exceptionThrown") errors.push(d.params.exceptionDetails.exception?.description);
+      };
+      const send = (method, params = {}) =>
+        new Promise((r) => {
+          pending.set(++seq, r);
+          ws.send(JSON.stringify({ id: seq, method, params }));
+        });
+      const ev = async (expression) =>
+        (await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true })).result?.result?.value;
+      await send("Runtime.enable");
+      // Headless windows have a minimum width (500 px); the override gives the exact viewport.
+      await send("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile: false });
+      await send("Page.navigate", { url });
+      for (let i = 0; i < 100 && (await ev("document.documentElement.dataset.ready")) === undefined; i++) await sleep(100);
+      await fn({ ev, sleep, errors });
+    } finally {
+      ws?.close();
+      chrome.kill();
+      await chrome.status;
     }
-    const targets = await (await fetch(`http://127.0.0.1:${port}/json`)).json();
-    ws = new WebSocket(targets.find((t) => t.type === "page").webSocketDebuggerUrl);
-    await new Promise((r, j) => ((ws.onopen = r), (ws.onerror = j)));
-    let seq = 0;
-    const pending = new Map();
-    const errors = [];
-    ws.onmessage = (m) => {
-      const d = JSON.parse(m.data);
-      pending.get(d.id)?.(d);
-      if (d.method === "Runtime.exceptionThrown") errors.push(d.params.exceptionDetails.exception?.description);
-    };
-    const send = (method, params = {}) =>
-      new Promise((r) => {
-        pending.set(++seq, r);
-        ws.send(JSON.stringify({ id: seq, method, params }));
-      });
-    const ev = async (expression) =>
-      (await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true })).result?.result?.value;
-    await send("Runtime.enable");
-    // Headless windows have a minimum width (500 px); the override gives the exact viewport.
-    await send("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile: false });
-    await send("Page.navigate", { url });
-    for (let i = 0; i < 100 && (await ev("document.documentElement.dataset.ready")) === undefined; i++) await sleep(100);
-    await fn({ ev, sleep, errors });
-  } finally {
-    ws?.close();
-    chrome.kill();
-    await chrome.status;
-    await Deno.remove(profile, { recursive: true }).catch(() => {});
-  }
+  });
 }
 
 Deno.test({

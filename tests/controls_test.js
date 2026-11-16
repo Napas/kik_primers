@@ -4,14 +4,12 @@ import {
   clampPitch,
   clampToBounds,
   ease,
-  floorHit,
   makeControls,
   MAX_FLOOR,
   MAX_MOVE,
   MAX_PITCH,
   moveDuration,
   pickRay,
-  rayBox,
   yawPitchTo,
 } from "../site/lib/scene/controls.js";
 
@@ -41,13 +39,6 @@ Deno.test("ease runs 0 -> 1 smoothly and clamps", () => {
   assert(ease(0.25) < 0.25 && ease(0.75) > 0.75);
 });
 
-Deno.test("floorHit meets the floor only in front of the camera", () => {
-  const p = floorHit({ x: 0, y: 2, z: 0 }, { x: 1, y: -1, z: 0 }, 0);
-  assertEquals(p, { x: 2, y: 0, z: 0 });
-  assertEquals(floorHit({ x: 0, y: 2, z: 0 }, { x: 1, y: 1, z: 0 }, 0), null);
-  assertEquals(floorHit({ x: 0, y: 2, z: 0 }, { x: 1, y: 0, z: 0 }, 0), null);
-});
-
 Deno.test("pickRay takes the nearest target the ray passes through, else the floor", () => {
   const origin = { x: 0, y: 1, z: 0 };
   const dir = { x: 1, y: 0, z: 0 };
@@ -71,15 +62,6 @@ Deno.test("yawPitchTo faces +x along the floor and tilts up to higher points", (
   assertAlmostEquals(pitch, 0);
   assert(yawPitchTo({ x: 0, y: 1, z: 0 }, { x: 1, y: 2, z: 0 }).pitch > 0);
   assertEquals(yawPitchTo({ x: 0, y: 1, z: 0 }, { x: 1, y: 9, z: 0 }).pitch, MAX_PITCH);
-});
-
-Deno.test("rayBox gives the distance to the first face, null on a miss or behind", () => {
-  const box = { min: { x: 4, y: 0, z: -1 }, max: { x: 5, y: 3, z: 1 } };
-  const o = { x: 0, y: 1, z: 0 };
-  assertAlmostEquals(rayBox(o, { x: 1, y: 0, z: 0 }, box), 4);
-  assertEquals(rayBox(o, { x: -1, y: 0, z: 0 }, box), null);
-  assertEquals(rayBox(o, { x: 0, y: 0, z: 1 }, box), null);
-  assertEquals(rayBox({ x: 0, y: 4, z: 0 }, { x: 1, y: 0, z: 0 }, box), null);
 });
 
 Deno.test("a far floor tap is clamped to MAX_FLOOR metres, then into the bounds", () => {
@@ -201,6 +183,20 @@ Deno.test("pick targets are measured once, and again only when the target map ch
     targets.set("t", spot); // same size, other object
     pointer("pointermove", 50, 50);
     assertEquals([hovers, measured], [["s", null, "t", "s"], 4], "the map's entries changed: measured again");
+  } finally {
+    controls.dispose();
+  }
+});
+
+Deno.test("walkTo and lookAt with instant: true arrive at once, with no eased move", () => {
+  const { camera, controls } = rig();
+  try {
+    controls.walkTo({ x: 30, z: 4 }, { instant: true });
+    assertEquals(controls.moving(), false);
+    assertEquals([camera.position.x, camera.position.z], [30, 4]);
+    assertAlmostEquals(camera.rotation.y, 0, 1e-9, "faces -z");
+    controls.lookAt({ x: 35, y: 1.7, z: 4 }, { instant: true });
+    assertAlmostEquals(camera.rotation.y, -Math.PI / 2, 1e-9, "turns to face +x at once, without update()");
   } finally {
     controls.dispose();
   }

@@ -71,6 +71,17 @@ export function visitedCount(opened, topic) {
 }
 
 /**
+ * Pixels to shift the view so the world centres on the part of `view` ({width, height}) that the panel
+ * (its bounding rect, or null) leaves free: half a right column's width, or half a bottom sheet's height.
+ */
+export function viewShift(panel, view) {
+  if (!panel) return { x: 0, y: 0 };
+  const x = panel.top <= 0 ? Math.max(0, view.width - Math.max(0, panel.left)) / 2 : 0;
+  const y = panel.top > 0 && panel.left <= 0 ? Math.max(0, view.height - panel.top) / 2 : 0;
+  return { x, y };
+}
+
+/**
  * Gives focus back to whatever opened a panel by keyboard. opened(active, keyboard, inPanel) when the panel
  * opens with focus (an opener inside the panel keeps the earlier one); closed() after it is hidden.
  */

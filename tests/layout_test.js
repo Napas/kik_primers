@@ -1,5 +1,5 @@
 import { assert, assertAlmostEquals, assertEquals, assertNotEquals } from "@std/assert";
-import { layoutTime } from "../site/lib/layout.js";
+import { DEFAULTS, layoutTime } from "../site/lib/layout.js";
 
 const room = (n, span) => ({ n, title: `R${n}`, span, style: "plain" });
 const spot = (id, r, at) => ({ id, room: r, at, kind: "book" });
@@ -87,6 +87,14 @@ for (const k of [4, 12]) {
     allInside(L, p);
   });
 }
+Deno.test("staggered spots in one year keep half a gap from the walls: the room grows to fit the stagger", () => {
+  const p = fxCrowd(8, 1950);
+  const L = layoutTime(p);
+  const r = roomOf(L, 1);
+  for (const s of L.spots) {
+    assert(s.x >= r.x0 + DEFAULTS.gap / 2 - EPS && s.x <= r.x1 - DEFAULTS.gap / 2 + EPS, `${s.id} at ${s.x} in [${r.x0}, ${r.x1}]`);
+  }
+});
 Deno.test("end-of-room clusters inside parallel lanes stay inside their rooms", () => {
   const spots = [
     ...Array.from({ length: 12 }, (_, i) => spot(`e${i}`, 1, 1990)),
@@ -141,3 +149,17 @@ Deno.test("xOfYear is clamped at the ends", () => {
   assertEquals(L.xOfYear(1000), 0);
   assertEquals(L.xOfYear(3000), L.xOfYear(1800));
 });
+
+Deno.test("rows are staggered: within a room, spots in any rows keep gap / rows apart in x, so none hides another", () => {
+  for (const p of [fxCrowd(12, 1950), fxSparseThenDense(), fxCrowd(40, 1901)]) {
+    const L = layoutTime(p);
+    const roomN = new Map(p.spots.map((s) => [s.id, s.room]));
+    for (const r of L.rooms) {
+      const xs = L.spots.filter((s) => roomN.get(s.id) === r.n).map((s) => s.x).sort((a, b) => a - b);
+      for (let i = 1; i < xs.length; i++) assert(xs[i] - xs[i - 1] >= 2.4 / L.rows - EPS, `room ${r.n}: ${xs[i - 1]} ${xs[i]}`);
+    }
+    allInside(L, p);
+  }
+});
+
+Deno.test("layoutTime reports its row count", () => assertEquals(layoutTime(fx2Rooms()).rows, 2));

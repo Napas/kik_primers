@@ -1,6 +1,6 @@
 import { assert, assertEquals, assertMatch } from "@std/assert";
 import { lifeStrip, plotExplainer, roomPanel, spotPanel, textView, worksOf } from "../site/lib/render.js";
-import { COLORS } from "../site/lib/theme.js";
+import { COLORS, STYLE_NAMES } from "../site/lib/theme.js";
 
 const bare = (kind, extra = {}) => ({ id: "x", room: 1, kind, name: "Vardas", aliases: [], years: null, text: "Tekstas.", links: [], ...extra });
 const person = (extra = {}) => bare("person", extra);
@@ -101,12 +101,27 @@ Deno.test("work with a plot shows the explainer, without one it does not", () =>
   assert(spotPanel(work({ plot: mkPlot() }), pack()).includes("data-char"));
   assert(!spotPanel(work(), pack()).includes("data-char"));
 });
-Deno.test("room panel reveals answers only when revealed", () => {
-  const room = pack().rooms[0];
+Deno.test("room panel shows why questions, answers only when revealed", () => {
+  const room = pack().rooms[1];
   const hidden = roomPanel(room, pack(), new Set());
-  assertMatch(hidden, /data-reveal="1:0"/);
-  assert(hidden.includes("Klausimas?") && !hidden.includes("Atsakymas"));
-  assert(roomPanel(room, pack(), new Set(["1:0"])).includes("Atsakymas"));
+  assertMatch(hidden, /data-reveal="2:0"/);
+  assert(hidden.includes("Kodėl?") && !hidden.includes("Todėl."));
+  assert(!hidden.includes("Klausimas?"));
+  const shown = roomPanel(room, pack(), new Set(["2:0"]));
+  assert(shown.includes("Todėl.") && !shown.includes("data-reveal"));
+});
+Deno.test("life event label has its own element", () => {
+  const h = lifeStrip(person({ life: [{ year: 1700, label: "Gimė" }, { year: 1750, label: "Mirė" }] }), pack());
+  assertMatch(h, /<span class="lbl">Gimė<\/span>/);
+  assertMatch(h, /<span class="lbl">Mirė<\/span>/);
+});
+Deno.test("life strip carries the room's style class", () => {
+  const h = lifeStrip(person({ room: 2, life: [{ year: 1, label: "A" }] }), pack());
+  assertMatch(h, /class="life style-print-shop"/);
+});
+Deno.test("site.css has an accent for every style", async () => {
+  const css = await Deno.readTextFile(new URL("../site/lib/site.css", import.meta.url));
+  for (const n of STYLE_NAMES) assert(css.includes(`.style-${n}`), n);
 });
 Deno.test("room panel lists the room's spots", () => {
   const p = pack({ spots: [bare("person", { id: "s1", room: 1 }), bare("person", { id: "s2", room: 2 })] });

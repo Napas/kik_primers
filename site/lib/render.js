@@ -57,13 +57,14 @@ export function lifeStrip(spot, pack) {
   const places = spot.places ?? [];
   const works = worksOf(pack, spot.id);
   if (!life.length && !places.length && !works.length) return "";
-  let html = `<section class="life">`;
+  const style = pack.rooms.find((r) => r.n === spot.room)?.style;
+  let html = `<section class="life${style ? ` style-${esc(style)}` : ""}">`;
   if (spot.motif) html += `<span class="motif">${motifSvg(spot.motif, 40)}</span>`;
   if (life.length) {
     const first = life[0].year, span = life[life.length - 1].year - first;
     const events = life.map((e) => {
       const f = span ? (e.year - first) / span : 0.5;
-      return `<li class="event" style="left:${pct(f)}"><b>${esc(e.year)}</b> ${esc(e.label)}${e.place ? ` <i>${esc(e.place)}</i>` : ""}</li>`;
+      return `<li class="event" style="left:${pct(f)}"><b>${esc(e.year)}</b><span class="lbl">${esc(e.label)}</span>${e.place ? ` <i>${esc(e.place)}</i>` : ""}</li>`;
     }).join("");
     html += `<h3>Gyvenimas</h3><ol class="track">${events}</ol>`;
   }
@@ -110,19 +111,19 @@ export function spotPanel(spot, pack, { opened = false } = {}) {
   return html + `</article>`;
 }
 
-/** The panel for one room: intro, why Q&A, its spots, and its questions (answers hidden until revealed). */
+/** The panel for one room: intro, its spots, and its why questions (answers hidden until revealed). */
 export function roomPanel(room, pack, revealed) {
   const spots = pack.spots.filter((s) => s.room === room.n).sort(byAtThenId);
-  const qs = pack.questions.filter((q) => q.room === room.n);
+  const why = room.why ?? [];
   let html = `<article class="panel room" data-room="${esc(room.n)}"><h2>${esc(room.title)}</h2><p>${esc(room.intro)}</p>`;
   if (spots.length) {
     html += `<ul class="spots">` + spots.map((s) => `<li><button type="button" data-spot="${esc(s.id)}">${esc(s.name)}</button></li>`).join("") + `</ul>`;
   }
-  if (qs.length) {
-    html += `<h3>Patikrink save</h3><ul class="questions">` + qs.map((q, i) => {
+  if (why.length) {
+    html += `<h3>Kodėl?</h3><ul class="questions">` + why.map((w, i) => {
       const key = `${room.n}:${i}`;
-      return `<li><p>${esc(q.q)}</p>` + (revealed.has(key)
-        ? `<p class="answer">${esc(q.a)}</p>`
+      return `<li><p>${esc(w.q)}</p>` + (revealed.has(key)
+        ? `<p class="answer">${esc(w.a)}</p>`
         : `<button type="button" data-reveal="${esc(key)}">Rodyti atsakymą</button>`) + `</li>`;
     }).join("") + `</ul>`;
   }

@@ -28,6 +28,30 @@
         1700
       ],
       "style": "print-shop"
+    },
+    {
+      "n": 2,
+      "title": "Mažoji Lietuva: Donelaitis, Rėza ir jų įpėdiniai",
+      "intro": "Lietuvių grožinė literatūra prasideda XVIII a. Mažojoje Lietuvoje. Donelaičio „Metus“ po autoriaus mirties išleido ir pavadino Rėza, o Mažosios Lietuvos linija tęsiasi į XX a.",
+      "why": [
+        {
+          "q": "Kodėl Donelaitis laikomas grožinės literatūros pradininku, nors Mažvydas buvo pirmesnis?",
+          "a": "Mažvydo ir Daukšos knygos yra religinės ir mokomosios. „Metai“ – pirmas originalus meninis kūrinys, kuriame kaimo gyvenimas vaizduojamas kaip meno objektas."
+        },
+        {
+          "q": "Kaip susiję Donelaitis ir Rėza?",
+          "a": "Be Rėzos „Metai“ galėjo likti rankraštyje. Jis juos išleido, pavadino ir taip įvedė į literatūrą. Todėl pirmasis „Metų“ leidėjas – Rėza, ne Daukša ar Daukantas."
+        },
+        {
+          "q": "Kaip Donelaitis susijęs su Nėrimi ir Marcinkevičiumi?",
+          "a": "Salomėja Nėris rašė eilėraštį apie Donelaitį, kuris priešo kumščiui priešpriešino gimtosios kalbos grožį. Justinas Marcinkevičius už poemą „Donelaitis“ (1964) tapo pirmuoju „Poezijos pavasario“ laureatu."
+        }
+      ],
+      "span": [
+        1700,
+        1830
+      ],
+      "style": "brick-church"
     }
   ],
   "spots": [
@@ -254,6 +278,158 @@
       "text": "Kunigas Jonas Bretkūnas pirmasis išvertė visą Bibliją į lietuvių kalbą.",
       "links": [],
       "wikidata": "Q177962"
+    },
+    {
+      "id": "donelaitis",
+      "room": 2,
+      "kind": "person",
+      "name": "Kristijonas Donelaitis",
+      "aliases": [],
+      "years": [
+        1714,
+        1780
+      ],
+      "at": 1760,
+      "text": "Kristijonas Donelaitis (1714 m. sausio 1 d. Lazdynėliuose – 1780 m. vasario 18 d. Tolminkiemyje) – lietuvių grožinės literatūros pradininkas, poemos „Metai“ autorius. Nuo 1743 m. jis buvo Tolminkiemio evangelikų liuteronų klebonas. Gimė ir palaidotas dabartinėje Kaliningrado srityje, todėl jo kapas yra Rusijoje, ne Lietuvoje. Vaikų neturėjo. Gyveno XVIII a. ir buvo W. A. Mozarto amžininkas. Jo vardu pavadinta viršukalnė Pamyro kalnyne. Kristupo Saboliaus filmas „Ruduo Tolminkiemyje“ skirtas jo atminimui. Donelaitis taip pat parašė šešias pasakėčias.",
+      "links": [
+        {
+          "to": "metai",
+          "label": "parašė"
+        },
+        {
+          "to": "donelaicio-pasakecios",
+          "label": "parašė"
+        },
+        {
+          "to": "reza",
+          "label": "išleido jo „Metus“"
+        },
+        {
+          "to": "sabolius",
+          "label": "filmas apie jį"
+        }
+      ],
+      "wikidata": "Q467490"
+    },
+    {
+      "id": "metai",
+      "room": 2,
+      "kind": "work",
+      "name": "„Metai“",
+      "aliases": [],
+      "years": [
+        1760,
+        1775
+      ],
+      "at": 1760,
+      "text": "„Metai“ – pirmasis lietuvių grožinės literatūros kūrinys ir garsiausias lietuviškas kūrinys, parašytas hegzametru (2997 eilutės). Parašyta apie 1760–1775 m. Poema turi keturias dalis: 1. „Pavasario linksmybės“ – ja poema prasideda: „Jau saulelė vėl atkopdama budino svietą“; 2. „Vasaros darbai“; 3. „Rudenio gėrybės“ (dar vadinama „Rudens gėrybėmis“) – ilgiausia dalis; 4. „Žiemos rūpesčiai“ – paskutinė, baigiasi žodžiais „Ir mes vėlei ant laukų trūsinėdami vargsim“. Veikėjai – Mažosios Lietuvos valstiečiai, būrai. Dori, darbštūs būrai vadinami viežlybaisiais; vienas teigiamų būrų – Krizas. Slunkius tapo tinginio sinonimu. Dar vienas ryškus veikėjas – Dočys. Kaimo seniūnas vadinamas šaltyšiumi; jis yra Pričkus. Kasdienė buitis įvardijama gyvais žodžiais: „kuršolė“ – šaltibarščiai. Piktas liežuvis vertinamas sparnuota fraze: ant jo „net velniai šokinėja“. Poemą 1818 m. Karaliaučiuje išleido ir „Metais“ pavadino Liudvikas Rėza, taigi „Metai“ išleisti tik po autoriaus mirties, XIX a.",
+      "links": [
+        {
+          "to": "donelaitis",
+          "label": "autorius"
+        },
+        {
+          "to": "reza",
+          "label": "išleido ir pavadino (1818)"
+        }
+      ],
+      "by": "donelaitis"
+    },
+    {
+      "id": "donelaicio-pasakecios",
+      "room": 2,
+      "kind": "work",
+      "name": "Donelaičio pasakėčios",
+      "aliases": [],
+      "years": null,
+      "at": 1760,
+      "text": "Donelaitis parašė šešias pasakėčias: „Lapės ir gandro čėsnis“ (lapė puotauja su gandru), „Pasaka apie šūdvabalį“, „Ąžuols gyrpelnys“, „Rudikis jomarkininks“ (veikėjas – šuo), „Šuo Didgalvis“ ir kt. Pasakėčia, kurioje teisėjas yra vilkas, taip pat jo. Pasakėčios „Arklys ir meška“ ir „Lapė ir žąsys“ – ne jo. Mešką ir arklį į garsiausią savo pasakėčią įvedė Simonas Stanevičius.",
+      "links": [
+        {
+          "to": "donelaitis",
+          "label": "autorius"
+        }
+      ],
+      "by": "donelaitis"
+    },
+    {
+      "id": "reza",
+      "room": 2,
+      "kind": "person",
+      "name": "Liudvikas Rėza",
+      "aliases": [],
+      "years": [
+        1776,
+        1840
+      ],
+      "at": 1818,
+      "text": "Liudvikas Rėza (1776–1840) gimė Karvaičiuose, Kuršių nerijoje. Buvo Karaliaučiaus universiteto teologijos profesorius. Po Donelaičio mirties jis savo lėšomis išleido poemą (1818 m., Karaliaučius) ir sugalvojo jai pavadinimą „Metai“. Taigi „Metai“ išleisti tik po autoriaus mirties, XIX a. Be Rėzos „Metai“ galėjo likti rankraštyje. Rėza taip pat išleido lietuvių liaudies dainų rinkinį „Dainos“ (1825). Laiškais jis kreipėsi į Johanną Wolfgangą Goethe ir siuntė jam savo darbą.",
+      "links": [
+        {
+          "to": "metai",
+          "label": "išleido ir pavadino (1818)"
+        },
+        {
+          "to": "donelaitis",
+          "label": "išleido jo poemą"
+        }
+      ],
+      "wikidata": "Q72522"
+    },
+    {
+      "id": "vydunas",
+      "room": 2,
+      "kind": "person",
+      "name": "Vydūnas",
+      "aliases": [
+        "Vilhelmas Storosta"
+      ],
+      "years": [
+        1868,
+        1953
+      ],
+      "at": 1830,
+      "aside": true,
+      "text": "Vydūnas (1868–1953; tikrasis vardas Vilhelmas Storosta) tęsia Mažosios Lietuvos liniją XX a. Vienas pirmųjų teosofijos idėjų skleidėjų Lietuvoje. Pirmasis į lietuvių kalbą išvertė „Bhagavadgytą“. Kūrė veikėjus su -vydo galūne: Tautvydą, Grožvydą, Milvydą. Koncentracijos stovykloje nekalėjo. Mirė Detmolde (Vokietija); palaikai 1991 m. perlaidoti Bitėnuose.",
+      "links": [],
+      "wikidata": "Q932413"
+    },
+    {
+      "id": "dachas",
+      "room": 2,
+      "kind": "person",
+      "name": "Simonas Dachas",
+      "aliases": [],
+      "years": [
+        1605,
+        1659
+      ],
+      "at": 1700,
+      "aside": true,
+      "text": "Simonas Dachas (1605–1659) – vokiečių kalba rašęs poetas, gimęs Klaipėdoje (Memelyje), Karaliaučiaus universiteto profesorius ir rektorius. Eilėraštis „Taravos Anikė“ – jo; eilėse jis ilgėjosi Dangės kranto. Klaipėda jam dedikavo 2025-uosius.",
+      "links": [],
+      "wikidata": "Q77285"
+    },
+    {
+      "id": "sabolius",
+      "room": 2,
+      "kind": "person",
+      "name": "Kristupas Sabolius",
+      "aliases": [],
+      "years": [
+        1979,
+        null
+      ],
+      "at": 1830,
+      "aside": true,
+      "text": "Kristupo Saboliaus filmas „Ruduo Tolminkiemyje“ skirtas Kristijono Donelaičio atminimui.",
+      "links": [
+        {
+          "to": "donelaitis",
+          "label": "filmas apie jį"
+        }
+      ],
+      "wikidata": "Q12661450"
     }
   ],
   "questions": [],

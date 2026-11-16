@@ -43,6 +43,19 @@ Deno.test("makeLabel draws the text, diacritics kept, on a sprite sized by its w
   }
 });
 
+Deno.test("labels draw after the spotlight cones and pools, so the additive light does not wash them out", () => {
+  const restore = installFakeCanvas();
+  try {
+    const label = makeLabel(THREE, "Ąž");
+    const spot = makeSpot(THREE, { id: "a", kind: "person", name: "A B" }, COLORS);
+    for (const name of ["spot-cone", "spot-pool"]) {
+      assert(label.renderOrder > spot.getObjectByName(name).renderOrder, name);
+    }
+  } finally {
+    restore();
+  }
+});
+
 Deno.test("makeSpot builds one tagged model per kind", () => {
   const restore = installFakeCanvas();
   try {

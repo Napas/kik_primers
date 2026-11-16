@@ -32,6 +32,7 @@ export function makeLabel(THREE, text) {
   const map = textTexture(THREE, text);
   const material = new THREE.SpriteMaterial({ map, transparent: true, opacity: LABEL.opacity, depthWrite: false });
   const sprite = new THREE.Sprite(material);
+  sprite.renderOrder = 1; // after the spotlights' additive cones and pools (0), so their light stays off the text
   const { width, height } = map.image;
   sprite.scale.set((LABEL.height * width) / height, LABEL.height, 1);
   return sprite;

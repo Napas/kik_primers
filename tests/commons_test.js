@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { creditsFrom, dropReason, photoFor, stripHtml, infoUrl, retryDelayMs } from "../tools/commons.js";
+import { authorFor, cleanAuthor, creditsFrom, dropReason, isFreeLicense, photoFor, stripHtml, infoUrl, retryDelayMs } from "../tools/commons.js";
 
 const sample = (n) =>
   JSON.parse(Deno.readTextFileSync(new URL(`./fixtures/commons/${n}.json`, import.meta.url)));
@@ -89,4 +89,38 @@ Deno.test("retryDelayMs: caps long waits, rejects loose formats, floors at 1 s",
   assertEquals(retryDelayMs("Fri, 01 Jan 2100 00:00:00 GMT", 0, now), 120000);
   assertEquals(retryDelayMs("0", 0), 1000);
   assertEquals(["-5", "1.5", "1 2", "12/25/2030"].map((h) => retryDelayMs(h, 1, now)), [10000, 10000, 10000, 10000]);
+});
+
+Deno.test("cleanAuthor drops unknown-author placeholders and Commons boilerplate", () => {
+  const cases = [
+    ["Unknown author", ""], ["unknown", ""], ["Anonymous", ""], ["неизвестно", ""], ["н.", ""], ["  ", ""],
+    ["ltwiki", ""], ["nežinomas", ""], ["Nežinomas", ""], ["Uploaded by Arz", ""],
+    ["Rights: Maironio lietuvių literatūros muziejus", "Maironio lietuvių literatūros muziejus"],
+    ["Adomas Kliučinskis, uploaded by Rimantas Lazdynas", "Adomas Kliučinskis"],
+    ["The original uploader was Ganto at Esperanto Wikipedia.", "Ganto"],
+    ["ru:User:Russianname", "Russianname"],
+    ["User:Someone", "Someone"],
+    ["Andrius_Tapinas.jpg: Eetuatyv derivative work: Homo ergaster (talk)", "Eetuatyv, Homo ergaster"],
+    ["Jonas Zenkevičius / Jan Zienkiewicz (1825-1888)", "Jonas Zenkevičius / Jan Zienkiewicz (1825-1888)"],
+    ["Oswald Lange, Mitau", "Oswald Lange, Mitau"],
+    ["T. Dragunas", "T. Dragunas"],
+  ];
+  for (const [raw, want] of cases) assertEquals(cleanAuthor(raw), want, raw);
+});
+
+Deno.test("authorFor: nežinomas only on public domain or CC0, otherwise null", () => {
+  assertEquals(authorFor("Unknown author", "Public domain"), "nežinomas");
+  assertEquals(authorFor("неизвестно", "CC0"), "nežinomas");
+  assertEquals(authorFor("Anonymous", "PD-old"), "nežinomas");
+  assertEquals(authorFor("Unknown author", "CC BY-SA 4.0"), null);
+  assertEquals(authorFor("ru:User:Russianname", "CC BY-SA 3.0"), "Russianname");
+  assertEquals(isFreeLicense("Not public domain"), false);
+});
+
+Deno.test("creditsFrom normalises a placeholder author, and drops it on a non-free licence", () => {
+  assertEquals(creditsFrom({ LicenseShortName: { value: "Public domain" }, Artist: { value: "Anonymous" } }), {
+    author: "nežinomas",
+    license: "Public domain",
+  });
+  assertEquals(creditsFrom({ LicenseShortName: { value: "CC BY 4.0" }, Artist: { value: "Unknown author" } }), null);
 });

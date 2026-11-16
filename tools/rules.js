@@ -2,6 +2,7 @@
 import { fold, isSlug } from "../site/lib/text.js";
 import { STYLE_NAMES } from "../site/lib/theme.js";
 import { MOTIFS } from "../site/lib/motifs.js";
+import { cleanAuthor, isFreeLicense } from "./commons.js";
 
 const LAYOUTS = ["time", "map"];
 const KINDS = ["person", "work", "group", "event", "place", "thing"];
@@ -29,7 +30,7 @@ function checkPhoto(ph, w, p) {
   if (!isObj(ph) || !["file", "author", "license", "source_url"].every((k) => isStr(ph[k]))) {
     return p.push(`${w}: photo needs file, author, license, source_url`);
   }
-  if (fold(ph.author) === "nezinomas" && !/public domain|^cc0/i.test(ph.license.trim())) {
+  if (!cleanAuthor(ph.author) && !isFreeLicense(ph.license)) {
     p.push(`${w}: photo author nežinomas needs a public domain or CC0 licence`);
   }
 }

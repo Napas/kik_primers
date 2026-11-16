@@ -34,6 +34,12 @@ Deno.test("unknown author needs public domain", () => {
   assertMatch(problems(withPhoto({ author: "nežinomas" })), /nežinomas/);
   assertEquals(checkPack(withPhoto({ author: "nežinomas", license: "Public domain" })), []);
 });
+Deno.test("unknown-author placeholders need public domain like nežinomas", () => {
+  for (const author of ["Unknown author", "Anonymous", "н.", "ltwiki"]) {
+    assertMatch(problems(withPhoto({ author, license: "CC BY-SA 4.0" })), /nežinomas/, author);
+    assertEquals(checkPack(withPhoto({ author, license: "CC0" })), [], author);
+  }
+});
 Deno.test("beat naming an unknown character", () =>
   assertMatch(problems(edit((p) => (p.spots[1].plot.beats[0].characters = ["Vėjas"]))), /unknown character Vėjas/));
 Deno.test("unknown motif", () => assertMatch(problems(edit((p) => (p.spots[0].motif = "nope"))), /motif nope/));

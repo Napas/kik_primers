@@ -18,17 +18,38 @@ export function stripHtml(html) {
     .trim();
 }
 
-const isFree = (license) => /^(public domain|pd\b|cc0)/i.test(license);
+/** True for public domain and CC0 licence names: the only ones that may go without a known author. */
+export const isFreeLicense = (license) => /^(public domain|pd\b|cc0)/i.test(String(license ?? "").trim());
+
+// Author fields that name no one: unknown-author phrases, a wiki's name, our own placeholder.
+const NO_AUTHOR = /^(?:unknown(?: author| photographer)?|author unknown|anonymous|anonym|неизвестно|неизвестный|н\.|ne[žz]inomas|[a-z]{2,3}wiki)$/i;
+
+/** An author field without Commons boilerplate (rights prefix, uploader and user-page notes); "" when it names no one. */
+export function cleanAuthor(raw) {
+  const a = String(raw ?? "")
+    .trim()
+    .replace(/^rights:\s*/i, "")
+    .replace(/^the original uploader was\s+(.+?)\s+at\s.*$/i, "$1")
+    .replace(/,?\s*uploaded by\b.*$/i, "")
+    .replace(/^[^\s:]+\.(?:jpe?g|png|gif|tiff?|svg):\s*/i, "") // a derivative's source file name
+    .replace(/\s*\(talk\)/gi, "")
+    .replace(/^(?:[a-z-]{2,12}:)?user:/i, "")
+    .replace(/\s+derivative work:\s+/i, ", ")
+    .trim();
+  return NO_AUTHOR.test(a) ? "" : a;
+}
+
+/** The author to credit: cleanAuthor(raw), else nežinomas on a public domain or CC0 licence, else null. */
+export function authorFor(raw, license) {
+  return cleanAuthor(raw) || (isFreeLicense(license) ? "nežinomas" : null);
+}
 
 /** `{author, license, license_url?}` from Commons `extmetadata`, or null when unusable. */
 export function creditsFrom(ext) {
   const license = stripHtml(ext?.LicenseShortName?.value);
   if (!license) return null;
-  let author = stripHtml(ext?.Artist?.value);
-  if (!author) {
-    if (!isFree(license)) return null;
-    author = "nežinomas";
-  }
+  const author = authorFor(stripHtml(ext?.Artist?.value), license);
+  if (!author) return null;
   const credits = { author, license };
   const url = stripHtml(ext?.LicenseUrl?.value);
   if (url) credits.license_url = url;

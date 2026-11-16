@@ -52,6 +52,30 @@
         1830
       ],
       "style": "brick-church"
+    },
+    {
+      "n": 3,
+      "title": "XIX a. pirmoji pusė: žemaičių sąjūdis ir romantizmas",
+      "intro": "XIX a. pirmojoje pusėje Žemaitijos bajorai ir kunigai ėmė rašyti lietuviškai, rinkti senienas ir aukštinti senovę.",
+      "why": [
+        {
+          "q": "Kaip susiję du vyskupai rašytojai?",
+          "a": "Valančius buvo Žemaičių vyskupas, Baranauskas – Seinų vyskupas. Kunigų rašytojų linija (Strazdas, Valančius, Baranauskas) tęsiasi į XX a.: Maironis vadovavo Kauno kunigų seminarijai, Vaižgantas buvo kunigas, Mykolaitis-Putinas įšventintas į kunigus, Vienažindys taip pat buvo kunigas."
+        },
+        {
+          "q": "Kaip Baranauskas susijęs su Vienuoliu ir Biliūnu?",
+          "a": "Visi trys – anykštėnai. Baranauskas buvo Vienuolio giminaitis. Anykščiai turi Baranausko klėtelę, Vienuolio muziejų ir Biliūno kapą Liudiškių piliakalnyje."
+        },
+        {
+          "q": "Kaip Mickevičius susijęs su Poška?",
+          "a": "„Pone Tade“ minimi Poškos Baubliai – pirmasis Lietuvos muziejus. Taip lenkiška romantizmo poema įamžino žemaičių senienų rinkėją."
+        }
+      ],
+      "span": [
+        1800,
+        1865
+      ],
+      "style": "log-chapel"
     }
   ],
   "spots": [
@@ -430,6 +454,421 @@
         }
       ],
       "wikidata": "Q12661450"
+    },
+    {
+      "id": "poska",
+      "room": 3,
+      "kind": "person",
+      "name": "Dionizas Poška",
+      "aliases": [],
+      "years": [
+        1764,
+        1830
+      ],
+      "at": 1812,
+      "text": "Dionizas Poška (1764–1830) – teisininkas, ne kunigas; Poška – tikroji jo pavardė. Apie 1812 m. įkūrė Baublius: išskobtuose ąžuolų kamienuose sudėtas senienas. Tai laikoma pirmuoju Lietuvos muziejumi; Baubliai minimi ir Mickevičiaus „Pone Tade“. Parašė poemą „Mužikas Žemaičių ir Lietuvos“; ne Daukantas ir ne Vaižgantas. Vilnių vadino „Šiaurės Roma“.",
+      "links": [
+        {
+          "to": "baubliai",
+          "label": "įkūrė"
+        },
+        {
+          "to": "muzikas",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q4375656"
+    },
+    {
+      "id": "baubliai",
+      "room": 3,
+      "kind": "thing",
+      "name": "Baubliai",
+      "aliases": [],
+      "years": [
+        1812
+      ],
+      "at": 1812,
+      "text": "Apie 1812 m. Dionizas Poška įkūrė Baublius: išskobtuose ąžuolų kamienuose sudėtas senienas. Tai laikoma pirmuoju Lietuvos muziejumi. Poškos Baubliai minimi Mickevičiaus „Pone Tade“.",
+      "links": [
+        {
+          "to": "poska",
+          "label": "įkūrė"
+        },
+        {
+          "to": "ponas-tadas",
+          "label": "minimi"
+        }
+      ]
+    },
+    {
+      "id": "muzikas",
+      "room": 3,
+      "kind": "work",
+      "name": "„Mužikas Žemaičių ir Lietuvos“",
+      "aliases": [],
+      "years": null,
+      "at": 1812,
+      "text": "Poemą „Mužikas Žemaičių ir Lietuvos“ parašė Dionizas Poška – ne Daukantas ir ne Vaižgantas.",
+      "links": [
+        {
+          "to": "poska",
+          "label": "autorius"
+        }
+      ],
+      "by": "poska"
+    },
+    {
+      "id": "daukantas",
+      "room": 3,
+      "kind": "person",
+      "name": "Simonas Daukantas",
+      "aliases": [
+        "Jokūbas Laukys",
+        "Motiejus Šauklys",
+        "Jonas Girdenis",
+        "Antanas Dagys",
+        "Devynakis",
+        "Tiewelis"
+      ],
+      "years": [
+        1793,
+        1864
+      ],
+      "at": 1822,
+      "text": "Simonas Daukantas (1793–1864) kilęs iš Skuodo krašto, Kalvių. Jis parašė pirmąją Lietuvos istoriją lietuvių kalba („Darbai senųjų lietuvių ir žemaičių“, parašyta 1822 m.) ir „Būdas senovės lietuvių, kalnėnų ir žemaičių“ (1845). Taip pat sudarė pirmąjį lietuvių pasakų rinkinį. Daug slapyvardžių: Jokūbas Laukys, Motiejus Šauklys, Jonas Girdenis, Antanas Dagys, Devynakis, Tiewelis. Jo portretas buvo ant 100 litų banknoto.",
+      "links": [
+        {
+          "to": "budas",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q382666"
+    },
+    {
+      "id": "budas",
+      "room": 3,
+      "kind": "work",
+      "name": "„Būdas senovės lietuvių, kalnėnų ir žemaičių“",
+      "aliases": [],
+      "years": [
+        1845
+      ],
+      "at": 1845,
+      "text": "Simono Daukanto „Būdas senovės lietuvių, kalnėnų ir žemaičių“ išleistas 1845 m.",
+      "links": [
+        {
+          "to": "daukantas",
+          "label": "autorius"
+        }
+      ],
+      "by": "daukantas"
+    },
+    {
+      "id": "strazdas",
+      "room": 3,
+      "kind": "person",
+      "name": "Antanas Strazdas",
+      "aliases": [],
+      "years": [
+        1760,
+        1833
+      ],
+      "at": 1814,
+      "text": "Antanas Strazdas (1760–1833) – kunigas poetas; Strazdas – tikroji jo pavardė. Rinkinys „Giesmės svietiškos ir šventos“ (1814). Jo giesmė „Pulkim ant kelių“ iki šiol giedama prieš mišias.",
+      "links": [
+        {
+          "to": "giesmes-svietiskos",
+          "label": "parašė"
+        },
+        {
+          "to": "pulkim-ant-keliu",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q4770954"
+    },
+    {
+      "id": "giesmes-svietiskos",
+      "room": 3,
+      "kind": "work",
+      "name": "„Giesmės svietiškos ir šventos“",
+      "aliases": [],
+      "years": [
+        1814
+      ],
+      "at": 1814,
+      "text": "Antano Strazdo rinkinys „Giesmės svietiškos ir šventos“ išleistas 1814 m.",
+      "links": [
+        {
+          "to": "strazdas",
+          "label": "autorius"
+        }
+      ],
+      "by": "strazdas"
+    },
+    {
+      "id": "pulkim-ant-keliu",
+      "room": 3,
+      "kind": "work",
+      "name": "„Pulkim ant kelių“",
+      "aliases": [],
+      "years": null,
+      "at": 1814,
+      "text": "Antano Strazdo giesmė „Pulkim ant kelių“ iki šiol giedama prieš mišias.",
+      "links": [
+        {
+          "to": "strazdas",
+          "label": "autorius"
+        }
+      ],
+      "by": "strazdas"
+    },
+    {
+      "id": "stanevicius",
+      "room": 3,
+      "kind": "person",
+      "name": "Simonas Stanevičius",
+      "aliases": [],
+      "years": [
+        1799,
+        1848
+      ],
+      "at": 1829,
+      "text": "Simonas Stanevičius (1799–1848) – garsėjo pasakėčiomis („Šešios pasakos“, 1829). Garsiausioje veikia meška ir arklys. Parašė odę „Šlovė žemaičių“, išleido rinkinį „Dainos žemaičių“.",
+      "links": [
+        {
+          "to": "slove-zemaiciu",
+          "label": "parašė"
+        },
+        {
+          "to": "donelaicio-pasakecios",
+          "label": "ne jo pasakėčios"
+        }
+      ],
+      "wikidata": "Q1966358"
+    },
+    {
+      "id": "slove-zemaiciu",
+      "room": 3,
+      "kind": "work",
+      "name": "„Šlovė žemaičių“",
+      "aliases": [],
+      "years": null,
+      "at": 1829,
+      "text": "Odę „Šlovė žemaičių“ parašė Simonas Stanevičius.",
+      "links": [
+        {
+          "to": "stanevicius",
+          "label": "autorius"
+        }
+      ],
+      "by": "stanevicius"
+    },
+    {
+      "id": "valancius",
+      "room": 3,
+      "kind": "person",
+      "name": "Motiejus Valančius",
+      "aliases": [],
+      "years": [
+        1801,
+        1875
+      ],
+      "at": 1850,
+      "text": "Motiejus Valančius (1801–1875) – Žemaičių vyskupas nuo 1850 m., blaivybės sąjūdžio pradininkas (1858). Kartais laikomas lietuvių prozos pradininku. Parašė apysaką „Palangos Juzė“ (1869), kurios veikėjas – siuvėjas Juzė Viskantas. Išleido „Vaikų knygelę“ (1868); jo knygelė vaikams – ir „Mikė Melagėlis“.",
+      "links": [
+        {
+          "to": "blaivybes-sajudis",
+          "label": "pradininkas"
+        },
+        {
+          "to": "palangos-juze",
+          "label": "parašė"
+        },
+        {
+          "to": "baranauskas",
+          "label": "kitas vyskupas rašytojas"
+        }
+      ],
+      "wikidata": "Q627106"
+    },
+    {
+      "id": "blaivybes-sajudis",
+      "room": 3,
+      "kind": "event",
+      "name": "Blaivybės sąjūdis",
+      "aliases": [],
+      "years": [
+        1858
+      ],
+      "at": 1858,
+      "text": "Žemaičių vyskupas Motiejus Valančius – blaivybės sąjūdžio pradininkas (1858).",
+      "links": [
+        {
+          "to": "valancius",
+          "label": "pradininkas"
+        }
+      ]
+    },
+    {
+      "id": "palangos-juze",
+      "room": 3,
+      "kind": "work",
+      "name": "„Palangos Juzė“",
+      "aliases": [],
+      "years": [
+        1869
+      ],
+      "at": 1865,
+      "aside": true,
+      "text": "Motiejaus Valančiaus apysaka „Palangos Juzė“ (1869); jos veikėjas – siuvėjas Juzė Viskantas.",
+      "links": [
+        {
+          "to": "valancius",
+          "label": "autorius"
+        }
+      ],
+      "by": "valancius"
+    },
+    {
+      "id": "mickevicius",
+      "room": 3,
+      "kind": "person",
+      "name": "Adomas Mickevičius",
+      "aliases": [],
+      "years": [
+        1798,
+        1855
+      ],
+      "at": 1834,
+      "text": "Adomas Mickevičius (1798–1855) – romantizmo poetas, rašęs lenkiškai, studijavęs Vilniaus universitete. Jis sakė: „lietuviška tautybė, lenkiška pilietybė“. Kūriniai: „Ponas Tadas“ (1834); „Gražina“, „Konradas Valenrodas“, „Vėlinės“, „Odė jaunystei“, „Krymo sonetai“; „Pulkininko mirtis“ – Emilijos Pliaterytės garbei. Mirė Konstantinopolyje. Gyveno anksčiau už Baranauską.",
+      "links": [
+        {
+          "to": "ponas-tadas",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q79822"
+    },
+    {
+      "id": "ponas-tadas",
+      "room": 3,
+      "kind": "work",
+      "name": "„Ponas Tadas“",
+      "aliases": [],
+      "years": [
+        1834
+      ],
+      "at": 1834,
+      "text": "Adomo Mickevičiaus „Ponas Tadas“ (1834) prasideda „Tėvyne Lietuva, mielesnė už sveikatą!“; pilnas pavadinimas „Paskutinis antpuolis Lietuvoje…“. „Pone Tade“ minimi Poškos Baubliai – pirmasis Lietuvos muziejus. Taip lenkiška romantizmo poema įamžino žemaičių senienų rinkėją.",
+      "links": [
+        {
+          "to": "mickevicius",
+          "label": "autorius"
+        },
+        {
+          "to": "baubliai",
+          "label": "mini"
+        }
+      ],
+      "by": "mickevicius"
+    },
+    {
+      "id": "baranauskas",
+      "room": 3,
+      "kind": "person",
+      "name": "Antanas Baranauskas",
+      "aliases": [
+        "Jurkštas Smalaūsis",
+        "Baronas",
+        "Bangputys"
+      ],
+      "years": [
+        1835,
+        1902
+      ],
+      "at": 1858,
+      "text": "Antanas Baranauskas (1835–1902) gimė Anykščiuose (ne Suvalkijoje); jo muziejus – klėtelė Anykščiuose. Būdamas 23 metų (1858–1859) parašė „Anykščių šilelį“. Pirmą kartą poema išspausdinta 1860 m. Lauryno Ivinskio kalendoriuje (1860–1861 m. kalendoriuose) Jurkšto Smalaūsio slapyvardžiu. Taigi ji išleista autoriui gyvam esant, XIX a., ne XVIII a. Kiti slapyvardžiai – Baronas, Bangputys. Baranauskas buvo kalbininkas ir matematikas, sukūrė lietuviškų geometrijos terminų. Nuo 1897 m. jis buvo Seinų vyskupas. Mirė XX a. pradžioje (1902) ir palaidotas Seinuose (Lenkija), ne Anykščiuose. Antanas Vienuolis buvo jo giminaitis: Baranauskas buvo Vienuolio motinos dėdė. Elegija „Ko gi skaudžia man širdelę“ taip pat jo. Pagal jo dainą Maironis sukūrė eilėraštį „Eina garsas“.",
+      "links": [
+        {
+          "to": "silelis",
+          "label": "parašė"
+        },
+        {
+          "to": "ivinskis",
+          "label": "išspausdino poemą"
+        },
+        {
+          "to": "valancius",
+          "label": "kitas vyskupas rašytojas"
+        }
+      ],
+      "wikidata": "Q570952"
+    },
+    {
+      "id": "silelis",
+      "room": 3,
+      "kind": "work",
+      "name": "„Anykščių šilelis“",
+      "aliases": [],
+      "years": [
+        1858,
+        1859
+      ],
+      "at": 1858,
+      "text": "Antano Baranausko „Anykščių šilelis“ (parašytas 1858–1859 m., išspausdintas 1860 m. Lauryno Ivinskio kalendoriuje) prasideda eilute „Kalnai kelmuoti, pakalnės nuplikę! Kas jūsų grožei senobinei tiki?“. Poema apverkia iškirstą girią; prisimenama, kaip anksčiau „miškan, būdavo, eini – tai net akų veria“. Ji trumpesnė už „Metus“. Grybai kelmučiai joje vadinami „nemunėmis“, kurapkos – „kropkomis“. Maironis apie ją sakė: „Tai tikras mūsų poezijos perlas“. Poema baigiasi ne žodžiais apie augantį „gražų atžalyną“.",
+      "links": [
+        {
+          "to": "baranauskas",
+          "label": "autorius"
+        },
+        {
+          "to": "ivinskis",
+          "label": "išspausdino kalendoriuje"
+        },
+        {
+          "to": "metai",
+          "label": "trumpesnė už"
+        }
+      ],
+      "by": "baranauskas"
+    },
+    {
+      "id": "ivinskis",
+      "room": 3,
+      "kind": "person",
+      "name": "Laurynas Ivinskis",
+      "aliases": [],
+      "years": [
+        1810,
+        1881
+      ],
+      "at": 1846,
+      "text": "Laurynas Ivinskis (1810–1881) 1846 m. išleido pirmąjį lietuvišką kalendorių. Jame vėliau pasirodė ir „Anykščių šilelis“.",
+      "links": [
+        {
+          "to": "silelis",
+          "label": "išspausdino kalendoriuje"
+        }
+      ],
+      "wikidata": "Q1960204"
+    },
+    {
+      "id": "vienazindys",
+      "room": 3,
+      "kind": "person",
+      "name": "Antanas Vienažindys",
+      "aliases": [],
+      "years": [
+        1841,
+        1892
+      ],
+      "at": 1865,
+      "aside": true,
+      "text": "Antanas Vienažindys taip pat buvo kunigas, kaip ir Strazdas, Valančius ir Baranauskas. Jo „Linksminkimos“ – vienas iš eilėraščių, kurie žmones pasiekė per dainas.",
+      "links": [],
+      "wikidata": "Q16444004"
     }
   ],
   "questions": [],

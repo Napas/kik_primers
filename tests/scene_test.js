@@ -65,6 +65,44 @@ Deno.test("makeSpot builds one tagged model per kind", () => {
   }
 });
 
+Deno.test("every spot gets a fake spotlight that shares one texture and material, with no real lights", () => {
+  const restore = installFakeCanvas();
+  try {
+    const lit = (obj) => {
+      const found = { lights: 0, pools: [], cones: [] };
+      obj.traverse((o) => {
+        if (o.isLight) found.lights++;
+        if (o.name === "spot-pool") found.pools.push(o);
+        if (o.name === "spot-cone") found.cones.push(o);
+      });
+      return found;
+    };
+    const all = KINDS.map((k) => makeSpot(THREE, spot(k), COLORS));
+    const [a, b] = [lit(all[0]), lit(all[1])];
+    for (const obj of all) {
+      const f = lit(obj);
+      assertEquals(f.lights, 0);
+      assertEquals([f.pools.length, f.cones.length], [1, 1]);
+      assertEquals(obj.userData.wall, undefined);
+      assert(f.pools[0].userData.wall === undefined && f.cones[0].userData.wall === undefined);
+      for (const m of [f.pools[0], f.cones[0]]) {
+        assertEquals(m.material.depthWrite, false);
+        assertEquals(m.castShadow, false);
+      }
+      assertEquals(f.cones[0].material.blending, THREE.AdditiveBlending);
+    }
+    assert(a.pools[0].material === b.pools[0].material, "pool material is shared");
+    assert(a.pools[0].material.map === b.pools[0].material.map, "pool texture is shared");
+    assert(a.pools[0].geometry === b.pools[0].geometry, "pool geometry is shared");
+    assert(a.cones[0].material === b.cones[0].material, "cone material is shared");
+    assert(a.cones[0].geometry === b.cones[0].geometry, "cone geometry is shared");
+    // The hit sphere is set from the model alone.
+    assert(all.every((o) => o.userData.pickRadius < 0.7));
+  } finally {
+    restore();
+  }
+});
+
 Deno.test("a person shows initials until a photo is set; an event shows its year", () => {
   const restore = installFakeCanvas();
   try {

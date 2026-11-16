@@ -43,6 +43,9 @@ export const SCENE = {
   ambient: { sky: 0xc8d4f0, ground: 0x141e33, intensity: 0.85 },
   fill: { color: 0xfff0d8, intensity: 0.6 },
   lamp: { power: 6, distance: 10, pool: 0.25 },
+  // Fake spotlight under each spot (no real light): warm floor pool diameter (m) and opacity, light cone
+  // height, floor radius (m) and brightness at the top.
+  spotlight: { color: 0xffd58a, pool: { size: 2.4, opacity: 0.4 }, cone: { height: 3.4, radius: 0.95, top: 0.11 } },
 };
 
 /** Typography of canvas-drawn labels: font stack, pixel size on the canvas, height in metres, sprite opacity. */

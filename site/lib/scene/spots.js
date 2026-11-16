@@ -1,6 +1,7 @@
 // One model per spot kind. Origin at floor level, front faces +z. Sizes in metres.
 // Pick spheres (pickY, pickRadius) stay under half the layout's 1.4 m row gap, so neighbours' spheres never overlap.
 import { textTexture } from "./labels.js";
+import { SCENE } from "../theme.js";
 
 const css = (n) => `#${n.toString(16).padStart(6, "0")}`;
 
@@ -117,10 +118,73 @@ const MODELS = {
   },
 };
 
+const SHARED = new WeakMap();
+
+/** One pool/cone geometry, material and canvas texture per THREE instance, shared by every spot. */
+function spotlightParts(THREE) {
+  let p = SHARED.get(THREE);
+  if (p) return p;
+  const { color, pool, cone } = SCENE.spotlight;
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = 64;
+  const g = canvas.getContext("2d");
+  const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grad.addColorStop(0, "rgba(255,255,255,1)");
+  grad.addColorStop(0.55, "rgba(255,255,255,0.4)");
+  grad.addColorStop(1, "rgba(255,255,255,0)");
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 64, 64);
+  const map = new THREE.CanvasTexture(canvas);
+  // The open cone is a ring of vertices at the apex (bright) and one at the floor (black, so additive
+  // blending adds nothing there): the beam fades out towards the floor.
+  const coneGeo = new THREE.CylinderGeometry(0.05, cone.radius, cone.height, 24, 1, true);
+  const c = new THREE.Color(color).multiplyScalar(cone.top);
+  const colors = [];
+  const pos = coneGeo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const k = pos.getY(i) > 0 ? 1 : 0;
+    colors.push(c.r * k, c.g * k, c.b * k);
+  }
+  coneGeo.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+  p = {
+    poolGeo: new THREE.PlaneGeometry(pool.size, pool.size),
+    poolMat: new THREE.MeshBasicMaterial({ color, map, transparent: true, opacity: pool.opacity, depthWrite: false }),
+    coneGeo,
+    coneMat: new THREE.MeshBasicMaterial({
+      vertexColors: true,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    }),
+  };
+  SHARED.set(THREE, p);
+  return p;
+}
+
+/** A warm floor pool and a faint light cone over the spot: cheap stand-ins for a spotlight. */
+function spotlight(THREE) {
+  const { poolGeo, poolMat, coneGeo, coneMat } = spotlightParts(THREE);
+  const g = new THREE.Group();
+  g.name = "spotlight";
+  const pool = new THREE.Mesh(poolGeo, poolMat);
+  pool.name = "spot-pool";
+  pool.rotation.x = -Math.PI / 2;
+  pool.position.set(0, 0.035, 0.15);
+  const cone = new THREE.Mesh(coneGeo, coneMat);
+  cone.name = "spot-cone";
+  cone.position.y = SCENE.spotlight.cone.height / 2;
+  cone.raycast = () => {};
+  pool.raycast = () => {};
+  g.add(pool, cone);
+  return g;
+}
+
 /** The model for `spot.kind` (a plaque for unknown kinds), tagged with spotId, kind and its label/pick sizes. */
 export function makeSpot(THREE, spot, COLORS) {
   const build = MODELS[spot.kind] ?? MODELS.thing;
   const { g, labelY, pickY, pickRadius } = build(THREE, spot, COLORS);
+  g.add(spotlight(THREE));
   Object.assign(g.userData, { spotId: spot.id, kind: spot.kind, labelY, pickY, pickRadius });
   g.name = spot.id;
   return g;

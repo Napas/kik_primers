@@ -1,5 +1,5 @@
 // What a selected spot draws in the world: gold arcs to the spots it links to, and a person's lifespan
-// on the year markers. The shapes come from styles.js; this module places them and removes them again.
+// on the year markers of their lane. The shapes come from styles.js; this module places them and removes them again.
 import { COLORS } from "../theme.js";
 import { lifespanBar, linkArc, yearLineZ } from "./styles.js";
 
@@ -25,12 +25,15 @@ export function lifespanRange(layout, years, now) {
   return { x0, x1: Math.max(layout.xOfYear(end), x0 + MIN_BAR) };
 }
 
-/** A bar over the life's years on the lane-0 year-marker line, added to scene; null without years. */
-export function drawLifespan(THREE, scene, layout, years) {
+/**
+ * A bar over the life's years on the year-marker line of room `n`'s lane (lane 0 for an unknown room),
+ * added to scene; null without years.
+ */
+export function drawLifespan(THREE, scene, layout, years, n) {
   const range = lifespanRange(layout, years, new Date().getFullYear());
-  const lane0 = layout.rooms.find((r) => r.lane === 0);
-  if (!range || !lane0) return null;
-  const bar = lifespanBar(THREE, range.x0, range.x1, yearLineZ(lane0), COLORS);
+  const room = layout.rooms.find((r) => r.n === n) ?? layout.rooms.find((r) => r.lane === 0);
+  if (!range || !room) return null;
+  const bar = lifespanBar(THREE, range.x0, range.x1, yearLineZ(room), COLORS);
   bar.name = "lifespan";
   scene.add(bar);
   return bar;

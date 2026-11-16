@@ -1,10 +1,10 @@
 // Builds the 3D world from a pack and its time layout: rooms along x, a path in front of each lane,
-// year markers on the first lane, one model and label per spot. Only placement lives here;
+// year markers along each lane's back walls, one model and label per spot. Only placement lives here;
 // the look comes from styles.js and spots.js, the light along the path from light.js. Builders take THREE as an argument.
 import { COLORS, lightFor, SCENE } from "../theme.js";
 import { makeSpot, setPhoto } from "./spots.js";
 import { makeLabel } from "./labels.js";
-import { ground, path, pathLanes, pathZ, plainRoom, STYLES, yearLineZ, yearMarker } from "./styles.js";
+import { ground, lowBackWalls, path, pathLanes, pathZ, plainRoom, STYLES, yearMarker, yearMarks } from "./styles.js";
 import { addPathLights, yearAt } from "./light.js";
 
 export { pathZ };
@@ -45,19 +45,20 @@ export function buildWorld(THREE, pack, layout, { aspect = 1, loadPhoto } = {}) 
   }
   addPathLights(THREE, scene, layout);
   const labels = []; // room titles and year markers: {sprite, x, z}
-  for (const t of layout.ticks) {
-    const marker = yearMarker(THREE, t.year, COLORS);
-    marker.position.set(t.x, 0, yearLineZ(first));
+  for (const m of yearMarks(layout)) {
+    const marker = yearMarker(THREE, m.year, COLORS);
+    marker.position.set(m.x, 0, m.z);
     scene.add(marker);
-    labels.push({ sprite: marker.userData.label, x: t.x, z: yearLineZ(first) });
+    labels.push({ sprite: marker.userData.label, x: m.x, z: m.z });
   }
 
   const roomGroups = new Map();
+  const low = lowBackWalls(layout.rooms);
   for (const r of layout.rooms) {
     const room = pack.rooms.find((p) => p.n === r.n);
     const group = new THREE.Group();
     group.name = `room-${r.n}`;
-    group.add((STYLES[room.style] ?? plainRoom)(THREE, r, COLORS));
+    group.add((STYLES[room.style] ?? plainRoom)(THREE, { ...r, low: low.has(r.n) }, COLORS));
     const label = makeLabel(THREE, room.title);
     label.position.set(r.x0 + Math.min(2, (r.x1 - r.x0) / 2), ROOM_TITLE_Y, r.z1 + TITLE_FRONT);
     group.add(label);

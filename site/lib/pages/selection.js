@@ -38,7 +38,7 @@ export function makeSelection(THREE, { world, pack, layout, progress, view }) {
     view.show(spotPanel(spot, pack), true);
     const ends = (spot.links ?? []).map((l) => world.spotMeshes.get(l.to)).filter((o) => o && o !== obj).map(top);
     const drawn = [drawLinks(THREE, world.scene, top(obj), ends)];
-    if (spot.kind === "person") drawn.push(drawLifespan(THREE, world.scene, layout, spot.years));
+    if (spot.kind === "person") drawn.push(drawLifespan(THREE, world.scene, layout, spot.years, spot.room));
     selected = { spot, drawn: drawn.filter(Boolean) };
     view.opened(id);
     progress.openSpot(slug, id);

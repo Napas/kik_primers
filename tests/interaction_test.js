@@ -100,17 +100,24 @@ Deno.test("drawLinks adds one gold arc per target, rising above both ends; remov
   assertEquals(drawLinks(THREE, scene, from, []).children.length, 0);
 });
 
-Deno.test("drawLifespan lays a bar on the year-marker line of lane 0, over the life's years", () => {
+Deno.test("drawLifespan lays a bar on the year line of the person's own lane, over the life's years", () => {
   const layout = layoutTime(LANES);
   const scene = new THREE.Scene();
-  const bar = drawLifespan(THREE, scene, layout, [1941, 1985]);
+  const zOf = (bar) => {
+    const box = new THREE.Box3().setFromObject(bar);
+    return (box.min.z + box.max.z) / 2;
+  };
+  const bar = drawLifespan(THREE, scene, layout, [1941, 1985], 2);
   assertEquals(bar.parent, scene);
   const box = new THREE.Box3().setFromObject(bar);
   assertAlmostEquals(box.min.x, layout.xOfYear(1941), 1e-6);
   assertAlmostEquals(box.max.x, layout.xOfYear(1985), 1e-6);
-  const lane0 = layout.rooms.find((r) => r.lane === 0);
-  assertAlmostEquals((box.min.z + box.max.z) / 2, yearLineZ(lane0), 1e-6);
-  assertEquals(drawLifespan(THREE, scene, layout, null), null);
+  const room = (n) => layout.rooms.find((r) => r.n === n);
+  assertEquals(room(2).lane, 1);
+  assertAlmostEquals(zOf(bar), yearLineZ(room(2)), 1e-6);
+  assertAlmostEquals(zOf(drawLifespan(THREE, scene, layout, [1941, 1985], 1)), yearLineZ(room(1)), 1e-6);
+  assertAlmostEquals(zOf(drawLifespan(THREE, scene, layout, [1941, 1985], 99)), yearLineZ(room(1)), 1e-6, "unknown room: lane 0");
+  assertEquals(drawLifespan(THREE, scene, layout, null, 1), null);
 });
 
 Deno.test("updateNearby shows labels within 12 m or on hover and loads each photo once within 30 m", () => {

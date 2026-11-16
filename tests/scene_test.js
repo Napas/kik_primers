@@ -1,11 +1,11 @@
-import { assert, assertEquals } from "@std/assert";
+import { assert, assertAlmostEquals, assertEquals } from "@std/assert";
 import * as THREE from "../site/lib/three/three.module.min.js";
 import { COLORS, LIGHT_BANDS, SCENE, spotlightLevel } from "../site/lib/theme.js";
 import { layoutTime } from "../site/lib/layout.js";
 import { initials, makeSpot, setPhoto } from "../site/lib/scene/spots.js";
 import { makeLabel } from "../site/lib/scene/labels.js";
 import { buildWorld } from "../site/lib/scene/world.js";
-import { ground, path, plainRoom, STYLES, yearMarker } from "../site/lib/scene/styles.js";
+import { ground, lowBackWalls, path, plainRoom, STYLES, yearLineZ, yearMarker, yearMarks } from "../site/lib/scene/styles.js";
 import { STYLE_NAMES } from "../site/lib/theme.js";
 import { installFakeCanvas } from "./fake_canvas.js";
 
@@ -285,6 +285,106 @@ Deno.test("buildWorld dims each spot's cone by the light band at its place", () 
     const cone = (id) => w.spotMeshes.get(id).getObjectByName("spot-cone").material.color.r;
     assertEquals(cone("s1"), 1, "a 1547 spot is in candle light");
     assertEquals(cone("s9"), spotlightLevel(LIGHT_BANDS[4]), "a 2000 spot is in daylight");
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("lowBackWalls: a back wall is low where the next lane has a room behind it, overlapping in x", () => {
+  const r = (n, lane, x0, x1) => ({ n, lane, x0, x1 });
+  const rooms = [
+    r(1, 0, 0, 10), r(2, 0, 10, 24), r(3, 1, 18, 32), r(4, 0, 31, 58), r(5, 1, 55, 67.6),
+    r(6, 0, 67.6, 100), r(7, 0, 100, 134), r(8, 1, 102, 134), r(9, 0, 134, 154), r(10, 2, 120, 125),
+  ];
+  // 6 and 9 only touch a lane-1 room at one x; 3 has nothing on lane 2 behind it.
+  assertEquals([...lowBackWalls(rooms)].sort((a, b) => a - b), [2, 4, 7, 8]);
+  assertEquals(lowBackWalls([]).size, 0);
+});
+
+Deno.test("yearLineZ lies between the back wall's front face and the back spot row", () => {
+  const r = { x0: 0, x1: 10, z0: -2.1, z1: 2.1 };
+  const backFace = r.z0 - 0.6 + 0.075;
+  assert(yearLineZ(r) > backFace + 0.1 && yearLineZ(r) < r.z0, String(yearLineZ(r)));
+});
+
+Deno.test("yearMarks: each lane's ticks over its extent on its own year line, moved off end walls", () => {
+  const lane0 = { n: 1, lane: 0, x0: 0, x1: 10, z0: -2.1, z1: 2.1 };
+  const layout = {
+    rooms: [lane0, { n: 2, lane: 0, x0: 10, x1: 20, z0: -2.1, z1: 2.1 }, { n: 3, lane: 1, x0: 5, x1: 15, z0: -9.1, z1: -4.9 }],
+    ticks: [{ year: 1500, x: 0 }, { year: 1550, x: 5.1 }, { year: 1600, x: 10 }, { year: 1650, x: 17 }, { year: 1700, x: 20 }],
+  };
+  const lane1 = layout.rooms[2];
+  const marks = yearMarks(layout).map((m) => [m.year, +m.x.toFixed(6), m.z]);
+  assertEquals(marks, [
+    [1500, 0.3, yearLineZ(lane0)],
+    [1550, 5.1, yearLineZ(lane0)],
+    [1600, 10.3, yearLineZ(lane0)],
+    [1650, 17, yearLineZ(lane0)],
+    [1700, 20.3, yearLineZ(lane0)],
+    [1550, 5.3, yearLineZ(lane1)],
+    [1600, 10, yearLineZ(lane1)],
+  ]);
+});
+
+Deno.test("a low back wall: 1.1 m, still one of three wall boxes, a lintel carries the signature, window light only on the floor", () => {
+  const restore = installFakeCanvas();
+  try {
+    const r = { x0: 30, x1: 42, z0: -2.1, z1: 2.1, low: true };
+    const backFace = r.z0 - 0.6 + 0.075;
+    const builders = [...STYLE_NAMES.map((name) => [name, STYLES[name]]), ["plain", plainRoom]];
+    for (const [name, build] of builders) {
+      const p = partsOf(build(THREE, r, COLORS));
+      assertEquals(p.walls.length, 3, name);
+      const back = p.walls.find((w) => boxOf(w).max.x - boxOf(w).min.x >= r.x1 - r.x0 - 1e-6);
+      assertAlmostEquals(boxOf(back).max.y, 1.1, 1e-6, `${name}: back wall height`);
+      for (const w of p.walls.filter((w) => w !== back)) assertAlmostEquals(boxOf(w).max.y, 3.2, 1e-6, `${name}: end walls stay full height`);
+      assert(p.lintel, `${name}: no lintel`);
+      const lintel = boxOf(p.lintel);
+      assert(lintel.min.x <= r.x0 + 1e-6 && lintel.max.x >= r.x1 - 1e-6, `${name}: lintel spans the room`);
+      assert(lintel.min.y >= 2.8 && Math.abs(lintel.max.y - 3.2) < 1e-6, `${name}: lintel at the top`);
+      assert(!p.lintel.userData.wall, `${name}: the lintel is decoration`);
+      if (name === "plain") continue;
+      assert(boxOf(p.signature).min.y >= 3.2 - 1e-6, `${name}: signature sits on the lintel`);
+      p.window.traverse((o) => o.isMesh && assert(boxOf(o).max.y < 0.1, `${name}: window light hangs in the opening`));
+      // Nothing but the landmark fills the opening between the low wall and the lintel.
+      for (const m of p.meshes) {
+        if (m.userData.wall || p.landmark.getObjectById(m.id)) continue;
+        const b = boxOf(m);
+        const inOpening = b.max.y > 1.2 && b.min.y < 2.8 && b.min.z < backFace + 0.5 && b.max.x > r.x0 + 1.6 && b.min.x < r.x1 - 1.6;
+        assert(!inOpening, `${name}: ${m.name || m.geometry.type} fills the opening`);
+      }
+    }
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("buildWorld lowers the back wall in front of a parallel lane and puts year markers on every lane", () => {
+  const restore = installFakeCanvas();
+  try {
+    const pack = {
+      slug: "lanes",
+      rooms: [
+        { n: 1, title: "Karas", span: [1940, 1990], style: "dp-barrack" },
+        { n: 2, title: "Sovietmetis", span: [1944, 1990], style: "concrete" },
+        { n: 3, title: "Po 1990", span: [2000, 2020], style: "glass" },
+      ],
+      spots: [],
+    };
+    const layout = layoutTime(pack);
+    const w = buildWorld(THREE, pack, layout);
+    const backTop = (n) => {
+      const walls = [];
+      w.roomGroups.get(n).traverse((o) => o.userData.wall && walls.push(boxOf(o)));
+      return walls.reduce((a, b) => (b.max.x - b.min.x > a.max.x - a.min.x ? b : a)).max.y;
+    };
+    assertAlmostEquals(backTop(1), 1.1, 1e-6, "room 1 has lane-1 room 2 behind it");
+    assertAlmostEquals(backTop(2), 3.2, 1e-6);
+    assertAlmostEquals(backTop(3), 3.2, 1e-6);
+    assert(w.walls.some((b) => Math.abs(b.max.y - 1.1) < 1e-6), "the low wall is an occluder at its real height");
+    const marks = yearMarks(layout);
+    assertEquals(new Set(marks.map((m) => m.z)).size, 2, "a year line on each lane");
+    assertEquals(w.labels.length, pack.rooms.length + marks.length);
   } finally {
     restore();
   }

@@ -5,26 +5,34 @@
 // A room style is a shell (back wall, two half-depth end walls, floor) plus three parts over and in it:
 // the signature shape over the back wall, the window light, and one landmark standing in the strip
 // between the back wall and the first spot row. Nothing reaches behind the back wall's rear face,
-// because a parallel lane's path runs right behind it.
+// because a parallel lane's path runs right behind it. A room with a parallel lane's room behind it gets a
+// low back wall (layout room `low: true`): a lintel between the end walls carries the signature, the
+// opening stays clear so the far lane shows through, and only the floor pools of the window light stay.
 import { makeLabel } from "./labels.js";
 
 const WALL_H = 3.2;
+const LOW_WALL_H = 1.1; // a back wall with a parallel lane behind it
+const LINTEL_H = 0.3;
 const WALL_T = 0.15;
 const MARGIN = 0.6; // floor beyond the outer spot rows
 const PATH_W = 1.4;
 const PATH_OFFSET = 1.4; // path centre in front of a room's z1
 const LANDMARK_D = 0.8; // depth of the strip behind the first spot row
 const WINDOW_GAP = 2.4; // windows keep this far from the room centre, where the landmark stands
-const TICK_SIDE = 0.9; // year markers stand this far beyond the path centre
-const MARKER_H = 0.5; // year marker post height
+const YEAR_IN = 0.2; // year markers stand this far in front of the back wall's front face
+const MARKER_H = LOW_WALL_H; // year marker post height
+const MARKER_EDGE = 0.3; // year markers keep this far from end walls
 const ARC = { r: 0.035, lift: 0.8, perMetre: 0.25, maxLift: 6, segments: 40, opacity: 0.9 };
 const LIFESPAN = { h: 0.08, d: 0.16 };
 
 /** z of the walking path along the lane of `room` (a layout room). */
 export const pathZ = (room) => room.z1 + PATH_OFFSET;
 
-/** z of the year-marker line beside the path of `room`'s lane. */
-export const yearLineZ = (room) => pathZ(room) + TICK_SIDE;
+/**
+ * z of the year-marker line of `room`'s lane: along the back walls, in front of a camera that looks at a
+ * spot from in front of it.
+ */
+export const yearLineZ = (room) => room.z0 - MARGIN + WALL_T / 2 + YEAR_IN;
 
 /** One entry per lane: its rooms' x extent and its path's z. */
 export function pathLanes(layout) {
@@ -34,6 +42,35 @@ export function pathLanes(layout) {
     lanes.set(r.lane, { ...l, x0: Math.min(l.x0, r.x0), x1: Math.max(l.x1, r.x1) });
   }
   return [...lanes.values()].sort((a, b) => a.lane - b.lane);
+}
+
+/** Numbers of rooms whose back wall is low: a room on the next lane overlaps their x range. */
+export function lowBackWalls(rooms) {
+  const low = new Set();
+  for (const r of rooms) {
+    if (rooms.some((b) => b.lane === r.lane + 1 && b.x0 < r.x1 && b.x1 > r.x0)) low.add(r.n);
+  }
+  return low;
+}
+
+/**
+ * Year markers, one per tick on every lane whose extent holds it: {year, x, z} on the lane's year line,
+ * moved MARKER_EDGE off any end wall of that lane (to the later side of a wall the tick stands on).
+ */
+export function yearMarks(layout) {
+  const out = [];
+  for (const lane of pathLanes(layout)) {
+    const rooms = layout.rooms.filter((r) => r.lane === lane.lane);
+    const edges = rooms.flatMap((r) => [r.x0, r.x1]);
+    const z = yearLineZ(rooms[0]);
+    for (const t of layout.ticks) {
+      if (t.x < lane.x0 || t.x > lane.x1) continue;
+      const e = edges.find((e) => Math.abs(t.x - e) < MARKER_EDGE);
+      const x = e === undefined ? t.x : t.x >= e ? e + MARKER_EDGE : e - MARKER_EDGE;
+      out.push({ year: t.year, x, z });
+    }
+  }
+  return out;
 }
 
 // ---------- shared part helpers ----------
@@ -206,15 +243,20 @@ function windowXs({ x0, x1 }, perMetre = 0.25, edge = 1) {
   return xs;
 }
 
-/** Room frame: centre, width, depth and the back wall's centre and front face. */
-function frame({ x0, x1, z0, z1 }) {
+/** Room frame: centre, width, depth, the back wall's centre, front face and height. */
+function frame({ x0, x1, z0, z1, low = false }) {
   const zb = z0 - MARGIN;
-  return { x0, x1, z0, z1, w: x1 - x0, cx: (x0 + x1) / 2, d: z1 - z0 + 2 * MARGIN, zc: (z0 + z1) / 2, zb, zf: zb + WALL_T / 2 };
+  return {
+    x0, x1, z0, z1, low,
+    w: x1 - x0, cx: (x0 + x1) / 2, d: z1 - z0 + 2 * MARGIN, zc: (z0 + z1) / 2, zb, zf: zb + WALL_T / 2,
+    backH: low ? LOW_WALL_H : WALL_H,
+  };
 }
 
 /**
  * The shell every style shares: floor, back wall, two end walls over the back half (so the room stays
- * visible from the path). `wall(w, h)` and `floor(w, d)` return materials sized to the surface.
+ * visible from the path); over a low back wall, a lintel between the end walls (decoration, not a wall).
+ * `wall(w, h)` and `floor(w, d)` return materials sized to the surface.
  */
 function shell(THREE, f, { wall, floor }) {
   const { box } = kit(THREE);
@@ -225,7 +267,8 @@ function shell(THREE, f, { wall, floor }) {
   fl.userData.part = "floor";
   g.add(fl);
   const tag = (m) => ((m.userData.wall = true), m);
-  g.add(tag(box(f.w, WALL_H, WALL_T, wall(f.w, WALL_H), f.cx, WALL_H / 2, f.zb)));
+  g.add(tag(box(f.w, f.backH, WALL_T, wall(f.w, f.backH), f.cx, f.backH / 2, f.zb)));
+  if (f.low) g.add(part(box(f.w, LINTEL_H, WALL_T, wall(f.w, LINTEL_H), f.cx, WALL_H - LINTEL_H / 2, f.zb), "lintel"));
   const endD = f.d / 2;
   for (const x of [f.x0, f.x1]) g.add(tag(box(WALL_T, WALL_H, endD, wall(endD, WALL_H), x, WALL_H / 2, f.zb + endD / 2)));
   return g;
@@ -243,6 +286,7 @@ export function lightPool(THREE, tex, color, opacity, w, d, x, z) {
   );
   m.rotation.x = -Math.PI / 2;
   m.position.set(x, 0.03, z);
+  m.userData.pool = true;
   return m;
 }
 
@@ -454,11 +498,20 @@ function windowPool(THREE, f, color, opacity) {
   return lightPool(THREE, poolTexture(THREE), color, opacity, Math.max(4, f.w * 0.8), 2.4, f.cx, f.zf + 1.2);
 }
 
+/** `light` with only its floor pools left: over a low back wall there is no wall to hang windows on. */
+function poolsOnly(light) {
+  const drop = [];
+  light.traverse((o) => o.isMesh && !o.userData.pool && drop.push(o));
+  for (const o of drop) o.removeFromParent();
+  return light;
+}
+
 /** Builds one style: the shell plus signature, window light and landmark; tags the group with its name. */
 function room(THREE, r, name, { wall, floor, signature, windowLight, landmark, extra }) {
   const f = frame(r);
   const g = shell(THREE, f, { wall, floor });
-  g.add(placeSignature(f, signature(f)), part(windowLight(f), "window"), placeLandmark(f, landmark));
+  const light = f.low ? poolsOnly(windowLight(f)) : windowLight(f);
+  g.add(placeSignature(f, signature(f)), part(light, "window"), placeLandmark(f, landmark));
   if (extra) g.add(extra(f));
   g.userData.style = name;
   return g;
@@ -764,7 +817,7 @@ export function yearMarker(THREE, year, C) {
   );
   post.position.y = MARKER_H / 2;
   const label = makeLabel(THREE, String(year));
-  label.position.y = 0.8;
+  label.position.y = MARKER_H + 0.3;
   g.add(post, label);
   g.userData.label = label;
   return g;

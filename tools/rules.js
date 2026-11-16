@@ -160,10 +160,14 @@ export function checkPack(pack) {
     if (q.spot !== undefined && !ids.has(q.spot)) p.push(`${w}: unknown spot ${q.spot}`);
   });
 
-  pack.skipped.forEach((s, i) => {
-    if (!isObj(s) || !isStr(s.span) || !isStr(s.reason)) p.push(`skipped #${i}: needs span and reason`);
-  });
+  p.push(...checkSkipped(pack.skipped));
   return p;
+}
+
+/** Problems in a list of skip entries ({span, reason}): a pack's `skipped` or a private coverage file's. */
+export function checkSkipped(list) {
+  if (!Array.isArray(list)) return ["skipped must be a list"];
+  return list.flatMap((s, i) => (isObj(s) && isStr(s.span) && isStr(s.reason) ? [] : [`skipped #${i}: needs span and reason`]));
 }
 
 /** Every string value in the pack, folded, joined with newlines. */
@@ -186,14 +190,16 @@ export function boldSpans(md) {
 }
 
 /**
- * Bold spans of the primer that are not covered. A span with a forbidden term
- * can't be copied into the pack, so it is covered only by a `skipped` entry whose
- * span equals it with each forbidden match replaced by "…" (compared folded).
- * Any other span is covered when it appears in the pack text or in `skipped`.
+ * Bold spans of the primer that are not covered. Skip entries are the pack's `skipped` plus
+ * `privateSkips` (kept outside the public site). A span with a forbidden term can't be copied into
+ * the pack, so it is covered only by a skip entry whose span equals it with each forbidden match
+ * replaced by "…" (compared folded). Any other span is covered when it appears in the pack text or
+ * in a skip entry.
  */
-export function checkCoverage(pack, primerMd) {
-  const text = packText(pack);
-  const masked = new Set((Array.isArray(pack.skipped) ? pack.skipped : []).map((k) => fold(String(k?.span ?? ""))));
+export function checkCoverage(pack, primerMd, privateSkips = []) {
+  const skips = [...(Array.isArray(pack.skipped) ? pack.skipped : []), ...privateSkips].map((k) => fold(String(k?.span ?? "")));
+  const text = [packText(pack), ...skips].join("\n");
+  const masked = new Set(skips);
   return boldSpans(primerMd)
     .filter((s) => {
       const f = fold(s);

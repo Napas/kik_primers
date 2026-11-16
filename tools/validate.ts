@@ -1,5 +1,7 @@
 // Usage: deno run -A tools/validate.ts site [--primer <slug>=<path>]...
-import { checkCoverage, checkPack, scanSite } from "./rules.js";
+// With --primer, skip entries for <slug> also come from the private <site>/../coverage/<slug>.json
+// ({"skipped": [{span, reason}]}), if it exists; it holds the masked spans that may not be public.
+import { checkCoverage, checkPack, checkSkipped, scanSite } from "./rules.js";
 
 const join = (...parts: string[]) => parts.join("/").replace(/\/+/g, "/");
 const BINARY = /\.(png|jpe?g|gif|webp|avif|ico|woff2?|ttf|otf|mp3|ogg|mp4|webm|pdf)$/i;
@@ -55,7 +57,23 @@ for (const [slug, path] of primers) {
     continue;
   }
   const md = await Deno.readTextFile(path);
-  for (const m of checkCoverage(pack, md)) problems.push(`${slug}: ${m}`);
+  for (const m of checkCoverage(pack, md, await privateSkips(slug))) problems.push(`${slug}: ${m}`);
+}
+
+/** Skip entries from the private coverage file for `slug`; [] when there is none. Problems go to `problems`. */
+async function privateSkips(slug: string): Promise<unknown[]> {
+  const file = join(root, "..", "coverage", `${slug}.json`);
+  let data;
+  try {
+    data = JSON.parse(await Deno.readTextFile(file));
+  } catch (err) {
+    if (err instanceof Deno.errors.NotFound) return [];
+    problems.push(`${file}: ${err instanceof Error ? err.message : err}`);
+    return [];
+  }
+  const found = checkSkipped(data?.skipped);
+  for (const m of found) problems.push(`${file}: ${m}`);
+  return found.length ? [] : data.skipped;
 }
 
 const files: { path: string; text: string }[] = [];

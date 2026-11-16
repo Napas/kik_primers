@@ -63,7 +63,7 @@ it prints nothing.
 - `title` and `intro`: the primer's `# ` heading and its opening paragraph, reworded
   only to drop show references.
 - `layout` is `"time"` (rooms along a year axis) or `"map"`. Literature is `time`.
-- `skipped[]`: `{ "span": "<bold text>", "reason": "..." }` (see section 9).
+- `skipped[]`: `{ "span": "<bold text>", "reason": "..." }`, neutral entries only (see section 9).
 
 ## 5. Rooms
 
@@ -222,13 +222,18 @@ are real content: cover them in a spot or room text. Give a reason each time; do
 skip a subject to make coverage pass.
 
 A bold span that contains a forbidden term (see `tools/rules.js`) cannot be written
-as-is, because the pack may not contain the term. Its `skipped` entry masks it: each
-forbidden-term match (the term only, not the words around it) is replaced by the single
-character `…` (U+2026). The comparison is folded like coverage. Example:
+as-is, because the pack may not contain the term. Even masked, such a sentence may
+point at the source, so its skip entry stays out of `site/`: it goes in the private
+file `coverage/<slug>.json` at the repo root (never deployed), which
+`deno task validate --primer` reads next to the pack's `skipped[]`:
 
 ```json
-{ "span": "Kodėl … klausiama apie X", "reason": "Rėmo frazė, ne faktas." }
+{ "skipped": [{ "span": "Kodėl … klausiama apie X", "reason": "Rėmo frazė, ne faktas." }] }
 ```
+
+The entry masks the span: each forbidden-term match (the term only, not the words
+around it) is replaced by the single character `…` (U+2026). The comparison is folded
+like coverage. The pack's own `skipped[]` holds only neutral entries.
 
 ## 10. Order of work
 

@@ -11458,10 +11458,5 @@
       "spot": "sokolovaite"
     }
   ],
-  "skipped": [
-    {
-      "span": "Kodėl … nuolat klausiama apie Kernagio dainas",
-      "reason": "Klausimas perrašytas kambario 8 klausimuose."
-    }
-  ]
+  "skipped": []
 }

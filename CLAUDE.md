@@ -40,6 +40,7 @@ site/lib/                               our ES modules: layout, render, quiz, pr
 site/lib/scene/                         Three.js world: world, styles, spots, light, controls, labels, arcs, nearby
 site/lib/pages/                         page wiring: index, overview, selection, world, test, about, common
 site/lib/three/                         vendored pinned Three.js + licence
+coverage/<slug>.json                    private skip entries for masked primer spans (not deployed)
 tools/                                  Deno: validate, rules, import-photos, commons, import-cards, build-index, make-basemap
 tests/                                  deno test (+ fixtures, fake canvas)
 docs/TOPIC.md                           how an agent writes a topic.json
@@ -60,8 +61,9 @@ docs/illustrations.md                   illustration house style and decisions
 - Photos need author, licence and source (Commons); `about.html` lists them.
 - Commons requests use a generic User-Agent, never personal details.
 - Pack file paths (`photo.file`, `illustration.file`) are relative to the topic folder.
-- A primer bold span containing a forbidden term is covered by a `skipped` entry
-  with each forbidden match replaced by "…" (U+2026); see `docs/TOPIC.md` section 9.
+- A primer bold span containing a forbidden term is covered by a skip entry with
+  each forbidden match replaced by "…" (U+2026), kept in the private
+  `coverage/<slug>.json`, never in the pack; see `docs/TOPIC.md` section 9.
 - Question order is neutral (sorted), so no card's origin shows.
 - Illustrations: approved images only. House style and decisions are in
   `docs/illustrations.md`. A neutral reviewing agent may approve new ones

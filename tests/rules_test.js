@@ -60,6 +60,10 @@ Deno.test("forbidden-term span passes via a masked skip entry", () =>
   assertEquals(checkCoverage(withMaskedSkip("Kodėl … klausiama apie X"), FORBIDDEN_SPAN), []));
 Deno.test("forbidden-term span without a masked skip is reported", () =>
   assertEquals(checkCoverage(mini(), FORBIDDEN_SPAN), ["not in pack: Kodėl laidoje klausiama apie X"]));
+Deno.test("forbidden-term span passes via a masked private skip entry", () =>
+  assertEquals(checkCoverage(mini(), FORBIDDEN_SPAN, [{ span: "Kodėl … klausiama apie X", reason: "r" }]), []));
+Deno.test("a private skip entry covers a plain span", () =>
+  assertEquals(checkCoverage(mini(), "**Nėra tokio**", [{ span: "Nėra tokio", reason: "r" }]), []));
 Deno.test("an unmasked skip entry does not cover a forbidden-term span", () =>
   assertEquals(checkCoverage(withMaskedSkip("Kodėl laidoje klausiama apie X"), FORBIDDEN_SPAN), ["not in pack: Kodėl laidoje klausiama apie X"]));
 Deno.test("mini primer is fully covered", () =>

@@ -1,17 +1,13 @@
 // Text drawn on canvases: name labels (sprites) and text textures for models.
-import { COLORS } from "../theme.js";
-
-const FONT = 'Georgia, "Times New Roman", serif';
-const LABEL_PX = 48;
-const LABEL_HEIGHT = 0.36; // metres
+import { COLORS, LABEL } from "../theme.js";
 
 /**
  * Canvas texture with `text` centred. Without `w`/`h` the canvas fits the text.
  * opts: {px, w, h, bg, fg, weight}.
  */
 export function textTexture(THREE, text, opts = {}) {
-  const { px = LABEL_PX, bg = COLORS.panel, fg = COLORS.text, weight = 600 } = opts;
-  const font = `${weight} ${px}px ${FONT}`;
+  const { px = LABEL.px, bg = COLORS.panel, fg = COLORS.text, weight = LABEL.weight } = opts;
+  const font = `${weight} ${px}px ${LABEL.font}`;
   const canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
   ctx.font = font;
@@ -31,12 +27,12 @@ export function textTexture(THREE, text, opts = {}) {
   return tex;
 }
 
-/** Name label that always faces the camera; LABEL_HEIGHT tall, width from the text. */
+/** Name label that always faces the camera; LABEL.height tall, width from the text. */
 export function makeLabel(THREE, text) {
   const map = textTexture(THREE, text);
-  const material = new THREE.SpriteMaterial({ map, transparent: true, opacity: 0.92, depthWrite: false });
+  const material = new THREE.SpriteMaterial({ map, transparent: true, opacity: LABEL.opacity, depthWrite: false });
   const sprite = new THREE.Sprite(material);
   const { width, height } = map.image;
-  sprite.scale.set((LABEL_HEIGHT * width) / height, LABEL_HEIGHT, 1);
+  sprite.scale.set((LABEL.height * width) / height, LABEL.height, 1);
   return sprite;
 }

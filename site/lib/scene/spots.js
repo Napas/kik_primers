@@ -30,6 +30,7 @@ export function setPhoto(spotObj, texture) {
       texture.offset.set(0, 1 - img / frame);
     }
   }
+  if (m.map !== texture) m.map?.dispose();
   m.map = texture;
   m.needsUpdate = true;
 }

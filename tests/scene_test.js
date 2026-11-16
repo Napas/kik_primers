@@ -5,6 +5,7 @@ import { layoutTime } from "../site/lib/layout.js";
 import { initials, makeSpot, setPhoto } from "../site/lib/scene/spots.js";
 import { makeLabel } from "../site/lib/scene/labels.js";
 import { buildWorld } from "../site/lib/scene/world.js";
+import { ground, path, plainRoom, yearMarker } from "../site/lib/scene/styles.js";
 import { installFakeCanvas } from "./fake_canvas.js";
 
 const root = new URL("../", import.meta.url).pathname;
@@ -68,7 +69,10 @@ Deno.test("a person shows initials until a photo is set; an event shows its year
     const person = makeSpot(THREE, spot("person"), COLORS);
     assert(canvases(person).some((c) => c.texts.includes("ŽĄ")));
     const tex = new THREE.Texture({ width: 100, height: 100 });
+    let disposed = false;
+    person.userData.portrait.material.map.addEventListener("dispose", () => (disposed = true));
     setPhoto(person, tex);
+    assert(disposed, "the initials texture is released");
     assertEquals(person.userData.portrait.material.map, tex);
     // A square photo on the taller frame is cropped at the sides, centred.
     assertEquals(tex.repeat.y, 1);
@@ -103,7 +107,30 @@ Deno.test("buildWorld places every room and spot from the layout", () => {
     assertEquals(w.camera.aspect, 1.5);
     assert(w.camera.position.x < layout.rooms[0].x0, "camera starts before the first room");
     assertEquals(photos.map(([f]) => f), ["jonas.jpg"]);
+    assertEquals(w.walls.length, 3 * layout.rooms.length, "back wall and two end walls per room");
+    for (const b of w.walls) assert(b.min.x <= b.max.x && b.min.y < b.max.y && b.min.z <= b.max.z);
+    const inside = (p) => p.x >= w.bounds.x0 && p.x <= w.bounds.x1 && p.z >= w.bounds.z0 && p.z <= w.bounds.z1;
+    assert(inside(w.camera.position), "camera starts inside the bounds");
+    for (const s of layout.spots) assert(inside(s), s.id);
     w.update(0.016);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("styles.js builds the plain look: walls tagged as occluders, path, ground, year markers", () => {
+  const restore = installFakeCanvas();
+  try {
+    const room = plainRoom(THREE, { x0: 0, x1: 10, z0: -2, z1: 2 }, COLORS);
+    const walls = [];
+    room.traverse((o) => o.userData.wall && walls.push(o));
+    assertEquals(walls.length, 3);
+    assert(path(THREE, { x0: 0, x1: 10, z: 3 }, COLORS).isMesh);
+    assert(ground(THREE, { x0: -5, x1: 15, z0: -10, z1: 10 }, COLORS).isMesh);
+    const m = yearMarker(THREE, 1550, COLORS);
+    const texts = [];
+    m.traverse((o) => o.material?.map?.image?.texts && texts.push(...o.material.map.image.texts));
+    assertEquals(texts, ["1550"]);
   } finally {
     restore();
   }

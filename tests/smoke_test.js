@@ -87,17 +87,24 @@ export async function dumpDom(url, { w = 1280, h = 800 } = {}) {
   }
 }
 
+const attrsOf = (tag = "") => Object.fromEntries([...tag.matchAll(/([\w-]+)(?:="([^"]*)")?/g)].slice(1).map((m) => [m[1], m[2] ?? ""]));
+
 /** Attributes of the opening <html> tag. */
-export function htmlAttrs(dom) {
-  const tag = dom.match(/<html\b[^>]*>/i)?.[0] ?? "";
-  return Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map((m) => [m[1], m[2]]));
+export const htmlAttrs = (dom) => attrsOf(dom.match(/<html\b[^>]*>/i)?.[0]);
+
+/** Attributes of the element with `id`, or null when there is none. */
+export function elementAttrs(dom, id) {
+  const tag = dom.match(new RegExp(`<[a-z]+\\b[^>]*\\bid="${id}"[^>]*>`, "i"))?.[0];
+  return tag ? attrsOf(tag) : null;
 }
 
 Deno.test({
   name: "pages reach their ready state in headless Chrome",
   ignore,
   fn: async (t) => {
-    await withSite([MINI], async (base) => {
+    // A listed pack without rooms passes the topic check, then fails while the world is built.
+    const BROKEN = { slug: "broken", title: "Sugadinta", spots: [] };
+    await withSite([MINI, BROKEN], async (base) => {
       const page = async (path, size) => htmlAttrs(await dumpDom(base + path, size));
 
       await t.step("world renders both rooms and all spots", async () => {
@@ -124,6 +131,13 @@ Deno.test({
         const a = await page("index.html");
         assertEquals(a["data-error"], undefined);
         assertEquals(a["data-ready"], "index");
+      });
+      await t.step("a failure while building the world leaves the error visible", async () => {
+        const dom = await dumpDom(`${base}world.html?topic=broken`);
+        assert(htmlAttrs(dom)["data-error"], "no data-error");
+        assertEquals(htmlAttrs(dom)["data-ready"], undefined);
+        assert("hidden" in elementAttrs(dom, "world"), "the 3D layer covers the error");
+        assert(!/<canvas/i.test(dom), "the canvas stays in the page");
       });
       for (const p of ["world", "test"]) {
         await t.step(`${p} with an unknown topic shows an error`, async () => {

@@ -1,5 +1,17 @@
 import { assert, assertAlmostEquals, assertEquals } from "@std/assert";
-import { clampPitch, ease, floorHit, moveDuration, MAX_PITCH, MAX_MOVE, pickRay, yawPitchTo } from "../site/lib/scene/controls.js";
+import {
+  clampPitch,
+  clampToBounds,
+  ease,
+  floorHit,
+  MAX_FLOOR,
+  MAX_MOVE,
+  MAX_PITCH,
+  moveDuration,
+  pickRay,
+  rayBox,
+  yawPitchTo,
+} from "../site/lib/scene/controls.js";
 
 const deg = (r) => (r * 180) / Math.PI;
 
@@ -43,12 +55,12 @@ Deno.test("pickRay takes the nearest target the ray passes through, else the flo
     { id: "aside", center: { x: 2, y: 1, z: 3 }, r: 0.5 },
     { id: "behind", center: { x: -2, y: 1, z: 0 }, r: 0.5 },
   ];
-  assertEquals(pickRay(origin, dir, targets, 0).id, "near");
+  assertEquals(pickRay(origin, dir, { targets, floorY: 0 }).id, "near");
   const down = { x: Math.SQRT1_2, y: -Math.SQRT1_2, z: 0 };
-  const floor = pickRay(origin, down, [], 0);
+  const floor = pickRay(origin, down, { floorY: 0 });
   assertEquals(floor.id, null);
   assertAlmostEquals(floor.point.x, 1);
-  assertEquals(pickRay(origin, { x: 0, y: 1, z: 0 }, [], 0), null);
+  assertEquals(pickRay(origin, { x: 0, y: 1, z: 0 }, { floorY: 0 }), null);
 });
 
 Deno.test("yawPitchTo faces +x along the floor and tilts up to higher points", () => {
@@ -57,4 +69,38 @@ Deno.test("yawPitchTo faces +x along the floor and tilts up to higher points", (
   assertAlmostEquals(pitch, 0);
   assert(yawPitchTo({ x: 0, y: 1, z: 0 }, { x: 1, y: 2, z: 0 }).pitch > 0);
   assertEquals(yawPitchTo({ x: 0, y: 1, z: 0 }, { x: 1, y: 9, z: 0 }).pitch, MAX_PITCH);
+});
+
+Deno.test("rayBox gives the distance to the first face, null on a miss or behind", () => {
+  const box = { min: { x: 4, y: 0, z: -1 }, max: { x: 5, y: 3, z: 1 } };
+  const o = { x: 0, y: 1, z: 0 };
+  assertAlmostEquals(rayBox(o, { x: 1, y: 0, z: 0 }, box), 4);
+  assertEquals(rayBox(o, { x: -1, y: 0, z: 0 }, box), null);
+  assertEquals(rayBox(o, { x: 0, y: 0, z: 1 }, box), null);
+  assertEquals(rayBox({ x: 0, y: 4, z: 0 }, { x: 1, y: 0, z: 0 }, box), null);
+});
+
+Deno.test("a far floor tap is clamped to MAX_FLOOR metres, then into the bounds", () => {
+  const origin = { x: 0, y: 1.7, z: 0 };
+  const nearHorizon = { x: 1, y: -Math.tan(Math.PI / 180), z: 0 }; // 1° below the horizon, ~97 m out
+  const hit = pickRay(origin, nearHorizon, { floorY: 0 });
+  assertEquals(hit.id, null);
+  assertAlmostEquals(hit.point.x, MAX_FLOOR);
+  assert(MAX_FLOOR >= 15 && MAX_FLOOR <= 20);
+  const bounds = { x0: -5, x1: 10, z0: -3, z1: 3 };
+  assertEquals(pickRay(origin, nearHorizon, { floorY: 0, bounds }).point.x, 10);
+  assertEquals(clampToBounds({ x: -9, z: 7 }, bounds), { x: -5, z: 3 });
+  assertEquals(clampToBounds({ x: 1, z: 2 }, bounds), { x: 1, z: 2 });
+  assertEquals(clampToBounds({ x: 1, z: 2 }, undefined), { x: 1, z: 2 });
+});
+
+Deno.test("a wall in front blocks spots and floor behind it", () => {
+  const origin = { x: 0, y: 1, z: 0 };
+  const wall = { min: { x: 3, y: 0, z: -2 }, max: { x: 3.2, y: 3, z: 2 } };
+  const behind = [{ id: "behind", center: { x: 5, y: 1, z: 0 }, r: 0.5 }];
+  assertEquals(pickRay(origin, { x: 1, y: 0, z: 0 }, { targets: behind, floorY: 0, occluders: [wall] }), null);
+  assertEquals(pickRay(origin, { x: 1, y: -0.1, z: 0 }, { floorY: 0, occluders: [wall] }), null); // floor at x=10
+  const before = [{ id: "before", center: { x: 2, y: 1, z: 0 }, r: 0.5 }];
+  assertEquals(pickRay(origin, { x: 1, y: 0, z: 0 }, { targets: before, floorY: 0, occluders: [wall] }).id, "before");
+  assertAlmostEquals(pickRay(origin, { x: 1, y: -0.5, z: 0 }, { floorY: 0, occluders: [wall] }).point.x, 2); // floor before the wall
 });

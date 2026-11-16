@@ -242,7 +242,41 @@
           "to": "dauksa",
           "label": "amžininkas"
         }
-      ]
+      ],
+      "life": [
+        {
+          "year": 1510,
+          "label": "Gimsta (apie 1510–1520 m.)"
+        },
+        {
+          "year": 1547,
+          "label": "Išspausdinamas jo „Katekizmas“ – pirmoji lietuviška knyga",
+          "place": "Karaliaučius"
+        },
+        {
+          "year": 1549,
+          "label": "Tampa Ragainės lietuviškos parapijos klebonu",
+          "place": "Ragainė"
+        },
+        {
+          "year": 1563,
+          "label": "Miršta",
+          "place": "Ragainė"
+        }
+      ],
+      "places": [
+        {
+          "name": "Karaliaučius",
+          "lat": 54.71,
+          "lon": 20.51
+        },
+        {
+          "name": "Ragainė",
+          "lat": 55.03,
+          "lon": 22.03
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "katekizmas",
@@ -313,7 +347,37 @@
           "to": "mazvydas",
           "label": "amžininkas"
         }
-      ]
+      ],
+      "life": [
+        {
+          "year": 1595,
+          "label": "Vilniuje išleidžia „Katekizmą“",
+          "place": "Vilnius"
+        },
+        {
+          "year": 1599,
+          "label": "Išleidžia „Postilę“ su prakalba, ginančia gimtąją kalbą",
+          "place": "Vilnius"
+        },
+        {
+          "year": 1615,
+          "label": "Miršta",
+          "place": "Varniai"
+        }
+      ],
+      "places": [
+        {
+          "name": "Vilnius",
+          "lat": 54.69,
+          "lon": 25.28
+        },
+        {
+          "name": "Varniai",
+          "lat": 55.73,
+          "lon": 22.37
+        }
+      ],
+      "motif": "church"
     },
     {
       "id": "dauksos-katekizmas",
@@ -375,7 +439,33 @@
           "label": "sudarė"
         }
       ],
-      "wikidata": "Q1618122"
+      "wikidata": "Q1618122",
+      "life": [
+        {
+          "year": 1579,
+          "label": "Gimsta (apie 1579 m.)"
+        },
+        {
+          "year": 1620,
+          "label": "Pirmasis „Trijų kalbų žodyno“ leidimas (apie 1620 m.)"
+        },
+        {
+          "year": 1629,
+          "label": "Išleidžia pamokslų rinkinį „Punktai sakymų“"
+        },
+        {
+          "year": 1631,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Vilnius",
+          "lat": 54.69,
+          "lon": 25.28
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "triju-kalbu-zodynas",
@@ -409,7 +499,25 @@
       "at": 1540,
       "text": "Stanislovas Rapolionis (1485–1545) – viena XVI a. raštijos pavardžių. Karaliaučiaus katedros epitafijoje vadinamas „lietuvių tautos garbe“.",
       "links": [],
-      "wikidata": "Q338487"
+      "wikidata": "Q338487",
+      "life": [
+        {
+          "year": 1485,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1545,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Karaliaučius",
+          "lat": 54.71,
+          "lon": 20.51
+        }
+      ],
+      "motif": "church"
     },
     {
       "id": "kulvietis",
@@ -422,7 +530,8 @@
       "years": null,
       "at": 1540,
       "text": "Abraomas Kulvietis (tikroji pavardė Ginvilionis) – viena XVI a. raštijos pavardžių.",
-      "links": []
+      "links": [],
+      "motif": "book"
     },
     {
       "id": "bretkunas",
@@ -437,7 +546,18 @@
       "at": 1590,
       "text": "Kunigas Jonas Bretkūnas pirmasis išvertė visą Bibliją į lietuvių kalbą.",
       "links": [],
-      "wikidata": "Q177962"
+      "wikidata": "Q177962",
+      "life": [
+        {
+          "year": 1536,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1602,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "donelaitis",
@@ -469,7 +589,51 @@
           "label": "filmas apie jį"
         }
       ],
-      "wikidata": "Q467490"
+      "wikidata": "Q467490",
+      "life": [
+        {
+          "year": 1714,
+          "label": "Gimsta",
+          "place": "Lazdynėliai"
+        },
+        {
+          "year": 1743,
+          "label": "Tampa Tolminkiemio evangelikų liuteronų klebonu",
+          "place": "Tolminkiemis"
+        },
+        {
+          "year": 1760,
+          "label": "Rašo „Metus“ (apie 1760–1775 m.)"
+        },
+        {
+          "year": 1780,
+          "label": "Miršta",
+          "place": "Tolminkiemis"
+        },
+        {
+          "year": 1818,
+          "label": "Rėza išleidžia „Metus“",
+          "place": "Karaliaučius"
+        }
+      ],
+      "places": [
+        {
+          "name": "Lazdynėliai",
+          "lat": 54.61,
+          "lon": 22.27
+        },
+        {
+          "name": "Tolminkiemis",
+          "lat": 54.46,
+          "lon": 22.44
+        },
+        {
+          "name": "Karaliaučius",
+          "lat": 54.71,
+          "lon": 20.51
+        }
+      ],
+      "motif": "seasons"
     },
     {
       "id": "metai",
@@ -534,7 +698,40 @@
           "label": "išleido jo poemą"
         }
       ],
-      "wikidata": "Q72522"
+      "wikidata": "Q72522",
+      "life": [
+        {
+          "year": 1776,
+          "label": "Gimsta",
+          "place": "Karvaičiai"
+        },
+        {
+          "year": 1818,
+          "label": "Savo lėšomis išleidžia Donelaičio poemą ir pavadina ją „Metais“",
+          "place": "Karaliaučius"
+        },
+        {
+          "year": 1825,
+          "label": "Išleidžia liaudies dainų rinkinį „Dainos“"
+        },
+        {
+          "year": 1840,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Karvaičiai",
+          "lat": 55.39,
+          "lon": 21.07
+        },
+        {
+          "name": "Karaliaučius",
+          "lat": 54.71,
+          "lon": 20.51
+        }
+      ],
+      "motif": "sea"
     },
     {
       "id": "vydunas",
@@ -552,7 +749,36 @@
       "aside": true,
       "text": "Vydūnas (1868–1953; tikrasis vardas Vilhelmas Storosta) tęsia Mažosios Lietuvos liniją XX a. Vienas pirmųjų teosofijos idėjų skleidėjų Lietuvoje. Pirmasis į lietuvių kalbą išvertė „Bhagavadgytą“. Kūrė veikėjus su -vydo galūne: Tautvydą, Grožvydą, Milvydą. Koncentracijos stovykloje nekalėjo. Mirė Detmolde (Vokietija); palaikai 1991 m. perlaidoti Bitėnuose.",
       "links": [],
-      "wikidata": "Q932413"
+      "wikidata": "Q932413",
+      "life": [
+        {
+          "year": 1868,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1953,
+          "label": "Miršta",
+          "place": "Detmoldas"
+        },
+        {
+          "year": 1991,
+          "label": "Palaikai perkeliami į Bitėnus",
+          "place": "Bitėnai"
+        }
+      ],
+      "places": [
+        {
+          "name": "Detmoldas",
+          "lat": 51.94,
+          "lon": 8.88
+        },
+        {
+          "name": "Bitėnai",
+          "lat": 55.08,
+          "lon": 22.05
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "dachas",
@@ -568,7 +794,36 @@
       "aside": true,
       "text": "Simonas Dachas (1605–1659) – vokiečių kalba rašęs poetas, gimęs Klaipėdoje (Memelyje), Karaliaučiaus universiteto profesorius ir rektorius. Eilėraštis „Taravos Anikė“ – jo; eilėse jis ilgėjosi Dangės kranto. Klaipėda jam dedikavo 2025-uosius.",
       "links": [],
-      "wikidata": "Q77285"
+      "wikidata": "Q77285",
+      "life": [
+        {
+          "year": 1605,
+          "label": "Gimsta",
+          "place": "Klaipėda"
+        },
+        {
+          "year": 1659,
+          "label": "Miršta"
+        },
+        {
+          "year": 2025,
+          "label": "Klaipėda jam dedikuoja 2025-uosius",
+          "place": "Klaipėda"
+        }
+      ],
+      "places": [
+        {
+          "name": "Klaipėda",
+          "lat": 55.7,
+          "lon": 21.14
+        },
+        {
+          "name": "Karaliaučius",
+          "lat": 54.71,
+          "lon": 20.51
+        }
+      ],
+      "motif": "river"
     },
     {
       "id": "sabolius",
@@ -589,7 +844,14 @@
           "label": "filmas apie jį"
         }
       ],
-      "wikidata": "Q12661450"
+      "wikidata": "Q12661450",
+      "life": [
+        {
+          "year": 1979,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "seasons"
     },
     {
       "id": "poska",
@@ -613,7 +875,30 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q4375656"
+      "wikidata": "Q4375656",
+      "life": [
+        {
+          "year": 1764,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1812,
+          "label": "Apie 1812 m. įkuria Baublius – pirmąjį Lietuvos muziejų"
+        },
+        {
+          "year": 1830,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Baubliai",
+          "lat": 55.47,
+          "lon": 22.57,
+          "approx": true
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "baubliai",
@@ -679,7 +964,34 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q382666"
+      "wikidata": "Q382666",
+      "life": [
+        {
+          "year": 1793,
+          "label": "Gimsta Skuodo krašte, Kalviuose",
+          "place": "Kalviai"
+        },
+        {
+          "year": 1822,
+          "label": "Parašo „Darbai senųjų lietuvių ir žemaičių“ – pirmąją Lietuvos istoriją lietuviškai"
+        },
+        {
+          "year": 1845,
+          "label": "„Būdas senovės lietuvių, kalnėnų ir žemaičių“"
+        },
+        {
+          "year": 1864,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Kalviai",
+          "lat": 56.2,
+          "lon": 21.34
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "budas",
@@ -722,7 +1034,22 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q4770954"
+      "wikidata": "Q4770954",
+      "life": [
+        {
+          "year": 1760,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1814,
+          "label": "Rinkinys „Giesmės svietiškos ir šventos“"
+        },
+        {
+          "year": 1833,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "church"
     },
     {
       "id": "giesmes-svietiskos",
@@ -782,7 +1109,22 @@
           "label": "ne jo pasakėčios"
         }
       ],
-      "wikidata": "Q1966358"
+      "wikidata": "Q1966358",
+      "life": [
+        {
+          "year": 1799,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1829,
+          "label": "Išleidžia „Šešias pasakas“"
+        },
+        {
+          "year": 1848,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "slove-zemaiciu",
@@ -827,7 +1169,34 @@
           "label": "kitas vyskupas rašytojas"
         }
       ],
-      "wikidata": "Q627106"
+      "wikidata": "Q627106",
+      "life": [
+        {
+          "year": 1801,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1850,
+          "label": "Tampa Žemaičių vyskupu"
+        },
+        {
+          "year": 1858,
+          "label": "Pradeda blaivybės sąjūdį"
+        },
+        {
+          "year": 1868,
+          "label": "Išleidžia „Vaikų knygelę“"
+        },
+        {
+          "year": 1869,
+          "label": "Apysaka „Palangos Juzė“"
+        },
+        {
+          "year": 1875,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "church"
     },
     {
       "id": "blaivybes-sajudis",
@@ -885,7 +1254,35 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q79822"
+      "wikidata": "Q79822",
+      "life": [
+        {
+          "year": 1798,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1834,
+          "label": "„Ponas Tadas“"
+        },
+        {
+          "year": 1855,
+          "label": "Miršta",
+          "place": "Konstantinopolis"
+        }
+      ],
+      "places": [
+        {
+          "name": "Vilnius",
+          "lat": 54.69,
+          "lon": 25.28
+        },
+        {
+          "name": "Konstantinopolis",
+          "lat": 41.01,
+          "lon": 28.96
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "ponas-tadas",
@@ -940,7 +1337,45 @@
           "label": "kitas vyskupas rašytojas"
         }
       ],
-      "wikidata": "Q570952"
+      "wikidata": "Q570952",
+      "life": [
+        {
+          "year": 1835,
+          "label": "Gimsta",
+          "place": "Anykščiai"
+        },
+        {
+          "year": 1858,
+          "label": "Parašo „Anykščių šilelį“ (1858–1859)"
+        },
+        {
+          "year": 1860,
+          "label": "Poema išspausdinama Ivinskio kalendoriuje"
+        },
+        {
+          "year": 1897,
+          "label": "Tampa Seinų vyskupu",
+          "place": "Seinai"
+        },
+        {
+          "year": 1902,
+          "label": "Miršta; palaidotas Seinuose",
+          "place": "Seinai"
+        }
+      ],
+      "places": [
+        {
+          "name": "Anykščiai",
+          "lat": 55.53,
+          "lon": 25.11
+        },
+        {
+          "name": "Seinai",
+          "lat": 54.1,
+          "lon": 23.35
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "silelis",
@@ -988,7 +1423,26 @@
           "label": "išspausdino kalendoriuje"
         }
       ],
-      "wikidata": "Q1960204"
+      "wikidata": "Q1960204",
+      "life": [
+        {
+          "year": 1810,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1846,
+          "label": "Išleidžia pirmąjį lietuvišką kalendorių"
+        },
+        {
+          "year": 1860,
+          "label": "Kalendoriuje išspausdina „Anykščių šilelį“"
+        },
+        {
+          "year": 1881,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "seasons"
     },
     {
       "id": "vienazindys",
@@ -1004,7 +1458,18 @@
       "aside": true,
       "text": "Antanas Vienažindys taip pat buvo kunigas, kaip ir Strazdas, Valančius ir Baranauskas. Jo „Linksminkimos“ – vienas iš eilėraščių, kurie žmones pasiekė per dainas.",
       "links": [],
-      "wikidata": "Q16444004"
+      "wikidata": "Q16444004",
+      "life": [
+        {
+          "year": 1841,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1892,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "spaudos-draudimas",
@@ -1092,7 +1557,56 @@
           "label": "kitas atgimimo balsas"
         }
       ],
-      "wikidata": "Q342580"
+      "wikidata": "Q342580",
+      "life": [
+        {
+          "year": 1858,
+          "label": "Gimsta",
+          "place": "Paežeriai"
+        },
+        {
+          "year": 1889,
+          "label": "Įkuria laikraštį „Varpas“"
+        },
+        {
+          "year": 1898,
+          "label": "„Varpe“ paskelbia „Tautišką giesmę“"
+        },
+        {
+          "year": 1899,
+          "label": "Miršta",
+          "place": "Kudirkos Naumiestis"
+        }
+      ],
+      "places": [
+        {
+          "name": "Paežeriai",
+          "lat": 54.64,
+          "lon": 22.98,
+          "approx": true
+        },
+        {
+          "name": "Šakiai",
+          "lat": 54.96,
+          "lon": 23.04
+        },
+        {
+          "name": "Kudirkos Naumiestis",
+          "lat": 54.77,
+          "lon": 22.87
+        },
+        {
+          "name": "Seinai",
+          "lat": 54.1,
+          "lon": 23.35
+        },
+        {
+          "name": "Varšuva",
+          "lat": 52.23,
+          "lon": 21.01
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "tautiska-giesme",
@@ -1156,7 +1670,45 @@
           "label": "kitas atgimimo balsas"
         }
       ],
-      "wikidata": "Q738888"
+      "wikidata": "Q738888",
+      "life": [
+        {
+          "year": 1862,
+          "label": "Gimsta",
+          "place": "Pasandravys"
+        },
+        {
+          "year": 1883,
+          "label": "Studijuoja literatūrą (1883–1884)"
+        },
+        {
+          "year": 1895,
+          "label": "Rinkinys „Pavasario balsai“"
+        },
+        {
+          "year": 1909,
+          "label": "Kauno kunigų seminarijos rektorius; įsigyja Siručio namą",
+          "place": "Kaunas"
+        },
+        {
+          "year": 1932,
+          "label": "Miršta",
+          "place": "Kaunas"
+        }
+      ],
+      "places": [
+        {
+          "name": "Pasandravys",
+          "lat": 55.44,
+          "lon": 23.33
+        },
+        {
+          "name": "Kaunas",
+          "lat": 54.9,
+          "lon": 23.93
+        }
+      ],
+      "motif": "river"
     },
     {
       "id": "maironio-muziejus",
@@ -1284,7 +1836,18 @@
           "label": "painiojamas su juo"
         }
       ],
-      "wikidata": "Q12670106"
+      "wikidata": "Q12670106",
+      "life": [
+        {
+          "year": 1876,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1901,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "river"
     },
     {
       "id": "zemaite",
@@ -1318,7 +1881,41 @@
           "label": "pasiūlė slapyvardį"
         }
       ],
-      "wikidata": "Q287069"
+      "wikidata": "Q287069",
+      "life": [
+        {
+          "year": 1845,
+          "label": "Gimsta",
+          "place": "Bukantė"
+        },
+        {
+          "year": 1895,
+          "label": "Debiutuoja apsakymu „Rudens vakaras“"
+        },
+        {
+          "year": 1921,
+          "label": "Miršta",
+          "place": "Marijampolė"
+        }
+      ],
+      "places": [
+        {
+          "name": "Bukantė",
+          "lat": 55.99,
+          "lon": 21.75
+        },
+        {
+          "name": "Marijampolė",
+          "lat": 54.56,
+          "lon": 23.35
+        },
+        {
+          "name": "Vilnius",
+          "lat": 54.69,
+          "lon": 25.28
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "rudens-vakaras",
@@ -1375,7 +1972,18 @@
           "label": "pasiūlė slapyvardį"
         }
       ],
-      "wikidata": "Q975183"
+      "wikidata": "Q975183",
+      "life": [
+        {
+          "year": 1860,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1930,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "dvi-moteri",
@@ -1419,7 +2027,18 @@
           "label": "rašė apie jį"
         }
       ],
-      "wikidata": "Q4972658"
+      "wikidata": "Q4972658",
+      "life": [
+        {
+          "year": 1861,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1943,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "lazdynu-peleda",
@@ -1465,7 +2084,18 @@
           "label": "sesuo"
         }
       ],
-      "wikidata": "Q7553754"
+      "wikidata": "Q7553754",
+      "life": [
+        {
+          "year": 1867,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1926,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "marija-ivanauskaite",
@@ -1489,7 +2119,18 @@
           "label": "sesuo"
         }
       ],
-      "wikidata": "Q6763315"
+      "wikidata": "Q6763315",
+      "life": [
+        {
+          "year": 1872,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1957,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "didziuliene",
@@ -1506,7 +2147,18 @@
       "at": 1895,
       "text": "Liudvika Didžiulienė – viena moterų rašytojų linijos atstovių; pasirašinėjo slapyvardžiu „Žmona“.",
       "links": [],
-      "wikidata": "Q12663746"
+      "wikidata": "Q12663746",
+      "life": [
+        {
+          "year": 1856,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1925,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "satrijos-ragana",
@@ -1529,7 +2181,45 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q391323"
+      "wikidata": "Q391323",
+      "life": [
+        {
+          "year": 1877,
+          "label": "Gimsta",
+          "place": "Medingėnai"
+        },
+        {
+          "year": 1922,
+          "label": "Apysaka „Sename dvare“"
+        },
+        {
+          "year": 1930,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Medingėnai",
+          "lat": 55.81,
+          "lon": 22.07
+        },
+        {
+          "name": "Labūnava",
+          "lat": 55.71,
+          "lon": 22.55
+        },
+        {
+          "name": "Užventis",
+          "lat": 55.78,
+          "lon": 22.65
+        },
+        {
+          "name": "Židikai",
+          "lat": 56.32,
+          "lon": 22.01
+        }
+      ],
+      "motif": "fence"
     },
     {
       "id": "sename-dvare",
@@ -1621,7 +2311,34 @@
           "label": "brolis"
         }
       ],
-      "wikidata": "Q12861754"
+      "wikidata": "Q12861754",
+      "life": [
+        {
+          "year": 1864,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1895,
+          "label": "Išleidžiama „Amerika pirtyje“ – pirmoji lietuviška komedija"
+        },
+        {
+          "year": 1899,
+          "label": "Komedija suvaidinta Palangoje",
+          "place": "Palanga"
+        },
+        {
+          "year": 1903,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Palanga",
+          "lat": 55.92,
+          "lon": 21.07
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "juozas-vilkutaitis",
@@ -1645,7 +2362,34 @@
           "label": "brolis"
         }
       ],
-      "wikidata": "Q12658702"
+      "wikidata": "Q12658702",
+      "life": [
+        {
+          "year": 1869,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1895,
+          "label": "Išleidžiama „Amerika pirtyje“ – pirmoji lietuviška komedija"
+        },
+        {
+          "year": 1899,
+          "label": "Komedija suvaidinta Palangoje",
+          "place": "Palanga"
+        },
+        {
+          "year": 1948,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Palanga",
+          "lat": 55.92,
+          "lon": 21.07
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "robertas-keturakis",
@@ -1666,7 +2410,18 @@
           "label": "ne tas Keturakis"
         }
       ],
-      "wikidata": "Q12671519"
+      "wikidata": "Q12671519",
+      "life": [
+        {
+          "year": 1935,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2021,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "pietaris",
@@ -1686,7 +2441,22 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q4360145"
+      "wikidata": "Q4360145",
+      "life": [
+        {
+          "year": 1850,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1902,
+          "label": "Miršta"
+        },
+        {
+          "year": 1904,
+          "label": "Pradedamas leisti romanas „Algimantas“ (1904–1906)"
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "algimantas",
@@ -1742,7 +2512,44 @@
           "label": "abu vaizdavo kaimą"
         }
       ],
-      "wikidata": "Q1958817"
+      "wikidata": "Q1958817",
+      "life": [
+        {
+          "year": 1869,
+          "label": "Gimsta",
+          "place": "Maleišiai"
+        },
+        {
+          "year": 1918,
+          "label": "Romanas „Pragiedruliai“ (1918–1920)"
+        },
+        {
+          "year": 1922,
+          "label": "Pirmasis Lietuvos rašytojų ir žurnalistų sąjungos pirmininkas"
+        },
+        {
+          "year": 1932,
+          "label": "„Žemaičių Robinzonas“"
+        },
+        {
+          "year": 1933,
+          "label": "Miršta",
+          "place": "Kaunas"
+        }
+      ],
+      "places": [
+        {
+          "name": "Maleišiai",
+          "lat": 55.74,
+          "lon": 25.43
+        },
+        {
+          "name": "Kaunas",
+          "lat": 54.9,
+          "lon": 23.93
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "pragiedruliai",
@@ -1863,7 +2670,46 @@
           "label": "abu anykštėnai"
         }
       ],
-      "wikidata": "Q1376466"
+      "wikidata": "Q1376466",
+      "life": [
+        {
+          "year": 1879,
+          "label": "Gimsta",
+          "place": "Niūronys"
+        },
+        {
+          "year": 1907,
+          "label": "Apysaka „Liūdna pasaka“"
+        },
+        {
+          "year": 1907,
+          "label": "Miršta",
+          "place": "Zakopanė"
+        },
+        {
+          "year": 1953,
+          "label": "Perkeliamas į Liudiškių piliakalnį",
+          "place": "Anykščiai"
+        }
+      ],
+      "places": [
+        {
+          "name": "Niūronys",
+          "lat": 55.57,
+          "lon": 25.09
+        },
+        {
+          "name": "Zakopanė",
+          "lat": 49.3,
+          "lon": 19.95
+        },
+        {
+          "name": "Anykščiai",
+          "lat": 55.53,
+          "lon": 25.11
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "liudna-pasaka",
@@ -1958,7 +2804,18 @@
           "label": "vaikystės draugas"
         }
       ],
-      "wikidata": "Q971087"
+      "wikidata": "Q971087",
+      "life": [
+        {
+          "year": 1879,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1964,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "kubiliute",
@@ -1979,7 +2836,18 @@
           "label": "jo našlė ją priglaudė"
         }
       ],
-      "wikidata": "Q6756675"
+      "wikidata": "Q6756675",
+      "life": [
+        {
+          "year": 1898,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1963,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "vienuolis",
@@ -2010,7 +2878,38 @@
           "label": "giminaitis (motinos dėdė)"
         }
       ],
-      "wikidata": "Q2008524"
+      "wikidata": "Q2008524",
+      "life": [
+        {
+          "year": 1882,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1913,
+          "label": "Apsakymas „Paskenduolė“"
+        },
+        {
+          "year": 1949,
+          "label": "Paskutinis romanas „Puodžiūnkiemis“"
+        },
+        {
+          "year": 1957,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Kaukazas",
+          "lat": 42.75,
+          "lon": 44.5
+        },
+        {
+          "name": "Anykščiai",
+          "lat": 55.53,
+          "lon": 25.11
+        }
+      ],
+      "motif": "mountains"
     },
     {
       "id": "paskenduole",
@@ -2086,7 +2985,50 @@
           "label": "kitas Vincas Mickevičius"
         }
       ],
-      "wikidata": "Q707346"
+      "wikidata": "Q707346",
+      "life": [
+        {
+          "year": 1882,
+          "label": "Gimsta",
+          "place": "Subartonys"
+        },
+        {
+          "year": 1911,
+          "label": "Drama „Šarūnas“"
+        },
+        {
+          "year": 1912,
+          "label": "„Dainavos šalies senų žmonių padavimai“"
+        },
+        {
+          "year": 1919,
+          "label": "Paskiriamas Lietuvos konsulu Azerbaidžane",
+          "place": "Azerbaidžanas"
+        },
+        {
+          "year": 1954,
+          "label": "Miršta",
+          "place": "JAV"
+        }
+      ],
+      "places": [
+        {
+          "name": "Subartonys",
+          "lat": 54.2,
+          "lon": 24.17
+        },
+        {
+          "name": "Azerbaidžanas",
+          "lat": 40.3,
+          "lon": 47.7
+        },
+        {
+          "name": "JAV",
+          "lat": 39.83,
+          "lon": -98.58
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "sarunas",
@@ -2183,7 +3125,18 @@
           "label": "ne Krėvė"
         }
       ],
-      "wikidata": "Q188271"
+      "wikidata": "Q188271",
+      "life": [
+        {
+          "year": 1880,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1935,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "simbolizmas",

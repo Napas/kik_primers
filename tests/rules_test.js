@@ -1,5 +1,5 @@
 import { assertEquals, assertMatch, assertNotEquals } from "@std/assert";
-import { boldSpans, checkCoverage, checkPack, packText, scanSite } from "../tools/rules.js";
+import { boldSpans, checkCoverage, checkPack, packFiles, packText, scanSite } from "../tools/rules.js";
 
 const mini = () => JSON.parse(Deno.readTextFileSync(new URL("./fixtures/mini/topic.json", import.meta.url)));
 const edit = (f) => {
@@ -50,6 +50,15 @@ Deno.test("room without span needs no at", () =>
     p.rooms[1].span = null;
     delete p.spots[2].at;
   })), []));
+Deno.test("a room span needs from < to: equal ends would give the room no width", () => {
+  assertMatch(problems(edit((p) => (p.rooms[1].span = [1700, 1700]))), /from < to/);
+  assertMatch(problems(edit((p) => (p.rooms[1].span = [1800, 1700]))), /from < to/);
+});
+Deno.test("packFiles lists every photo and illustration file a pack names", () => {
+  const p = edit((p) => (p.spots[1].illustration = { file: "img/knyga.png", approved: true }));
+  assertEquals(packFiles(p), ["img/jonas.jpg", "img/knyga.png"]);
+  assertEquals(packFiles({ spots: [{}, null, { photo: { file: 3 } }] }), []);
+});
 Deno.test("by must be a person", () =>
   assertMatch(problems(edit((p) => (p.spots[1].by = "didysis-sukilimas"))), /not a person/));
 Deno.test("question with unknown room", () =>

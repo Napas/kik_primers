@@ -79,8 +79,8 @@ One room per `## N.` section, same `n` and title.
 - `why[]`: every bold question in the section. The question and its answer sit on the same
   line: `**Kodėl ...?** Prūsijos kunigaikštis ...`. `q` is the bold text, `a` is the rest
   of that same paragraph. Do not drop any; coverage requires them.
-- `span`: `[from, to]` integers, `from <= to`, or `null` for an annex room with no
-  years. Take it from the section title (XVI–XVII a. gives `[1500, 1700]`, "1918–1940"
+- `span`: `[from, to]` integers, `from < to` (equal ends would give the room no
+  width), or `null` for an annex room with no years. Take it from the section title (XVI–XVII a. gives `[1500, 1700]`, "1918–1940"
   gives `[1918, 1940]`) or from the `extras.json` `overview` timeline `start`/`end`
   for that period. Rooms may overlap.
 - `style` must be one of the names below. Literature mapping:
@@ -142,6 +142,8 @@ Fields:
 - `photo`: optional, set by `tools/import-photos.ts`: `file`, `author`, `license`,
   `source_url` all non-empty (`license_url` optional). `author: "nežinomas"` only for
   public-domain or CC0 files. No licence info means no photo (the import drops it).
+  `file` is relative to the topic folder and must exist there (`deno task validate`
+  checks it, and the same for `illustration.file`).
 
 Person-only optional fields:
 

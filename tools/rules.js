@@ -20,8 +20,8 @@ function checkRoom(r, i, p) {
     p.push(`${w}: why must be a list of {q, a}`);
   }
   const s = r.span;
-  if (s !== null && !(Array.isArray(s) && s.length === 2 && s.every(isInt) && s[0] <= s[1])) {
-    p.push(`${w}: span must be null or [from, to] with from <= to`);
+  if (s !== null && !(Array.isArray(s) && s.length === 2 && s.every(isInt) && s[0] < s[1])) {
+    p.push(`${w}: span must be null or [from, to] with from < to`);
   }
   if (!STYLE_NAMES.includes(r.style)) p.push(`${w}: style ${r.style} is not a known style`);
 }
@@ -163,6 +163,13 @@ export function checkPack(pack) {
 
   p.push(...checkSkipped(pack.skipped));
   return p;
+}
+
+/** Photo and illustration files the pack's spots name, as paths relative to its topic folder. */
+export function packFiles(pack) {
+  return (Array.isArray(pack?.spots) ? pack.spots : [])
+    .flatMap((s) => [s?.photo?.file, s?.illustration?.file])
+    .filter(isStr);
 }
 
 /** Problems in a list of skip entries ({span, reason}): a pack's `skipped` or a private coverage file's. */

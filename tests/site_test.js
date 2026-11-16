@@ -44,6 +44,33 @@ Deno.test("validate reports an unreadable file", async () => {
   }
 });
 
+Deno.test("validate reports a photo or illustration file missing from its topic folder", async () => {
+  const dir = await Deno.makeTempDir();
+  try {
+    const topic = `${dir}/topics/mini-test`;
+    await Deno.mkdir(`${topic}/img`, { recursive: true });
+    const pack = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/mini/topic.json`));
+    pack.spots[1].illustration = { file: "img/knyga.png", approved: true };
+    pack.spots[2].photo = { ...pack.spots[0].photo, file: "../mini-test/img/jonas.jpg" };
+    await Deno.writeTextFile(`${topic}/topic.json`, JSON.stringify(pack));
+    let r = await validate(dir);
+    assertEquals(r.code, 1);
+    assertMatch(r.err, /mini-test\/topic\.json: missing file img\/jonas\.jpg/);
+    assertMatch(r.err, /missing file img\/knyga\.png/);
+    await Deno.writeFile(`${topic}/img/jonas.jpg`, new Uint8Array());
+    await Deno.writeFile(`${topic}/img/knyga.png`, new Uint8Array());
+    r = await validate(dir);
+    assertEquals(r.code, 1, "a path leaving the topic folder counts as missing");
+    assertMatch(r.err, /missing file \.\.\/mini-test\/img\/jonas\.jpg/);
+    delete pack.spots[2].photo;
+    await Deno.writeTextFile(`${topic}/topic.json`, JSON.stringify(pack));
+    r = await validate(dir);
+    assertEquals(r.code, 0, r.err);
+  } finally {
+    await Deno.remove(dir, { recursive: true });
+  }
+});
+
 // A primer span with a forbidden word, built from parts so this file passes the scan.
 const MASKED_SPAN = `Kodėl ${"laid" + "oje"} klausiama apie X`;
 
@@ -52,6 +79,8 @@ Deno.test("validate --primer takes masked skips from the private coverage/<slug>
   try {
     await Deno.mkdir(`${dir}/site/topics/mini-test`, { recursive: true });
     await Deno.copyFile(`${root}tests/fixtures/mini/topic.json`, `${dir}/site/topics/mini-test/topic.json`);
+    await Deno.mkdir(`${dir}/site/topics/mini-test/img`);
+    await Deno.writeFile(`${dir}/site/topics/mini-test/img/jonas.jpg`, new Uint8Array());
     const primer = Deno.readTextFileSync(`${root}tests/fixtures/mini/primer.md`) + `\n**${MASKED_SPAN}**\n`;
     await Deno.writeTextFile(`${dir}/primer.md`, primer);
     const run = () => validate(`${dir}/site`, "--primer", `mini-test=${dir}/primer.md`);

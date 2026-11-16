@@ -1,7 +1,8 @@
 // Usage: deno run -A tools/validate.ts site [--primer <slug>=<path>]...
 // With --primer, skip entries for <slug> also come from the private <site>/../coverage/<slug>.json
 // ({"skipped": [{span, reason}]}), if it exists; it holds the masked spans that may not be public.
-import { checkCoverage, checkPack, checkSkipped, scanSite } from "./rules.js";
+import { checkCoverage, checkPack, checkSkipped, packFiles, scanSite } from "./rules.js";
+import { imgUrl } from "../site/lib/render.js";
 
 const join = (...parts: string[]) => parts.join("/").replace(/\/+/g, "/");
 const BINARY = /\.(png|jpe?g|gif|webp|avif|ico|woff2?|ttf|otf|mp3|ogg|mp4|webm|pdf)$/i;
@@ -11,6 +12,14 @@ async function* walk(dir: string): AsyncGenerator<string> {
     const p = join(dir, e.name);
     if (e.isDirectory) yield* walk(p);
     else if (e.isFile) yield p;
+  }
+}
+
+async function isFile(path: string): Promise<boolean> {
+  try {
+    return (await Deno.stat(path)).isFile;
+  } catch {
+    return false;
   }
 }
 
@@ -42,6 +51,10 @@ try {
       packs.set(e.name, pack);
       for (const m of checkPack(pack)) problems.push(`${file}: ${m}`);
       if (pack?.slug !== e.name) problems.push(`${file}: slug ${pack?.slug} must equal folder name ${e.name}`);
+      for (const f of packFiles(pack)) {
+        // imgUrl is "" for a path that could leave the topic folder; the site cannot show such a file.
+        if (!imgUrl(pack, f) || !(await isFile(join(topics, e.name, f)))) problems.push(`${file}: missing file ${f}`);
+      }
     } catch (err) {
       problems.push(`${file}: ${err instanceof Error ? err.message : err}`);
     }

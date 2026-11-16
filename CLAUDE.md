@@ -14,7 +14,10 @@ Plan: `docs/superpowers/plans/2026-11-16-primer-world.md`.
 - Nothing under `site/` may mention: the TV show the source material came
   from, its broadcaster, the private study kit (`kik`), or the repo owner
   (name, answers, attempts, which questions they missed). The test suite scans
-  `site/` for these; keep the list in `tools/` current.
+  `site/` (paths and text) for the show's name, the broadcaster, `kik`, word
+  forms of "laida", archive ids and "missed"; keep that list (`FORBIDDEN` in
+  `tools/rules.js`) current. The owner's identity is not in the scan list:
+  check it in review.
 - Never put frames, stills, videos or archive ids (qids, `<digits>:<time>`)
   anywhere in this repo.
 - Deploying needs the owner's go-ahead each time. Hosting is not chosen yet.
@@ -54,8 +57,10 @@ docs/illustrations.md                   illustration house style and decisions
   (`/opt/homebrew/bin/deno`).
 - Three.js is vendored at a pinned version with its licence; no runtime CDN.
 - Lithuanian UI and content. Lithuanian text in UTF-8 with diacritics.
-- Look and feel live in one theme module and one model factory per spot kind:
-  change the look there, not in layout or content code.
+- Look and feel live in four files: `site/lib/theme.js` (colours, sizes,
+  light), `site/lib/site.css` (pages), `site/lib/scene/styles.js` (rooms,
+  path, ground) and `site/lib/scene/spots.js` (one model per spot kind). Change the
+  look there, not in layout or content code.
 - Browser storage: neutral key prefix, every access in try/catch, the page
   works without it.
 - Photos need author, licence and source (Commons); `about.html` lists them.

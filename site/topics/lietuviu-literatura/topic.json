@@ -3199,7 +3199,38 @@
           "label": "romanas apie jo moteris"
         }
       ],
-      "wikidata": "Q1124485"
+      "wikidata": "Q1124485",
+      "life": [
+        {
+          "year": 1893,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1927,
+          "label": "Rinkinys „Tarp dviejų aušrų“"
+        },
+        {
+          "year": 1933,
+          "label": "Romanas „Altorių šešėly“"
+        },
+        {
+          "year": 1935,
+          "label": "Veda Emiliją Kvedaraitę",
+          "place": "Ryga"
+        },
+        {
+          "year": 1967,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Ryga",
+          "lat": 56.95,
+          "lon": 24.11
+        }
+      ],
+      "motif": "church"
     },
     {
       "id": "tarp-dvieju-ausru",
@@ -3296,7 +3327,18 @@
           "label": "atsakas"
         }
       ],
-      "wikidata": "Q1714258"
+      "wikidata": "Q1714258",
+      "life": [
+        {
+          "year": 1866,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1943,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "church"
     },
     {
       "id": "ruseckaite",
@@ -3317,7 +3359,14 @@
           "label": "romanas apie jo moteris"
         }
       ],
-      "wikidata": "Q16443027"
+      "wikidata": "Q16443027",
+      "life": [
+        {
+          "year": 1950,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "sruoga",
@@ -3358,7 +3407,49 @@
           "label": "prisiminė jį"
         }
       ],
-      "wikidata": "Q571888"
+      "wikidata": "Q571888",
+      "life": [
+        {
+          "year": 1896,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1943,
+          "label": "Paimamas įkaitu į Štuthofo koncentracijos stovyklą",
+          "place": "Štuthofas"
+        },
+        {
+          "year": 1945,
+          "label": "Parašo „Dievų mišką“",
+          "place": "Birštonas"
+        },
+        {
+          "year": 1947,
+          "label": "Miršta"
+        },
+        {
+          "year": 1957,
+          "label": "Išleidžiamas „Dievų miškas“"
+        }
+      ],
+      "places": [
+        {
+          "name": "Miunchenas",
+          "lat": 48.14,
+          "lon": 11.57
+        },
+        {
+          "name": "Štuthofas",
+          "lat": 54.33,
+          "lon": 19.15
+        },
+        {
+          "name": "Birštonas",
+          "lat": 54.6,
+          "lon": 24.03
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "milzino-paunksme",
@@ -3437,7 +3528,18 @@
           "label": "opera „Dalia“"
         }
       ],
-      "wikidata": "Q805870"
+      "wikidata": "Q805870",
+      "life": [
+        {
+          "year": 1904,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1972,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "seasons"
     },
     {
       "id": "babickaite",
@@ -3458,7 +3560,18 @@
           "label": "prisiminė jį"
         }
       ],
-      "wikidata": "Q4074389"
+      "wikidata": "Q4074389",
+      "life": [
+        {
+          "year": 1897,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1961,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "binkis",
@@ -3499,7 +3612,42 @@
           "label": "žmona"
         }
       ],
-      "wikidata": "Q1959702"
+      "wikidata": "Q1959702",
+      "life": [
+        {
+          "year": 1893,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1923,
+          "label": "Rinkinys „100 pavasarių“"
+        },
+        {
+          "year": 1924,
+          "label": "„Keturių vėjų“ žurnalas (1924–1928)"
+        },
+        {
+          "year": 1938,
+          "label": "Pjesė „Atžalynas“"
+        },
+        {
+          "year": 1942,
+          "label": "Miršta; palaidotas Kaune",
+          "place": "Kaunas"
+        },
+        {
+          "year": 1988,
+          "label": "Pasaulio tautų teisuolio vardas"
+        }
+      ],
+      "places": [
+        {
+          "name": "Kaunas",
+          "lat": 54.9,
+          "lon": 23.93
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "keturi-vejai",
@@ -3605,7 +3753,22 @@
           "label": "rašė žurnale"
         }
       ],
-      "wikidata": "Q4457286"
+      "wikidata": "Q4457286",
+      "life": [
+        {
+          "year": 1904,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1924,
+          "label": "Rašo „Keturių vėjų“ žurnale (1924–1928)"
+        },
+        {
+          "year": 1969,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "semerys",
@@ -3625,7 +3788,22 @@
           "label": "rašė žurnale"
         }
       ],
-      "wikidata": "Q12672268"
+      "wikidata": "Q12672268",
+      "life": [
+        {
+          "year": 1898,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1924,
+          "label": "Rašo „Keturių vėjų“ žurnale (1924–1928)"
+        },
+        {
+          "year": 1981,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "binkiene",
@@ -3646,7 +3824,18 @@
           "label": "vyras"
         }
       ],
-      "wikidata": "Q106614835"
+      "wikidata": "Q106614835",
+      "life": [
+        {
+          "year": 1902,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1984,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "greimas",
@@ -3671,7 +3860,18 @@
           "label": "prie jo kapo"
         }
       ],
-      "wikidata": "Q313379"
+      "wikidata": "Q313379",
+      "life": [
+        {
+          "year": 1917,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1992,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "miskinis",
@@ -3692,7 +3892,18 @@
           "label": "prisaikdino"
         }
       ],
-      "wikidata": "Q16443899"
+      "wikidata": "Q16443899",
+      "life": [
+        {
+          "year": 1905,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1983,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "kernagis",
@@ -3717,7 +3928,18 @@
           "label": "daina pagal „Šaukiu aš tautą“"
         }
       ],
-      "wikidata": "Q5110456"
+      "wikidata": "Q5110456",
+      "life": [
+        {
+          "year": 1951,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2008,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "boruta",
@@ -3745,7 +3967,44 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q1961038"
+      "wikidata": "Q1961038",
+      "life": [
+        {
+          "year": 1905,
+          "label": "Gimsta netoli Liudvinavo",
+          "place": "Liudvinavas"
+        },
+        {
+          "year": 1938,
+          "label": "Romanas „Mediniai stebuklai“"
+        },
+        {
+          "year": 1945,
+          "label": "Išleidžiama apysaka „Baltaragio malūnas“"
+        },
+        {
+          "year": 1965,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Liudvinavas",
+          "lat": 54.48,
+          "lon": 23.35
+        },
+        {
+          "name": "Ražiškiai",
+          "lat": 54.83,
+          "lon": 23.92
+        },
+        {
+          "name": "Marijampolė",
+          "lat": 54.56,
+          "lon": 23.35
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "mediniai-stebuklai",
@@ -3832,7 +4091,43 @@
           "label": "painiojama su juo"
         }
       ],
-      "wikidata": "Q462166"
+      "wikidata": "Q462166",
+      "life": [
+        {
+          "year": 1904,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1938,
+          "label": "Rinkinys „Diemedžiu žydėsiu“"
+        },
+        {
+          "year": 1940,
+          "label": "Poema „Eglė žalčių karalienė“"
+        },
+        {
+          "year": 1945,
+          "label": "Miršta",
+          "place": "Maskva"
+        },
+        {
+          "year": 1965,
+          "label": "Jos atminimui pradedamas „Poezijos pavasaris“"
+        }
+      ],
+      "places": [
+        {
+          "name": "Maskva",
+          "lat": 55.75,
+          "lon": 37.62
+        },
+        {
+          "name": "Kaunas",
+          "lat": 54.9,
+          "lon": 23.93
+        }
+      ],
+      "motif": "sea"
     },
     {
       "id": "diemedziu-zydesiu",
@@ -3944,7 +4239,18 @@
           "label": "painiojamas su ja"
         }
       ],
-      "wikidata": "Q1960969"
+      "wikidata": "Q1960969",
+      "life": [
+        {
+          "year": 1896,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1917,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "seasons"
     },
     {
       "id": "cvirka",
@@ -3970,7 +4276,26 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q2496710"
+      "wikidata": "Q2496710",
+      "life": [
+        {
+          "year": 1909,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1934,
+          "label": "Romanas „Frank Kruk“"
+        },
+        {
+          "year": 1936,
+          "label": "Romanas „Meisteris ir sūnūs“"
+        },
+        {
+          "year": 1947,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "frank-kruk",
@@ -4036,7 +4361,52 @@
           "label": "vadovavo"
         }
       ],
-      "wikidata": "Q2240208"
+      "wikidata": "Q2240208",
+      "life": [
+        {
+          "year": 1907,
+          "label": "Gimsta",
+          "place": "Stebeikėliai"
+        },
+        {
+          "year": 1941,
+          "label": "Rinkinys „Šaukiu aš tautą“"
+        },
+        {
+          "year": 2002,
+          "label": "Miršta",
+          "place": "Los Andželas"
+        },
+        {
+          "year": 2020,
+          "label": "Atidengiamas paminklas",
+          "place": "Pasvalys"
+        }
+      ],
+      "places": [
+        {
+          "name": "Stebeikėliai",
+          "lat": 56.08,
+          "lon": 24.31,
+          "approx": true
+        },
+        {
+          "name": "Los Andželas",
+          "lat": 34.05,
+          "lon": -118.24
+        },
+        {
+          "name": "Kaunas",
+          "lat": 54.9,
+          "lon": 23.93
+        },
+        {
+          "name": "Pasvalys",
+          "lat": 56.06,
+          "lon": 24.4
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "saukiu-as-tauta",
@@ -4090,7 +4460,29 @@
           "label": "Mažosios Lietuvos linija"
         }
       ],
-      "wikidata": "Q459271"
+      "wikidata": "Q459271",
+      "life": [
+        {
+          "year": 1897,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1935,
+          "label": "Romanas „Aukštujų Šimonių likimas“; už jį – valstybinė literatūros premija"
+        },
+        {
+          "year": 1978,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Priekulė",
+          "lat": 55.56,
+          "lon": 21.32
+        }
+      ],
+      "motif": "sea"
     },
     {
       "id": "aukstuju-simoniu-likimas",
@@ -4150,7 +4542,33 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q6097324"
+      "wikidata": "Q6097324",
+      "life": [
+        {
+          "year": 1889,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1913,
+          "label": "Romanas „Kuprelis“"
+        },
+        {
+          "year": 1940,
+          "label": "Memuarai-publicistika „Raudonasis tvanas“"
+        },
+        {
+          "year": 1959,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Švedija",
+          "lat": 62.0,
+          "lon": 15.0
+        }
+      ],
+      "motif": "ship"
     },
     {
       "id": "kuprelis",
@@ -4194,7 +4612,32 @@
           "label": "ne jo slapyvardis"
         }
       ],
-      "wikidata": "Q3801386"
+      "wikidata": "Q3801386",
+      "life": [
+        {
+          "year": 1921,
+          "label": "Gimsta",
+          "place": "Šarnelė"
+        },
+        {
+          "year": 1944,
+          "label": "Žūva nuo artilerijos sviedinio skeveldros",
+          "place": "Žemaičių Kalvarija"
+        }
+      ],
+      "places": [
+        {
+          "name": "Šarnelė",
+          "lat": 56.13,
+          "lon": 21.96
+        },
+        {
+          "name": "Žemaičių Kalvarija",
+          "lat": 56.12,
+          "lon": 22.02
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "banionis",
@@ -4215,7 +4658,18 @@
           "label": "turėjo važiuoti kartu"
         }
       ],
-      "wikidata": "Q908633"
+      "wikidata": "Q908633",
+      "life": [
+        {
+          "year": 1924,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2014,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "racickas",
@@ -4238,7 +4692,14 @@
           "label": "ne Mačernis"
         }
       ],
-      "wikidata": "Q16477140"
+      "wikidata": "Q16477140",
+      "life": [
+        {
+          "year": 1952,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "skema",
@@ -4258,7 +4719,40 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q4770956"
+      "wikidata": "Q4770956",
+      "life": [
+        {
+          "year": 1910,
+          "label": "Gimsta",
+          "place": "Lodzė"
+        },
+        {
+          "year": 1929,
+          "label": "Pradeda studijuoti mediciną"
+        },
+        {
+          "year": 1958,
+          "label": "Romanas „Balta drobulė“"
+        },
+        {
+          "year": 1961,
+          "label": "Žūva autoavarijoje",
+          "place": "JAV"
+        }
+      ],
+      "places": [
+        {
+          "name": "Lodzė",
+          "lat": 51.76,
+          "lon": 19.46
+        },
+        {
+          "name": "Niujorkas",
+          "lat": 40.71,
+          "lon": -74.01
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "balta-drobule",
@@ -4305,7 +4799,22 @@
           "label": "žmona"
         }
       ],
-      "wikidata": "Q12664573"
+      "wikidata": "Q12664573",
+      "life": [
+        {
+          "year": 1914,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1957,
+          "label": "Romanas „Miškais ateina ruduo“"
+        },
+        {
+          "year": 1980,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "miskais-ateina-ruduo",
@@ -4346,7 +4855,22 @@
           "label": "vyras"
         }
       ],
-      "wikidata": "Q12678968"
+      "wikidata": "Q12678968",
+      "life": [
+        {
+          "year": 1927,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2013,
+          "label": "Miršta"
+        },
+        {
+          "year": 2027,
+          "label": "Seimo paskelbti Liūnės Sutemos metai"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "radauskas",
@@ -4366,7 +4890,30 @@
           "label": "dainuoja jo „Vakarą“"
         }
       ],
-      "wikidata": "Q5617250"
+      "wikidata": "Q5617250",
+      "life": [
+        {
+          "year": 1910,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1944,
+          "label": "Pasitraukia į Vakarus"
+        },
+        {
+          "year": 1970,
+          "label": "Miršta",
+          "place": "Vašingtonas"
+        }
+      ],
+      "places": [
+        {
+          "name": "Vašingtonas",
+          "lat": 38.9,
+          "lon": -77.04
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "ditkovskis",
@@ -4387,7 +4934,14 @@
           "label": "dainuoja jo „Vakarą“"
         }
       ],
-      "wikidata": "Q16467796"
+      "wikidata": "Q16467796",
+      "life": [
+        {
+          "year": 1955,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "seasons"
     },
     {
       "id": "nyka-niliunas",
@@ -4404,7 +4958,18 @@
       "at": 1944,
       "text": "Alfonsas Nyka-Niliūnas (tikroji pavardė Čipkus; 1919–2015) – vienas egzodo poetų.",
       "links": [],
-      "wikidata": "Q12647669"
+      "wikidata": "Q12647669",
+      "life": [
+        {
+          "year": 1919,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2015,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "aistis",
@@ -4421,7 +4986,18 @@
       "at": 1944,
       "text": "Jonas Aistis (tikroji pavardė Aleksandravičius; 1904–1973) – egzodo poetas, „liūdnojo veido riteris“; apgynė disertaciją apie evangelijų vertimus į provansalų kalbą.",
       "links": [],
-      "wikidata": "Q1395225"
+      "wikidata": "Q1395225",
+      "life": [
+        {
+          "year": 1904,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1973,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "bradunas",
@@ -4436,7 +5012,18 @@
       "at": 1944,
       "text": "Kazys Bradūnas – egzodo poetas; rinkiniai „Vilniaus varpai“, „Pėdos arimuos“; dramaturgas nebuvo. Jo žodžiai iškalti Sausio 13-osios proginės monetos briaunoje.",
       "links": [],
-      "wikidata": "Q1398095"
+      "wikidata": "Q1398095",
+      "life": [
+        {
+          "year": 1917,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2009,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "nagys",
@@ -4451,7 +5038,18 @@
       "at": 1944,
       "text": "Egzodo poetas Henrikas Nagys patriotinę poeziją vadino „čiobreline“.",
       "links": [],
-      "wikidata": "Q16452565"
+      "wikidata": "Q16452565",
+      "life": [
+        {
+          "year": 1920,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1996,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "milosas",
@@ -4485,7 +5083,44 @@
           "label": "abu LDK paveldo poetai, rašę lenkiškai"
         }
       ],
-      "wikidata": "Q45970"
+      "wikidata": "Q45970",
+      "life": [
+        {
+          "year": 1911,
+          "label": "Gimsta",
+          "place": "Šeteniai"
+        },
+        {
+          "year": 1955,
+          "label": "Romanas „Isos slėnis“"
+        },
+        {
+          "year": 1977,
+          "label": "Pakviečia Tomą Venclovą dėstyti Berklyje",
+          "place": "Berklis"
+        },
+        {
+          "year": 1980,
+          "label": "Nobelio premija"
+        },
+        {
+          "year": 2004,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Šeteniai",
+          "lat": 55.4,
+          "lon": 24.04
+        },
+        {
+          "name": "Berklis",
+          "lat": 37.87,
+          "lon": -122.27
+        }
+      ],
+      "motif": "river"
     },
     {
       "id": "isos-slenis",
@@ -4532,7 +5167,26 @@
           "label": "senelis"
         }
       ],
-      "wikidata": "Q187907"
+      "wikidata": "Q187907",
+      "life": [
+        {
+          "year": 1937,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1977,
+          "label": "Milošas pakviečia jį dėstyti Berklyje",
+          "place": "Berklis"
+        }
+      ],
+      "places": [
+        {
+          "name": "Berklis",
+          "lat": 37.87,
+          "lon": -122.27
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "antanas-venclova",
@@ -4553,7 +5207,18 @@
           "label": "sūnus"
         }
       ],
-      "wikidata": "Q571075"
+      "wikidata": "Q571075",
+      "life": [
+        {
+          "year": 1906,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1971,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "rackauskas",
@@ -4574,7 +5239,18 @@
           "label": "anūkas"
         }
       ],
-      "wikidata": "Q12665163"
+      "wikidata": "Q12665163",
+      "life": [
+        {
+          "year": 1885,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1968,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "milasius",
@@ -4590,7 +5266,25 @@
       "aside": true,
       "text": "Oskaras Milašius – vienas „svetimakalbių“ lietuvių: rašė prancūziškai, jo skulptūra stovi Fontenblo mieste.",
       "links": [],
-      "wikidata": "Q544902"
+      "wikidata": "Q544902",
+      "life": [
+        {
+          "year": 1877,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1939,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Fontenblo",
+          "lat": 48.4,
+          "lon": 2.7
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "baltrusaitis",
@@ -4606,7 +5300,18 @@
       "aside": true,
       "text": "Jurgis Baltrušaitis – vienas „svetimakalbių“ lietuvių, diplomatas Rusijoje, išgelbėjęs Borisą Pasternaką ir Marcą Chagallą.",
       "links": [],
-      "wikidata": "Q2378046"
+      "wikidata": "Q2378046",
+      "life": [
+        {
+          "year": 1873,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1944,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "savickis",
@@ -4622,7 +5327,25 @@
       "aside": true,
       "text": "Jurgis Savickis – vienas „svetimakalbių“ lietuvių; diplomatinę karjerą pradėjo Danijoje, o savo vilą Prancūzijoje pavadino „Ariogala“.",
       "links": [],
-      "wikidata": "Q14835563"
+      "wikidata": "Q14835563",
+      "life": [
+        {
+          "year": 1890,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1952,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Danija",
+          "lat": 56.0,
+          "lon": 10.0
+        }
+      ],
+      "motif": "sea"
     },
     {
       "id": "marcinkevicius",
@@ -4682,7 +5405,56 @@
           "label": "ta pati gimnazija"
         }
       ],
-      "wikidata": "Q359563"
+      "wikidata": "Q359563",
+      "life": [
+        {
+          "year": 1930,
+          "label": "Gimsta",
+          "place": "Važatkiemis"
+        },
+        {
+          "year": 1964,
+          "label": "Poema „Donelaitis“"
+        },
+        {
+          "year": 1965,
+          "label": "Pirmasis „Poezijos pavasario“ laureatas"
+        },
+        {
+          "year": 1968,
+          "label": "Drama „Mindaugas“"
+        },
+        {
+          "year": 1971,
+          "label": "Drama „Katedra“"
+        },
+        {
+          "year": 1977,
+          "label": "Drama „Mažvydas“"
+        },
+        {
+          "year": 2011,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Važatkiemis",
+          "lat": 54.64,
+          "lon": 24.04
+        },
+        {
+          "name": "Prienai",
+          "lat": 54.63,
+          "lon": 23.95
+        },
+        {
+          "name": "Druskininkai",
+          "lat": 54.02,
+          "lon": 23.97
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "donelaitis-poema",
@@ -4850,7 +5622,25 @@
           "label": "ta pati gimnazija"
         }
       ],
-      "wikidata": "Q4770951"
+      "wikidata": "Q4770951",
+      "life": [
+        {
+          "year": 1908,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1987,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Prienai",
+          "lat": 54.63,
+          "lon": 23.95
+        }
+      ],
+      "motif": "book"
     },
     {
       "id": "baltusis",
@@ -4876,7 +5666,34 @@
           "label": "dažnai supainiojami"
         }
       ],
-      "wikidata": "Q2042700"
+      "wikidata": "Q2042700",
+      "life": [
+        {
+          "year": 1909,
+          "label": "Gimsta",
+          "place": "Ryga"
+        },
+        {
+          "year": 1957,
+          "label": "„Parduotos vasaros“ (1957, 1969)"
+        },
+        {
+          "year": 1979,
+          "label": "Romanas „Sakmė apie Juzą“"
+        },
+        {
+          "year": 1991,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Ryga",
+          "lat": 56.95,
+          "lon": 24.11
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "sakme-apie-juza",
@@ -4919,7 +5736,22 @@
           "label": "dažnai supainiojami"
         }
       ],
-      "wikidata": "Q4055889"
+      "wikidata": "Q4055889",
+      "life": [
+        {
+          "year": 1922,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1976,
+          "label": "Lenino premija už „Sodybų tuštėjimo metą“"
+        },
+        {
+          "year": 1999,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "sodybu-tustejimo-metas",
@@ -4957,7 +5789,18 @@
           "label": "painiojamas su juo"
         }
       ],
-      "wikidata": "Q15728230"
+      "wikidata": "Q15728230",
+      "life": [
+        {
+          "year": 1932,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2021,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "granauskas",
@@ -4981,7 +5824,43 @@
           "label": "rašė apie jo skaitytojus"
         }
       ],
-      "wikidata": "Q1410933"
+      "wikidata": "Q1410933",
+      "life": [
+        {
+          "year": 1939,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1975,
+          "label": "Apysaka „Jaučio aukojimas“"
+        },
+        {
+          "year": 1988,
+          "label": "Apysaka „Gyvenimas po klevu“"
+        },
+        {
+          "year": 2014,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Mosėdis",
+          "lat": 56.16,
+          "lon": 21.58
+        },
+        {
+          "name": "Skuodas",
+          "lat": 56.27,
+          "lon": 21.53
+        },
+        {
+          "name": "Sėda",
+          "lat": 56.16,
+          "lon": 22.09
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "gyvenimas-po-klevu",
@@ -5028,7 +5907,22 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q692182"
+      "wikidata": "Q692182",
+      "life": [
+        {
+          "year": 1930,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2003,
+          "label": "Romanas „Durnių laivas“"
+        },
+        {
+          "year": 2008,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "giles-nuotykiai",
@@ -5105,7 +5999,22 @@
           "label": "giminaitis"
         }
       ],
-      "wikidata": "Q599550"
+      "wikidata": "Q599550",
+      "life": [
+        {
+          "year": 1945,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1972,
+          "label": "Apysaka „Riešutų duona“"
+        },
+        {
+          "year": 1977,
+          "label": "Pagal „Riešutų duoną“ sukuriamas filmas"
+        }
+      ],
+      "motif": "fence"
     },
     {
       "id": "riesutu-duona",
@@ -5139,7 +6048,18 @@
       "at": 1960,
       "text": "Mykolas Sluckis – sovietmečio prozininkas, romano „Laiptai į dangų“ autorius.",
       "links": [],
-      "wikidata": "Q12666100"
+      "wikidata": "Q12666100",
+      "life": [
+        {
+          "year": 1928,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2013,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "zilinskaite",
@@ -5154,7 +6074,18 @@
       "at": 1970,
       "text": "Vytautė Žilinskaitė (1930–2024) – humoristė, pasakos „Robotas ir peteliškė“ autorė.",
       "links": [],
-      "wikidata": "Q2161850"
+      "wikidata": "Q2161850",
+      "life": [
+        {
+          "year": 1930,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2024,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "savelis",
@@ -5169,7 +6100,18 @@
       "at": 1970,
       "text": "Rimantas Šavelis – „Tado Blindos“ autorius.",
       "links": [],
-      "wikidata": "Q12671359"
+      "wikidata": "Q12671359",
+      "life": [
+        {
+          "year": 1942,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2021,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "gutauskas",
@@ -5184,7 +6126,18 @@
       "at": 1980,
       "text": "Leonardas Gutauskas – „Vilko dantų karolių“ autorius.",
       "links": [],
-      "wikidata": "Q16458444"
+      "wikidata": "Q16458444",
+      "life": [
+        {
+          "year": 1938,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2021,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "aputis",
@@ -5199,7 +6152,25 @@
       "at": 1975,
       "text": "Novelistas Juozas Aputis gyveno Zervynose.",
       "links": [],
-      "wikidata": "Q3811354"
+      "wikidata": "Q3811354",
+      "life": [
+        {
+          "year": 1936,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2010,
+          "label": "Miršta"
+        }
+      ],
+      "places": [
+        {
+          "name": "Zervynos",
+          "lat": 54.12,
+          "lon": 24.5
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "grusas",
@@ -5223,7 +6194,26 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q13640180"
+      "wikidata": "Q13640180",
+      "life": [
+        {
+          "year": 1901,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1957,
+          "label": "Drama „Herkus Mantas“"
+        },
+        {
+          "year": 1972,
+          "label": "Drama „Barbora Radvilaitė“"
+        },
+        {
+          "year": 1986,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "church"
     },
     {
       "id": "herkus-mantas",
@@ -5276,7 +6266,14 @@
       "at": 1970,
       "text": "Kazys Saja (g. 1932) – pjesės „Šventežeris“, „Mamutų medžioklė“, „Ubagų sala“ (veiksmas Plateliuose); apysaka „Būrimas obuolio sėklom“. Jis taip pat Kovo 11-osios Akto signataras. Pasakų rinkinys „Dangus griūva“ – ne jo, o Borutos.",
       "links": [],
-      "wikidata": "Q6381130"
+      "wikidata": "Q6381130",
+      "life": [
+        {
+          "year": 1932,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "dauguvietis",
@@ -5300,7 +6297,18 @@
           "label": "ne jo"
         }
       ],
-      "wikidata": "Q4155246"
+      "wikidata": "Q4155246",
+      "life": [
+        {
+          "year": 1885,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1949,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "zaldokyne",
@@ -5345,7 +6353,22 @@
           "label": "dainuoja jo eiles"
         }
       ],
-      "wikidata": "Q1289688"
+      "wikidata": "Q1289688",
+      "life": [
+        {
+          "year": 1943,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1985,
+          "label": "Įsteigia Jotvingių premiją"
+        },
+        {
+          "year": 2008,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "jotvingiu-premija",
@@ -5383,7 +6406,22 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q4282554"
+      "wikidata": "Q4282554",
+      "life": [
+        {
+          "year": 1936,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1977,
+          "label": "„Kukučio baladės“"
+        },
+        {
+          "year": 2013,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "kukucio-balades",
@@ -5417,7 +6455,18 @@
       "at": 1960,
       "text": "Paulius Širvys (1920–1979) – „Aš – beržas, lietuviškas beržas, su plieno dalgiu ant peties“; „Nežiūrėk, nežibėk“, „Neklauskit meilės vardo“, „Su Nemunu pateka saulė“; rinkinys „Ir nusinešė saulę miškai“.",
       "links": [],
-      "wikidata": "Q7220079"
+      "wikidata": "Q7220079",
+      "life": [
+        {
+          "year": 1920,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1979,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "baltakis",
@@ -5437,7 +6486,18 @@
           "label": "dainuoja jo „Daktarus“"
         }
       ],
-      "wikidata": "Q2547085"
+      "wikidata": "Q2547085",
+      "life": [
+        {
+          "year": 1930,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2022,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "hiperbole",
@@ -5475,7 +6535,14 @@
           "label": "daina „Kaip gražu miške“"
         }
       ],
-      "wikidata": "Q13192275"
+      "wikidata": "Q13192275",
+      "life": [
+        {
+          "year": 1953,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "miezelaitis",
@@ -5490,7 +6557,18 @@
       "at": 1960,
       "text": "Vaikams rašė Eduardas Mieželaitis („Zuikis Puikis“, „Kastantas muzikantas“). „Kiškių sukilimas“ – ne jo, o Binkio.",
       "links": [],
-      "wikidata": "Q738623"
+      "wikidata": "Q738623",
+      "life": [
+        {
+          "year": 1919,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1997,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "kubilinskas",
@@ -5505,7 +6583,18 @@
       "at": 1955,
       "text": "Vaikams rašė ir Kostas Kubilinskas („Bebenčiukas ir Kvailutė“); jis bendradarbiavo su saugumu.",
       "links": [],
-      "wikidata": "Q6433503"
+      "wikidata": "Q6433503",
+      "life": [
+        {
+          "year": 1923,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1962,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "degutyte",
@@ -5525,7 +6614,18 @@
           "label": "pirmoji laureatė moteris"
         }
       ],
-      "wikidata": "Q16453194"
+      "wikidata": "Q16453194",
+      "life": [
+        {
+          "year": 1928,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1990,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "seasons"
     },
     {
       "id": "gavelis",
@@ -5553,7 +6653,26 @@
           "label": "skyrė knygą"
         }
       ],
-      "wikidata": "Q7339157"
+      "wikidata": "Q7339157",
+      "life": [
+        {
+          "year": 1950,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1989,
+          "label": "Romanas „Vilniaus pokeris“"
+        },
+        {
+          "year": 1993,
+          "label": "Romanas „Vilniaus džiazas“"
+        },
+        {
+          "year": 2002,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "vilniaus-pokeris",
@@ -5617,7 +6736,18 @@
           "label": "jam skirta knyga"
         }
       ],
-      "wikidata": "Q16476707"
+      "wikidata": "Q16476707",
+      "life": [
+        {
+          "year": 1960,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1993,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "kuncinas",
@@ -5637,7 +6767,22 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q725299"
+      "wikidata": "Q725299",
+      "life": [
+        {
+          "year": 1947,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1993,
+          "label": "Romanas „Tūla“"
+        },
+        {
+          "year": 2002,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "tula",
@@ -5684,7 +6829,30 @@
           "label": "jos vardo premija"
         }
       ],
-      "wikidata": "Q383772"
+      "wikidata": "Q383772",
+      "life": [
+        {
+          "year": 1961,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1985,
+          "label": "Debiutas „Pakalnučių metai“"
+        },
+        {
+          "year": 1993,
+          "label": "Romanas „Ragana ir lietus“"
+        },
+        {
+          "year": 2005,
+          "label": "Nacionalinė kultūros ir meno premija"
+        },
+        {
+          "year": 2007,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "mountains"
     },
     {
       "id": "pakalnuciu-metai",
@@ -5743,7 +6911,22 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q6438276"
+      "wikidata": "Q6438276",
+      "life": [
+        {
+          "year": 1974,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2008,
+          "label": "Debiutinis romanas „Silva rerum“"
+        },
+        {
+          "year": 2019,
+          "label": "Pirmoji „Petro imperatorės“ dalis"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "silva-rerum",
@@ -5782,7 +6965,18 @@
           "label": "parašė"
         }
       ],
-      "wikidata": "Q438597"
+      "wikidata": "Q438597",
+      "life": [
+        {
+          "year": 1965,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2004,
+          "label": "Nacionalinė kultūros ir meno premija"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "pagyvenusio-vyro-pagundos",
@@ -5814,7 +7008,14 @@
       "at": 2013,
       "text": "Andrius Tapinas – „Vilko valanda“ (veikėjas Sidabras) ir tęsinys „Maro diena“, politinis trileris „Prezidentas“.",
       "links": [],
-      "wikidata": "Q12648406"
+      "wikidata": "Q12648406",
+      "life": [
+        {
+          "year": 1977,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "ivaskevicius",
@@ -5834,7 +7035,14 @@
           "label": "pavaizdavo ją kaip Salę"
         }
       ],
-      "wikidata": "Q1899450"
+      "wikidata": "Q1899450",
+      "life": [
+        {
+          "year": 1973,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "kmita",
@@ -5849,7 +7057,14 @@
       "at": 2016,
       "text": "Rimantas Kmita – „Pietinia kronikas“ (šiaulietiška šnekta, Metų knyga).",
       "links": [],
-      "wikidata": "Q31199105"
+      "wikidata": "Q31199105",
+      "life": [
+        {
+          "year": 1977,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "city"
     },
     {
       "id": "slepikas",
@@ -5864,7 +7079,14 @@
       "at": 2011,
       "text": "Alvydas Šlepikas – „Mano vardas – Marytė“.",
       "links": [],
-      "wikidata": "Q16443562"
+      "wikidata": "Q16443562",
+      "life": [
+        {
+          "year": 1966,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "kondrotas",
@@ -5880,7 +7102,14 @@
       "aside": true,
       "text": "Saulius Tomas Kondrotas – „Žalčio žvilgsnis“.",
       "links": [],
-      "wikidata": "Q10970412"
+      "wikidata": "Q10970412",
+      "life": [
+        {
+          "year": 1953,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "forest"
     },
     {
       "id": "zyle",
@@ -5895,7 +7124,14 @@
       "at": 2020,
       "text": "Kotryna Zylė – „Mylimi kaulai“.",
       "links": [],
-      "wikidata": "Q65260877"
+      "wikidata": "Q65260877",
+      "life": [
+        {
+          "year": 1986,
+          "label": "Gimsta"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "pancerovas",
@@ -5906,7 +7142,8 @@
       "years": null,
       "at": 2020,
       "text": "Dovydas Pancerovas – „Medžiojant tėvą“, „Kiborgų žemė“, su Birute Davidonyte „Pranešėjas ir prezidentas“.",
-      "links": []
+      "links": [],
+      "motif": "pen"
     },
     {
       "id": "dovydeno-premija",
@@ -5944,7 +7181,14 @@
           "to": "dovydeno-premija",
           "label": "laureatė (2025)"
         }
-      ]
+      ],
+      "life": [
+        {
+          "year": 2025,
+          "label": "Liudo Dovydėno premija už romaną „Pozuotoja“"
+        }
+      ],
+      "motif": "pen"
     },
     {
       "id": "dovydenas",
@@ -5965,7 +7209,22 @@
           "label": "jo vardo premija"
         }
       ],
-      "wikidata": "Q16459263"
+      "wikidata": "Q16459263",
+      "life": [
+        {
+          "year": 1906,
+          "label": "Gimsta"
+        },
+        {
+          "year": 2000,
+          "label": "Miršta"
+        },
+        {
+          "year": 2007,
+          "label": "Pradedama teikti jo vardo premija už romaną"
+        }
+      ],
+      "motif": "village"
     },
     {
       "id": "ivanauskaites-premija",
@@ -6038,7 +7297,18 @@
           "label": "jo vardo premija"
         }
       ],
-      "wikidata": "Q4102582"
+      "wikidata": "Q4102582",
+      "life": [
+        {
+          "year": 1906,
+          "label": "Gimsta"
+        },
+        {
+          "year": 1992,
+          "label": "Miršta"
+        }
+      ],
+      "motif": "pen"
     }
   ],
   "questions": [

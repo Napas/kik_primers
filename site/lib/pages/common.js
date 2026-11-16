@@ -44,10 +44,31 @@ export function hashId(hash) {
   }
 }
 
-/** The text view's element id for a location hash: `spot-<id>` for a bare spot id; "" without one. */
+// The text view prefixes spot element ids with "spot-".
+const unprefixed = (id) => (id.startsWith("spot-") ? id.slice("spot-".length) : id);
+
+/** The text view's element id for a location hash (`#<id>` or `#spot-<id>`): `spot-<id>`; "" without one. */
 export function textAnchor(hash) {
+  const id = unprefixed(hashId(hash));
+  return id ? `spot-${id}` : "";
+}
+
+/** The spot a location hash names, as `#<id>` or the text view's `#spot-<id>`, that has(id) accepts; else null. */
+export function hashSpot(hash, has) {
   const id = hashId(hash);
-  return !id || id.startsWith("spot-") ? id : `spot-${id}`;
+  return [id, unprefixed(id)].find((x) => x && has(x)) ?? null;
+}
+
+/** True when the world page shows the text view: ?view=text, or a layout the 3D world does not draw. */
+export const textOnly = (url, pack) => url.searchParams.get("view") === "text" || pack.layout !== "time";
+
+/**
+ * Visited spots of an index.json topic: opened ids among topic.ids when the index lists them, else the opened
+ * count capped at topic.spots.
+ */
+export function visitedCount(opened, topic) {
+  if (Array.isArray(topic.ids)) return topic.ids.filter((id) => opened.has(id)).length;
+  return Math.min(opened.size, topic.spots);
 }
 
 /**

@@ -42,7 +42,7 @@ function serveDir(dir) {
   });
 }
 
-/** Copies site/ (without its topics) to a temp dir with `packs` as topics/<slug>/topic.json and an index listing them, serves it, runs fn(baseUrl). */
+/** Copies site/ (without its topics) to a temp dir with `packs` as topics/<slug>/topic.json and an index listing them, serves it, runs fn(baseUrl, dir). */
 export async function withSite(packs, fn) {
   const dir = await Deno.makeTempDir();
   await copyDir(`${root}site`, dir, new Set(["topics"]));
@@ -55,7 +55,7 @@ export async function withSite(packs, fn) {
   await Deno.writeTextFile(`${dir}/topics/index.json`, JSON.stringify({ topics }));
   const server = serveDir(dir);
   try {
-    await fn(`http://127.0.0.1:${server.addr.port}/`);
+    await fn(`http://127.0.0.1:${server.addr.port}/`, dir);
   } finally {
     await server.shutdown();
     await Deno.remove(dir, { recursive: true });
@@ -109,7 +109,8 @@ Deno.test({
     // A spot kind that the 3D models cannot build (an Object.prototype key) while the text view renders it.
     const ODD = { ...structuredClone(MINI), slug: "odd-kind" };
     ODD.spots[2].kind = "constructor";
-    await withSite([MINI, STYLED, BROKEN, ODD], async (base) => {
+    const MAP = { ...structuredClone(MINI), slug: "map-test", layout: "map" };
+    await withSite([MINI, STYLED, BROKEN, ODD, MAP], async (base, dir) => {
       const page = async (path, size) => htmlAttrs(await dumpDom(base + path, size));
 
       await t.step("world renders both rooms and all spots", async () => {
@@ -132,6 +133,11 @@ Deno.test({
         assertEquals(a["data-error"], undefined);
         assertEquals(a["data-ready"], "text");
       });
+      await t.step("a layout other than time shows the text view", async () => {
+        const dom = await dumpDom(`${base}world.html?topic=map-test`);
+        assertEquals([htmlAttrs(dom)["data-error"], htmlAttrs(dom)["data-ready"]], [undefined, "text"]);
+        assert("hidden" in elementAttrs(dom, "world"), "the 3D layer stays hidden");
+      });
       await t.step("test page", async () => {
         const a = await page("test.html?topic=mini-test");
         assertEquals(a["data-error"], undefined);
@@ -144,6 +150,11 @@ Deno.test({
       });
       await t.step("a spot id in the hash opens that spot", async () => {
         const a = await page("world.html?topic=mini-test#jonas-rastas");
+        assertEquals(a["data-error"], undefined);
+        assertEquals([a["data-ready"], a["data-open"]], ["world", "jonas-rastas"]);
+      });
+      await t.step("the text view's #spot-<id> opens that spot too", async () => {
+        const a = await page("world.html?topic=mini-test#spot-jonas-rastas");
         assertEquals(a["data-error"], undefined);
         assertEquals([a["data-ready"], a["data-open"]], ["world", "jonas-rastas"]);
       });
@@ -166,6 +177,16 @@ Deno.test({
       }
       await t.step("a failure while building the world leaves the error visible", async () => {
         const dom = await dumpDom(`${base}world.html?topic=broken`);
+        assert(htmlAttrs(dom)["data-error"], "no data-error");
+        assertEquals(htmlAttrs(dom)["data-ready"], undefined);
+        assert("hidden" in elementAttrs(dom, "world"), "the 3D layer covers the error");
+        assert(!/<canvas/i.test(dom), "the canvas stays in the page");
+      });
+      await t.step("a failure while wiring the built world leaves the error visible", async () => {
+        // Without #overview the page fails after the scene is built and its canvas added.
+        const html = await Deno.readTextFile(`${dir}/world.html`);
+        await Deno.writeTextFile(`${dir}/no-overview.html`, html.replace(' id="overview"', ""));
+        const dom = await dumpDom(`${base}no-overview.html?topic=mini-test`);
         assert(htmlAttrs(dom)["data-error"], "no data-error");
         assertEquals(htmlAttrs(dom)["data-ready"], undefined);
         assert("hidden" in elementAttrs(dom, "world"), "the 3D layer covers the error");
@@ -287,6 +308,11 @@ Deno.test({
         await ev(`document.querySelector('#panel article').dataset.mark = "kept"`);
         await act(`document.querySelector('#panel article p').click()`);
         assertEquals(await ev(`document.querySelector('#panel article').dataset.mark`), "kept", "a click on panel text is not a spot link");
+        const arrow = (type) =>
+          `document.querySelector('#panel article p').dispatchEvent(new KeyboardEvent("${type}", {code: "ArrowDown", key: "ArrowDown", bubbles: true, cancelable: true}))`;
+        assertEquals(await ev(arrow("keydown")), true, "ArrowDown in the panel is left to the panel");
+        s = await act(arrow("keyup"));
+        assertEquals([s.open, s.spot], ["jonas-rastas", "jonas-rastas"], "ArrowDown in the panel does not walk away");
         s = await act(`document.querySelector('#panel a[data-spot="pirma-knyga"]').click()`);
         assertEquals([s.open, s.hash], ["pirma-knyga", ""], "a panel link opens its spot without following the href");
         s = await act(`document.querySelector('#panel [data-close]').click()`);

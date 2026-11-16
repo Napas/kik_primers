@@ -1,5 +1,17 @@
-import { assertEquals, assertMatch, assertThrows } from "@std/assert";
-import { focusReturn, hashId, lastScore, pageProgress, storageBackend, textAnchor, topicFromUrl } from "../site/lib/pages/common.js";
+import { assert, assertEquals, assertMatch, assertThrows } from "@std/assert";
+import {
+  focusReturn,
+  hashId,
+  hashSpot,
+  lastScore,
+  pageProgress,
+  storageBackend,
+  textAnchor,
+  textOnly,
+  topicFromUrl,
+  visitedCount,
+} from "../site/lib/pages/common.js";
+import { aboutHtml } from "../site/lib/pages/about.js";
 import { makeStore } from "../site/lib/storage.js";
 import { facePrompt, move, orderRight, shift, summarize } from "../site/lib/pages/test.js";
 
@@ -132,6 +144,45 @@ Deno.test("textAnchor names the text view's element for a hash: spot-<id> for a 
   assertEquals(textAnchor("#spot-jonas-rastas"), "spot-jonas-rastas");
   assertEquals(textAnchor(""), "");
   assertEquals(textAnchor("#%E0%A4%A"), "");
+});
+
+Deno.test("hashSpot takes a spot id with or without the text view's spot- prefix", () => {
+  const ids = new Set(["jonas-rastas", "spot-x"]);
+  const has = (id) => ids.has(id);
+  assertEquals(hashSpot("#jonas-rastas", has), "jonas-rastas");
+  assertEquals(hashSpot("#spot-jonas-rastas", has), "jonas-rastas");
+  assertEquals(hashSpot("#spot-x", has), "spot-x", "an id that itself starts with spot- wins");
+  for (const h of ["", "#spot-", "#nera", "#%E0%A4%A"]) assertEquals(hashSpot(h, has), null, h);
+});
+
+Deno.test("textOnly: the text view for ?view=text or a layout other than time", () => {
+  const time = { layout: "time" };
+  assertEquals(textOnly(url("?topic=a"), time), false);
+  assertEquals(textOnly(url("?topic=a&view=text"), time), true);
+  assertEquals(textOnly(url("?topic=a"), { layout: "map" }), true);
+});
+
+Deno.test("visitedCount counts only the topic's spot ids when listed, else caps at its spot count", () => {
+  const opened = new Set(["a", "b", "old-1", "old-2"]);
+  assertEquals(visitedCount(opened, { spots: 3, ids: ["a", "b", "c"] }), 2);
+  assertEquals(visitedCount(opened, { spots: 3 }), 3);
+  assertEquals(visitedCount(new Set(["a"]), { spots: 3 }), 1);
+});
+
+Deno.test("aboutHtml lists what loaded and says in Lithuanian what did not", () => {
+  const pack = { spots: [{ name: "Jonas", photo: { author: "P", license: "CC0", source_url: "https://x.org/a" } }, { name: "Be nuotraukos" }] };
+  const topics = [{ slug: "a", title: "Tema A" }, { slug: "b", title: "Tema B" }];
+  const ok = (value) => ({ status: "fulfilled", value });
+  const failed = { status: "rejected", reason: new Error("404") };
+  let r = aboutHtml(topics, [ok(pack), failed], ok("MIT <licence>"));
+  assertEquals(r.credits, 1);
+  assertMatch(r.html, /<li>Jonas: P, CC0 /);
+  assertMatch(r.html, /Nepavyko įkelti temų: Tema B\./);
+  assertMatch(r.html, /MIT &lt;licence&gt;/);
+  r = aboutHtml(topics, [ok(pack), ok(pack)], failed);
+  assertEquals(r.credits, 2);
+  assert(!r.html.includes("Nepavyko įkelti temų"), r.html);
+  assertMatch(r.html, /Three\.js licencijos įkelti nepavyko\./);
 });
 
 Deno.test("focusReturn gives focus back to a keyboard opener that is still in the page", () => {

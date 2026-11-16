@@ -1,6 +1,6 @@
-// World page: the 3D world for ?topic=, or the text view with ?view=text or without WebGL.
-// In the world, picking a spot (or #<spot-id> on load) walks to it and opens its panel with link arcs and,
-// for a person, the lifespan; entering a room opens the room's panel once per visit.
+// World page: the 3D world for ?topic=, or the text view with ?view=text, a layout other than time, or
+// without WebGL. In the world, picking a spot (or #<spot-id> / #spot-<spot-id> on load) walks to it and opens
+// its panel with link arcs and, for a person, the lifespan; entering a room opens the room's panel once per visit.
 import { imgUrl, plotExplainer, textView } from "../render.js";
 import { layoutTime } from "../layout.js";
 import { SCENE } from "../theme.js";
@@ -10,7 +10,7 @@ import { makeControls } from "../scene/controls.js";
 import { sizeLabels, standPoint, updateNearby } from "../scene/nearby.js";
 import { overview, roomAt, roomCounts } from "./overview.js";
 import { makeSelection, roomVisit } from "./selection.js";
-import { focusReturn, hashId, loadIndex, loadPack, markReady, pageProgress, run, showError, textAnchor, topicFromUrl } from "./common.js";
+import { focusReturn, hashSpot, loadIndex, loadPack, markReady, pageProgress, run, showError, textAnchor, textOnly, topicFromUrl } from "./common.js";
 
 const MAX_DT = 0.1; // seconds; longer frame gaps (hidden tab) don't jump the camera
 
@@ -37,7 +37,7 @@ async function main() {
   if (t.error) return showError(t.error);
   const pack = await loadPack(t.slug);
   document.title = pack.title;
-  if (url.searchParams.get("view") === "text" || !hasWebGL()) return showText(pack);
+  if (textOnly(url, pack) || !hasWebGL()) return showText(pack);
 
   const THREE = await import("three");
   let renderer;
@@ -46,8 +46,16 @@ async function main() {
   } catch {
     return showText(pack);
   }
-  // The 3D layer stays hidden until its first frame renders; if the scene fails, the text view takes its place.
+  // The 3D layer stays hidden until the world is built and wired; if the scene fails, the text view takes its
+  // place; if the wiring fails, the layer and the overview go away so the error shows.
   const host = document.getElementById("world");
+  const overviewEl = document.getElementById("overview");
+  const teardown = () => {
+    renderer.dispose();
+    host.replaceChildren();
+    host.hidden = true;
+    if (overviewEl) overviewEl.hidden = true;
+  };
   const layout = layoutTime(pack);
   let world;
   try {
@@ -55,10 +63,19 @@ async function main() {
     host.append(renderer.domElement);
     renderer.render(world.scene, world.camera);
   } catch (e) {
-    renderer.dispose();
-    host.replaceChildren();
+    teardown();
     console.error(e);
     return showText(pack);
+  }
+  let ui;
+  try {
+    ui = interact(THREE, world, pack, layout, renderer.domElement, pageProgress(url));
+    const start = hashSpot(location.hash, (id) => world.spotMeshes.has(id));
+    if (start) ui.goTo(start);
+  } catch (e) {
+    ui?.controls.dispose();
+    teardown();
+    throw e;
   }
   host.hidden = false;
   const link = document.getElementById("text-link");
@@ -67,9 +84,6 @@ async function main() {
   markReady("world", { rooms: world.roomGroups.size, spots: world.spotMeshes.size });
 
   addEventListener("resize", () => sizeTo(renderer, world.camera));
-  const ui = interact(THREE, world, pack, layout, renderer.domElement, pageProgress(url));
-  const start = hashId(location.hash);
-  if (world.spotMeshes.has(start)) ui.goTo(start);
 
   const clock = new THREE.Clock();
   renderer.setAnimationLoop(() => {
@@ -95,7 +109,8 @@ function interact(THREE, world, pack, layout, canvas, progress) {
   const opener = focusReturn();
 
   const counts = () => roomCounts(pack, progress.opened(pack.slug));
-  const map = overview(document.getElementById("overview"), layout, { rooms: pack.rooms, counts: counts(), onJump: jumpTo });
+  const overviewEl = document.getElementById("overview");
+  const map = overview(overviewEl, layout, { rooms: pack.rooms, counts: counts(), onJump: jumpTo });
   const selection = makeSelection(THREE, {
     world,
     pack,
@@ -127,6 +142,8 @@ function interact(THREE, world, pack, layout, canvas, progress) {
     targets: world.spotMeshes,
     occluders: world.walls,
     bounds: world.bounds,
+    // Keys pressed in the panel or the overview belong to them (scrolling, buttons), not to walking.
+    ignore: (el) => el instanceof Node && (panel.contains(el) || overviewEl.contains(el)),
     onPick: (id, point) => (id === null ? controls.walkTo(point) : goTo(id)),
     onHover(id) {
       hovered = id;

@@ -76,8 +76,9 @@ One room per `## N.` section, same `n` and title.
 ```
 
 - `intro`: the section's opening paragraph (the line(s) before the first bold subject).
-- `why[]`: every bold question line in the section (`**Kodėl ...?**`) as `q`, with the
-  paragraph that follows as `a`. Do not drop any; coverage requires them.
+- `why[]`: every bold question in the section. The question and its answer sit on the same
+  line: `**Kodėl ...?** Prūsijos kunigaikštis ...`. `q` is the bold text, `a` is the rest
+  of that same paragraph. Do not drop any; coverage requires them.
 - `span`: `[from, to]` integers, `from <= to`, or `null` for an annex room with no
   years. Take it from the section title (XVI–XVII a. gives `[1500, 1700]`, "1918–1940"
   gives `[1918, 1940]`) or from the `extras.json` `overview` timeline `start`/`end`
@@ -210,11 +211,14 @@ diacritics folded, in some spot's `name`, `aliases` or `text`, a room's `intro` 
 `why`, or the pack intro. Spans that deliberately have no place go in `skipped[]`:
 
 ```json
-{ "span": "Bendras patarimas: ...", "reason": "Patarimas žaidėjui, ne faktas." }
+{ "span": "Pavyzdinis paryškintas tekstas", "reason": "Žaidėjo patarimas, ne faktas." }
 ```
 
-Typical skips: advice aimed at a quiz player, the study-kit framing paragraph. Give a
-reason each time; do not skip a subject to make coverage pass.
+`span` must equal the bold span's text exactly (without the `**`). Sentences that frame
+the primer for a quiz player are plain text, not bold spans, so they need no `skipped`
+entry. Bold spans inside such a paragraph (e.g. `tikrosios pavardės ir slapyvardžiai`)
+are real content: cover them in a spot or room text. Give a reason each time; do not
+skip a subject to make coverage pass.
 
 ## 10. Order of work
 

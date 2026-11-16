@@ -136,6 +136,32 @@ Deno.test("every spot gets a fake spotlight that shares one texture and material
   }
 });
 
+Deno.test("spots share their plain materials; each portrait and year plate keeps its own", () => {
+  const restore = installFakeCanvas();
+  try {
+    const plain = (obj) => {
+      const out = new Set();
+      obj.traverse((o) => {
+        if (o.isMesh && o.parent === obj && !o.material.map) out.add(o.material);
+      });
+      return out;
+    };
+    const a = KINDS.map((k) => plain(makeSpot(THREE, spot(k), COLORS)));
+    const b = KINDS.map((k) => plain(makeSpot(THREE, spot(k), COLORS)));
+    a.forEach((mats, i) => {
+      assert(mats.size > 0, KINDS[i]);
+      for (const m of mats) assert(b[i].has(m), `${KINDS[i]}: ${m.type} not shared`);
+    });
+    const [p1, p2] = [makeSpot(THREE, spot("person"), COLORS), makeSpot(THREE, spot("person"), COLORS)];
+    assert(p1.userData.portrait.material !== p2.userData.portrait.material, "portraits get their own material");
+    const other = { ...COLORS, gold: "#ff0000" };
+    const g = [...plain(makeSpot(THREE, spot("work"), other))].find((m) => m.metalness > 0);
+    assertEquals(g.color.getHexString(), "ff0000", "other colours get other materials");
+  } finally {
+    restore();
+  }
+});
+
 Deno.test("a person shows initials until a photo is set; an event shows its year", () => {
   const restore = installFakeCanvas();
   try {

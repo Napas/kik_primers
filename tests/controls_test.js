@@ -105,9 +105,10 @@ function rig(opts = {}) {
   const spot = new THREE.Object3D();
   spot.position.set(0, 0, -5);
   spot.userData = { pickY: 1.7, pickRadius: 0.5 };
-  const controls = makeControls(camera, dom, { targets: new Map([["s", spot]]), ...opts });
+  const targets = new Map([["s", spot]]);
+  const controls = makeControls(camera, dom, { targets, ...opts });
   const pointer = (type, x, y) => dom.dispatchEvent(Object.assign(new Event(type), { pointerId: 1, clientX: x, clientY: y }));
-  return { camera, controls, pointer };
+  return { camera, controls, pointer, targets, spot };
 }
 
 Deno.test("hovering reports the spot under the pointer, then null when it leaves", () => {
@@ -147,4 +148,60 @@ Deno.test("a wall in front blocks spots and floor behind it", () => {
   const before = [{ id: "before", center: { x: 2, y: 1, z: 0 }, r: 0.5 }];
   assertEquals(pickRay(origin, { x: 1, y: 0, z: 0 }, { targets: before, floorY: 0, occluders: [wall] }).id, "before");
   assertAlmostEquals(pickRay(origin, { x: 1, y: -0.5, z: 0 }, { floorY: 0, occluders: [wall] }).point.x, 2); // floor before the wall
+});
+
+// A walk key pressed with `target` as the event's target, dispatched on the window as a bubbling key would be.
+function key(type, code, target) {
+  const e = Object.assign(new Event(type, { cancelable: true }), { code });
+  if (target) Object.defineProperty(e, "target", { value: target });
+  globalThis.dispatchEvent(e);
+  return e;
+}
+
+Deno.test("walk keys move the camera unless their target is one the page ignores", () => {
+  const panel = { id: "panel" };
+  const { camera, controls } = rig({ ignore: (el) => el === panel });
+  try {
+    const inPanel = key("keydown", "ArrowUp", panel);
+    controls.update(1);
+    assertEquals(inPanel.defaultPrevented, false, "the panel keeps its arrow keys");
+    assertEquals([camera.position.x, camera.position.z], [0, 0]);
+    key("keyup", "ArrowUp", panel);
+    const onCanvas = key("keydown", "ArrowUp");
+    controls.update(1);
+    assertEquals(onCanvas.defaultPrevented, true);
+    assert(camera.position.z < 0, "walks forward");
+    key("keyup", "ArrowUp", panel); // released anywhere, the key stops
+    const z = camera.position.z;
+    controls.update(1);
+    assertEquals(camera.position.z, z);
+  } finally {
+    controls.dispose();
+  }
+});
+
+Deno.test("pick targets are measured once, and again only when the target map changes", () => {
+  const hovers = [];
+  const { controls, pointer, targets, spot } = rig({ onHover: (id) => hovers.push(id) });
+  try {
+    let measured = 0;
+    const measure = spot.getWorldPosition.bind(spot);
+    spot.getWorldPosition = (v) => (measured++, measure(v));
+    pointer("pointermove", 50, 50);
+    pointer("pointermove", 52, 50);
+    pointer("pointermove", 50, 95);
+    assertEquals([hovers, measured], [["s", null], 1]);
+    const other = new THREE.Object3D();
+    other.position.set(2, 0, -5);
+    other.userData = { pickY: 1.7, pickRadius: 0.5 };
+    targets.set("t", other);
+    pointer("pointermove", 85, 50);
+    assertEquals([hovers, measured], [["s", null, "t"], 2]);
+    targets.delete("t");
+    targets.set("t", spot); // same size, other object
+    pointer("pointermove", 50, 50);
+    assertEquals([hovers, measured], [["s", null, "t", "s"], 4], "the map's entries changed: measured again");
+  } finally {
+    controls.dispose();
+  }
 });

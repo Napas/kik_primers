@@ -109,11 +109,17 @@ const isTyping = (el) => el?.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.te
  * Drives `camera` from pointer events on `dom` and keys on the window.
  * opts: floorY; onPick(id | null, point) on click/tap; onHover(id | null) when the spot under a mouse
  * pointer changes; targets: Map<id, Object3D> of pickable spots
- * (each with userData.pickY and userData.pickRadius, as makeSpot sets them); occluders: [{min, max}]
- * wall boxes that block picks; bounds: {x0, x1, z0, z1} the camera stays inside.
+ * (each with userData.pickY and userData.pickRadius, as makeSpot sets them; their positions are read once
+ * and again only when the map's entries change); occluders: [{min, max}] wall boxes that block picks;
+ * bounds: {x0, x1, z0, z1} the camera stays inside; ignore(target): true for a keydown target whose keys
+ * are not walk keys (such as page panels).
  * Returns {walkTo, lookAt, update(dt), moving() (an eased walk is running), dispose}.
  */
-export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, onHover = () => {}, targets = new Map(), occluders = [], bounds } = {}) {
+export function makeControls(
+  camera,
+  dom,
+  { floorY = 0, onPick = () => {}, onHover = () => {}, targets = new Map(), occluders = [], bounds, ignore = () => false } = {},
+) {
   camera.rotation.reorder("YXZ");
   let yaw = camera.rotation.y;
   let pitch = clampPitch(camera.rotation.x);
@@ -127,6 +133,30 @@ export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, onHov
   const held = (set) => [...set].some((k) => keys.has(k));
   const apply = () => camera.rotation.set(pitch, yaw, 0);
 
+  let picks = []; // [{id, obj, center, r}] for pickRay, in the targets' order
+
+  // True when the targets map no longer holds exactly the entries `picks` was measured from.
+  function stale() {
+    if (picks.length !== targets.size) return true;
+    let i = 0;
+    for (const [id, obj] of targets) {
+      const p = picks[i++];
+      if (p.id !== id || p.obj !== obj) return true;
+    }
+    return false;
+  }
+
+  function pickTargets() {
+    if (stale()) {
+      picks = [...targets].map(([id, obj]) => {
+        const center = obj.getWorldPosition(camera.position.clone());
+        center.y += obj.userData.pickY ?? 1;
+        return { id, obj, center, r: obj.userData.pickRadius ?? 0.8 };
+      });
+    }
+    return picks;
+  }
+
   // What the pointer at e points at: {id, point} or null, as pickRay returns it.
   function hitAt(e) {
     const rect = dom.getBoundingClientRect();
@@ -135,12 +165,7 @@ export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, onHov
     camera.updateMatrixWorld();
     const origin = camera.position.clone();
     const dir = origin.clone().set(nx, ny, 0.5).unproject(camera).sub(origin);
-    const list = [...targets].map(([id, obj]) => {
-      const center = obj.getWorldPosition(origin.clone());
-      center.y += obj.userData.pickY ?? 1;
-      return { id, center, r: obj.userData.pickRadius ?? 0.8 };
-    });
-    return pickRay(origin, dir, { targets: list, floorY, occluders, bounds });
+    return pickRay(origin, dir, { targets: pickTargets(), floorY, occluders, bounds });
   }
 
   function pick(e) {
@@ -177,7 +202,7 @@ export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, onHov
     if (wasClick && e.type === "pointerup") pick(e);
   };
   const onKeyDown = (e) => {
-    if (!HANDLED.has(e.code) || e.metaKey || e.ctrlKey || e.altKey || isTyping(e.target)) return;
+    if (!HANDLED.has(e.code) || e.metaKey || e.ctrlKey || e.altKey || isTyping(e.target) || ignore(e.target)) return;
     e.preventDefault();
     keys.add(e.code);
   };

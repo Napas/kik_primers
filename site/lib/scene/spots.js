@@ -34,10 +34,27 @@ export function setPhoto(spotObj, texture) {
   m.needsUpdate = true;
 }
 
+const MATS = new WeakMap(); // THREE -> WeakMap(colours -> materials)
+
+/** The plain spot materials for colours C, one set per THREE instance and C, shared by every spot. */
+function sharedMats(THREE, C) {
+  let byColors = MATS.get(THREE);
+  if (!byColors) MATS.set(THREE, (byColors = new WeakMap()));
+  let m = byColors.get(C);
+  if (!m) {
+    const mat = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.8, ...extra });
+    m = {
+      gold: mat(C.gold, { metalness: 0.6, roughness: 0.35 }),
+      stone: mat(C.path),
+      banner: mat(C.gold, { side: THREE.DoubleSide, roughness: 0.9 }),
+    };
+    byColors.set(C, m);
+  }
+  return m;
+}
+
+// Text planes get their own material: a person's photo replaces its map (setPhoto).
 function parts(THREE, C) {
-  const mat = (color, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.8, ...extra });
-  const gold = mat(C.gold, { metalness: 0.6, roughness: 0.35 });
-  const stone = mat(C.path);
   const mesh = (geo, m, x, y, z) => {
     const o = new THREE.Mesh(geo, m);
     o.position.set(x, y, z);
@@ -47,7 +64,7 @@ function parts(THREE, C) {
     const map = textTexture(THREE, text, opts);
     return new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map }));
   };
-  return { mat, gold, stone, mesh, textPlane };
+  return { ...sharedMats(THREE, C), mesh, textPlane };
 }
 
 const MODELS = {
@@ -62,7 +79,7 @@ const MODELS = {
     g.userData.portrait = portrait;
     return { g, labelY: 2.4, pickY: 1.4, pickRadius: 0.65 };
   },
-  work(THREE, spot, C) {
+  work(THREE, _spot, C) {
     const { gold, stone, mesh } = parts(THREE, C);
     const g = new THREE.Group();
     g.add(mesh(new THREE.CylinderGeometry(0.22, 0.3, 0.9, 16), stone, 0, 0.45, 0));
@@ -71,14 +88,14 @@ const MODELS = {
     g.add(book);
     return { g, labelY: 1.9, pickY: 0.9, pickRadius: 0.6 };
   },
-  group(THREE, spot, C) {
-    const { mat, gold, mesh } = parts(THREE, C);
+  group(THREE, _spot, C) {
+    const { gold, banner, mesh } = parts(THREE, C);
     const g = new THREE.Group();
     g.add(mesh(new THREE.CylinderGeometry(0.03, 0.03, 2.4, 8), gold, -0.45, 1.2, 0));
     const bar = mesh(new THREE.CylinderGeometry(0.02, 0.02, 1, 8), gold, 0, 2.3, 0);
     bar.rotation.z = Math.PI / 2;
     g.add(bar);
-    g.add(mesh(new THREE.PlaneGeometry(0.9, 1.2), mat(C.gold, { side: THREE.DoubleSide, roughness: 0.9 }), 0, 1.65, 0.01));
+    g.add(mesh(new THREE.PlaneGeometry(0.9, 1.2), banner, 0, 1.65, 0.01));
     return { g, labelY: 2.7, pickY: 1.5, pickRadius: 0.65 };
   },
   event(THREE, spot, C) {
@@ -95,7 +112,7 @@ const MODELS = {
     }
     return { g, labelY: 1.6, pickY: 0.6, pickRadius: 0.6 };
   },
-  place(THREE, spot, C) {
+  place(THREE, _spot, C) {
     const { gold, stone, mesh } = parts(THREE, C);
     const g = new THREE.Group();
     g.add(mesh(new THREE.CylinderGeometry(0.05, 0.05, 2, 8), stone, 0, 1, 0));
@@ -105,7 +122,7 @@ const MODELS = {
     g.add(board);
     return { g, labelY: 2.3, pickY: 1.3, pickRadius: 0.65 };
   },
-  thing(THREE, spot, C) {
+  thing(THREE, _spot, C) {
     const { gold, stone, mesh } = parts(THREE, C);
     const g = new THREE.Group();
     g.add(mesh(new THREE.BoxGeometry(0.5, 0.9, 0.3), stone, 0, 0.45, 0));

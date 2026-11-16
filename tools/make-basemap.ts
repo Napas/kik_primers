@@ -8,7 +8,9 @@ const W = (BOX.lonMax - BOX.lonMin) * SCALE;
 const H = (BOX.latMax - BOX.latMin) * SCALE;
 
 type Pt = [number, number];
-const topo = await (await fetch(URL_)).json();
+const res = await fetch(URL_);
+if (!res.ok) throw new Error(`fetch failed: ${res.status}`);
+const topo = await res.json();
 const { scale, translate } = topo.transform;
 
 // Decode delta-encoded quantized arcs to lon/lat.
@@ -58,24 +60,48 @@ function at(a: Pt, b: Pt, axis: 0 | 1, v: number): Pt {
 }
 
 const r1 = (n: number) => Math.round(n * 10) / 10;
+const MIN_SIZE = 1.5; // px: smaller rings are dropped
+const TOLERANCE = 0.5; // px: Douglas-Peucker
+
+function simplify(pts: Pt[]): Pt[] {
+  if (pts.length < 3) return pts;
+  const [a, b] = [pts[0], pts[pts.length - 1]];
+  const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+  let max = 0, idx = 0;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const p = pts[i];
+    const dist = len === 1 && a[0] === b[0] && a[1] === b[1]
+      ? Math.hypot(p[0] - a[0], p[1] - a[1])
+      : Math.abs((b[0] - a[0]) * (a[1] - p[1]) - (a[0] - p[0]) * (b[1] - a[1])) / len;
+    if (dist > max) [max, idx] = [dist, i];
+  }
+  if (max <= TOLERANCE) return [a, b];
+  return [...simplify(pts.slice(0, idx + 1)).slice(0, -1), ...simplify(pts.slice(idx))];
+}
+
 let d = "";
 for (const g of topo.objects.countries.geometries) {
   const polys: number[][][] = g.type === "Polygon" ? [g.arcs] : g.type === "MultiPolygon" ? g.arcs : [];
   for (const poly of polys) {
     for (const r of poly) {
-      const pts = clip(ring(r));
-      if (pts.length < 3) continue;
-      // Project, round, drop consecutive duplicates, emit relative deltas.
-      let px = NaN, py = NaN;
-      let start = "";
+      const clipped = clip(ring(r));
+      if (clipped.length < 3) continue;
+      const px: Pt[] = clipped.map(([lon, lat]) => [(lon - BOX.lonMin) * SCALE, (BOX.latMax - lat) * SCALE]);
+      const xs = px.map((p) => p[0]), ys = px.map((p) => p[1]);
+      if (Math.max(...xs) - Math.min(...xs) < MIN_SIZE && Math.max(...ys) - Math.min(...ys) < MIN_SIZE) continue;
+      // Split the closed ring at its farthest point so simplification keeps both halves.
+      let far = 0, fd = 0;
+      px.forEach((p, i) => { const q = Math.hypot(p[0] - px[0][0], p[1] - px[0][1]); if (q > fd) [fd, far] = [q, i]; });
+      const s = [...simplify(px.slice(0, far + 1)).slice(0, -1), ...simplify([...px.slice(far), px[0]]).slice(0, -1)];
+      // Round, drop consecutive duplicates, emit relative deltas.
+      let cx = NaN, cy = NaN, start = "";
       const deltas: number[] = [];
-      for (const [lon, lat] of pts) {
-        const x = r1((lon - BOX.lonMin) * SCALE);
-        const y = r1((BOX.latMax - lat) * SCALE);
+      for (const [x0, y0] of s) {
+        const x = r1(x0), y = r1(y0);
         if (!start) start = `M${x} ${y}`;
-        else if (x !== px || y !== py) deltas.push(r1(x - px), r1(y - py));
-        px = x;
-        py = y;
+        else if (x !== cx || y !== cy) deltas.push(r1(x - cx), r1(y - cy));
+        cx = x;
+        cy = y;
       }
       if (deltas.length >= 4) d += `${start}l${deltas.join(" ").replace(/ -/g, "-")}z`;
     }

@@ -40,6 +40,23 @@ Deno.test("project places Vilnius inside and New York outside", () => {
   assertEquals(project(40.71, -74.0).inside, false);
 });
 
-Deno.test("basemap path is non-trivial", () => {
-  assert(BASEMAP.path.startsWith("M") && BASEMAP.path.length > 2000);
+Deno.test("basemap has the fixed box and stays inside it", () => {
+  assertEquals(BASEMAP.width, 550);
+  assertEquals(BASEMAP.height, 360);
+  assertEquals(BASEMAP.box, { lonMin: -10, lonMax: 45, latMin: 35, latMax: 71 });
+  // Path is M<x> <y>l<dx> <dy>...z per ring; accumulate the relative deltas.
+  const eps = 0.5; // rounding drift
+  let count = 0;
+  for (const ring of BASEMAP.path.split("z").filter(Boolean)) {
+    const [m, rel] = ring.slice(1).split("l");
+    const nums = (s) => s.match(/-?\d+(\.\d+)?/g).map(Number);
+    let [x, y] = nums(m);
+    const d = nums(rel);
+    for (let i = -2; i < d.length; i += 2) {
+      if (i >= 0) { x += d[i]; y += d[i + 1]; }
+      assert(x >= -eps && x <= BASEMAP.width + eps && y >= -eps && y <= BASEMAP.height + eps, `${x},${y}`);
+      count++;
+    }
+  }
+  assert(count > 500);
 });

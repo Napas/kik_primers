@@ -192,6 +192,26 @@
         1990
       ],
       "style": "concrete"
+    },
+    {
+      "n": 9,
+      "title": "Po 1990 m.: Vilniaus romanai, istorija, populiarioji literatūra",
+      "intro": "Po 1990 m. lietuvių literatūra vėl susijungia. Prozos herojumi tampa Vilnius, skaitytojus traukia istoriniai ir populiarieji romanai, o rašytojų darbus įvertina premijos.",
+      "why": [
+        {
+          "q": "Kodėl Vilnius tampa po 1990 m. prozos herojumi?",
+          "a": "„Vilniaus pokeris“, „Vilniaus džiazas“ ir „Tūla“ (veiksmas Vilniuje) – trys garsiausi to meto romanai, visi apie Vilnių. „Silva rerum“ grąžina į senąjį, LDK laikų Vilnių. Todėl kalbant apie Vilniaus romanus pirmiausia minimi šie keturi."
+        },
+        {
+          "q": "Kaip skirti Gavelį, Kunčiną ir Ivanauskaitę?",
+          "a": "Gavelis – „Vilniaus…“ pavadinimai ir fizikas autorius. Kunčinas – „Tūla“. Ivanauskaitė – „Ragana ir lietus“, Tibetas ir pakalnutės."
+        }
+      ],
+      "span": [
+        1990,
+        2026
+      ],
+      "style": "glass"
     }
   ],
   "spots": [
@@ -4553,6 +4573,521 @@
         }
       ],
       "wikidata": "Q16453194"
+    },
+    {
+      "id": "gavelis",
+      "room": 9,
+      "kind": "person",
+      "name": "Ričardas Gavelis",
+      "aliases": [],
+      "years": [
+        1950,
+        2002
+      ],
+      "at": 1993,
+      "text": "Ričardas Gavelis (1950–2002) – fizikas, ne „Literatūros ir meno“ redaktorius. Jo romanai: „Vilniaus pokeris“ (1989) ir „Vilniaus džiazas“ (1993) – išleisti skirtingais metais. Taip pat „Jauno žmogaus memuarai“, „Taikos balandis“ ir knyga „Nemirtingumas“, skirta Vitui Lingiui.",
+      "links": [
+        {
+          "to": "vilniaus-pokeris",
+          "label": "parašė"
+        },
+        {
+          "to": "vilniaus-dziazas",
+          "label": "parašė"
+        },
+        {
+          "to": "lingys",
+          "label": "skyrė knygą"
+        }
+      ],
+      "wikidata": "Q7339157"
+    },
+    {
+      "id": "vilniaus-pokeris",
+      "room": 9,
+      "kind": "work",
+      "name": "„Vilniaus pokeris“",
+      "aliases": [],
+      "years": [
+        1989
+      ],
+      "at": 1990,
+      "aside": true,
+      "text": "Ričardo Gavelio romanas „Vilniaus pokeris“ (1989); veikėjai Vytautas Vargalys, Lolita Banytė-Žilienė. Jis – vienas garsiausių romanų apie Vilnių.",
+      "links": [
+        {
+          "to": "gavelis",
+          "label": "autorius"
+        },
+        {
+          "to": "vilniaus-dziazas",
+          "label": "kitas Vilniaus romanas"
+        }
+      ],
+      "by": "gavelis"
+    },
+    {
+      "id": "vilniaus-dziazas",
+      "room": 9,
+      "kind": "work",
+      "name": "„Vilniaus džiazas“",
+      "aliases": [],
+      "years": [
+        1993
+      ],
+      "at": 1993,
+      "text": "Ričardo Gavelio romanas „Vilniaus džiazas“ (1993) išleistas kitais metais nei „Vilniaus pokeris“ (1989).",
+      "links": [
+        {
+          "to": "gavelis",
+          "label": "autorius"
+        }
+      ],
+      "by": "gavelis"
+    },
+    {
+      "id": "lingys",
+      "room": 9,
+      "kind": "person",
+      "name": "Vitas Lingys",
+      "aliases": [],
+      "years": [
+        1960,
+        1993
+      ],
+      "at": 1993,
+      "aside": true,
+      "text": "Žurnalistui Vitui Lingiui Ričardas Gavelis skyrė knygą „Nemirtingumas“.",
+      "links": [
+        {
+          "to": "gavelis",
+          "label": "jam skirta knyga"
+        }
+      ],
+      "wikidata": "Q16476707"
+    },
+    {
+      "id": "kuncinas",
+      "room": 9,
+      "kind": "person",
+      "name": "Jurgis Kunčinas",
+      "aliases": [],
+      "years": [
+        1947,
+        2002
+      ],
+      "at": 1993,
+      "text": "Jurgis Kunčinas (1947–2002) parašė romaną „Tūla“ (1993). Alytuje jo atminimui rengiamas trumposios prozos festivalis „Imbiero vakarai“.",
+      "links": [
+        {
+          "to": "tula",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q725299"
+    },
+    {
+      "id": "tula",
+      "room": 9,
+      "kind": "work",
+      "name": "„Tūla“",
+      "aliases": [],
+      "years": [
+        1993
+      ],
+      "at": 1993,
+      "text": "Jurgio Kunčino romanas „Tūla“ (1993); veiksmas vyksta Vilniuje, pasakotojas bevardis.",
+      "links": [
+        {
+          "to": "kuncinas",
+          "label": "autorius"
+        }
+      ],
+      "by": "kuncinas"
+    },
+    {
+      "id": "ivanauskaite",
+      "room": 9,
+      "kind": "person",
+      "name": "Jurga Ivanauskaitė",
+      "aliases": [],
+      "years": [
+        1961,
+        2007
+      ],
+      "at": 1993,
+      "text": "Jurga Ivanauskaitė (1961–2007) debiutavo knyga „Pakalnučių metai“ (1985), parašyta anksčiau nei „Mėnulio vaikai“. Kūriniai: „Ragana ir lietus“ (1993); „Placebas“, „Sapnų nublokšti“, „Kelionė į Šambalą“; trilogija „Tibeto mandala“ ir knyga „Ištremtas Tibetas“ (pratarmė – Dalai Lamos). Pagal jos romanus sukurtas filmas „Nuodėmės užkalbėjimas“. 2005 m. ji tapo Nacionalinės kultūros ir meno premijos laureate. Jos vardo premija skiriama ne vyresniems kaip 45 metų autoriams. „Kelionė į Tandadriką“ ir „Danielius Dalba“ – ne jos.",
+      "links": [
+        {
+          "to": "pakalnuciu-metai",
+          "label": "debiutas"
+        },
+        {
+          "to": "ragana-ir-lietus",
+          "label": "parašė"
+        },
+        {
+          "to": "ivanauskaites-premija",
+          "label": "jos vardo premija"
+        }
+      ],
+      "wikidata": "Q383772"
+    },
+    {
+      "id": "pakalnuciu-metai",
+      "room": 9,
+      "kind": "work",
+      "name": "„Pakalnučių metai“",
+      "aliases": [],
+      "years": [
+        1985
+      ],
+      "at": 1990,
+      "aside": true,
+      "text": "„Pakalnučių metai“ (1985) – Jurgos Ivanauskaitės debiutinė knyga, parašyta anksčiau nei „Mėnulio vaikai“.",
+      "links": [
+        {
+          "to": "ivanauskaite",
+          "label": "autorė"
+        }
+      ],
+      "by": "ivanauskaite"
+    },
+    {
+      "id": "ragana-ir-lietus",
+      "room": 9,
+      "kind": "work",
+      "name": "„Ragana ir lietus“",
+      "aliases": [],
+      "years": [
+        1993
+      ],
+      "at": 1993,
+      "text": "Jurgos Ivanauskaitės „Ragana ir lietus“ (1993) – Vilniaus savivaldybės etikos komisija buvo pripažinusi jį „pornografiniu“.",
+      "links": [
+        {
+          "to": "ivanauskaite",
+          "label": "autorė"
+        }
+      ],
+      "by": "ivanauskaite"
+    },
+    {
+      "id": "sabaliauskaite",
+      "room": 9,
+      "kind": "person",
+      "name": "Kristina Sabaliauskaitė",
+      "aliases": [],
+      "years": [
+        1974,
+        null
+      ],
+      "at": 2008,
+      "text": "Kristina Sabaliauskaitė (g. 1974) debiutavo romanu „Silva rerum“ (2008). Serija „Petro imperatorė“ (pirmoji dalis 2019) – apie Jekateriną I, ne apie Jekateriną Didžiąją; ji turi mažiau dalių nei „Silva rerum“. Sabaliauskaitė taip pat parašė „Danielius Dalba ir kitos istorijos“, „Kaip skaityti meną?“. Ji Vilniaus garbės pilietė, pelnė Abiejų Tautų apdovanojimą, bet ne ES literatūros premiją.",
+      "links": [
+        {
+          "to": "silva-rerum",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q6438276"
+    },
+    {
+      "id": "silva-rerum",
+      "room": 9,
+      "kind": "work",
+      "name": "„Silva rerum“",
+      "aliases": [],
+      "years": [
+        2008
+      ],
+      "at": 2008,
+      "text": "„Silva rerum“ (2008) – Kristinos Sabaliauskaitės debiutas. Tai keturių dalių ciklas apie Žemaitijos bajorų Norvaišų šeimą; veikėjai Jonas Kirdėjus Birontas, Jonas Delamarsas, Marijonas Daugėla. Romanas grąžina į senąjį, LDK laikų Vilnių.",
+      "links": [
+        {
+          "to": "sabaliauskaite",
+          "label": "autorė"
+        }
+      ],
+      "by": "sabaliauskaite"
+    },
+    {
+      "id": "parulskis",
+      "room": 9,
+      "kind": "person",
+      "name": "Sigitas Parulskis",
+      "aliases": [],
+      "years": [
+        1965,
+        null
+      ],
+      "at": 2004,
+      "text": "Sigitas Parulskis (g. 1965) – romanas „Trys sekundės dangaus“ (ne eilėraščių rinkinys), rinkinys „Pagyvenusio vyro pagundos“. 2004 m. gavo Nacionalinę kultūros ir meno premiją. „Poezijos pavasario“ laureatu jis nėra tapęs.",
+      "links": [
+        {
+          "to": "pagyvenusio-vyro-pagundos",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q438597"
+    },
+    {
+      "id": "pagyvenusio-vyro-pagundos",
+      "room": 9,
+      "kind": "work",
+      "name": "„Pagyvenusio vyro pagundos“",
+      "aliases": [],
+      "years": null,
+      "at": 2004,
+      "text": "„Pagyvenusio vyro pagundos“ – Sigito Parulskio rinkinys.",
+      "links": [
+        {
+          "to": "parulskis",
+          "label": "autorius"
+        }
+      ],
+      "by": "parulskis"
+    },
+    {
+      "id": "tapinas",
+      "room": 9,
+      "kind": "person",
+      "name": "Andrius Tapinas",
+      "aliases": [],
+      "years": [
+        1977,
+        null
+      ],
+      "at": 2013,
+      "text": "Andrius Tapinas – „Vilko valanda“ (veikėjas Sidabras) ir tęsinys „Maro diena“, politinis trileris „Prezidentas“.",
+      "links": [],
+      "wikidata": "Q12648406"
+    },
+    {
+      "id": "ivaskevicius",
+      "room": 9,
+      "kind": "person",
+      "name": "Marius Ivaškevičius",
+      "aliases": [],
+      "years": [
+        1973,
+        null
+      ],
+      "at": 2002,
+      "text": "Marius Ivaškevičius – „Žali“ (ne pirmasis jo romanas), „Madagaskaras“, „Tomas Mūras“. Pjesėje „Madagaskaras“ jis Salomėją Nėrį pavaizdavo kaip Salę.",
+      "links": [
+        {
+          "to": "neris",
+          "label": "pavaizdavo ją kaip Salę"
+        }
+      ],
+      "wikidata": "Q1899450"
+    },
+    {
+      "id": "kmita",
+      "room": 9,
+      "kind": "person",
+      "name": "Rimantas Kmita",
+      "aliases": [],
+      "years": [
+        1977,
+        null
+      ],
+      "at": 2016,
+      "text": "Rimantas Kmita – „Pietinia kronikas“ (šiaulietiška šnekta, Metų knyga).",
+      "links": [],
+      "wikidata": "Q31199105"
+    },
+    {
+      "id": "slepikas",
+      "room": 9,
+      "kind": "person",
+      "name": "Alvydas Šlepikas",
+      "aliases": [],
+      "years": [
+        1966,
+        null
+      ],
+      "at": 2011,
+      "text": "Alvydas Šlepikas – „Mano vardas – Marytė“.",
+      "links": [],
+      "wikidata": "Q16443562"
+    },
+    {
+      "id": "kondrotas",
+      "room": 9,
+      "kind": "person",
+      "name": "Saulius Tomas Kondrotas",
+      "aliases": [],
+      "years": [
+        1953,
+        null
+      ],
+      "at": 1990,
+      "aside": true,
+      "text": "Saulius Tomas Kondrotas – „Žalčio žvilgsnis“.",
+      "links": [],
+      "wikidata": "Q10970412"
+    },
+    {
+      "id": "zyle",
+      "room": 9,
+      "kind": "person",
+      "name": "Kotryna Zylė",
+      "aliases": [],
+      "years": [
+        1986,
+        null
+      ],
+      "at": 2020,
+      "text": "Kotryna Zylė – „Mylimi kaulai“.",
+      "links": [],
+      "wikidata": "Q65260877"
+    },
+    {
+      "id": "pancerovas",
+      "room": 9,
+      "kind": "person",
+      "name": "Dovydas Pancerovas",
+      "aliases": [],
+      "years": null,
+      "at": 2020,
+      "text": "Dovydas Pancerovas – „Medžiojant tėvą“, „Kiborgų žemė“, su Birute Davidonyte „Pranešėjas ir prezidentas“.",
+      "links": []
+    },
+    {
+      "id": "dovydeno-premija",
+      "room": 9,
+      "kind": "thing",
+      "name": "Liudo Dovydėno premija",
+      "aliases": [],
+      "years": [
+        2007
+      ],
+      "at": 2007,
+      "text": "Premijos, apie kurias dažnai klausiama: Liudo Dovydėno premija – Rašytojų sąjungos, už geriausią lietuvišką romaną (nuo 2007 m., ne kasmet). 2022 m. ją gavo Ieva Dumbrytė, 2025 m. – I. M. Sokolovaitė už romaną „Pozuotoja“.",
+      "links": [
+        {
+          "to": "dovydenas",
+          "label": "pavadinta jo vardu"
+        },
+        {
+          "to": "sokolovaite",
+          "label": "laureatė (2025)"
+        }
+      ]
+    },
+    {
+      "id": "sokolovaite",
+      "room": 9,
+      "kind": "person",
+      "name": "I. M. Sokolovaitė",
+      "aliases": [],
+      "years": null,
+      "at": 2025,
+      "text": "I. M. Sokolovaitė 2025 m. gavo Liudo Dovydėno premiją (Rašytojų sąjungos premija už geriausią lietuvišką romaną) už romaną „Pozuotoja“.",
+      "links": [
+        {
+          "to": "dovydeno-premija",
+          "label": "laureatė (2025)"
+        }
+      ]
+    },
+    {
+      "id": "dovydenas",
+      "room": 9,
+      "kind": "person",
+      "name": "Liudas Dovydėnas",
+      "aliases": [],
+      "years": [
+        1906,
+        2000
+      ],
+      "at": 2007,
+      "aside": true,
+      "text": "Rašytojo Liudo Dovydėno vardu Rašytojų sąjunga skiria premiją už geriausią lietuvišką romaną.",
+      "links": [
+        {
+          "to": "dovydeno-premija",
+          "label": "jo vardo premija"
+        }
+      ],
+      "wikidata": "Q16459263"
+    },
+    {
+      "id": "ivanauskaites-premija",
+      "room": 9,
+      "kind": "thing",
+      "name": "Jurgos Ivanauskaitės premija",
+      "aliases": [],
+      "years": null,
+      "at": 2007,
+      "text": "Jurgos Ivanauskaitės premija skiriama jauniems (iki 45 m.) autoriams.",
+      "links": [
+        {
+          "to": "ivanauskaite",
+          "label": "pavadinta jos vardu"
+        }
+      ]
+    },
+    {
+      "id": "maironio-premija",
+      "room": 9,
+      "kind": "thing",
+      "name": "Maironio premija",
+      "aliases": [],
+      "years": [
+        2013
+      ],
+      "at": 2013,
+      "text": "Maironio premija – Kauno ir „Poezijos pavasario“ laureatui. Maironio vardu Kauno taryba skiria premiją už geriausią naują poezijos knygą, o nuo 2013 m. ji įteikiama ir „Poezijos pavasario“ laureatui.",
+      "links": [
+        {
+          "to": "maironis",
+          "label": "pavadinta jo vardu"
+        },
+        {
+          "to": "poezijos-pavasaris",
+          "label": "teikiama laureatui"
+        }
+      ]
+    },
+    {
+      "id": "vaiciulaicio-premija",
+      "room": 9,
+      "kind": "thing",
+      "name": "Antano Vaičiulaičio premija",
+      "aliases": [],
+      "years": null,
+      "at": 2007,
+      "text": "Antano Vaičiulaičio premija skiriama už trumposios prozos kūrinį.",
+      "links": [
+        {
+          "to": "vaiciulaitis",
+          "label": "pavadinta jo vardu"
+        }
+      ]
+    },
+    {
+      "id": "vaiciulaitis",
+      "room": 9,
+      "kind": "person",
+      "name": "Antanas Vaičiulaitis",
+      "aliases": [],
+      "years": [
+        1906,
+        1992
+      ],
+      "at": 1992,
+      "aside": true,
+      "text": "Rašytojo Antano Vaičiulaičio vardu skiriama premija už trumposios prozos kūrinį.",
+      "links": [
+        {
+          "to": "vaiciulaicio-premija",
+          "label": "jo vardo premija"
+        }
+      ],
+      "wikidata": "Q4102582"
     }
   ],
   "questions": [],

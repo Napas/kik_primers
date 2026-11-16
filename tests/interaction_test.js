@@ -3,9 +3,12 @@ import * as THREE from "../site/lib/three/three.module.min.js";
 import { layoutTime } from "../site/lib/layout.js";
 import { buildWorld } from "../site/lib/scene/world.js";
 import { drawLifespan, drawLinks, lifespanRange, removeDrawn } from "../site/lib/scene/arcs.js";
-import { LABEL_RANGE, PHOTO_RANGE, updateNearby } from "../site/lib/scene/nearby.js";
+import { clearance, LABEL_NEAR, LABEL_RANGE, PHOTO_RANGE, STAND, standPoint, updateNearby } from "../site/lib/scene/nearby.js";
 import { yearLineZ } from "../site/lib/scene/styles.js";
 import { markerLeft, overviewHtml, roomAt, roomCounts } from "../site/lib/pages/overview.js";
+import { makeSelection, roomVisit } from "../site/lib/pages/selection.js";
+import { makeStore } from "../site/lib/storage.js";
+import { makeProgress } from "../site/lib/progress.js";
 import { installFakeCanvas } from "./fake_canvas.js";
 
 const root = new URL("../", import.meta.url).pathname;
@@ -134,6 +137,124 @@ Deno.test("updateNearby shows labels within 12 m or on hover and loads each phot
     updateNearby(w.spotMeshes, close, null);
     assertEquals(jonas.userData.label.visible, true);
     assertEquals(event.userData.label.visible, Math.hypot(event.position.x - close.x, event.position.z - close.z) <= 12);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("roomAt: a room's x-range is half-open, so a spot on a shared border belongs to the later room", () => {
+  const pack = { slug: "adj", rooms: [{ n: 1, title: "A", span: [1500, 1600] }, { n: 2, title: "B", span: [1600, 1700] }], spots: [] };
+  const layout = layoutTime(pack);
+  const [r1, r2] = layout.rooms;
+  assertEquals(r1.x1, r2.x0);
+  const z = r1.z1 + 1.4;
+  assertEquals(roomAt(layout, r1.x0, z), 1);
+  assertEquals(roomAt(layout, r2.x0, z), 2, "the border goes to the room that starts there");
+  assertEquals(roomAt(layout, r2.x1, z), 2, "the last room's end is inside it");
+  assertEquals(roomAt(layout, r2.x1 + 0.01, z), null);
+});
+
+Deno.test("roomVisit opens a room once per visit, never for rooms passed on a chosen walk", () => {
+  let s = { visit: null, quiet: false };
+  const frame = (n, moving = false) => {
+    s = roomVisit(s.visit, n, s.quiet, moving);
+    return s.open;
+  };
+  assertEquals(frame(null), false, "before the first room");
+  assertEquals(frame(1), true, "entering opens");
+  assertEquals(frame(1), false, "staying (also after Esc closed the panel) does not reopen");
+  assertEquals(frame(null), false);
+  assertEquals(frame(1), true, "re-entering opens again");
+  s.quiet = true; // a walk to a chosen spot starts
+  assertEquals(frame(2, true), false, "a room passed on the way stays closed");
+  assertEquals(frame(null, true), false);
+  assertEquals(frame(3, false), false, "arriving in the chosen spot's room keeps the spot panel");
+  assertEquals(s.quiet, false, "quiet ends when the walk ends");
+  assertEquals(frame(3), false, "still the same visit");
+  assertEquals(frame(2), true, "walking on into another room opens it");
+});
+
+Deno.test("standPoint keeps the default 2.5 m in front when clear, else finds a point with clearance", () => {
+  const t = { x: 10, z: 0 };
+  assertEquals(standPoint(t, []), { x: 10, z: STAND.front });
+  const blocked = [{ x: 10, z: 1.2 }, { x: 10, z: 2.5 }];
+  const p = standPoint(t, blocked);
+  const c = clearance(p, t, blocked);
+  assert(c.point >= STAND.point && c.sight >= STAND.sight, JSON.stringify({ p, c }));
+  const far = [{ x: 30, z: 0 }];
+  assertEquals(standPoint(t, far), { x: 10, z: STAND.front }, "far spots don't matter");
+});
+
+Deno.test("standPoint in a crowd returns the candidate with the most clearance", () => {
+  const t = { x: 0, z: 0 };
+  const crowd = [];
+  for (let x = -6; x <= 6; x += 0.8) for (let z = -1; z <= 6; z += 0.8) if (Math.hypot(x, z) > 0.5) crowd.push({ x, z });
+  const p = standPoint(t, crowd);
+  assert(Number.isFinite(p.x) && Number.isFinite(p.z));
+  assert(p.z > t.z, "stays in front of the spot");
+});
+
+Deno.test("clearance measures distances to the stand point and to the sight segment", () => {
+  const c = clearance({ x: 0, z: 2 }, { x: 0, z: 0 }, [{ x: 0.3, z: 1 }, { x: 0, z: 3 }]);
+  assertAlmostEquals(c.sight, 0.3, 1e-9, "beside the segment");
+  assertAlmostEquals(c.point, 1, 1e-9, "the spot behind the stand point is off the segment but 1 m from the point");
+  assertEquals(clearance({ x: 0, z: 2 }, { x: 0, z: 0 }, []), { point: Infinity, sight: Infinity });
+});
+
+Deno.test("updateNearby hides labels of spots right next to the eye, except the selected one", () => {
+  const restore = installFakeCanvas();
+  try {
+    const w = buildWorld(THREE, MINI, layoutTime(MINI));
+    const jonas = w.spotMeshes.get("jonas-rastas");
+    const eye = { x: jonas.position.x + LABEL_NEAR / 2, y: 1.7, z: jonas.position.z };
+    updateNearby(w.spotMeshes, eye, null, null);
+    assertEquals(jonas.userData.label.visible, false);
+    updateNearby(w.spotMeshes, eye, "jonas-rastas", null);
+    assertEquals(jonas.userData.label.visible, false, "hover does not bring back a label in the face");
+    updateNearby(w.spotMeshes, eye, null, "jonas-rastas");
+    assertEquals(jonas.userData.label.visible, true);
+  } finally {
+    restore();
+  }
+});
+
+Deno.test("makeSelection: one open thing at a time; reopening and closing leave no drawings behind", () => {
+  const restore = installFakeCanvas();
+  try {
+    const layout = layoutTime(MINI);
+    const world = buildWorld(THREE, MINI, layout);
+    const progress = makeProgress(makeStore(null));
+    const calls = [];
+    let open = null; // what the page would put in data-open
+    const view = {
+      show: (html, focus) => calls.push(["show", focus, html]),
+      hide: () => calls.push(["hide"]),
+      opened: (id) => (open = id),
+    };
+    const sel = makeSelection(THREE, { world, pack: MINI, layout, progress, view });
+    const base = world.scene.children.length;
+    sel.openSpot("jonas-rastas");
+    assertEquals(world.scene.children.length, base + 2, "link arcs and lifespan");
+    assertEquals([sel.spot.id, open], ["jonas-rastas", "jonas-rastas"]);
+    assertEquals(calls.at(-1)[1], true, "an explicit open takes focus");
+    sel.openSpot("jonas-rastas");
+    assertEquals(world.scene.children.length, base + 2, "re-picking replaces, not adds");
+    sel.openSpot("pirma-knyga");
+    assertEquals(world.scene.children.length, base + 1, "a work has arcs, no lifespan");
+    sel.openRoom(1, false);
+    assertEquals(world.scene.children.length, base, "entering a room deselects the spot");
+    assertEquals([sel.spot, open], [null, null]);
+    assertEquals(calls.at(-1)[1], false);
+    assertMatch(calls.at(-1)[2], /data-room="1"/);
+    sel.reveal("1:0");
+    assert(progress.revealed("mini-test").has("1:0"));
+    assertMatch(calls.at(-1)[2], /Nes tai pradžia\./);
+    sel.openSpot("jonas-rastas");
+    sel.close();
+    assertEquals(world.scene.children.length, base);
+    assertEquals(calls.at(-1), ["hide"]);
+    assertEquals(open, null);
+    assertEquals([...progress.opened("mini-test")].sort(), ["jonas-rastas", "pirma-knyga"]);
   } finally {
     restore();
   }

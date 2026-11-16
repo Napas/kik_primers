@@ -47,12 +47,12 @@ button:disabled { opacity: .4; cursor: default; }
 .style-concrete { --accent: #a3a9b5; }
 .style-glass { --accent: #7fb8e0; }
 .life .motif { position: absolute; top: 0; right: 0; color: var(--accent); opacity: .8; }
-.track { position: relative; list-style: none; margin: 2.5rem .75rem 4rem; padding: 0; height: 2px; background: var(--path); }
-.track .event { position: absolute; top: -4px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--accent); font-size: 0; }
-.track .event b, .track .event i, .track .event .lbl { font-size: .75rem; font-style: normal; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--text); }
-.track .event i { color: var(--muted); top: 3.2rem; }
-.track .event b { top: 1rem; }
-.track .event .lbl { top: 2.1rem; }
+.track { position: relative; list-style: none; margin: 1.25rem .75rem 1rem; padding: 0; height: 2px; background: var(--path); }
+.track .event { position: absolute; top: -4px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--accent); }
+.panel ol.events { list-style: none; margin: 0 0 1rem; padding: 0; font-size: .9rem; }
+.events li { margin: .15rem 0; }
+.events b { color: var(--accent); margin-right: .25rem; }
+.events i { color: var(--muted); font-style: normal; }
 .basemap { width: 100%; height: auto; background: var(--floor); border-radius: 6px; }
 .basemap path { fill: var(--path); stroke: none; }
 .basemap circle { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }

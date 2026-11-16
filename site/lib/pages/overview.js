@@ -9,12 +9,14 @@ const extent = (layout) => ({ x0: Math.min(0, ...layout.rooms.map((r) => r.x0)),
 
 /**
  * The room at floor point (x, z), or null: one whose x-range holds x, on the lane nearest z.
- * A lane reaches from its rooms' back (z0) to its path, so parallel lanes don't overlap.
+ * x-ranges are half-open [x0, x1), so a shared border belongs to the room that starts there; a room
+ * that no other room follows keeps its end. A lane reaches from its rooms' back (z0) to its path.
  */
 export function roomAt(layout, x, z) {
+  const starts = new Set(layout.rooms.map((r) => r.x0));
   let best = null, bestD = Infinity;
   for (const r of layout.rooms) {
-    if (x < r.x0 || x > r.x1) continue;
+    if (x < r.x0 || x > r.x1 || (x === r.x1 && starts.has(r.x1))) continue;
     const d = Math.max(0, r.z0 - z, z - pathZ(r));
     if (d < bestD) [best, bestD] = [r.n, d];
   }

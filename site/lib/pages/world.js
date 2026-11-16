@@ -1,19 +1,18 @@
 // World page: the 3D world for ?topic=, or the text view with ?view=text or without WebGL.
 // In the world, picking a spot (or #<spot-id> on load) walks to it and opens its panel with link arcs and,
 // for a person, the lifespan; entering a room opens the room's panel once per visit.
-import { imgUrl, plotExplainer, roomPanel, spotPanel, textView } from "../render.js";
+import { imgUrl, plotExplainer, textView } from "../render.js";
 import { layoutTime } from "../layout.js";
 import { SCENE } from "../theme.js";
 import { makeStore } from "../storage.js";
 import { makeProgress } from "../progress.js";
 import { buildWorld, pathZ } from "../scene/world.js";
 import { makeControls } from "../scene/controls.js";
-import { drawLifespan, drawLinks, removeDrawn } from "../scene/arcs.js";
-import { updateNearby } from "../scene/nearby.js";
+import { standPoint, updateNearby } from "../scene/nearby.js";
 import { overview, roomAt, roomCounts } from "./overview.js";
+import { makeSelection, roomVisit } from "./selection.js";
 import { hashId, loadIndex, loadPack, markReady, run, showError, storageBackend, topicFromUrl } from "./common.js";
 
-const STAND_OFF = 2.5; // metres in front of a picked spot
 const MAX_DT = 0.1; // seconds; longer frame gaps (hidden tab) don't jump the camera
 
 function hasWebGL() {
@@ -82,19 +81,39 @@ async function main() {
 
 // Controls, the side panel, the overview and progress. Returns {controls, goTo(id), frame()}.
 function interact(THREE, world, pack, layout, canvas, progress) {
-  const { slug } = pack;
-  const spots = new Map(pack.spots.map((s) => [s.id, s]));
-  const rooms = new Map(pack.rooms.map((r) => [r.n, r]));
   const root = document.documentElement;
   const panel = document.getElementById("panel");
   const body = document.getElementById("panel-body");
-  let selected = null; // {spot, drawn: Object3D[]} while a spot's panel is open
-  let visit = null; // room the visitor stands in
-  let quiet = false; // while walking to a chosen spot or room, rooms on the way don't open
+  const spotsAt = [...world.spotMeshes].map(([id, o]) => ({ id, x: o.position.x, z: o.position.z }));
+  let room = { visit: null, quiet: false }; // roomVisit state; quiet while walking to a chosen spot or room
   let hovered = null;
 
-  const counts = () => roomCounts(pack, progress.opened(slug));
+  const counts = () => roomCounts(pack, progress.opened(pack.slug));
   const map = overview(document.getElementById("overview"), layout, { rooms: pack.rooms, counts: counts(), onJump: jumpTo });
+  const selection = makeSelection(THREE, {
+    world,
+    pack,
+    layout,
+    progress,
+    view: {
+      show(html, focus) {
+        body.innerHTML = html;
+        panel.classList.add("is-open");
+        panel.inert = false;
+        if (focus) panel.focus({ preventScroll: true });
+      },
+      hide() {
+        panel.classList.remove("is-open");
+        if (panel.contains(document.activeElement)) document.activeElement.blur();
+        panel.inert = true;
+      },
+      opened(id) {
+        if (id === null) delete root.dataset.open;
+        else root.dataset.open = id;
+        map.setCounts(counts());
+      },
+    },
+  });
   const controls = makeControls(world.camera, canvas, {
     floorY: 0,
     targets: world.spotMeshes,
@@ -107,55 +126,15 @@ function interact(THREE, world, pack, layout, canvas, progress) {
     },
   });
 
-  function deselect() {
-    for (const o of selected?.drawn ?? []) removeDrawn(world.scene, o);
-    selected = null;
-    delete root.dataset.open;
-  }
-
-  function show(html, focus) {
-    body.innerHTML = html;
-    panel.classList.add("is-open");
-    panel.inert = false;
-    if (focus) panel.focus({ preventScroll: true });
-  }
-
-  function close() {
-    deselect();
-    panel.classList.remove("is-open");
-    if (panel.contains(document.activeElement)) document.activeElement.blur();
-    panel.inert = true;
-  }
-
-  const top = (o) => ({ x: o.position.x, y: o.userData.pickY + o.userData.pickRadius, z: o.position.z });
-
-  function openSpot(id) {
-    const spot = spots.get(id);
-    const obj = world.spotMeshes.get(id);
-    deselect();
-    show(spotPanel(spot, pack), true);
-    const ends = (spot.links ?? []).map((l) => world.spotMeshes.get(l.to)).filter((o) => o && o !== obj).map(top);
-    const drawn = [drawLinks(THREE, world.scene, top(obj), ends)];
-    if (spot.kind === "person") drawn.push(drawLifespan(THREE, world.scene, layout, spot.years));
-    selected = { spot, drawn: drawn.filter(Boolean) };
-    root.dataset.open = id;
-    progress.openSpot(slug, id);
-    map.setCounts(counts());
-  }
-
   function goTo(id) {
     if (!world.spotMeshes.has(id)) return;
     const obj = world.spotMeshes.get(id);
     const p = obj.position;
-    controls.walkTo({ x: p.x, y: 0, z: p.z + STAND_OFF });
+    const at = standPoint(p, spotsAt.filter((s) => s.id !== id));
+    controls.walkTo({ x: at.x, y: 0, z: at.z });
     controls.lookAt({ x: p.x, y: p.y + obj.userData.pickY, z: p.z });
-    quiet = true;
-    openSpot(id);
-  }
-
-  function openRoom(n, focus) {
-    deselect();
-    show(roomPanel(rooms.get(n), pack, progress.revealed(slug)), focus);
+    room.quiet = true;
+    selection.openSpot(id);
   }
 
   function jumpTo(n) {
@@ -163,23 +142,22 @@ function interact(THREE, world, pack, layout, canvas, progress) {
     const x = (r.x0 + r.x1) / 2;
     controls.walkTo({ x, z: pathZ(r) });
     controls.lookAt({ x, y: SCENE.eye - 0.6, z: (r.z0 + r.z1) / 2 });
-    quiet = true;
-    openRoom(n, true);
+    room.quiet = true;
+    selection.openRoom(n, true);
   }
 
   function reveal(key) {
-    const [n, i] = key.split(":").map(Number);
-    progress.revealWhy(slug, n, i);
-    openRoom(n, false);
+    selection.reveal(key);
     (body.querySelector("[data-reveal]") ?? panel).focus({ preventScroll: true });
   }
 
   // Redraws the plot explainer at the button's step; focus stays on the same side's button while it is enabled.
   function step(button) {
-    if (!selected?.spot.plot) return;
+    const plot = selection.spot?.plot;
+    if (!plot) return;
     const section = button.closest(".plot");
     const side = [...section.querySelectorAll("[data-step]")].indexOf(button);
-    section.outerHTML = plotExplainer(selected.spot.plot, { step: Number(button.dataset.step) });
+    section.outerHTML = plotExplainer(plot, { step: Number(button.dataset.step) });
     const buttons = body.querySelectorAll(".plot [data-step]");
     (buttons[side]?.disabled ? buttons[1 - side] : buttons[side])?.focus();
   }
@@ -190,25 +168,22 @@ function interact(THREE, world, pack, layout, canvas, progress) {
     if (!el) return;
     if (el.tagName === "A") e.preventDefault();
     const d = el.dataset;
-    if ("close" in d) close();
+    if ("close" in d) selection.close();
     else if ("spot" in d) goTo(d.spot);
     else if ("reveal" in d) reveal(d.reveal);
     else if ("step" in d) step(el);
   });
   addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && panel.classList.contains("is-open")) close();
+    if (e.key === "Escape" && panel.classList.contains("is-open")) selection.close();
   });
 
   function frame() {
     const eye = world.camera.position;
     const n = roomAt(layout, eye.x, eye.z);
-    if (n !== visit) {
-      visit = n;
-      if (n !== null && !quiet) openRoom(n, false);
-    }
-    if (quiet && !controls.moving()) quiet = false;
+    room = roomVisit(room.visit, n, room.quiet, controls.moving());
+    if (room.open) selection.openRoom(n, false);
     map.mark(eye.x, n);
-    updateNearby(world.spotMeshes, eye, hovered);
+    updateNearby(world.spotMeshes, eye, hovered, selection.spot?.id ?? null);
   }
 
   return { controls, goTo, frame };

@@ -162,8 +162,17 @@ function kit(THREE) {
   };
   // A flat glowing outline facing +z.
   const pane = (pts, mat) => new THREE.Mesh(new THREE.ShapeGeometry(shape(pts)), mat);
-  return { std, glow, at, box, cyl, group, slab, pane };
+  // A w×d rectangle lying flat, facing up, centred on (x, y, z).
+  const flat = (w, d, mat, x, y, z) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), mat);
+    m.rotation.x = -Math.PI / 2;
+    return at(m, x, y, z);
+  };
+  return { std, glow, at, box, cyl, group, slab, pane, flat };
 }
+
+/** Points of a w×h rectangle standing on y=0, centred on x=0. */
+const rectPts = (w, h) => [[-w / 2, 0], [w / 2, 0], [w / 2, h], [-w / 2, h]];
 
 /** Points of an arch: a rectangle w×h topped by a half circle (round) or a pointed arch (lancet). */
 function archPts(w, h, pointed = false, n = 8) {
@@ -208,13 +217,9 @@ function frame({ x0, x1, z0, z1, low = false }) {
  * `wall(w, h)` and `floor(w, d)` return materials sized to the surface.
  */
 function shell(THREE, f, { wall, floor }) {
-  const { box } = kit(THREE);
+  const { box, flat } = kit(THREE);
   const g = new THREE.Group();
-  const fl = new THREE.Mesh(new THREE.PlaneGeometry(f.w, f.d), floor(f.w, f.d));
-  fl.rotation.x = -Math.PI / 2;
-  fl.position.set(f.cx, 0.01, f.zc);
-  fl.userData.part = "floor";
-  g.add(fl);
+  g.add(part(flat(f.w, f.d, floor(f.w, f.d), f.cx, 0.01, f.zc), "floor"));
   const tag = (m) => ((m.userData.wall = true), m);
   g.add(tag(box(f.w, f.backH, WALL_T, wall(f.w, f.backH), f.cx, f.backH / 2, f.zb)));
   if (f.low) g.add(part(box(f.w, LINTEL_H, WALL_T, wall(f.w, LINTEL_H), f.cx, WALL_H - LINTEL_H / 2, f.zb), "lintel"));
@@ -229,12 +234,8 @@ const surface = (THREE, tex, extra = {}) => (w, h) =>
 
 /** A floor pool of light in `color`, `w`×`d` metres, centred on (x, z). */
 export function lightPool(THREE, tex, color, opacity, w, d, x, z) {
-  const m = new THREE.Mesh(
-    new THREE.PlaneGeometry(w, d),
-    new THREE.MeshBasicMaterial({ color, map: tex, transparent: true, opacity, depthWrite: false }),
-  );
-  m.rotation.x = -Math.PI / 2;
-  m.position.set(x, 0.03, z);
+  const mat = new THREE.MeshBasicMaterial({ color, map: tex, transparent: true, opacity, depthWrite: false });
+  const m = kit(THREE).flat(w, d, mat, x, 0.03, z);
   m.userData.pool = true;
   return m;
 }
@@ -534,7 +535,7 @@ export const STYLES = {
           box(0.36, 0.06, 0.06, gold, 0, h + 0.5, 0),
         );
       },
-      windowLight: (f) => group(windows(THREE, f, windowXs(f, 0.2), [[-0.35, 0], [0.35, 0], [0.35, 0.55], [-0.35, 0.55]], 1.5, 0x9fc4ff), windowPool(THREE, f, 0x9fc4ff, 0.32)),
+      windowLight: (f) => group(windows(THREE, f, windowXs(f, 0.2), rectPts(0.7, 0.55), 1.5, 0x9fc4ff), windowPool(THREE, f, 0x9fc4ff, 0.32)),
       landmark: LANDMARKS.shrinePillar(THREE, C),
     });
   },
@@ -585,7 +586,7 @@ export const STYLES = {
         }
         return g;
       },
-      windowLight: (f) => group(windows(THREE, f, windowXs(f, 0.3), [[-0.25, 0], [0.25, 0], [0.25, 0.6], [-0.25, 0.6]], 1.4, 0xffc77a, { bars, barMat: frameMat }), windowPool(THREE, f, 0xffc77a, 0.16)),
+      windowLight: (f) => group(windows(THREE, f, windowXs(f, 0.3), rectPts(0.5, 0.6), 1.4, 0xffc77a, { bars, barMat: frameMat }), windowPool(THREE, f, 0xffc77a, 0.16)),
       landmark: LANDMARKS.wellSweep(THREE),
     });
   },
@@ -608,7 +609,7 @@ export const STYLES = {
           box(0.18, 1.8, 0.02, glow(0xfff0c8), f.w / 2 - tower - 0.6, 1.1, tower + 0.015),
         );
       },
-      windowLight: (f) => group(windows(THREE, f, windowXs(f, 0.35), [[-0.3, 0], [0.3, 0], [0.3, 2.3], [-0.3, 2.3]], 0.5, 0xfff0c8, { opacity: 0.9 }), windowPool(THREE, f, 0xfff0c8, 0.14)),
+      windowLight: (f) => group(windows(THREE, f, windowXs(f, 0.35), rectPts(0.6, 2.3), 0.5, 0xfff0c8, { opacity: 0.9 }), windowPool(THREE, f, 0xfff0c8, 0.14)),
       landmark: LANDMARKS.radio(THREE, C),
       extra: (f) => {
         const g = group();
@@ -636,7 +637,7 @@ export const STYLES = {
           cyl(0.06, 0.06, 1.0, std(0x3a3a3a, { metalness: 0.5 }), a * 0.4, 0.8, 0.01),
         );
       },
-      windowLight: (f) => group(windows(THREE, f, windowXs(f, 0.2), [[-0.25, 0], [0.25, 0], [0.25, 0.5], [-0.25, 0.5]], 1.6, 0xe8d8a8, { bars, barMat: std(0x2a2620), opacity: 0.85 }), windowPool(THREE, f, 0xfff0c8, 0.1)),
+      windowLight: (f) => group(windows(THREE, f, windowXs(f, 0.2), rectPts(0.5, 0.5), 1.6, 0xe8d8a8, { bars, barMat: std(0x2a2620), opacity: 0.85 }), windowPool(THREE, f, 0xfff0c8, 0.1)),
       landmark: LANDMARKS.suitcases(THREE, C),
     });
   },
@@ -685,7 +686,7 @@ export const STYLES = {
       },
       windowLight: (f) => {
         const g = group(windowPool(THREE, f, 0xcfe4ff, 0.2));
-        g.add(windows(THREE, f, windowXs(f, 0.4, 0.6), [[-0.6, 0], [0.6, 0], [0.6, 2.6], [-0.6, 2.6]], 0.3, 0xcfe4ff, { opacity: 0.35 }));
+        g.add(windows(THREE, f, windowXs(f, 0.4, 0.6), rectPts(1.2, 2.6), 0.3, 0xcfe4ff, { opacity: 0.35 }));
         for (let x = f.x0 + 1.5; x < f.x1 - 0.5; x += 1.5) g.add(box(0.08, WALL_H, 0.08, timber, x, WALL_H / 2, f.zf + 0.05));
         return g;
       },
@@ -728,18 +729,13 @@ export function pathLamp(THREE, band, C) {
 
 /** Walking path strip from x0 to x1, centred on z. */
 export function path(THREE, { x0, x1, z }, C) {
-  const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, PATH_W), new THREE.MeshStandardMaterial({ color: C.path, roughness: 1 }));
-  m.rotation.x = -Math.PI / 2;
-  m.position.set((x0 + x1) / 2, 0.02, z);
-  return m;
+  return kit(THREE).flat(x1 - x0, PATH_W, new THREE.MeshStandardMaterial({ color: C.path, roughness: 1 }), (x0 + x1) / 2, 0.02, z);
 }
 
 /** Ground under the whole world. */
 export function ground(THREE, { x0, x1, z0, z1 }, C) {
-  const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), new THREE.MeshStandardMaterial({ color: C.bg, roughness: 1 }));
-  m.rotation.x = -Math.PI / 2;
-  m.position.set((x0 + x1) / 2, 0, (z0 + z1) / 2);
-  return m;
+  const mat = new THREE.MeshStandardMaterial({ color: C.bg, roughness: 1 });
+  return kit(THREE).flat(x1 - x0, z1 - z0, mat, (x0 + x1) / 2, 0, (z0 + z1) / 2);
 }
 
 /** Gold tube arcing from `a` to `b` ({x, y, z}); longer links arc higher. */

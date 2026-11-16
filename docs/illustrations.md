@@ -39,7 +39,7 @@ The generated PNGs carry an XMP block (`DigitalSourceType` = `trainedAlgorithmic
 
 The owner approved all 5 (2026-11-16) as stylised representations. Noted logical slips: the altar shadow in "Altorių šešėly", and the lift on an open balcony in "Balta drobulė".
 
-Decision on illustrating the rest: pending, to be asked.
+Decision on illustrating the rest (user, 2026-11-16): a later change, with lighter images; a neutral agent reviews each image instead of the user.
 
 ## Shipped files
 

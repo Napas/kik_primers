@@ -747,6 +747,10 @@
         "sources": [
           "https://lt.wikipedia.org/wiki/Metai_(Donelaitis)"
         ]
+      },
+      "illustration": {
+        "file": "img/works/metai.png",
+        "approved": true
       }
     },
     {
@@ -1579,7 +1583,11 @@
           "label": "trumpesnė už"
         }
       ],
-      "by": "baranauskas"
+      "by": "baranauskas",
+      "illustration": {
+        "file": "img/works/silelis.png",
+        "approved": true
+      }
     },
     {
       "id": "ivinskis",
@@ -3911,6 +3919,10 @@
         "sources": [
           "https://lt.wikipedia.org/wiki/Altorių_šešėly"
         ]
+      },
+      "illustration": {
+        "file": "img/works/altoriu-seseli.png",
+        "approved": true
       }
     },
     {
@@ -4129,7 +4141,11 @@
           "label": "autorius"
         }
       ],
-      "by": "sruoga"
+      "by": "sruoga",
+      "illustration": {
+        "file": "img/works/dievu-miskas.png",
+        "approved": true
+      }
     },
     {
       "id": "dvarionas",
@@ -5570,6 +5586,10 @@
         "sources": [
           "https://www.vle.lt/straipsnis/antanas-skema/"
         ]
+      },
+      "illustration": {
+        "file": "img/works/balta-drobule.png",
+        "approved": true
       }
     },
     {

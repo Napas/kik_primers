@@ -289,6 +289,57 @@ Deno.test({
 });
 
 Deno.test({
+  name: "keyboard focus: test page steps, world panel return, and the text view's beats and hash",
+  ignore,
+  sanitizeResources: false,
+  sanitizeOps: false,
+  fn: async () => {
+    await withSite([MINI], async (base) => {
+      const active = `(() => { const a = document.activeElement; return a ? (a.id || a.dataset.step || a.dataset.room || a.tagName) : null; })()`;
+      await withPage(`${base}test.html?topic=mini-test&nostore=1`, async ({ ev, sleep, errors }) => {
+        assertEquals(await ev("document.documentElement.dataset.ready"), "test");
+        const seen = [];
+        // Answer every item by keyboard-style clicks on the focused element, noting what holds focus.
+        for (let i = 0; i < 40 && (await ev("document.documentElement.dataset.ready")) !== "test-done"; i++) {
+          const a = await ev(active);
+          seen.push(a);
+          assert(a && a !== "BODY", `focus lost at step ${i}: ${JSON.stringify(seen)}`);
+          if (a === "-1" || a === "1") {
+            await ev(`document.activeElement.click()`);
+            await sleep(50);
+            seen.push(await ev(active));
+            assertEquals(seen.at(-1), a, "the moved row keeps focus on the same button");
+            await ev(`document.getElementById("check").click()`);
+          } else await ev(`document.activeElement.click()`);
+          await sleep(50);
+        }
+        assertEquals(await ev("document.documentElement.dataset.ready"), "test-done");
+        assertEquals(await ev(`document.activeElement.tagName`), "H2", "the result heading takes focus");
+        assertEquals(errors, []);
+      });
+      await withPage(`${base}world.html?topic=mini-test&nostore=1`, async ({ ev, sleep, errors }) => {
+        await ev(`document.querySelector('#overview details')?.setAttribute("open", "")`);
+        await ev(`(() => { const b = document.querySelector('#overview button[data-room="2"]'); b.focus(); b.dispatchEvent(new KeyboardEvent("keydown", {key: "Enter", bubbles: true})); b.click(); })()`);
+        await sleep(400);
+        assertEquals(await ev(`panel.classList.contains("is-open")`), true);
+        await ev(`dispatchEvent(new KeyboardEvent("keydown", {key: "Escape"}))`);
+        await sleep(200);
+        assertEquals(await ev(active), "SUMMARY", "Esc returns focus to the room list that opened the panel");
+        assertEquals(errors, []);
+      });
+      await withPage(`${base}world.html?topic=mini-test&view=text#pirma-knyga`, async ({ ev, errors }) => {
+        assertEquals(await ev("document.documentElement.dataset.ready"), "text");
+        assertEquals(await ev(`document.querySelectorAll("ol.beats li").length`), 4, "every beat of the plot");
+        assertEquals(await ev(`document.querySelectorAll("#app button").length`), 0);
+        const top = await ev(`document.getElementById("spot-pirma-knyga").getBoundingClientRect().top`);
+        assert(Math.abs(top) < 2 && (await ev("scrollY")) > 0, `the hash's spot is scrolled to: top ${top}`);
+        assertEquals(errors, []);
+      }, { w: 800, h: 400 });
+    });
+  },
+});
+
+Deno.test({
   name: "the real packs in site/ render in headless Chrome",
   ignore,
   fn: async (t) => {

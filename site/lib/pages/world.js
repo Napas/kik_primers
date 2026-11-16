@@ -11,7 +11,7 @@ import { makeControls } from "../scene/controls.js";
 import { sizeLabels, standPoint, updateNearby } from "../scene/nearby.js";
 import { overview, roomAt, roomCounts } from "./overview.js";
 import { makeSelection, roomVisit } from "./selection.js";
-import { hashId, loadIndex, loadPack, markReady, run, showError, storageBackend, topicFromUrl } from "./common.js";
+import { focusReturn, hashId, loadIndex, loadPack, markReady, run, showError, storageBackend, textAnchor, topicFromUrl } from "./common.js";
 
 const MAX_DT = 0.1; // seconds; longer frame gaps (hidden tab) don't jump the camera
 
@@ -22,8 +22,10 @@ function hasWebGL() {
   return Boolean(gl);
 }
 
+// The text arrives after load, when the browser has already tried to scroll to the hash, so scroll again.
 function showText(pack) {
   document.getElementById("app").innerHTML = textView(pack);
+  document.getElementById(textAnchor(location.hash))?.scrollIntoView();
   markReady("text", { rooms: pack.rooms.length, spots: pack.spots.length });
 }
 
@@ -87,6 +89,10 @@ function interact(THREE, world, pack, layout, canvas, progress) {
   const spotsAt = [...world.spotMeshes].map(([id, o]) => ({ id, x: o.position.x, z: o.position.z }));
   let room = { visit: null, quiet: false }; // roomVisit state; quiet while walking to a chosen spot or room
   let hovered = null;
+  let keyboard = false; // the last input was a key, not a pointer
+  addEventListener("keydown", () => (keyboard = true), true);
+  addEventListener("pointerdown", () => (keyboard = false), true);
+  const opener = focusReturn();
 
   const counts = () => roomCounts(pack, progress.opened(pack.slug));
   const map = overview(document.getElementById("overview"), layout, { rooms: pack.rooms, counts: counts(), onJump: jumpTo });
@@ -97,6 +103,7 @@ function interact(THREE, world, pack, layout, canvas, progress) {
     progress,
     view: {
       show(html, focus) {
+        if (focus) opener.opened(document.activeElement, keyboard, panel.contains(document.activeElement));
         body.innerHTML = html;
         panel.classList.add("is-open");
         panel.inert = false;
@@ -106,6 +113,7 @@ function interact(THREE, world, pack, layout, canvas, progress) {
         panel.classList.remove("is-open");
         if (panel.contains(document.activeElement)) document.activeElement.blur();
         panel.inert = true;
+        opener.closed();
       },
       opened(id) {
         if (id === null) delete root.dataset.open;

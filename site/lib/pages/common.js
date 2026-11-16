@@ -39,6 +39,29 @@ export function hashId(hash) {
   }
 }
 
+/** The text view's element id for a location hash: `spot-<id>` for a bare spot id; "" without one. */
+export function textAnchor(hash) {
+  const id = hashId(hash);
+  return !id || id.startsWith("spot-") ? id : `spot-${id}`;
+}
+
+/**
+ * Gives focus back to whatever opened a panel by keyboard. opened(active, keyboard, inPanel) when the panel
+ * opens with focus (an opener inside the panel keeps the earlier one); closed() after it is hidden.
+ */
+export function focusReturn() {
+  let opener = null;
+  return {
+    opened(active, keyboard, inPanel) {
+      if (!inPanel) opener = keyboard ? active : null;
+    },
+    closed() {
+      if (opener?.isConnected) opener.focus({ preventScroll: true });
+      opener = null;
+    },
+  };
+}
+
 async function fetchJson(path) {
   const res = await fetch(path);
   if (!res.ok) throw new Error(`${path}: ${res.status}`);

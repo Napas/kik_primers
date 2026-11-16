@@ -1,5 +1,5 @@
 import { assert, assertEquals, assertMatch } from "@std/assert";
-import { imgUrl, lifeStrip, plotExplainer, roomPanel, spotPanel, textView, worksOf } from "../site/lib/render.js";
+import { imgUrl, licenseHtml, lifeStrip, plotExplainer, roomPanel, spotPanel, textView, worksOf } from "../site/lib/render.js";
 import { COLORS, STYLE_NAMES } from "../site/lib/theme.js";
 
 const bare = (kind, extra = {}) => ({ id: "x", room: 1, kind, name: "Vardas", aliases: [], years: null, text: "Tekstas.", links: [], ...extra });
@@ -42,7 +42,21 @@ Deno.test("unapproved illustration is not shown", () => {
 });
 Deno.test("photo credit links the source", () => {
   const h = spotPanel(person({ photo: { file: "p.jpg", author: "Jonas", license: "CC0", source_url: "https://commons.example/p" } }), pack());
-  assertMatch(h, /<a [^>]*href="https:\/\/commons\.example\/p"[^>]*>Nuotrauka: Jonas, CC0<\/a>/);
+  assertMatch(h, /Nuotrauka: <a [^>]*href="https:\/\/commons\.example\/p"[^>]*>Jonas<\/a>, CC0</);
+});
+Deno.test("photo credit links the licence name to its licence_url", () => {
+  const photo = {
+    file: "p.jpg", author: "Jonas", license: "CC BY-SA 4.0", source_url: "https://commons.example/p",
+    license_url: "https://creativecommons.org/licenses/by-sa/4.0",
+  };
+  const h = spotPanel(person({ photo }), pack());
+  assertMatch(h, /<a [^>]*href="https:\/\/creativecommons\.org\/licenses\/by-sa\/4\.0"[^>]*>CC BY-SA 4\.0<\/a>/);
+  assert(!/<a [^>]*>[^<]*<a /.test(h), "links are not nested");
+});
+Deno.test("licenseHtml links only http(s) licence urls and escapes the name", () => {
+  assertEquals(licenseHtml({ license: "CC0" }), "CC0");
+  assertEquals(licenseHtml({ license: "A&B", license_url: "javascript:alert(1)" }), "A&amp;B");
+  assertMatch(licenseHtml({ license: "<x>", license_url: "https://e.org/l?a=1&b=2" }), /^<a href="https:\/\/e\.org\/l\?a=1&amp;b=2" [^>]*>&lt;x&gt;<\/a>$/);
 });
 Deno.test("unsafe photo source url is not linked", () => {
   const h = spotPanel(person({ photo: { file: "p.jpg", author: "A", license: "CC0", source_url: "javascript:alert(1)" } }), pack());
@@ -97,6 +111,23 @@ Deno.test("a plot without relations has no relation list", () => {
   const plot = mkPlot();
   plot.relations = [];
   assert(!plotExplainer(plot).includes("relations"));
+  delete plot.relations;
+  assert(!plotExplainer(plot).includes("relations"), "relations may be left out");
+});
+Deno.test("plot lists each character with their role, escaped", () => {
+  const plot = mkPlot();
+  plot.characters[0].role = "<dukra>";
+  const list = plotExplainer(plot).match(/<ul class="roles">([\s\S]*?)<\/ul>/)?.[1] ?? "";
+  for (const t of ["<b>Katrė</b> – &lt;dukra&gt;", "<b>Jonas</b> – tėvas", "<b>Petras</b> – kaimynas"]) assert(list.includes(t), t);
+});
+Deno.test("text view lists every plot beat and links works by anchor, with no step or spot buttons", () => {
+  const p = pack({ spots: [person({ id: "donelaitis", at: 1750 }), work({ id: "metai", by: "donelaitis", at: 1765, plot: mkPlot() })] });
+  const h = textView(p);
+  const beats = h.match(/<ol class="beats">([\s\S]*?)<\/ol>/)?.[1] ?? "";
+  for (const t of ["Pradžia.", "Vidurys.", "Pabaiga.", "Epilogas."]) assert(beats.includes(t), t);
+  assert(!h.includes("data-step") && !h.includes("<button"), "no controls that only the 3D page wires");
+  assertMatch(h, /<a class="spine" href="#spot-metai">/);
+  assertMatch(h, /id="spot-metai"/);
 });
 Deno.test("plot step is clamped", () => {
   assert(plotExplainer(mkPlot(), { step: 99 }).includes("Epilogas."));
@@ -148,6 +179,11 @@ Deno.test("life strip carries the room's style class", () => {
 Deno.test("site.css has an accent for every style", async () => {
   const css = await Deno.readTextFile(new URL("../site/lib/site.css", import.meta.url));
   for (const n of STYLE_NAMES) assert(css.includes(`.style-${n}`), n);
+});
+Deno.test("room panel links a test of that room when it has questions", () => {
+  const p = pack();
+  assertMatch(roomPanel(p.rooms[0], p, new Set()), /<a href="test\.html\?topic=mini&amp;room=1">Testas šiai salei<\/a>/);
+  assert(!roomPanel(p.rooms[1], p, new Set()).includes("test.html"), "room 2 has no questions");
 });
 Deno.test("room panel lists the room's spots", () => {
   const p = pack({ spots: [bare("person", { id: "s1", room: 1 }), bare("person", { id: "s2", room: 2 })] });

@@ -62,7 +62,8 @@ button:disabled { opacity: .4; cursor: default; }
 .plot-map { width: 100%; height: auto; background: var(--floor); border-radius: 6px; }
 .plot-map line { stroke: var(--path); stroke-width: 1.5; }
 .plot-map text { fill: var(--muted); font-size: 11px; paint-order: stroke; stroke: var(--floor); stroke-width: 3px; stroke-linejoin: round; } /* halo over crossing lines */
-.panel ul.relations { list-style: none; padding: 0; margin: .5rem 0 0; font-size: .85rem; color: var(--muted); }
+.panel ul.relations, .panel ul.roles { list-style: none; padding: 0; margin: .5rem 0 0; font-size: .85rem; color: var(--muted); }
+.roles b { color: var(--text); font-weight: normal; }
 .relations li.on { color: var(--text); }
 .plot-map .node circle { fill: var(--path); }
 .plot-map .node.on circle { fill: var(--gold); }

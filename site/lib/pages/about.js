@@ -1,5 +1,6 @@
 // About page: photo credits from every pack and the Three.js licence.
 import { esc } from "../text.js";
+import { licenseHtml } from "../render.js";
 import { loadIndex, loadPack, markReady, run } from "./common.js";
 
 const AI_NOTE = "Turinys parengtas padedant dirbtiniam intelektui; jame gali būti klaidų.";
@@ -13,7 +14,7 @@ const isHttp = (u) => /^https?:\/\//i.test(u);
 
 function creditItem(c) {
   const src = isHttp(c.source_url) ? `<a href="${esc(c.source_url)}" rel="noopener">šaltinis</a>` : "";
-  return `<li>${esc(c.name)}: ${esc(c.author)}, ${esc(c.license)} ${src}</li>`;
+  return `<li>${esc(c.name)}: ${esc(c.author)}, ${licenseHtml(c)} ${src}</li>`;
 }
 
 run(async () => {

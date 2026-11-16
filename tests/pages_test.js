@@ -1,5 +1,5 @@
 import { assertEquals, assertMatch, assertThrows } from "@std/assert";
-import { hashId, lastScore, storageBackend, topicFromUrl } from "../site/lib/pages/common.js";
+import { focusReturn, hashId, lastScore, storageBackend, textAnchor, topicFromUrl } from "../site/lib/pages/common.js";
 import { makeStore } from "../site/lib/storage.js";
 import { facePrompt, move, orderRight, shift, summarize } from "../site/lib/pages/test.js";
 
@@ -119,4 +119,31 @@ Deno.test("shift moves the item with the given id by its current position", () =
 Deno.test("facePrompt asks who it is above the photo", () => {
   const h = facePrompt({ slug: "mini-test" }, { name: "Jonas", photo: { file: "img/jonas.jpg" } });
   assertMatch(h, /^<p>Kas tai\?<\/p><img src="topics\/mini-test\/img\/jonas\.jpg" alt="">$/);
+});
+
+Deno.test("textAnchor names the text view's element for a hash: spot-<id> for a bare spot id", () => {
+  assertEquals(textAnchor("#jonas-rastas"), "spot-jonas-rastas");
+  assertEquals(textAnchor("#spot-jonas-rastas"), "spot-jonas-rastas");
+  assertEquals(textAnchor(""), "");
+  assertEquals(textAnchor("#%E0%A4%A"), "");
+});
+
+Deno.test("focusReturn gives focus back to a keyboard opener that is still in the page", () => {
+  const el = (isConnected = true) => ({ isConnected, focused: 0, focus() { this.focused++; } });
+  const r = focusReturn();
+  const button = el();
+  r.opened(button, true, false);
+  r.opened(el(), true, true); // a link inside the panel keeps the first opener
+  r.closed();
+  assertEquals(button.focused, 1);
+  r.closed();
+  assertEquals(button.focused, 1, "once per open");
+  const clicked = el();
+  r.opened(clicked, false, false);
+  r.closed();
+  assertEquals(clicked.focused, 0, "pointer opens leave focus alone");
+  const gone = el(false);
+  r.opened(gone, true, false);
+  r.closed();
+  assertEquals(gone.focused, 0, "a removed opener is skipped");
 });

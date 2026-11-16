@@ -57,8 +57,10 @@ async function main() {
   const results = [];
   let i = 0;
 
-  const html = (s) => {
+  // Each step replaces the page, so focus moves to `focus` (a selector), else the step's first button.
+  const html = (s, focus = "[data-focus], button") => {
     app.innerHTML = s;
+    app.querySelector(focus)?.focus();
   };
   const header = () => `<p class="muted">${i + 1}/${items.length}</p>`;
   const next = (item, right) => {
@@ -108,16 +110,17 @@ async function main() {
         };
       }
     };
-    const draw = () => {
+    const draw = (focus) => {
       html(`${header()}<div class="card"><p>Išdėstyk nuo seniausio pagal ${by}:</p>
         <ol class="order">${order.map((id) => `<li data-id="${esc(id)}"><span class="grip" aria-hidden="true">⠿</span> ${esc(spotName(id))}
           <button data-step="-1" aria-label="Aukštyn">↑</button><button data-step="1" aria-label="Žemyn">↓</button></li>`).join("")}</ol></div>
-        <p><button id="check">Tikrinti</button></p>`);
+        <p><button id="check">Tikrinti</button></p>`, focus);
       const list = app.querySelector("ol");
       for (const b of list.querySelectorAll("[data-step]")) {
         b.onclick = () => {
-          order = shift(order, b.closest("li").dataset.id, +b.dataset.step);
-          draw();
+          const id = b.closest("li").dataset.id;
+          order = shift(order, id, +b.dataset.step);
+          draw(`li[data-id="${CSS.escape(id)}"] [data-step="${b.dataset.step}"]`);
         };
       }
       dragWire(list);
@@ -141,7 +144,7 @@ async function main() {
       const links = m.spots.map((id) => `<a href="world.html?topic=${slug}#${encodeURIComponent(id)}">${esc(spotName(id))}</a>`);
       return `<li>${esc(m.text)} ${links.join(", ")}</li>`;
     });
-    html(`<h2>Rezultatas: ${s.right}/${s.total}</h2>
+    html(`<h2 tabindex="-1" data-focus>Rezultatas: ${s.right}/${s.total}</h2>
       ${wrongRows.length ? `<h3>Klaidos</h3><ul class="wrong">${wrongRows.join("")}</ul>` : ""}
       <p><a href="test.html?topic=${slug}${room === undefined ? "" : `&room=${room}`}">Dar kartą</a> · <a href="index.html">Temų sąrašas</a></p>`);
     markReady("test-done", { right: s.right, total: s.total });

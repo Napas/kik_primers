@@ -78,3 +78,24 @@ Deno.test("public packs keep masked skip entries out of site/", async () => {
     for (const k of pack.skipped) assert(!k.span.includes("…"), `${e.name}: ${k.span}`);
   }
 });
+
+Deno.test("every page's header links the about page", async () => {
+  for (const page of ["index", "world", "test", "about"]) {
+    const html = await Deno.readTextFile(`${root}site/${page}.html`);
+    const header = html.match(/<header class="bar">([\s\S]*?)<\/header>/)?.[1] ?? "";
+    assertMatch(header, /<a href="about\.html"[^>]*>Apie<\/a>/, page);
+  }
+});
+
+Deno.test("a room panel's test link opens a non-empty session for every real room", async () => {
+  const { roomPanel } = await import("../site/lib/render.js");
+  const { buildSession } = await import("../site/lib/quiz.js");
+  for await (const e of Deno.readDir(`${root}site/topics`)) {
+    if (!e.isDirectory) continue;
+    const pack = JSON.parse(await Deno.readTextFile(`${root}site/topics/${e.name}/topic.json`));
+    for (const room of pack.rooms) {
+      if (!roomPanel(room, pack, new Set()).includes("test.html")) continue;
+      assert(buildSession(pack, { room: room.n }).length > 0, `${e.name} room ${room.n}`);
+    }
+  }
+});

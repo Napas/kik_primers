@@ -71,6 +71,8 @@ export function overview(dom, layout, { onJump, rooms, counts = new Map() }) {
   dom.addEventListener("click", (e) => {
     const el = e.target.closest("[data-room]");
     if (!el) return;
+    // The list closes, hiding the chosen button, so keyboard focus moves to the list's summary.
+    if (list.contains(document.activeElement)) list.querySelector("summary").focus();
     list.open = false;
     onJump(Number(el.dataset.room));
   });

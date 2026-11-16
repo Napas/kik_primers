@@ -211,6 +211,7 @@ Deno.test("styles.js builds the plain look: walls tagged as occluders, path, gro
     const texts = [];
     m.traverse((o) => o.material?.map?.image?.texts && texts.push(...o.material.map.image.texts));
     assertEquals(texts, ["1550"]);
+    assert(m.userData.label.position.z >= 0.1, "the year sits in front of the wall face its post stands in");
   } finally {
     restore();
   }

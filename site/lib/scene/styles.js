@@ -21,6 +21,7 @@ const LANDMARK_D = 0.8; // depth of the strip behind the first spot row
 const WINDOW_GAP = 2.4; // windows keep this far from the room centre, where the landmark stands
 const MARKER_H = LOW_WALL_H; // year marker post height
 const MARKER_R = 0.03; // year marker post radius; landmarks keep at least 0.035 m off the back wall
+const MARKER_LABEL = { y: MARKER_H + 0.3, out: 0.15 }; // the year above its post, in front of the wall face
 const MARKER_EDGE = 0.3; // year markers keep this far from end walls
 const ARC = { r: 0.035, lift: 0.8, perMetre: 0.25, maxLift: 6, segments: 40, opacity: 0.9 };
 const LIFESPAN = { h: 0.08, d: 0.06 }; // as deep as a year marker post
@@ -817,7 +818,7 @@ export function yearMarker(THREE, year, C) {
   );
   post.position.y = MARKER_H / 2;
   const label = makeLabel(THREE, String(year));
-  label.position.y = MARKER_H + 0.3;
+  label.position.set(0, MARKER_LABEL.y, MARKER_LABEL.out);
   g.add(post, label);
   g.userData.label = label;
   return g;

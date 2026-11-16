@@ -144,6 +144,26 @@
         1940
       ],
       "style": "kaunas-modern"
+    },
+    {
+      "n": 7,
+      "title": "Karas ir egzodas: lietuvių literatūra svetur",
+      "intro": "1944 m. dalis rašytojų pasitraukė į Vakarus; po karo daugelis jų kūrė JAV.",
+      "why": [
+        {
+          "q": "Kaip Škėma susijęs su savo veikėju?",
+          "a": "Autorius ir „Baltos drobulės“ veikėjas sutampa vardu (Antanas) ir darbu (liftininkai Niujorke). Todėl romanas laikomas iš dalies autobiografiniu egzodo romanu."
+        },
+        {
+          "q": "Kaip susiję Milošas ir Mickevičius?",
+          "a": "Abu – LDK paveldo poetai, rašę lenkiškai, bet Lietuvą laikę tėvyne. Mickevičius – „lietuviška tautybė, lenkiška pilietybė“, Milošas – Nevėžio slėnis „Isos slėnyje“."
+        }
+      ],
+      "span": [
+        1940,
+        1990
+      ],
+      "style": "dp-barrack"
     }
   ],
   "spots": [
@@ -3150,6 +3170,458 @@
         }
       ],
       "by": "seinius"
+    },
+    {
+      "id": "macernis",
+      "room": 7,
+      "kind": "person",
+      "name": "Vytautas Mačernis",
+      "aliases": [],
+      "years": [
+        1921,
+        1944
+      ],
+      "at": 1944,
+      "text": "Vytautas Mačernis (1921–1944) gimė Šarnelėje, Žemaitijoje. Žuvo 1944 m. spalio 7 d. prie Žemaičių Kalvarijos nuo atsitiktinės artilerijos sviedinio skeveldros. Tuo metu kartu su juo vežimu turėjo važiuoti aktorius Donatas Banionis. Jo vienintelis baigtas ciklas – „Vizijos“. Vytauto Dvarčionio slapyvardis – ne Mačernio, o Vytauto Račicko.",
+      "links": [
+        {
+          "to": "banionis",
+          "label": "turėjo važiuoti kartu"
+        },
+        {
+          "to": "racickas",
+          "label": "ne jo slapyvardis"
+        }
+      ],
+      "wikidata": "Q3801386"
+    },
+    {
+      "id": "banionis",
+      "room": 7,
+      "kind": "person",
+      "name": "Donatas Banionis",
+      "aliases": [],
+      "years": [
+        1924,
+        2014
+      ],
+      "at": 1944,
+      "aside": true,
+      "text": "Aktorius Donatas Banionis 1944 m. turėjo važiuoti tuo pačiu vežimu kaip ir žuvęs poetas Vytautas Mačernis.",
+      "links": [
+        {
+          "to": "macernis",
+          "label": "turėjo važiuoti kartu"
+        }
+      ],
+      "wikidata": "Q908633"
+    },
+    {
+      "id": "racickas",
+      "room": 7,
+      "kind": "person",
+      "name": "Vytautas Račickas",
+      "aliases": [
+        "Vytautas Dvarčionis"
+      ],
+      "years": [
+        1952,
+        null
+      ],
+      "at": 1952,
+      "aside": true,
+      "text": "Vytauto Dvarčionio slapyvardžiu pasirašinėjo Vytautas Račickas, ne Vytautas Mačernis.",
+      "links": [
+        {
+          "to": "macernis",
+          "label": "ne Mačernis"
+        }
+      ],
+      "wikidata": "Q16477140"
+    },
+    {
+      "id": "skema",
+      "room": 7,
+      "kind": "person",
+      "name": "Antanas Škėma",
+      "aliases": [],
+      "years": [
+        1910,
+        1961
+      ],
+      "at": 1958,
+      "text": "Antanas Škėma (1910–1961) gimė Lodzėje (Lenkija), 1929 m. pradėjo studijuoti mediciną. Debiutinė novelė – „Baimė“, pirmoji pjesė – „Julijana“. Niujorke dirbo liftininku viešbutyje „Roosevelt“. Romanas „Balta drobulė“ (1958). Pagal Škėmos kūrinį sukurtas filmas „Izaokas“ (2019). Kaip ir Albert'as Camus, jis žuvo autoavarijoje (JAV, 1961). „Altorių šešėly“ ir „Miškais ateina ruduo“ – ne jo. Jo citata: „Istorijos motto: tas pats, bet kitaip“.",
+      "links": [
+        {
+          "to": "balta-drobule",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q4770956"
+    },
+    {
+      "id": "balta-drobule",
+      "room": 7,
+      "kind": "work",
+      "name": "„Balta drobulė“",
+      "aliases": [
+        "„Keltuvas“"
+      ],
+      "years": [
+        1958
+      ],
+      "at": 1958,
+      "text": "Antano Škėmos romanas „Balta drobulė“ (1958; pirminis pavadinimas „Keltuvas“) prasideda epigrafu apie palaimintus idiotus. Jo veikėjas – taip pat liftininkas Antanas Garšva. Autorius ir veikėjas sutampa vardu (Antanas) ir darbu (liftininkai Niujorke), todėl romanas laikomas iš dalies autobiografiniu egzodo romanu.",
+      "links": [
+        {
+          "to": "skema",
+          "label": "autorius"
+        }
+      ],
+      "by": "skema"
+    },
+    {
+      "id": "katiliskis",
+      "room": 7,
+      "kind": "person",
+      "name": "Marius Katiliškis",
+      "aliases": [
+        "Albinas Marius Vaitkus"
+      ],
+      "years": [
+        1914,
+        1980
+      ],
+      "at": 1957,
+      "text": "Marius Katiliškis (tikrasis vardas Albinas Marius Vaitkus; 1914–1980) parašė romaną „Miškais ateina ruduo“ (1957). Kiti kūriniai: „Užuovėja“, „Išėjusiems negrįžti“, „Pirmadienis Emerald gatvėje“. Jo žmona – poetė Liūnė Sutema.",
+      "links": [
+        {
+          "to": "miskais-ateina-ruduo",
+          "label": "parašė"
+        },
+        {
+          "to": "sutema",
+          "label": "žmona"
+        }
+      ],
+      "wikidata": "Q12664573"
+    },
+    {
+      "id": "miskais-ateina-ruduo",
+      "room": 7,
+      "kind": "work",
+      "name": "„Miškais ateina ruduo“",
+      "aliases": [],
+      "years": [
+        1957
+      ],
+      "at": 1957,
+      "text": "Mariaus Katiliškio romanas „Miškais ateina ruduo“ (1957); veikėjai Tilius Gelažius ir Monika Doveikienė. Jis ne Škėmos.",
+      "links": [
+        {
+          "to": "katiliskis",
+          "label": "autorius"
+        }
+      ],
+      "by": "katiliskis"
+    },
+    {
+      "id": "sutema",
+      "room": 7,
+      "kind": "person",
+      "name": "Liūnė Sutema",
+      "aliases": [
+        "Zinaida Nagytė-Katiliškienė"
+      ],
+      "years": [
+        1927,
+        2013
+      ],
+      "at": 1957,
+      "text": "Poetė Liūnė Sutema (Zinaida Nagytė-Katiliškienė, 1927–2013) – Mariaus Katiliškio žmona. Seimas 2027-uosius paskelbė Liūnės Sutemos metais.",
+      "links": [
+        {
+          "to": "katiliskis",
+          "label": "vyras"
+        }
+      ],
+      "wikidata": "Q12678968"
+    },
+    {
+      "id": "radauskas",
+      "room": 7,
+      "kind": "person",
+      "name": "Henrikas Radauskas",
+      "aliases": [],
+      "years": [
+        1910,
+        1970
+      ],
+      "at": 1944,
+      "text": "Henrikas Radauskas (1910–1970) – egzodo poetas, 1944 m. pasitraukė į Vakarus, mirė Vašingtone. Jo tėvas – lietuvis Bernardas, motina Amalija – pusiau lenkė, pusiau vokietė; jis buvo vienas iš dvynių. Rinktinė „Pasauliu netikiu, o pasaka tikiu“; eilėraštis „Dainos gimimas“ („Po šakom akacijos baltos“). Jo „Vakarą“ dainuoja bardas Olegas Ditkovskis.",
+      "links": [
+        {
+          "to": "ditkovskis",
+          "label": "dainuoja jo „Vakarą“"
+        }
+      ],
+      "wikidata": "Q5617250"
+    },
+    {
+      "id": "ditkovskis",
+      "room": 7,
+      "kind": "person",
+      "name": "Olegas Ditkovskis",
+      "aliases": [],
+      "years": [
+        1955,
+        null
+      ],
+      "at": 1990,
+      "aside": true,
+      "text": "Bardas Olegas Ditkovskis dainuoja Henriko Radausko „Vakarą“.",
+      "links": [
+        {
+          "to": "radauskas",
+          "label": "dainuoja jo „Vakarą“"
+        }
+      ],
+      "wikidata": "Q16467796"
+    },
+    {
+      "id": "nyka-niliunas",
+      "room": 7,
+      "kind": "person",
+      "name": "Alfonsas Nyka-Niliūnas",
+      "aliases": [
+        "Alfonsas Čipkus"
+      ],
+      "years": [
+        1919,
+        2015
+      ],
+      "at": 1944,
+      "text": "Alfonsas Nyka-Niliūnas (tikroji pavardė Čipkus; 1919–2015) – vienas egzodo poetų.",
+      "links": [],
+      "wikidata": "Q12647669"
+    },
+    {
+      "id": "aistis",
+      "room": 7,
+      "kind": "person",
+      "name": "Jonas Aistis",
+      "aliases": [
+        "Jonas Aleksandravičius"
+      ],
+      "years": [
+        1904,
+        1973
+      ],
+      "at": 1944,
+      "text": "Jonas Aistis (tikroji pavardė Aleksandravičius; 1904–1973) – egzodo poetas, „liūdnojo veido riteris“; apgynė disertaciją apie evangelijų vertimus į provansalų kalbą.",
+      "links": [],
+      "wikidata": "Q1395225"
+    },
+    {
+      "id": "bradunas",
+      "room": 7,
+      "kind": "person",
+      "name": "Kazys Bradūnas",
+      "aliases": [],
+      "years": [
+        1917,
+        2009
+      ],
+      "at": 1944,
+      "text": "Kazys Bradūnas – egzodo poetas; rinkiniai „Vilniaus varpai“, „Pėdos arimuos“; dramaturgas nebuvo. Jo žodžiai iškalti Sausio 13-osios proginės monetos briaunoje.",
+      "links": [],
+      "wikidata": "Q1398095"
+    },
+    {
+      "id": "nagys",
+      "room": 7,
+      "kind": "person",
+      "name": "Henrikas Nagys",
+      "aliases": [],
+      "years": [
+        1920,
+        1996
+      ],
+      "at": 1944,
+      "text": "Egzodo poetas Henrikas Nagys patriotinę poeziją vadino „čiobreline“.",
+      "links": [],
+      "wikidata": "Q16452565"
+    },
+    {
+      "id": "milosas",
+      "room": 7,
+      "kind": "person",
+      "name": "Česlovas Milošas",
+      "aliases": [
+        "Czesław Miłosz"
+      ],
+      "years": [
+        1911,
+        2004
+      ],
+      "at": 1955,
+      "text": "Česlovas Milošas (Czesław Miłosz; 1911–2004) gimė Šeteniuose, Kėdainių rajone (ne Raseinių). Buvo teisininkas, rašė lenkiškai. 1980 m. tapo pirmuoju dabartinėje Lietuvos teritorijoje gimusiu Nobelio premijos laureatu. Romane „Isos slėnis“ (1955) Isa – tai Nevėžis. 1980 m. jis sakė, kad gera gimti mažoje šalyje, kur gamta žmogiško masto. Eilėraštį skyrė Konstantinui Sirvydui. 1977 m. jis pakvietė Tomą Venclovą dėstyti Berklyje. Kaip ir Mickevičius, jis – LDK paveldo poetas, rašęs lenkiškai, bet Lietuvą laikęs tėvyne.",
+      "links": [
+        {
+          "to": "isos-slenis",
+          "label": "parašė"
+        },
+        {
+          "to": "sirvydas",
+          "label": "skyrė eilėraštį"
+        },
+        {
+          "to": "venclova",
+          "label": "pakvietė dėstyti Berklyje"
+        },
+        {
+          "to": "mickevicius",
+          "label": "abu LDK paveldo poetai, rašę lenkiškai"
+        }
+      ],
+      "wikidata": "Q45970"
+    },
+    {
+      "id": "isos-slenis",
+      "room": 7,
+      "kind": "work",
+      "name": "„Isos slėnis“",
+      "aliases": [],
+      "years": [
+        1955
+      ],
+      "at": 1955,
+      "text": "Česlovo Milošo romane „Isos slėnis“ (1955) Isa – tai Nevėžis.",
+      "links": [
+        {
+          "to": "milosas",
+          "label": "autorius"
+        }
+      ],
+      "by": "milosas"
+    },
+    {
+      "id": "venclova",
+      "room": 7,
+      "kind": "person",
+      "name": "Tomas Venclova",
+      "aliases": [],
+      "years": [
+        1937,
+        null
+      ],
+      "at": 1977,
+      "text": "Tomas Venclova yra rašytojo Antano Venclovos sūnus ir Merkelio Račkausko anūkas. 1977 m. Česlovas Milošas jį pakvietė dėstyti Berklyje.",
+      "links": [
+        {
+          "to": "milosas",
+          "label": "pakvietė jį į Berklį"
+        },
+        {
+          "to": "antanas-venclova",
+          "label": "tėvas"
+        },
+        {
+          "to": "rackauskas",
+          "label": "senelis"
+        }
+      ],
+      "wikidata": "Q187907"
+    },
+    {
+      "id": "antanas-venclova",
+      "room": 7,
+      "kind": "person",
+      "name": "Antanas Venclova",
+      "aliases": [],
+      "years": [
+        1906,
+        1971
+      ],
+      "at": 1950,
+      "aside": true,
+      "text": "Rašytojas Antanas Venclova – Tomo Venclovos tėvas.",
+      "links": [
+        {
+          "to": "venclova",
+          "label": "sūnus"
+        }
+      ],
+      "wikidata": "Q571075"
+    },
+    {
+      "id": "rackauskas",
+      "room": 7,
+      "kind": "person",
+      "name": "Merkelis Račkauskas",
+      "aliases": [],
+      "years": [
+        1885,
+        1968
+      ],
+      "at": 1950,
+      "aside": true,
+      "text": "Merkelis Račkauskas – Tomo Venclovos senelis.",
+      "links": [
+        {
+          "to": "venclova",
+          "label": "anūkas"
+        }
+      ],
+      "wikidata": "Q12665163"
+    },
+    {
+      "id": "milasius",
+      "room": 7,
+      "kind": "person",
+      "name": "Oskaras Milašius",
+      "aliases": [],
+      "years": [
+        1877,
+        1939
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Oskaras Milašius – vienas „svetimakalbių“ lietuvių: rašė prancūziškai, jo skulptūra stovi Fontenblo mieste.",
+      "links": [],
+      "wikidata": "Q544902"
+    },
+    {
+      "id": "baltrusaitis",
+      "room": 7,
+      "kind": "person",
+      "name": "Jurgis Baltrušaitis",
+      "aliases": [],
+      "years": [
+        1873,
+        1944
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Jurgis Baltrušaitis – vienas „svetimakalbių“ lietuvių, diplomatas Rusijoje, išgelbėjęs Borisą Pasternaką ir Marcą Chagallą.",
+      "links": [],
+      "wikidata": "Q2378046"
+    },
+    {
+      "id": "savickis",
+      "room": 7,
+      "kind": "person",
+      "name": "Jurgis Savickis",
+      "aliases": [],
+      "years": [
+        1890,
+        1952
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Jurgis Savickis – vienas „svetimakalbių“ lietuvių; diplomatinę karjerą pradėjo Danijoje, o savo vilą Prancūzijoje pavadino „Ariogala“.",
+      "links": [],
+      "wikidata": "Q14835563"
     }
   ],
   "questions": [],

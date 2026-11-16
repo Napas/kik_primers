@@ -44,7 +44,6 @@ export function hashId(hash) {
   }
 }
 
-// The text view prefixes spot element ids with "spot-".
 const unprefixed = (id) => (id.startsWith("spot-") ? id.slice("spot-".length) : id);
 
 /** The text view's element id for a location hash (`#<id>` or `#spot-<id>`): `spot-<id>`; "" without one. */

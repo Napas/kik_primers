@@ -221,6 +221,15 @@ entry. Bold spans inside such a paragraph (e.g. `tikrosios pavardės ir slapyvar
 are real content: cover them in a spot or room text. Give a reason each time; do not
 skip a subject to make coverage pass.
 
+A bold span that contains a forbidden term (see `tools/rules.js`) cannot be written
+as-is, because the pack may not contain the term. Its `skipped` entry masks it: each
+forbidden-term match (the term only, not the words around it) is replaced by the single
+character `…` (U+2026). The comparison is folded like coverage. Example:
+
+```json
+{ "span": "Kodėl … klausiama apie X", "reason": "Rėmo frazė, ne faktas." }
+```
+
 ## 10. Order of work
 
 1. Read `primer.md`, `extras.json`, `people.json`, `faces.json`.

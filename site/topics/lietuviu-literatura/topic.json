@@ -894,11 +894,6 @@
         {
           "year": 1659,
           "label": "Miršta"
-        },
-        {
-          "year": 2025,
-          "label": "Klaipėda jam dedikuoja 2025-uosius",
-          "place": "Klaipėda"
         }
       ],
       "places": [
@@ -4261,10 +4256,6 @@
           "year": 1942,
           "label": "Miršta; palaidotas Kaune",
           "place": "Kaunas"
-        },
-        {
-          "year": 1988,
-          "label": "Pasaulio tautų teisuolio vardas"
         }
       ],
       "places": [
@@ -4343,41 +4334,7 @@
           "label": "autorius"
         }
       ],
-      "by": "binkis",
-      "plot": {
-        "characters": [
-          {
-            "name": "Petras Keraitis",
-            "role": "gimnazistas, pagrindinis veikėjas"
-          }
-        ],
-        "relations": [],
-        "beats": [
-          {
-            "text": "Scenoje – gyvas, tikroviškas gimnazijos mokinių pasaulis.",
-            "characters": []
-          },
-          {
-            "text": "Gimnazistas Petras Keraitis nekaltai apkaltinamas vagyste.",
-            "characters": [
-              "Petras Keraitis"
-            ]
-          },
-          {
-            "text": "Svarbiausi klausimai – doroviniai.",
-            "characters": [
-              "Petras Keraitis"
-            ]
-          },
-          {
-            "text": "Visa pjesė persunkta tikėjimo gėriu.",
-            "characters": []
-          }
-        ],
-        "sources": [
-          "https://www.vle.lt/straipsnis/kazys-binkis/"
-        ]
-      }
+      "by": "binkis"
     },
     {
       "id": "kiskiu-sukilimas",
@@ -4879,10 +4836,6 @@
           "year": 1945,
           "label": "Miršta",
           "place": "Maskva"
-        },
-        {
-          "year": 1965,
-          "label": "Jos atminimui pradedamas „Poezijos pavasaris“"
         }
       ],
       "places": [
@@ -5146,11 +5099,6 @@
           "year": 2002,
           "label": "Miršta",
           "place": "Los Andželas"
-        },
-        {
-          "year": 2020,
-          "label": "Atidengiamas paminklas",
-          "place": "Pasvalys"
         }
       ],
       "places": [
@@ -5713,10 +5661,6 @@
         {
           "year": 2013,
           "label": "Miršta"
-        },
-        {
-          "year": 2027,
-          "label": "Seimo paskelbti Liūnės Sutemos metai"
         }
       ],
       "motif": "pen"
@@ -8195,10 +8139,6 @@
         {
           "year": 2000,
           "label": "Miršta"
-        },
-        {
-          "year": 2007,
-          "label": "Pradedama teikti jo vardo premija už romaną"
         }
       ],
       "motif": "village"

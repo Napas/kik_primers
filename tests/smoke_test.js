@@ -301,8 +301,10 @@ Deno.test({
         const a = htmlAttrs(await dumpDom(`${base}index.html`));
         assertEquals([a["data-error"], a["data-ready"]], [undefined, "index"]);
       });
+      let photos = 0;
       for (const { slug } of index.topics) {
         const pack = JSON.parse(await Deno.readTextFile(`${site}/topics/${slug}/topic.json`));
+        photos += pack.spots.filter((s) => s.photo).length;
         // The 390×844 phone run is the CDP test below: headless windows are at least 500 px wide.
         await t.step(`${slug}: world at 1400×800 builds every room and spot`, async () => {
           const a = htmlAttrs(await dumpDom(`${base}world.html?topic=${slug}`, { w: 1400, h: 800 }));
@@ -330,6 +332,12 @@ Deno.test({
           assert(dom.includes(`src="${imgUrl(pack, person.photo.file)}"`), "no photo in the panel");
         });
       }
+      await t.step("about page lists every photo credit", async () => {
+        const dom = await dumpDom(`${base}about.html`);
+        const a = htmlAttrs(dom);
+        assertEquals([a["data-error"], a["data-ready"], a["data-credits"]], [undefined, "about", `${photos}`]);
+        assertEquals(dom.match(/<ul class="credits">([\s\S]*?)<\/ul>/)?.[1].match(/<li>/g)?.length ?? 0, photos);
+      });
     } finally {
       await server.shutdown();
     }

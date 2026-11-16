@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "slug": "lietuviu-literatura",
+  "title": "Lietuvių literatūra: nuo „Katekizmo“ iki „Silva rerum“",
+  "intro": "Lietuvių literatūra yra jauna ir susiaurėjusi į kelias lemtingas linijas. Raštija prasideda XVI a. religinėmis knygomis, grožinė literatūra – XVIII a. Mažojoje Lietuvoje. XIX a. ją augina žemaičių sąjūdis ir spaudos draudimo metų knygnešių kultūra, XX a. pradžioje susiformuoja moderni proza, tarpukaryje – sąjūdžiai ir grupės. Po 1944 m. literatūra skyla į sovietinę Lietuvą ir egzodą, o po 1990 m. vėl susijungia. Žemiau rašytojai sudėti į tas linijas: kas su kuo gyveno vienu metu, kas ką išleido, kas kieno slapyvardžiu pasirašinėjo. Verta įsiminti tris dalykus. Pirma, tikrosios pavardės ir slapyvardžiai (Maironis – Mačiulis, Vaižgantas – Tumas, Krėvė – Mickevičius). Antra, kūrinio veikėjai (Katrė, Lapinas, Liudas Vasaris, Antanas Garšva). Trečia, kūrinių dalių pavadinimai ir pirmosios eilutės („Jau saulelė vėl atkopdama…“, „Kalnai kelmuoti, pakalnės nuplikę“).",
+  "layout": "time",
+  "rooms": [
+    {
+      "n": 1,
+      "title": "Raštijos pradžia (XVI–XVII a.)",
+      "intro": "Lietuviška raštija gimė iš Reformacijos ir kontrreformacijos varžybų: abi pusės norėjo kalbėti su žmonėmis jų kalba.",
+      "why": [
+        {
+          "q": "Kodėl pirmoji lietuviška knyga išleista ne Lietuvoje, o Karaliaučiuje?",
+          "a": "Prūsijos kunigaikštis Albrechtas 1544 m. įkūrė Karaliaučiaus universitetą, rėmė spaustuvę ir skyrė stipendijų lietuviams. Mažvydas buvo vienas pirmųjų žinomų to universiteto absolventų lietuvių. Taip Mažoji Lietuva tapo raštijos lopšiu."
+        },
+        {
+          "q": "Kaip Mažvydas susijęs su Justinu Marcinkevičiumi?",
+          "a": "Marcinkevičiaus draminės trilogijos trečioji dalis vadinasi „Mažvydas“. Jos garsus vaizdas – pirmosios raidės skiemenuojamos („el-ie“ bus „lie“)."
+        },
+        {
+          "q": "Kuo skiriasi Mažvydas, Daukša ir Sirvydas?",
+          "a": "Mažvydas – liuteronas Prūsijoje, Daukša ir Sirvydas – katalikai LDK. Visi trys laikomi lietuvių raštijos pradininkais: pirmoji knyga, pirmoji katalikiška knyga su kalbos gynimu ir pirmasis žodynas."
+        }
+      ],
+      "span": [
+        1500,
+        1700
+      ],
+      "style": "print-shop"
+    }
+  ],
+  "spots": [
+    {
+      "id": "mazvydas",
+      "room": 1,
+      "kind": "person",
+      "name": "Martynas Mažvydas",
+      "aliases": [
+        "Martynas Mažvydas Vaitkūnas"
+      ],
+      "years": [
+        1510,
+        1563
+      ],
+      "at": 1547,
+      "text": "Martynas Mažvydas (apie 1510–1520 – 1563) – liuteronų kunigas, nuo 1549 m. Ragainės lietuviškos parapijos klebonas. Pilnas vardas su tėvavardžiu – Martynas Mažvydas Vaitkūnas (Vaitkaus sūnus). Jo „Katekizmas“ (1547 m., Karaliaučius) – pirmoji lietuviška spausdinta knyga. Mažvydas buvo vienas pirmųjų žinomų Karaliaučiaus universiteto absolventų lietuvių. Mirė ir palaidotas Ragainėje, dabartinėje Kaliningrado srityje (Rusija). Jis gyveno XVI a. ir buvo Daukšos amžininkas.",
+      "links": [
+        {
+          "to": "katekizmas",
+          "label": "parašė"
+        },
+        {
+          "to": "karaliauciaus-universitetas",
+          "label": "baigė"
+        },
+        {
+          "to": "dauksa",
+          "label": "amžininkas"
+        }
+      ]
+    },
+    {
+      "id": "katekizmas",
+      "room": 1,
+      "kind": "work",
+      "name": "„Katekizmas“ (1547)",
+      "aliases": [
+        "Mažvydo „Katekizmas“"
+      ],
+      "years": [
+        1547
+      ],
+      "at": 1547,
+      "text": "Mažvydo „Katekizmas“ (1547 m., Karaliaučius) – pirmoji lietuviška spausdinta knyga. Joje yra pirmasis lietuviškas elementorius „Pigus ir trumpas mokslas skaityti ir rašyti“ (pirmą kartą išspausdinta lietuviška abėcėlė); eiliuota prakalba „Knygelės pačios bylo lietuvininkump ir žemaičiump“ – pirmasis žinomas originalus lietuviškas eilėraštis; akrostichas (pirmasis lietuvių literatūroje): prakalbos eilučių pirmosios raidės sudaro autoriaus vardą ir pavardę; ketureilis, skirtas Lietuvos Didžiajai Kunigaikštystei. Knyga išspausdinta gotikiniu šriftu ir turi 79 puslapius. Žinomi du egzemplioriai: vienas Vilniaus universiteto bibliotekoje, kitas Torunės (Mikalojaus Koperniko) universitete. Abu įsigyti iš Odesos bibliotekos. „Katekizmas“ pirmasis įrašytas į Lietuvos nacionalinį „Pasaulio atminties“ registrą.",
+      "links": [
+        {
+          "to": "mazvydas",
+          "label": "autorius"
+        },
+        {
+          "to": "karaliauciaus-universitetas",
+          "label": "išspausdintas Karaliaučiuje"
+        }
+      ],
+      "by": "mazvydas"
+    },
+    {
+      "id": "karaliauciaus-universitetas",
+      "room": 1,
+      "kind": "event",
+      "name": "Karaliaučiaus universitetas",
+      "aliases": [],
+      "years": [
+        1544
+      ],
+      "at": 1544,
+      "text": "Prūsijos kunigaikštis Albrechtas 1544 m. įkūrė Karaliaučiaus universitetą, rėmė spaustuvę ir skyrė stipendijų lietuviams. Mažvydas buvo vienas pirmųjų žinomų to universiteto absolventų lietuvių. Taip Mažoji Lietuva tapo raštijos lopšiu, o pirmoji lietuviška knyga išleista ne Lietuvoje, o Karaliaučiuje.",
+      "links": [
+        {
+          "to": "mazvydas",
+          "label": "absolventas"
+        },
+        {
+          "to": "katekizmas",
+          "label": "čia išspausdintas"
+        }
+      ]
+    },
+    {
+      "id": "dauksa",
+      "room": 1,
+      "kind": "person",
+      "name": "Mikalojus Daukša",
+      "aliases": [],
+      "years": null,
+      "at": 1595,
+      "text": "Mikalojus Daukša (mirė 1615 m. Varniuose) – katalikų kunigas, Žemaičių kapitulos kanauninkas. Išleido „Katekizmą“ (1595) ir „Postilę“ (1599) Vilniuje. Lenkiškai parašyta „Prakalba į malonųjį skaitytoją“ gina gimtąją kalbą. Iš jos paimti žodžiai apie kalbą kaip „bendrą meilės ryšį, tėvynės motiną, valstybės sargą“ – jie iškalti Kęstučio Balčiūno paminkle „Tautai ir kalbai“. Daukša ir Sirvydas – katalikai LDK, Mažvydas – liuteronas Prūsijoje.",
+      "links": [
+        {
+          "to": "dauksos-katekizmas",
+          "label": "išleido"
+        },
+        {
+          "to": "postile",
+          "label": "išleido"
+        },
+        {
+          "to": "mazvydas",
+          "label": "amžininkas"
+        }
+      ]
+    },
+    {
+      "id": "dauksos-katekizmas",
+      "room": 1,
+      "kind": "work",
+      "name": "Daukšos „Katekizmas“",
+      "aliases": [],
+      "years": [
+        1595
+      ],
+      "at": 1595,
+      "text": "Mikalojus Daukša 1595 m. Vilniuje išleido „Katekizmą“.",
+      "links": [
+        {
+          "to": "dauksa",
+          "label": "išleido"
+        },
+        {
+          "to": "katekizmas",
+          "label": "ne Mažvydo"
+        }
+      ],
+      "by": "dauksa"
+    },
+    {
+      "id": "postile",
+      "room": 1,
+      "kind": "work",
+      "name": "Daukšos „Postilė“",
+      "aliases": [],
+      "years": [
+        1599
+      ],
+      "at": 1599,
+      "text": "Mikalojaus Daukšos „Postilė“ išleista 1599 m. Vilniuje. Lenkiškai parašyta „Prakalba į malonųjį skaitytoją“ gina gimtąją kalbą; iš jos paimti žodžiai apie kalbą kaip „bendrą meilės ryšį, tėvynės motiną, valstybės sargą“ iškalti Kęstučio Balčiūno paminkle „Tautai ir kalbai“.",
+      "links": [
+        {
+          "to": "dauksa",
+          "label": "išleido"
+        }
+      ],
+      "by": "dauksa"
+    },
+    {
+      "id": "sirvydas",
+      "room": 1,
+      "kind": "person",
+      "name": "Konstantinas Sirvydas",
+      "aliases": [],
+      "years": [
+        1579,
+        1631
+      ],
+      "at": 1620,
+      "text": "Konstantinas Sirvydas (apie 1579–1631) – jėzuitas, Vilniaus universiteto dėstytojas ir pamokslininkas, ne žemaitis. Sudarė pirmąjį lietuvių kalbos žodyną – „Trijų kalbų žodyną“ (lenkų–lotynų–lietuvių; leidimai datuojami apie 1620 ir 1629 m.). Išleido pamokslų rinkinį „Punktai sakymų“ (1629). Jis kūrė naujus žodžius; pavyzdžiui, Vytį vadino „vaikytoju“.",
+      "links": [
+        {
+          "to": "triju-kalbu-zodynas",
+          "label": "sudarė"
+        }
+      ],
+      "wikidata": "Q1618122"
+    },
+    {
+      "id": "triju-kalbu-zodynas",
+      "room": 1,
+      "kind": "work",
+      "name": "„Trijų kalbų žodynas“",
+      "aliases": [],
+      "years": [
+        1620
+      ],
+      "at": 1620,
+      "text": "Konstantino Sirvydo „Trijų kalbų žodynas“ (lenkų–lotynų–lietuvių) – pirmasis lietuvių kalbos žodynas. Leidimai datuojami apie 1620 ir 1629 m.",
+      "links": [
+        {
+          "to": "sirvydas",
+          "label": "sudarė"
+        }
+      ],
+      "by": "sirvydas"
+    },
+    {
+      "id": "rapolionis",
+      "room": 1,
+      "kind": "person",
+      "name": "Stanislovas Rapolionis",
+      "aliases": [],
+      "years": [
+        1485,
+        1545
+      ],
+      "at": 1540,
+      "text": "Stanislovas Rapolionis (1485–1545) – viena XVI a. raštijos pavardžių. Karaliaučiaus katedros epitafijoje vadinamas „lietuvių tautos garbe“.",
+      "links": [],
+      "wikidata": "Q338487"
+    },
+    {
+      "id": "kulvietis",
+      "room": 1,
+      "kind": "person",
+      "name": "Abraomas Kulvietis",
+      "aliases": [
+        "Ginvilionis"
+      ],
+      "years": null,
+      "at": 1540,
+      "text": "Abraomas Kulvietis (tikroji pavardė Ginvilionis) – viena XVI a. raštijos pavardžių.",
+      "links": []
+    },
+    {
+      "id": "bretkunas",
+      "room": 1,
+      "kind": "person",
+      "name": "Jonas Bretkūnas",
+      "aliases": [],
+      "years": [
+        1536,
+        1602
+      ],
+      "at": 1590,
+      "text": "Kunigas Jonas Bretkūnas pirmasis išvertė visą Bibliją į lietuvių kalbą.",
+      "links": [],
+      "wikidata": "Q177962"
+    }
+  ],
+  "questions": [],
+  "skipped": []
+}

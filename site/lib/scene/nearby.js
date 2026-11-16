@@ -1,4 +1,5 @@
 // Where the visitor stands and what that changes: spot labels, photo loading, and where to stand to see a spot.
+import { LABEL, SCENE } from "../theme.js";
 
 export const LABEL_RANGE = 12; // metres; nearer spots show their name label
 export const LABEL_NEAR = 2; // metres; nearer spots hide their label (it would fill the view), unless selected
@@ -51,10 +52,16 @@ export function standPoint(target, others) {
   return best;
 }
 
+/** Factor (at most 1) on a spot label's size so it fills at most LABEL.maxView of the view height `d` metres away. */
+export function labelScale(d) {
+  const view = 2 * d * Math.tan((SCENE.fov * Math.PI) / 360);
+  return Math.min(1, (LABEL.maxView * view) / LABEL.height);
+}
+
 /**
  * spotMeshes: Map<id, Object3D> from buildWorld; eye: the camera position; hovered, selected: spot ids or null.
  * A label shows within LABEL_RANGE (floor distance), while hovered or while selected, but not nearer than
- * LABEL_NEAR unless selected. A photo loader runs once within PHOTO_RANGE.
+ * LABEL_NEAR unless selected; labelScale sizes it. A photo loader runs once within PHOTO_RANGE.
  */
 export function updateNearby(spotMeshes, eye, hovered, selected) {
   for (const [id, obj] of spotMeshes) {
@@ -62,6 +69,9 @@ export function updateNearby(spotMeshes, eye, hovered, selected) {
     const { label, loadPhoto } = obj.userData;
     if (label) {
       label.visible = id === selected || (d >= LABEL_NEAR && (d <= LABEL_RANGE || id === hovered));
+      const base = (label.userData.baseScale ??= label.scale.clone());
+      const k = labelScale(d);
+      label.scale.set(base.x * k, base.y * k, 1);
     }
     if (loadPhoto && d <= PHOTO_RANGE) {
       delete obj.userData.loadPhoto;

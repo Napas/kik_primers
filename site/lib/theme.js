@@ -39,6 +39,7 @@ export function lightFor(year) {
  */
 export const SCENE = {
   eye: 1.7,
+  fov: 60, // camera's vertical field of view, degrees
   fog: { near: 16, far: 55 },
   ambient: { sky: 0xc8d4f0, ground: 0x141e33, intensity: 0.85 },
   fill: { color: 0xfff0d8, intensity: 0.6 },
@@ -48,11 +49,15 @@ export const SCENE = {
   spotlight: { color: 0xffd58a, pool: { size: 2.4, opacity: 0.4 }, cone: { height: 3.4, radius: 0.95, top: 0.11 } },
 };
 
-/** Typography of canvas-drawn labels: font stack, pixel size on the canvas, height in metres, sprite opacity. */
+/**
+ * Typography of canvas-drawn labels: font stack, pixel size on the canvas, height in metres, sprite opacity,
+ * and the largest share of the view height a spot label may fill up close.
+ */
 export const LABEL = {
   font: 'Georgia, "Times New Roman", serif',
   px: 48,
   weight: 600,
   height: 0.36,
   opacity: 0.92,
+  maxView: 0.035,
 };

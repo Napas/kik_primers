@@ -3,7 +3,8 @@ import * as THREE from "../site/lib/three/three.module.min.js";
 import { layoutTime } from "../site/lib/layout.js";
 import { buildWorld } from "../site/lib/scene/world.js";
 import { drawLifespan, drawLinks, lifespanRange, removeDrawn } from "../site/lib/scene/arcs.js";
-import { clearance, LABEL_NEAR, LABEL_RANGE, PHOTO_RANGE, STAND, standPoint, updateNearby } from "../site/lib/scene/nearby.js";
+import { clearance, LABEL_NEAR, LABEL_RANGE, labelScale, PHOTO_RANGE, STAND, standPoint, updateNearby } from "../site/lib/scene/nearby.js";
+import { LABEL, SCENE } from "../site/lib/theme.js";
 import { yearLineZ } from "../site/lib/scene/styles.js";
 import { markerLeft, overviewHtml, roomAt, roomCounts } from "../site/lib/pages/overview.js";
 import { makeSelection, roomVisit } from "../site/lib/pages/selection.js";
@@ -199,6 +200,32 @@ Deno.test("clearance measures distances to the stand point and to the sight segm
   assertAlmostEquals(c.sight, 0.3, 1e-9, "beside the segment");
   assertAlmostEquals(c.point, 1, 1e-9, "the spot behind the stand point is off the segment but 1 m from the point");
   assertEquals(clearance({ x: 0, z: 2 }, { x: 0, z: 0 }, []), { point: Infinity, sight: Infinity });
+});
+
+Deno.test("labelScale keeps a near label at LABEL.maxView of the view height and a far one at full size", () => {
+  const viewAt = (d) => 2 * d * Math.tan((SCENE.fov * Math.PI) / 360);
+  for (const d of [1, 2.5, 5]) assertAlmostEquals((LABEL.height * labelScale(d)) / viewAt(d), LABEL.maxView, 1e-9);
+  assertEquals(labelScale(LABEL_RANGE), 1);
+  assertEquals(labelScale(40), 1);
+});
+
+Deno.test("updateNearby sizes each label by its distance without compounding", () => {
+  const restore = installFakeCanvas();
+  try {
+    const w = buildWorld(THREE, MINI, layoutTime(MINI));
+    const label = w.spotMeshes.get("jonas-rastas").userData.label;
+    const [x, y] = [label.scale.x, label.scale.y];
+    const jonas = w.spotMeshes.get("jonas-rastas").position;
+    const eye = { x: jonas.x - 3, y: 1.7, z: jonas.z };
+    updateNearby(w.spotMeshes, eye, null, null);
+    updateNearby(w.spotMeshes, eye, null, null);
+    assertAlmostEquals(label.scale.y, y * labelScale(3), 1e-9);
+    assertAlmostEquals(label.scale.x, x * labelScale(3), 1e-9);
+    updateNearby(w.spotMeshes, { x: jonas.x - 11, y: 1.7, z: jonas.z }, null, null);
+    assertAlmostEquals(label.scale.y, y * labelScale(11), 1e-9);
+  } finally {
+    restore();
+  }
 });
 
 Deno.test("updateNearby hides labels of spots right next to the eye, except the selected one", () => {

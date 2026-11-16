@@ -168,7 +168,7 @@
     {
       "n": 8,
       "title": "Sovietmetis (1944–1990): tarp ideologijos ir tautos atminties",
-      "intro": "1944–1990 m. sovietinėje Lietuvoje literatūra kūrė tarp ideologijos ir tautos atminties. Šalia Justino Marcinkevičiaus čia sudėti trys barai: proza, drama ir poezija.",
+      "intro": "1944–1990 m. sovietinėje Lietuvoje literatūra buvo kuriama tarp ideologijos ir tautos atminties. Šalia Justino Marcinkevičiaus čia sudėti trys barai: proza, drama ir poezija.",
       "why": [
         {
           "q": "Kaip Marcinkevičiaus dramos susijusios su raštijos pradžia?",
@@ -4965,7 +4965,7 @@
         2007
       ],
       "at": 2007,
-      "text": "Premijos, apie kurias dažnai klausiama: Liudo Dovydėno premija – Rašytojų sąjungos, už geriausią lietuvišką romaną (nuo 2007 m., ne kasmet). 2022 m. ją gavo Ieva Dumbrytė, 2025 m. – I. M. Sokolovaitė už romaną „Pozuotoja“.",
+      "text": "Liudo Dovydėno premija – Rašytojų sąjungos, už geriausią lietuvišką romaną (nuo 2007 m., ne kasmet). 2022 m. ją gavo Ieva Dumbrytė, 2025 m. – I. M. Sokolovaitė už romaną „Pozuotoja“.",
       "links": [
         {
           "to": "dovydenas",
@@ -5036,9 +5036,7 @@
       "kind": "thing",
       "name": "Maironio premija",
       "aliases": [],
-      "years": [
-        2013
-      ],
+      "years": null,
       "at": 2013,
       "text": "Maironio premija – Kauno ir „Poezijos pavasario“ laureatui. Maironio vardu Kauno taryba skiria premiją už geriausią naują poezijos knygą, o nuo 2013 m. ji įteikiama ir „Poezijos pavasario“ laureatui.",
       "links": [
@@ -5090,11 +5088,2763 @@
       "wikidata": "Q4102582"
     }
   ],
-  "questions": [],
+  "questions": [
+    {
+      "id": "dauksa-1",
+      "q": "Kada išleisti Daukšos „Katekizmas“ ir „Postilė“?",
+      "a": "1595 ir 1599 m. Vilniuje",
+      "room": 1,
+      "spot": "dauksa"
+    },
+    {
+      "id": "dauksa-2",
+      "q": "Kas parašė „Postilę“ ir „Prakalbą į malonųjį skaitytoją“?",
+      "a": "Mikalojus Daukša",
+      "room": 1,
+      "spot": "dauksa"
+    },
+    {
+      "id": "dauksa-3",
+      "q": "Kieno žodžiai apie kalbą kaip „tėvynės motiną, valstybės sargą“ iškalti paminkle „Tautai ir kalbai“?",
+      "a": "Mikalojaus Daukšos",
+      "room": 1,
+      "spot": "dauksa"
+    },
+    {
+      "id": "katekizmas-1",
+      "q": "Iš kurio miesto bibliotekos įsigyti abu „Katekizmo“ egzemplioriai?",
+      "a": "Iš Odesos",
+      "room": 1,
+      "spot": "katekizmas"
+    },
+    {
+      "id": "katekizmas-2",
+      "q": "Kaip vadinasi pirmasis lietuviškas elementorius ir kada jis išleistas?",
+      "a": "„Pigus ir trumpas mokslas skaityti ir rašyti“, 1547 m.",
+      "room": 1,
+      "spot": "katekizmas"
+    },
+    {
+      "id": "katekizmas-3",
+      "q": "Kiek puslapių turi „Katekizmas“?",
+      "a": "79",
+      "room": 1,
+      "spot": "katekizmas"
+    },
+    {
+      "id": "katekizmas-4",
+      "q": "Kokiu šriftu išspausdintas „Katekizmas“?",
+      "a": "Gotikiniu",
+      "room": 1,
+      "spot": "katekizmas"
+    },
+    {
+      "id": "katekizmas-5",
+      "q": "Kur saugomi du išlikę „Katekizmo“ egzemplioriai?",
+      "a": "Vilniaus universiteto ir Torunės universiteto bibliotekose",
+      "room": 1,
+      "spot": "katekizmas"
+    },
+    {
+      "id": "katekizmas-6",
+      "q": "Kur yra pirmasis lietuviškas akrostichas?",
+      "a": "Mažvydo „Katekizmo“ prakalboje",
+      "room": 1,
+      "spot": "katekizmas"
+    },
+    {
+      "id": "mazvydas-1",
+      "q": "Kada ir kur išleistas Mažvydo „Katekizmas“?",
+      "a": "1547 m. Karaliaučiuje",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-2",
+      "q": "Kaip Mažvydas susijęs su Justinu Marcinkevičiumi?",
+      "a": "Marcinkevičiaus draminės trilogijos trečioji dalis – „Mažvydas“, kurioje skiemenuojamos pirmosios raidės („el-ie“ bus „lie“).",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-3",
+      "q": "Kaip vadinasi Mažvydo eiliuota prakalba?",
+      "a": "„Knygelės pačios bylo lietuvininkump ir žemaičiump“",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-4",
+      "q": "Kam skirtas „Katekizmo“ pradžios ketureilis?",
+      "a": "Lietuvos Didžiajai Kunigaikštystei",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-5",
+      "q": "Kas buvo Mažvydas pagal profesiją?",
+      "a": "Liuteronų kunigas (Ragainės klebonas)",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-6",
+      "q": "Kas pirmasis išspausdino lietuvišką abėcėlę?",
+      "a": "Martynas Mažvydas",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-7",
+      "q": "Kodėl pirmoji lietuviška knyga išleista Karaliaučiuje?",
+      "a": "Prūsijos kunigaikštis Albrechtas 1544 m. įkūrė Karaliaučiaus universitetą, rėmė spaustuvę ir lietuvius studentus; liuteronas Mažvydas ten mokėsi ir išleido „Katekizmą“.",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-8",
+      "q": "Koks Martyno Mažvydo tėvavardis?",
+      "a": "Vaitkūnas",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-9",
+      "q": "Kuo skiriasi trys raštijos pradininkai Mažvydas, Daukša ir Sirvydas?",
+      "a": "Mažvydas – liuteronas Prūsijoje (pirmoji knyga), Daukša ir Sirvydas – katalikai LDK (kalbos gynimas, pirmasis žodynas).",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "mazvydas-10",
+      "q": "Kurioje šalyje dabar yra Mažvydo kapas?",
+      "a": "Rusijoje (Ragainė, Kaliningrado sritis)",
+      "room": 1,
+      "spot": "mazvydas"
+    },
+    {
+      "id": "sirvydas-1",
+      "q": "Ar Sirvydas buvo žemaitis?",
+      "a": "Ne",
+      "room": 1,
+      "spot": "sirvydas"
+    },
+    {
+      "id": "sirvydas-2",
+      "q": "Ką Sirvydas vadino „vaikytoju“?",
+      "a": "Vytį",
+      "room": 1,
+      "spot": "sirvydas"
+    },
+    {
+      "id": "sirvydas-3",
+      "q": "Kas sudarė pirmąjį lietuvių kalbos žodyną – „Trijų kalbų žodyną“?",
+      "a": "Konstantinas Sirvydas",
+      "room": 1,
+      "spot": "sirvydas"
+    },
+    {
+      "id": "dachas-1",
+      "q": "Kas yra eilėraščio „Taravos Anikė“ autorius?",
+      "a": "Simonas Dachas (gimęs Klaipėdoje)",
+      "room": 2,
+      "spot": "dachas"
+    },
+    {
+      "id": "donelaitis-1",
+      "q": "Ką Donelaitis „Metuose“ vadina „kuršole“?",
+      "a": "Šaltibarščius",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-2",
+      "q": "Kada gimė Kristijonas Donelaitis?",
+      "a": "1714 m. sausio 1 d.",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-3",
+      "q": "Kaip Donelaitis susijęs su „Poezijos pavasariu“?",
+      "a": "Marcinkevičius už poemą „Donelaitis“ tapo pirmuoju „Poezijos pavasario“ laureatu (1965).",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-4",
+      "q": "Kaip prasideda „Metai“?",
+      "a": "„Jau saulelė vėl atkopdama budino svietą“",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-5",
+      "q": "Kaip susiję Donelaitis ir Rėza?",
+      "a": "Rėza po Donelaičio mirties 1818 m. savo lėšomis išleido poemą ir davė jai pavadinimą „Metai“.",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-6",
+      "q": "Kaip vadinasi paskutinė, ketvirtoji „Metų“ dalis?",
+      "a": "„Žiemos rūpesčiai“",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-7",
+      "q": "Kaip vadinasi pirmoji „Metų“ dalis?",
+      "a": "„Pavasario linksmybės“",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-8",
+      "q": "Kaip vadinasi „Metų“ dalys apie vasarą ir rudenį?",
+      "a": "„Vasaros darbai“, „Rudenio (Rudens) gėrybės“",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-9",
+      "q": "Kaip „Metuose“ vadinamas kaimo seniūnas?",
+      "a": "Šaltyšius (Pričkus)",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-10",
+      "q": "Kaip „Metuose“ vadinami dori, darbštūs būrai?",
+      "a": "Viežlybieji",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-11",
+      "q": "Kiek pasakėčių parašė Donelaitis ir kurios garsiausios?",
+      "a": "Šešias; „Lapės ir gandro čėsnis“, „Pasaka apie šūdvabalį“, „Ąžuols gyrpelnys“",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-12",
+      "q": "Kodėl grožinės literatūros pradininkas – Donelaitis, o ne Mažvydas?",
+      "a": "Mažvydo ir Daukšos knygos religinės; „Metai“ – pirmasis originalus meninis kūrinys lietuviškai.",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-13",
+      "q": "Kokiu metru parašyti „Metai“?",
+      "a": "Hegzametru",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-14",
+      "q": "Kur palaidotas Donelaitis ir kurioje šalyje tai dabar?",
+      "a": "Tolminkiemyje, Rusijoje (Kaliningrado sritis)",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-15",
+      "q": "Kuri „Metų“ dalis ilgiausia?",
+      "a": "„Rudenio gėrybės“",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-16",
+      "q": "Kurio kompozitoriaus amžininkas buvo Donelaitis?",
+      "a": "W. A. Mozarto",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "donelaitis-17",
+      "q": "Kuris „Metų“ veikėjas tapo tinginio sinonimu?",
+      "a": "Slunkius",
+      "room": 2,
+      "spot": "donelaitis"
+    },
+    {
+      "id": "metai-1",
+      "q": "Ar „Metai“ išleisti autoriui gyvam esant?",
+      "a": "Ne, po mirties – 1818 m.",
+      "room": 2,
+      "spot": "metai"
+    },
+    {
+      "id": "metai-2",
+      "q": "Kas leidžia literatūros žurnalą „Metai“?",
+      "a": "Lietuvos rašytojų sąjunga",
+      "room": 2,
+      "spot": "metai"
+    },
+    {
+      "id": "metai-3",
+      "q": "Kas sugalvojo poemos pavadinimą „Metai“?",
+      "a": "Liudvikas Rėza",
+      "room": 2,
+      "spot": "metai"
+    },
+    {
+      "id": "metai-4",
+      "q": "Kokiais žodžiais baigiasi „Metai“?",
+      "a": "„Ir mes vėlei ant laukų trūsinėdami vargsim“",
+      "room": 2,
+      "spot": "metai"
+    },
+    {
+      "id": "metai-5",
+      "q": "Koks kūrinys laikomas pirmuoju lietuvių grožinės literatūros kūriniu?",
+      "a": "Donelaičio „Metai“",
+      "room": 2,
+      "spot": "metai"
+    },
+    {
+      "id": "metai-6",
+      "q": "Kuri poema ilgesnė: „Metai“ ar „Anykščių šilelis“?",
+      "a": "„Metai“",
+      "room": 2,
+      "spot": "metai"
+    },
+    {
+      "id": "reza-1",
+      "q": "Kas savo lėšomis pirmasis išleido „Metus“?",
+      "a": "Liudvikas Rėza (1818)",
+      "room": 2,
+      "spot": "reza"
+    },
+    {
+      "id": "reza-2",
+      "q": "Kur gimė Liudvikas Rėza?",
+      "a": "Kuršių nerijoje (Karvaičiuose)",
+      "room": 2,
+      "spot": "reza"
+    },
+    {
+      "id": "reza-3",
+      "q": "Kuriam garsiam vokiečių rašytojui laiškais rašė Rėza?",
+      "a": "J. W. Goethe",
+      "room": 2,
+      "spot": "reza"
+    },
+    {
+      "id": "vydunas-1",
+      "q": "Iš kurios šalies 1991 m. perkelti Vydūno palaikai į Bitėnus?",
+      "a": "Iš Vokietijos",
+      "room": 2,
+      "spot": "vydunas"
+    },
+    {
+      "id": "vydunas-2",
+      "q": "Kas pirmasis į lietuvių kalbą išvertė „Bhagavadgytą“?",
+      "a": "Vydūnas",
+      "room": 2,
+      "spot": "vydunas"
+    },
+    {
+      "id": "vydunas-3",
+      "q": "Tikroji Vydūno pavardė?",
+      "a": "Vilhelmas Storosta",
+      "room": 2,
+      "spot": "vydunas"
+    },
+    {
+      "id": "baranauskas-1",
+      "q": "Kaip Baranauskas, Vienuolis ir Biliūnas susiję su Anykščiais?",
+      "a": "Baranauskas ten gimė (klėtelė-muziejus), Vienuolis ten palaidotas, Biliūnas gimė Niūronyse ir perlaidotas prie Anykščių.",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "baranauskas-2",
+      "q": "Kas parašė elegiją „Ko gi skaudžia man širdelę“?",
+      "a": "Antanas Baranauskas",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "baranauskas-3",
+      "q": "Kiek metų buvo Baranauskui, kai jis parašė „Anykščių šilelį“?",
+      "a": "23",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "baranauskas-4",
+      "q": "Kokį mokslą be kalbotyros tyrinėjo Baranauskas?",
+      "a": "Matematiką (geometrijos terminai)",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "baranauskas-5",
+      "q": "Kokiais slapyvardžiais pasirašinėjo Baranauskas?",
+      "a": "Jurkštas Smalaūsis, Baronas, Bangputys",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "baranauskas-6",
+      "q": "Kur gimė Antanas Baranauskas?",
+      "a": "Anykščiuose",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "baranauskas-7",
+      "q": "Kur palaidotas Baranauskas?",
+      "a": "Seinuose, Lenkijoje",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "baranauskas-8",
+      "q": "Kuriais metais gyveno Antanas Baranauskas?",
+      "a": "1835–1902",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "baranauskas-9",
+      "q": "Kurio miesto vyskupas buvo Baranauskas?",
+      "a": "Seinų (Lenkija)",
+      "room": 3,
+      "spot": "baranauskas"
+    },
+    {
+      "id": "daukantas-1",
+      "q": "Kas pirmasis parašė Lietuvos istoriją lietuviškai?",
+      "a": "Simonas Daukantas",
+      "room": 3,
+      "spot": "daukantas"
+    },
+    {
+      "id": "daukantas-2",
+      "q": "Kas sudarė pirmąjį lietuvių pasakų rinkinį?",
+      "a": "Simonas Daukantas",
+      "room": 3,
+      "spot": "daukantas"
+    },
+    {
+      "id": "daukantas-3",
+      "q": "Koks rašytojas iš Skuodo krašto buvo ant litų banknoto?",
+      "a": "Simonas Daukantas",
+      "room": 3,
+      "spot": "daukantas"
+    },
+    {
+      "id": "daukantas-4",
+      "q": "Kurio rašytojo slapyvardis Jokūbas Laukys?",
+      "a": "Simono Daukanto",
+      "room": 3,
+      "spot": "daukantas"
+    },
+    {
+      "id": "daukantas-5",
+      "q": "Pabaikite Daukanto pavadinimą „Būdas senovės lietuvių, …“",
+      "a": "Kalnėnų ir žemaičių",
+      "room": 3,
+      "spot": "daukantas"
+    },
+    {
+      "id": "ivinskis-1",
+      "q": "Ką 1846 m. pirmasis išleido Laurynas Ivinskis?",
+      "a": "Lietuvišką kalendorių",
+      "room": 3,
+      "spot": "ivinskis"
+    },
+    {
+      "id": "mickevicius-1",
+      "q": "Kas parašė poemas „Gražina“ ir „Vėlinės“?",
+      "a": "Adomas Mickevičius",
+      "room": 3,
+      "spot": "mickevicius"
+    },
+    {
+      "id": "mickevicius-2",
+      "q": "Kas parašė „Poną Tadą“?",
+      "a": "Adomas Mickevičius",
+      "room": 3,
+      "spot": "mickevicius"
+    },
+    {
+      "id": "mickevicius-3",
+      "q": "Kas sakė: „Lietuviška tautybė, lenkiška pilietybė“?",
+      "a": "Adomas Mickevičius",
+      "room": 3,
+      "spot": "mickevicius"
+    },
+    {
+      "id": "mickevicius-4",
+      "q": "Kur mirė Mickevičius?",
+      "a": "Konstantinopolyje",
+      "room": 3,
+      "spot": "mickevicius"
+    },
+    {
+      "id": "mickevicius-5",
+      "q": "Kurį kūrinį Mickevičius parašė Emilijos Pliaterytės garbei?",
+      "a": "„Pulkininko mirtis“",
+      "room": 3,
+      "spot": "mickevicius"
+    },
+    {
+      "id": "mickevicius-6",
+      "q": "Kuri poema prasideda „Tėvyne Lietuva, mielesnė už sveikatą!“?",
+      "a": "„Ponas Tadas“",
+      "room": 3,
+      "spot": "mickevicius"
+    },
+    {
+      "id": "mickevicius-7",
+      "q": "Kuriai krypčiai priskiriamas Mickevičius?",
+      "a": "Romantizmui",
+      "room": 3,
+      "spot": "mickevicius"
+    },
+    {
+      "id": "poska-1",
+      "q": "Iš kokių medžių padaryti Poškos Baubliai?",
+      "a": "Iš ąžuolų",
+      "room": 3,
+      "spot": "poska"
+    },
+    {
+      "id": "poska-2",
+      "q": "Kaip Mickevičius susijęs su Poška?",
+      "a": "„Pone Tade“ minimi Poškos Baubliai – pirmasis Lietuvos muziejus.",
+      "room": 3,
+      "spot": "poska"
+    },
+    {
+      "id": "poska-3",
+      "q": "Kas įkūrė pirmąjį Lietuvos muziejų – Baublius?",
+      "a": "Dionizas Poška",
+      "room": 3,
+      "spot": "poska"
+    },
+    {
+      "id": "poska-4",
+      "q": "Kas parašė „Mužikas Žemaičių ir Lietuvos“?",
+      "a": "Dionizas Poška",
+      "room": 3,
+      "spot": "poska"
+    },
+    {
+      "id": "poska-5",
+      "q": "Kokia buvo Poškos profesija?",
+      "a": "Teisininkas (ne kunigas)",
+      "room": 3,
+      "spot": "poska"
+    },
+    {
+      "id": "poska-6",
+      "q": "Kuriame kūrinyje minimi Poškos Baubliai?",
+      "a": "„Pone Tade“",
+      "room": 3,
+      "spot": "poska"
+    },
+    {
+      "id": "poska-7",
+      "q": "Kuris rašytojas Vilnių vadino „Šiaurės Roma“?",
+      "a": "Dionizas Poška",
+      "room": 3,
+      "spot": "poska"
+    },
+    {
+      "id": "silelis-1",
+      "q": "Iš kokio kūrinio: „Miškan, būdavo, eini – tai net akų veria“?",
+      "a": "„Anykščių šilelis“",
+      "room": 3,
+      "spot": "silelis"
+    },
+    {
+      "id": "silelis-2",
+      "q": "Ką „Anykščių šilelyje“ vadina „nemunėmis“?",
+      "a": "Kelmučius (grybus)",
+      "room": 3,
+      "spot": "silelis"
+    },
+    {
+      "id": "silelis-3",
+      "q": "Kaip prasideda „Anykščių šilelis“?",
+      "a": "„Kalnai kelmuoti, pakalnės nuplikę!“",
+      "room": 3,
+      "spot": "silelis"
+    },
+    {
+      "id": "silelis-4",
+      "q": "Kas apie „Anykščių šilelį“ sakė: „Tai tikras mūsų poezijos perlas“?",
+      "a": "Maironis",
+      "room": 3,
+      "spot": "silelis"
+    },
+    {
+      "id": "silelis-5",
+      "q": "Kokius gyvūnus Baranauskas vadina „kropkomis“?",
+      "a": "Kurapkas",
+      "room": 3,
+      "spot": "silelis"
+    },
+    {
+      "id": "silelis-6",
+      "q": "Kur ir kada pirmą kartą išspausdintas „Anykščių šilelis“?",
+      "a": "1860 m. Lauryno Ivinskio kalendoriuje",
+      "room": 3,
+      "spot": "silelis"
+    },
+    {
+      "id": "silelis-7",
+      "q": "„Kalnai kelmuoti, pakalnės nuplikę“ – kurio kūrinio pradžia ir kurio autoriaus?",
+      "a": "„Anykščių šilelio“, Antano Baranausko",
+      "room": 3,
+      "spot": "silelis"
+    },
+    {
+      "id": "stanevicius-1",
+      "q": "Kaip vadinasi Stanevičiaus odė apie žemaičius?",
+      "a": "„Šlovė žemaičių“",
+      "room": 3,
+      "spot": "stanevicius"
+    },
+    {
+      "id": "stanevicius-2",
+      "q": "Kokie gyvūnai garsiausioje Stanevičiaus pasakėčioje?",
+      "a": "Meška ir arklys",
+      "room": 3,
+      "spot": "stanevicius"
+    },
+    {
+      "id": "strazdas-1",
+      "q": "Kas išleido rinkinį „Giesmės svietiškos ir šventos“?",
+      "a": "Antanas Strazdas",
+      "room": 3,
+      "spot": "strazdas"
+    },
+    {
+      "id": "strazdas-2",
+      "q": "Kas sukūrė giesmę „Pulkim ant kelių“?",
+      "a": "Antanas Strazdas",
+      "room": 3,
+      "spot": "strazdas"
+    },
+    {
+      "id": "strazdas-3",
+      "q": "Tikroji Antano Strazdo pavardė?",
+      "a": "Strazdas",
+      "room": 3,
+      "spot": "strazdas"
+    },
+    {
+      "id": "valancius-1",
+      "q": "Kas laikomas blaivybės sąjūdžio pradininku?",
+      "a": "Motiejus Valančius",
+      "room": 3,
+      "spot": "valancius"
+    },
+    {
+      "id": "valancius-2",
+      "q": "Kas parašė „Mikė Melagėlis“?",
+      "a": "Motiejus Valančius",
+      "room": 3,
+      "spot": "valancius"
+    },
+    {
+      "id": "valancius-3",
+      "q": "Kas parašė „Palangos Juzę“ ir kas jos veikėjas?",
+      "a": "Motiejus Valančius; siuvėjas Viskantas",
+      "room": 3,
+      "spot": "valancius"
+    },
+    {
+      "id": "valancius-4",
+      "q": "Kurie du XIX a. rašytojai buvo vyskupai?",
+      "a": "Motiejus Valančius – Žemaičių vyskupas, Antanas Baranauskas – Seinų vyskupas.",
+      "room": 3,
+      "spot": "valancius"
+    },
+    {
+      "id": "valancius-5",
+      "q": "Kuris rašytojas buvo Žemaičių vyskupas?",
+      "a": "Motiejus Valančius",
+      "room": 3,
+      "spot": "valancius"
+    },
+    {
+      "id": "amerika-pirtyje-1",
+      "q": "Kaip skirti „Ameriką pirtyje“ ir „Žaldokynę“?",
+      "a": "„Amerika pirtyje“ – pirmoji lietuviška komedija (Keturakis, broliai Vilkutaičiai); „Žaldokynė“ – Boriso Dauguviečio komedija.",
+      "room": 4,
+      "spot": "amerika-pirtyje"
+    },
+    {
+      "id": "amerika-pirtyje-2",
+      "q": "Kas parašė pirmąją lietuvišką komediją „Amerika pirtyje“?",
+      "a": "Keturakis – broliai Vilkutaičiai",
+      "room": 4,
+      "spot": "amerika-pirtyje"
+    },
+    {
+      "id": "amerika-pirtyje-3",
+      "q": "Kur ir kada suvaidinta „Amerika pirtyje“ kaip pirmasis viešas lietuviškas spektaklis?",
+      "a": "Palangoje, 1899 m.",
+      "room": 4,
+      "spot": "amerika-pirtyje"
+    },
+    {
+      "id": "bite-1",
+      "q": "Kuri rašytoja – viena Lietuvos moterų judėjimo pradininkių?",
+      "a": "Gabrielė Petkevičaitė-Bitė",
+      "room": 4,
+      "spot": "bite"
+    },
+    {
+      "id": "dedes-ir-dedienes-1",
+      "q": "Kurio kūrinio veikėjai Mykoliukas, Severiutė ir Rapolas?",
+      "a": "Vaižganto „Dėdės ir dėdienės“",
+      "room": 4,
+      "spot": "dedes-ir-dedienes"
+    },
+    {
+      "id": "dedes-ir-dedienes-2",
+      "q": "„Dėdės ir dėdienės“ – romanas ar apysaka?",
+      "a": "Apysaka",
+      "room": 4,
+      "spot": "dedes-ir-dedienes"
+    },
+    {
+      "id": "didziuliene-1",
+      "q": "Koks Liudvikos Didžiulienės slapyvardis?",
+      "a": "Žmona",
+      "room": 4,
+      "spot": "didziuliene"
+    },
+    {
+      "id": "jurate-ir-kastytis-1",
+      "q": "Koks Maironio „Jūratės ir Kastyčio“ žanras ir kas žūsta?",
+      "a": "Baladė; žūsta Kastytis",
+      "room": 4,
+      "spot": "jurate-ir-kastytis"
+    },
+    {
+      "id": "kudirka-1",
+      "q": "Kada ir kur paskelbta „Tautiška giesmė“?",
+      "a": "1898 m. „Varpe“",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-2",
+      "q": "Kaip susiję Kudirka ir Maironis?",
+      "a": "Abu atgimimo poetai, kūrę tėvynės giesmes: Kudirka – „Tautišką giesmę“ (1898), Maironis – „Lietuva brangi“; Kudirka mirė 1899 m., Maironis – 1932 m.",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-3",
+      "q": "Kas pasirašinėjo slapyvardžiais Kapsas ir Paežerių Vincas?",
+      "a": "Vincas Kudirka",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-4",
+      "q": "Kodėl XIX a. rašytojai slėpėsi po slapyvardžiais?",
+      "a": "Spaudos draudimo metais (1864–1904) lietuviška spauda buvo persekiojama; slapyvardis (Kapsas, Jurkštas Smalaūsis, „Dvi moteri“) slėpė autorių.",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-5",
+      "q": "Kokia buvo Vinco Kudirkos profesija ir kur jis dirbo?",
+      "a": "Gydytojas, Šakiuose",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-6",
+      "q": "Kokią satyrą parašė Kudirka apie tiltą?",
+      "a": "„Lietuvos tilto atsiminimai“",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-7",
+      "q": "Kokiais slapyvardžiais pasirašinėjo Kudirka?",
+      "a": "Kapsas, Paežerių Vincas",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-8",
+      "q": "Kuo Kudirka nebuvo: seimo dalyvis, iš seminarijos pašalintas, gydytojas Šakiuose, kvarteto vadovas?",
+      "a": "Didžiojo Vilniaus Seimo dalyviu",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-9",
+      "q": "Kuriame mieste Kudirka negyveno: Kaune, Seinuose, Šakiuose, Varšuvoje?",
+      "a": "Kaune",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-10",
+      "q": "Kurio anglų poeto kūrinį pirmasis visą išvertė Kudirka?",
+      "a": "Džordžo Bairono",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kudirka-11",
+      "q": "Kuris Kudirkos eilėraštis tapo moksleivių himnu?",
+      "a": "„Labora!“",
+      "room": 4,
+      "spot": "kudirka"
+    },
+    {
+      "id": "kur-bega-sesupe-1",
+      "q": "Ar „Kur bėga Šešupė“ minimas Mindaugas?",
+      "a": "Ne (minimas Vytautas Didis ir Birutė)",
+      "room": 4,
+      "spot": "kur-bega-sesupe"
+    },
+    {
+      "id": "kur-bega-sesupe-2",
+      "q": "Kelios ir kokios upės minimos „Kur bėga Šešupė“?",
+      "a": "Dvi – Šešupė ir Nemunas",
+      "room": 4,
+      "spot": "kur-bega-sesupe"
+    },
+    {
+      "id": "lazdynu-peleda-1",
+      "q": "Kokiu slapyvardžiu pasirašinėjo seserys Sofija ir Marija Ivanauskaitės?",
+      "a": "Lazdynų Pelėda",
+      "room": 4,
+      "spot": "lazdynu-peleda"
+    },
+    {
+      "id": "lietuva-brangi-1",
+      "q": "Kuris Maironio eilėraštis prasideda „Graži tu, mano brangi tėvyne“ ir kaip jis baigiasi?",
+      "a": "„Lietuva brangi“; „Ne veltui dainiai plačiai išgyrė!“",
+      "room": 4,
+      "spot": "lietuva-brangi"
+    },
+    {
+      "id": "maironis-1",
+      "q": "Ar Maironis gavo Lietuvos valstybinę literatūros premiją?",
+      "a": "Ne",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-2",
+      "q": "Kas parašė „Vakaras ant ežero keturių kantonų“?",
+      "a": "Maironis",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-3",
+      "q": "Kieno vardu Kauno taryba skiria premiją už geriausią naują poezijos knygą?",
+      "a": "Maironio",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-4",
+      "q": "Kokį įvykį aprašo Maironio poema „Ant Punės kalno, ties Nemunu“?",
+      "a": "Pilėnų mūšį",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-5",
+      "q": "Kokį namą Maironis įsigijo Kaune 1909 m.?",
+      "a": "Siručio namą (dabar Maironio literatūros muziejus)",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-6",
+      "q": "Kokia gėlė minima „Lietuva brangi“?",
+      "a": "Rūta",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-7",
+      "q": "Kokia kalba Maironis parašė pirmuosius eilėraščius?",
+      "a": "Lenkų",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-8",
+      "q": "Kokia Maironio draminė trilogija?",
+      "a": "„Kęstučio mirtis“, „Vytautas pas kryžiuočius“, „Didysis Vytautas – karalius“",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-9",
+      "q": "Kokiais slapyvardžiais iš pradžių pasirašinėjo Maironis?",
+      "a": "Zvalionis, Stanislovas Zanavykas (ir St. Garnys)",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-10",
+      "q": "Kokias pareigas Maironis ėjo Kaune?",
+      "a": "Kauno kunigų seminarijos rektorius (vyskupu nebuvo)",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-11",
+      "q": "Kokios dvi upės minimos eilėraštyje „Lietuva brangi“?",
+      "a": "Dubysa ir Nevėžis",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-12",
+      "q": "Koks garsiausias Maironio rinkinys?",
+      "a": "„Pavasario balsai“ (1895)",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-13",
+      "q": "Kuri Maironio poema apie parsidavusį bajorą?",
+      "a": "„Čičinskas“",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-14",
+      "q": "Kurie kūriniai dažnai klaidingai priskiriami Maironiui?",
+      "a": "„Margi sakalai“ ir „Tarp dviejų aušrų“ (Putino), „Yra šalis, kur upės teka“ (Vaičaičio), „Milžino paunksmė“ (Sruogos).",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-15",
+      "q": "Kurio poeto vardo premija nuo 2013 m. įteikiama ir „Poezijos pavasario“ laureatui (ne Nėries, nors festivalis jai skirtas)?",
+      "a": "Maironio",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-16",
+      "q": "Kuris Maironio eilėraštis: „Kur lygūs laukai, snaudžia tamsūs miškai, lietuviai barzdočiai dūmoja“?",
+      "a": "„Milžinų kapai“",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "maironis-17",
+      "q": "Tikrasis Maironio vardas ir pavardė?",
+      "a": "Jonas Mačiulis",
+      "room": 4,
+      "spot": "maironis"
+    },
+    {
+      "id": "marti-1",
+      "q": "Iš kokio kūrinio veikėjas Vingių Jonas?",
+      "a": "Žemaitės „Marti“",
+      "room": 4,
+      "spot": "marti"
+    },
+    {
+      "id": "marti-2",
+      "q": "Kokios šeimos supriešintos „Marčioje“?",
+      "a": "Vingių ir Driežų",
+      "room": 4,
+      "spot": "marti"
+    },
+    {
+      "id": "marti-3",
+      "q": "Kuo vardu „Marčios“ pagrindinė veikėja?",
+      "a": "Katrė (Driežų Katrė)",
+      "room": 4,
+      "spot": "marti"
+    },
+    {
+      "id": "pietaris-1",
+      "q": "Kaip vadinasi pirmasis lietuviškas istorinis romanas ir kas jo autorius?",
+      "a": "„Algimantas“, Vincas Pietaris",
+      "room": 4,
+      "spot": "pietaris"
+    },
+    {
+      "id": "satrijos-ragana-1",
+      "q": "Kas parašė „Irkos tragediją“?",
+      "a": "Šatrijos Ragana",
+      "room": 4,
+      "spot": "satrijos-ragana"
+    },
+    {
+      "id": "satrijos-ragana-2",
+      "q": "Kokiu slapyvardžiu žinoma Marija Pečkauskaitė?",
+      "a": "Šatrijos Ragana",
+      "room": 4,
+      "spot": "satrijos-ragana"
+    },
+    {
+      "id": "satrijos-ragana-3",
+      "q": "Koks kūrinys laikomas pirmuoju lietuvių kūriniu paaugliams?",
+      "a": "Šatrijos Raganos „Vincas Stonis“",
+      "room": 4,
+      "spot": "satrijos-ragana"
+    },
+    {
+      "id": "satrijos-ragana-4",
+      "q": "Kur palaidota Šatrijos Ragana?",
+      "a": "Židikuose (Mažeikių r.)",
+      "room": 4,
+      "spot": "satrijos-ragana"
+    },
+    {
+      "id": "satrijos-ragana-5",
+      "q": "Kuri moteris vienintelė tarpukariu gavo VDU garbės daktarės vardą?",
+      "a": "Marija Pečkauskaitė-Šatrijos Ragana",
+      "room": 4,
+      "spot": "satrijos-ragana"
+    },
+    {
+      "id": "satrijos-ragana-6",
+      "q": "Kurio dvaro gyvenimas atsispindi „Sename dvare“?",
+      "a": "Užvenčio",
+      "room": 4,
+      "spot": "satrijos-ragana"
+    },
+    {
+      "id": "tautiska-giesme-1",
+      "q": "Kiek kartų „Tautiškoje giesmėje“ paminėta Lietuva?",
+      "a": "Keturis",
+      "room": 4,
+      "spot": "tautiska-giesme"
+    },
+    {
+      "id": "tautiska-giesme-2",
+      "q": "Kiek kartų „Tautiškoje giesmėje“ pasikartoja „tegul“, kiek – Tėvynė?",
+      "a": "Keturis; Tėvynė – vieną",
+      "room": 4,
+      "spot": "tautiska-giesme"
+    },
+    {
+      "id": "tautiska-giesme-3",
+      "q": "Koks dangaus kūnas ir koks organas minimi „Tautiškoje giesmėje“?",
+      "a": "Saulė ir širdis",
+      "room": 4,
+      "spot": "tautiska-giesme"
+    },
+    {
+      "id": "traku-pilis-1",
+      "q": "Kokiais „grybais“ apaugusi Maironio „Trakų pilis“?",
+      "a": "Pelėsiais (ir kerpėm)",
+      "room": 4,
+      "spot": "traku-pilis"
+    },
+    {
+      "id": "vaicaitis-1",
+      "q": "Kas parašė dainą tapusį „Kur bakūžė samanota“?",
+      "a": "Pranas Vaičaitis",
+      "room": 4,
+      "spot": "vaicaitis"
+    },
+    {
+      "id": "vaicaitis-2",
+      "q": "Kas parašė „Yra šalis, kur upės teka“?",
+      "a": "Pranas Vaičaitis",
+      "room": 4,
+      "spot": "vaicaitis"
+    },
+    {
+      "id": "vaizgantas-1",
+      "q": "Kaip Vaižgantas pavadino savo taksą?",
+      "a": "Kaukas",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-2",
+      "q": "Kas buvo pirmasis Lietuvos rašytojų ir žurnalistų sąjungos (1922) pirmininkas?",
+      "a": "Juozas Tumas-Vaižgantas",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-3",
+      "q": "Kas parašė „Rimai ir nerimai“?",
+      "a": "Juozas Tumas-Vaižgantas",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-4",
+      "q": "Kieno vardu pasivadino Vaižgantas?",
+      "a": "Senovės lietuvių linų (ir kanapių) dievo",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-5",
+      "q": "Kokius mineralinių vandenų pavadinimus sugalvojo Vaižgantas?",
+      "a": "„Vytautas“ ir „Birutė“",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-6",
+      "q": "Kur gimė Vaižgantas?",
+      "a": "Dabartiniame Anykščių rajone (Maleišiai), ne Žemaitijoje",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-7",
+      "q": "Kur yra Vaižganto memorialinis muziejus?",
+      "a": "Kaune",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-8",
+      "q": "Kurio leidinio įkūrėjas buvo Vaižgantas?",
+      "a": "„Tėvynės sargo“",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-9",
+      "q": "Tikroji Vaižganto pavardė?",
+      "a": "Tumas",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "vaizgantas-10",
+      "q": "Žinomiausias Vaižganto romanas?",
+      "a": "„Pragiedruliai“",
+      "room": 4,
+      "spot": "vaizgantas"
+    },
+    {
+      "id": "zemaite-1",
+      "q": "Kaip Žemaitė ir Vaižgantas vaizdavo kaimą?",
+      "a": "Abu realistiškai: Žemaitė – šeimos dramas („Marti“), Vaižgantas – kaimo charakterius („Dėdės ir dėdienės“).",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-2",
+      "q": "Kas parašė apybraižą „Kelionė į Šidlavą“?",
+      "a": "Žemaitė",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-3",
+      "q": "Kas parašė „Sutkai“, „Topylis“, „Kunigo naudą velniai gaudo“?",
+      "a": "Žemaitė",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-4",
+      "q": "Kieno siūlymu „Rudens vakaro“ autorė gavo slapyvardį Žemaitė?",
+      "a": "Jono Jablonskio",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-5",
+      "q": "Kokia Žemaitės mergautinė pavardė?",
+      "a": "Beniuševičiūtė (Žymantienė)",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-6",
+      "q": "Kokiam ciklui priklauso „Marti“, „Sučiuptas velnias“, „Petras Kurmelis“?",
+      "a": "„Laimė nutekėjimo“",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-7",
+      "q": "Kokiu bendru slapyvardžiu pasirašinėjo Žemaitė ir Bitė?",
+      "a": "„Dvi moteri“",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-8",
+      "q": "Koks Žemaitės debiutinis kūrinys ir kiek jai buvo metų?",
+      "a": "„Rudens vakaras“, 49 metai",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-9",
+      "q": "Kur palaidota Žemaitė?",
+      "a": "Marijampolėje",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-10",
+      "q": "Kuri rašytoja aprašė dvi savaites Lukiškių kalėjime?",
+      "a": "Žemaitė („Kalėjimo įspūdžiai“)",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "zemaite-11",
+      "q": "Kurio rašytojo vardu pavadinta daugiausia gatvių Lietuvoje?",
+      "a": "Žemaitės",
+      "room": 4,
+      "spot": "zemaite"
+    },
+    {
+      "id": "biliunas-1",
+      "q": "Apie kokį gyvūną Biliūno „Kliudžiau“ ir kokios spalvos jis?",
+      "a": "Apie baltą katytę",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-2",
+      "q": "Ar Biliūnas buvo romantizmo rašytojas?",
+      "a": "Ne",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-3",
+      "q": "Kaip vadinasi Biliūno apysakos herojai, kurių vyras išeina į 1863 m. sukilimą?",
+      "a": "Petras ir Juozapota Baniai („Liūdna pasaka“)",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-4",
+      "q": "Kas parašė pasaką „Laimės žiburys“?",
+      "a": "Jonas Biliūnas",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-5",
+      "q": "Kiek romanų parašė Biliūnas?",
+      "a": "Nė vieno",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-6",
+      "q": "Kokiais slapyvardžiais pasirašinėjo Biliūnas?",
+      "a": "Jonas Anykštėnas, Jonas Barzdyla, Jonas Niūronis, Jonas Bežemis",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-7",
+      "q": "Kuo skiriasi Biliūnas, Vienuolis ir Krėvė?",
+      "a": "Biliūnas – lyrinė psichologinė novelė; Vienuolis – kaimo drama ir Kaukazo legendos; Krėvė – padavimai ir dramos apie kunigaikščius.",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-8",
+      "q": "Kuo vardu šuo Biliūno apsakyme ir kaip jis žuvo?",
+      "a": "Brisius; buvo nušautas",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-9",
+      "q": "Kur mirė Jonas Biliūnas?",
+      "a": "Zakopanėje",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-10",
+      "q": "Kurio rašytojo slapyvardis buvo Jonas Bežemis (ir Jonas Anykštėnas, Jonas Barzdyla)?",
+      "a": "Jono Biliūno",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-11",
+      "q": "Kurio signataro vaikystės draugas buvo Biliūnas?",
+      "a": "Stepono Kairio",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "biliunas-12",
+      "q": "Kuris rašytojas laikomas lyrinės psichologinės novelės pradininku?",
+      "a": "Jonas Biliūnas",
+      "room": 5,
+      "spot": "biliunas"
+    },
+    {
+      "id": "kreve-1",
+      "q": "Ką Kauno studentai vadino Patu ir Patašonu?",
+      "a": "Krėvę ir Sruogą",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "kreve-2",
+      "q": "Kas parašė dramą „Žentas“?",
+      "a": "Vincas Krėvė",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "kreve-3",
+      "q": "Kas parašė tragediją „Skirgaila“?",
+      "a": "Vincas Krėvė",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "kreve-4",
+      "q": "Kokį Dzūkijos pavadinimą išpopuliarino Krėvė?",
+      "a": "Dainava",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "kreve-5",
+      "q": "Krėvės slapyvardis slepia kokią tikrąją pavardę – ir kas buvo kitas garsus Vincas Mickevičius?",
+      "a": "Mickevičius; kitas – Kapsukas",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "kreve-6",
+      "q": "Kuri Krėvės drama – apie Dainavos kunigaikštį?",
+      "a": "„Šarūnas“",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "kreve-7",
+      "q": "Lapinas – kokio kūrinio ir kurio rašytojo veikėjas?",
+      "a": "Vinco Krėvės apsakymo „Skerdžius“",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "kreve-8",
+      "q": "Pabaikite: Krėvės „Dainavos šalies senų žmonių …“?",
+      "a": "Padavimai",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "kreve-9",
+      "q": "Tikroji Vinco Krėvės pavardė?",
+      "a": "Mickevičius",
+      "room": 5,
+      "spot": "kreve"
+    },
+    {
+      "id": "liudna-pasaka-1",
+      "q": "Į kurį sukilimą „Liūdnoje pasakoje“ išeina Petras?",
+      "a": "1863 m.",
+      "room": 5,
+      "spot": "liudna-pasaka"
+    },
+    {
+      "id": "liudna-pasaka-2",
+      "q": "Iš kokio kūrinio frazė „Ar nežinai tamsta, kur mano Petriukas?“",
+      "a": "Biliūno „Liūdna pasaka“",
+      "room": 5,
+      "spot": "liudna-pasaka"
+    },
+    {
+      "id": "skerdzius-1",
+      "q": "Kuo panašūs „Skerdžius“ ir „Liūdna pasaka“?",
+      "a": "Abiejuose likimas susietas su netektimi: Lapinas miršta nukirtus liepą, Juozapota palūžta netekusi Petro.",
+      "room": 5,
+      "spot": "skerdzius"
+    },
+    {
+      "id": "skerdzius-2",
+      "q": "Kuris kūrinys prasideda „Du senu buvo Pagirių sodžiuje“?",
+      "a": "Krėvės „Skerdžius“",
+      "room": 5,
+      "spot": "skerdzius"
+    },
+    {
+      "id": "skerdzius-3",
+      "q": "Po kokio medžio nukirtimo miršta skerdžius Lapinas?",
+      "a": "Liepos (Grainio liepos)",
+      "room": 5,
+      "spot": "skerdzius"
+    },
+    {
+      "id": "vaivorykste-1",
+      "q": "Koks buvo pirmasis lietuvių literatūros žurnalas ir kada jis pradėtas leisti?",
+      "a": "„Vaivorykštė“, 1913 m.",
+      "room": 5,
+      "spot": "vaivorykste"
+    },
+    {
+      "id": "vienuolis-1",
+      "q": "Garsiausias Vienuolio apsakymas ir jo veikėjos vardas?",
+      "a": "„Paskenduolė“, Veronika",
+      "room": 5,
+      "spot": "vienuolis"
+    },
+    {
+      "id": "vienuolis-2",
+      "q": "Kokia buvo Vienuolio profesija?",
+      "a": "Vaistininkas (farmacininkas)",
+      "room": 5,
+      "spot": "vienuolis"
+    },
+    {
+      "id": "vienuolis-3",
+      "q": "Koks paskutinis Vienuolio romanas?",
+      "a": "„Puodžiūnkiemis“",
+      "room": 5,
+      "spot": "vienuolis"
+    },
+    {
+      "id": "vienuolis-4",
+      "q": "Kur palaidotas Vienuolis?",
+      "a": "Anykščiuose",
+      "room": 5,
+      "spot": "vienuolis"
+    },
+    {
+      "id": "vienuolis-5",
+      "q": "Kuris garsus rašytojas buvo Vienuolio motinos dėdė?",
+      "a": "Antanas Baranauskas",
+      "room": 5,
+      "spot": "vienuolis"
+    },
+    {
+      "id": "vienuolis-6",
+      "q": "Kuris lietuvių rašytojas sukūrė „Kaukazo legendų“ ciklą?",
+      "a": "Antanas Vienuolis",
+      "room": 5,
+      "spot": "vienuolis"
+    },
+    {
+      "id": "vienuolis-7",
+      "q": "Tikroji Antano Vienuolio pavardė?",
+      "a": "Žukauskas",
+      "room": 5,
+      "spot": "vienuolis"
+    },
+    {
+      "id": "altoriu-seseli-1",
+      "q": "Baronienės pavardė „Altorių šešėly“?",
+      "a": "Rainakienė",
+      "room": 6,
+      "spot": "altoriu-seseli"
+    },
+    {
+      "id": "altoriu-seseli-2",
+      "q": "Kokia knyga 1935 m. „Literatūros gražuolių“ konkurse surinko daugiausia balsų?",
+      "a": "„Altorių šešėly“",
+      "room": 6,
+      "spot": "altoriu-seseli"
+    },
+    {
+      "id": "altoriu-seseli-3",
+      "q": "Kurio romano dalys „Bandymų dienos“, „Eina gyvenimas“, „Išsivadavimas“?",
+      "a": "„Altorių šešėly“",
+      "room": 6,
+      "spot": "altoriu-seseli"
+    },
+    {
+      "id": "altoriu-seseli-4",
+      "q": "Pagrindinis „Altorių šešėly“ veikėjas?",
+      "a": "Liudas Vasaris",
+      "room": 6,
+      "spot": "altoriu-seseli"
+    },
+    {
+      "id": "atzalynas-1",
+      "q": "Petras Keraitis – kurio kūrinio ir kurio autoriaus veikėjas?",
+      "a": "Kazio Binkio pjesės „Atžalynas“",
+      "room": 6,
+      "spot": "atzalynas"
+    },
+    {
+      "id": "baltaragio-malunas-1",
+      "q": "Ar „Baltaragio malūnas“ parašytas tarpukariu?",
+      "a": "Ne (išleistas 1945 m.)",
+      "room": 6,
+      "spot": "baltaragio-malunas"
+    },
+    {
+      "id": "baltaragio-malunas-2",
+      "q": "Kokios apysakos veiksmas vyksta Paudruvės krašte?",
+      "a": "„Baltaragio malūnas“",
+      "room": 6,
+      "spot": "baltaragio-malunas"
+    },
+    {
+      "id": "baltaragio-malunas-3",
+      "q": "Koks malūnininko Baltaragio vardas?",
+      "a": "Baltrus",
+      "room": 6,
+      "spot": "baltaragio-malunas"
+    },
+    {
+      "id": "baltaragio-malunas-4",
+      "q": "Kuo vardu velnias „Baltaragio malūne“?",
+      "a": "Pinčukas",
+      "room": 6,
+      "spot": "baltaragio-malunas"
+    },
+    {
+      "id": "baltaragio-malunas-5",
+      "q": "Pagal kurią lietuvišką knygą sukurti ir baletas, ir kino miuziklas?",
+      "a": "„Baltaragio malūnas“",
+      "room": 6,
+      "spot": "baltaragio-malunas"
+    },
+    {
+      "id": "binkis-1",
+      "q": "Kas buvo „Keturių vėjų“ grupės iniciatorius ir vadovas?",
+      "a": "Kazys Binkis",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-2",
+      "q": "Kas parašė dramą „Generalinė repeticija“?",
+      "a": "Kazys Binkis",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-3",
+      "q": "Kas parašė poemą vaikams „Kiškių sukilimas“?",
+      "a": "Kazys Binkis",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-4",
+      "q": "Kieno slapyvardžiai K. Alijošius, K. Papilietis, Nelatvis?",
+      "a": "Kazio Binkio",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-5",
+      "q": "Kodėl „Keturi vėjai“ svarbūs ir kas jiems nepriklausė?",
+      "a": "Tai pirmasis lietuvių avangardo sąjūdis su Binkiu priešakyje; modernistas Sruoga jam nepriklausė.",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-6",
+      "q": "Kur palaidotas Binkis?",
+      "a": "Kaune",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-7",
+      "q": "Kuri Binkio pjesė parašyta 1938 m.?",
+      "a": "„Atžalynas“",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-8",
+      "q": "Kuriam rašytojui 1988 m. suteiktas Pasaulio tautų teisuolio vardas?",
+      "a": "Kaziui Binkiui",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-9",
+      "q": "Kurio poeto eilės tapo Kernagio daina „Tamošiaus Bekepurio piršlybos“?",
+      "a": "Kazio Binkio",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-10",
+      "q": "Kurių poetų eilės tapo Kernagio dainomis?",
+      "a": "Binkio (Tamošius Bekepuris), Gedos (baltojo nieko avinėlis), Erlicko („Kaip gražu miške“), Brazdžionio („Šaukiu aš tautą“), Vienažindžio („Linksminkimos“).",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-11",
+      "q": "Prie kieno kapo Greimas prisaikdino Antaną Miškinį?",
+      "a": "Kazio Binkio",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "binkis-12",
+      "q": "Rinkinys „100 pavasarių“ (1923) – kurio poeto ir kurios grupės vadovo?",
+      "a": "Kazio Binkio, „Keturių vėjų“ vadovo",
+      "room": 6,
+      "spot": "binkis"
+    },
+    {
+      "id": "boruta-1",
+      "q": "Iš kur buvo pašalintas Boruta?",
+      "a": "Iš Marijampolės mokytojų seminarijos ir universiteto",
+      "room": 6,
+      "spot": "boruta"
+    },
+    {
+      "id": "boruta-2",
+      "q": "Kas parašė pasakų rinkinį „Dangus griūva“?",
+      "a": "Kazys Boruta",
+      "room": 6,
+      "spot": "boruta"
+    },
+    {
+      "id": "boruta-3",
+      "q": "Kas parašė romaną „Mediniai stebuklai“ ir kas jo veikėjas?",
+      "a": "Kazys Boruta; dievdirbys Vincas Dovinė",
+      "room": 6,
+      "spot": "boruta"
+    },
+    {
+      "id": "boruta-4",
+      "q": "Kurio rašytojo slapyvardis Vincas Dovinė?",
+      "a": "Kazio Borutos",
+      "room": 6,
+      "spot": "boruta"
+    },
+    {
+      "id": "brazdzionis-1",
+      "q": "Kas parašė rinkinį „Per pasaulį keliauja žmogus“?",
+      "a": "Bernardas Brazdžionis",
+      "room": 6,
+      "spot": "brazdzionis"
+    },
+    {
+      "id": "brazdzionis-2",
+      "q": "Kas parašė rinkinį „Šaukiu aš tautą“?",
+      "a": "Bernardas Brazdžionis",
+      "room": 6,
+      "spot": "brazdzionis"
+    },
+    {
+      "id": "brazdzionis-3",
+      "q": "Kokiu slapyvardžiu Brazdžionis rašė vaikams?",
+      "a": "Vytė Nemunėlis",
+      "room": 6,
+      "spot": "brazdzionis"
+    },
+    {
+      "id": "brazdzionis-4",
+      "q": "Kuris iš Baranausko, Radausko, Brazdžionio, Škėmos palaidotas Lietuvoje?",
+      "a": "Brazdžionis (Kaune)",
+      "room": 6,
+      "spot": "brazdzionis"
+    },
+    {
+      "id": "brazdzionis-5",
+      "q": "Kuris poetas gimė 1907 m. Biržų apskrityje, mirė 2002 m. Los Andžele?",
+      "a": "Bernardas Brazdžionis",
+      "room": 6,
+      "spot": "brazdzionis"
+    },
+    {
+      "id": "brazdzionis-6",
+      "q": "Kuris rašytojas vadovavo Maironio lietuvių literatūros muziejui?",
+      "a": "Bernardas Brazdžionis",
+      "room": 6,
+      "spot": "brazdzionis"
+    },
+    {
+      "id": "brazdzionis-7",
+      "q": "Pagal kurį Brazdžionio eilėraštį Kernagis sukūrė Atgimimo himną?",
+      "a": "„Šaukiu aš tautą“",
+      "room": 6,
+      "spot": "brazdzionis"
+    },
+    {
+      "id": "brazdzionis-8",
+      "q": "Slapyvardžiai Vytė Nemunėlis ir J. Brazaitis – kurio poeto?",
+      "a": "Bernardo Brazdžionio",
+      "room": 6,
+      "spot": "brazdzionis"
+    },
+    {
+      "id": "cvirka-1",
+      "q": "Kas parašė knygą vaikams „Mikučio vargai“?",
+      "a": "Petras Cvirka",
+      "room": 6,
+      "spot": "cvirka"
+    },
+    {
+      "id": "cvirka-2",
+      "q": "Kas parašė romaną „Meisteris ir sūnūs“?",
+      "a": "Petras Cvirka",
+      "room": 6,
+      "spot": "cvirka"
+    },
+    {
+      "id": "cvirka-3",
+      "q": "Kas pasirašinėjo slapyvardžiu Klangių Petras?",
+      "a": "Petras Cvirka",
+      "room": 6,
+      "spot": "cvirka"
+    },
+    {
+      "id": "cvirka-4",
+      "q": "Kuris romanas apie grabdirbį Praną Krukelį?",
+      "a": "Cvirkos „Frank Kruk“",
+      "room": 6,
+      "spot": "cvirka"
+    },
+    {
+      "id": "dievu-miskas-1",
+      "q": "Kurią knygą Lietuvos šimtmečio knygos rinkimuose skaitytojai išrinko pirmąja?",
+      "a": "„Dievų miškas“",
+      "room": 6,
+      "spot": "dievu-miskas"
+    },
+    {
+      "id": "dievu-miskas-2",
+      "q": "Kuris lietuviškas romanas išleistas didžiausiu tiražu?",
+      "a": "„Dievų miškas“",
+      "room": 6,
+      "spot": "dievu-miskas"
+    },
+    {
+      "id": "egle-1",
+      "q": "Kuri Nėries poema (1940) pripažinta geriausiu visų laikų kūriniu vaikams?",
+      "a": "„Eglė žalčių karalienė“",
+      "room": 6,
+      "spot": "egle"
+    },
+    {
+      "id": "keturi-vejai-1",
+      "q": "Kaip vadinosi futuristų žurnalas, leistas 1924–1928 m.?",
+      "a": "„Keturi vėjai“",
+      "room": 6,
+      "spot": "keturi-vejai"
+    },
+    {
+      "id": "neris-1",
+      "q": "Kaip Nėris susijusi su „Poezijos pavasariu“?",
+      "a": "Festivalis pradėtas 1965 m. jos mirties metinėms paminėti; pirmasis laureatas – Marcinkevičius.",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "neris-2",
+      "q": "Kaip vadinasi 1938 m. išleistas Nėries rinkinys?",
+      "a": "„Diemedžiu žydėsiu“",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "neris-3",
+      "q": "Kas pasirašinėjo Jūraitės ir Liūdytės slapyvardžiais?",
+      "a": "Salomėja Nėris",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "neris-4",
+      "q": "Kokios asmenybės prototipas Ivaškevičiaus „Madagaskaro“ Salė?",
+      "a": "Salomėjos Nėries",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "neris-5",
+      "q": "Kur miega nykštukai Nėries „Senelės pasakoje“?",
+      "a": "Pusnynuos",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "neris-6",
+      "q": "Kur mirė Nėris ir kiek jai buvo metų?",
+      "a": "Maskvoje, nesulaukusi 45 metų (1945)",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "neris-7",
+      "q": "Kuri poetė išleido rinkinį „Pėdos smėly“?",
+      "a": "Salomėja Nėris",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "neris-8",
+      "q": "Paskutinis Nėries rinkinys?",
+      "a": "„Lakštingala negali nečiulbėti“",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "neris-9",
+      "q": "Tikroji Salomėjos Nėries pavardė?",
+      "a": "Bačinskaitė (Bučienė)",
+      "room": 6,
+      "spot": "neris"
+    },
+    {
+      "id": "poezijos-pavasaris-1",
+      "q": "Ar „Poezijos pavasaris“ vyksta kas dvejus metus?",
+      "a": "Ne, kasmet",
+      "room": 6,
+      "spot": "poezijos-pavasaris"
+    },
+    {
+      "id": "poezijos-pavasaris-2",
+      "q": "Kada pradėtas rengti „Poezijos pavasaris“ ir kieno atminimui?",
+      "a": "1965 m., minint Salomėjos Nėries mirties metines",
+      "room": 6,
+      "spot": "poezijos-pavasaris"
+    },
+    {
+      "id": "poezijos-pavasaris-3",
+      "q": "Kas tapo pirmuoju „Poezijos pavasario“ laureatu?",
+      "a": "Justinas Marcinkevičius (už poemą „Donelaitis“)",
+      "room": 6,
+      "spot": "poezijos-pavasaris"
+    },
+    {
+      "id": "poezijos-pavasaris-4",
+      "q": "Kuriame VU kiemelyje vyksta baigiamasis „Poezijos pavasario“ vakaras?",
+      "a": "Motiejaus Kazimiero Sarbievijaus",
+      "room": 6,
+      "spot": "poezijos-pavasaris"
+    },
+    {
+      "id": "putinas-1",
+      "q": "Apie kurį graikų mitologijos herojų Putinas parašė poemą?",
+      "a": "Prometėją",
+      "room": 6,
+      "spot": "putinas"
+    },
+    {
+      "id": "putinas-2",
+      "q": "Garsiausias Mykolaičio-Putino romanas?",
+      "a": "„Altorių šešėly“",
+      "room": 6,
+      "spot": "putinas"
+    },
+    {
+      "id": "putinas-3",
+      "q": "Kas parašė dramą „Valdovas“?",
+      "a": "Vincas Mykolaitis-Putinas",
+      "room": 6,
+      "spot": "putinas"
+    },
+    {
+      "id": "putinas-4",
+      "q": "Kas parašė „Margi sakalai“?",
+      "a": "Vincas Mykolaitis-Putinas",
+      "room": 6,
+      "spot": "putinas"
+    },
+    {
+      "id": "putinas-5",
+      "q": "Kurį sukilimą vaizduoja Putino „Sukilėliai“?",
+      "a": "1863 m.",
+      "room": 6,
+      "spot": "putinas"
+    },
+    {
+      "id": "putinas-6",
+      "q": "Kuris iš trijų Vincų – Krėvė, Mykolaitis-Putinas, Kudirka – įšventintas į kunigus?",
+      "a": "Mykolaitis-Putinas",
+      "room": 6,
+      "spot": "putinas"
+    },
+    {
+      "id": "putinas-7",
+      "q": "Pirmasis ir žymiausias Putino simbolistinės poezijos rinkinys?",
+      "a": "„Tarp dviejų aušrų“",
+      "room": 6,
+      "spot": "putinas"
+    },
+    {
+      "id": "seinius-1",
+      "q": "Iš ko kilo Šeiniaus slapyvardis?",
+      "a": "Iš gimtojo kaimo pavadinimo",
+      "room": 6,
+      "spot": "seinius"
+    },
+    {
+      "id": "seinius-2",
+      "q": "Kas 1940 m. išleido „Raudonąjį tvaną“?",
+      "a": "Ignas Šeinius",
+      "room": 6,
+      "spot": "seinius"
+    },
+    {
+      "id": "seinius-3",
+      "q": "Kokioje šalyje gyveno ir jos kalba rašė Šeinius?",
+      "a": "Švedijoje",
+      "room": 6,
+      "spot": "seinius"
+    },
+    {
+      "id": "seinius-4",
+      "q": "Tikroji Igno Šeiniaus pavardė?",
+      "a": "Jurkūnas",
+      "room": 6,
+      "spot": "seinius"
+    },
+    {
+      "id": "seinius-5",
+      "q": "Žymiausias Šeiniaus romanas?",
+      "a": "„Kuprelis“",
+      "room": 6,
+      "spot": "seinius"
+    },
+    {
+      "id": "simonaityte-1",
+      "q": "Kas parašė romaną „Vilius Karalius“?",
+      "a": "Ieva Simonaitytė",
+      "room": 6,
+      "spot": "simonaityte"
+    },
+    {
+      "id": "simonaityte-2",
+      "q": "Kas pasirašinėjo slapyvardžiu Bemokslė Vanagiškė?",
+      "a": "Ieva Simonaitytė",
+      "room": 6,
+      "spot": "simonaityte"
+    },
+    {
+      "id": "simonaityte-3",
+      "q": "Kas tapo pirmuoju Lietuvos valstybinės literatūros premijos laureatu?",
+      "a": "Ieva Simonaitytė",
+      "room": 6,
+      "spot": "simonaityte"
+    },
+    {
+      "id": "simonaityte-4",
+      "q": "Kieno antkapyje užrašyta „Jau lazdą padėjau, kelionė baigta“?",
+      "a": "Ievos Simonaitytės",
+      "room": 6,
+      "spot": "simonaityte"
+    },
+    {
+      "id": "simonaityte-5",
+      "q": "Kuri rašytoja vadinama Mažosios Lietuvos metraštininke?",
+      "a": "Ieva Simonaitytė",
+      "room": 6,
+      "spot": "simonaityte"
+    },
+    {
+      "id": "simonaityte-6",
+      "q": "Reikšmingiausias Simonaitytės romanas?",
+      "a": "„Aukštujų Šimonių likimas“",
+      "room": 6,
+      "spot": "simonaityte"
+    },
+    {
+      "id": "sruoga-1",
+      "q": "Ar Sruoga priklausė „Keturiems vėjams“?",
+      "a": "Ne",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "sruoga-2",
+      "q": "Kaip susiję Sruoga ir Krėvė?",
+      "a": "Abu rašė istorines dramas („Skirgaila“ – Krėvės, „Apyaušrio dalia“ – Sruogos); Kauno studentai juos vadino Patu ir Patašonu.",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "sruoga-3",
+      "q": "Kas parašė pjesę „Aitvaras teisėjas“?",
+      "a": "Balys Sruoga",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "sruoga-4",
+      "q": "Kas sukūrė poemą „Giesmė apie Gediminą“?",
+      "a": "Balys Sruoga",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "sruoga-5",
+      "q": "Kur Sruoga parašė „Dievų mišką“?",
+      "a": "Birštone",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "sruoga-6",
+      "q": "Kuriam asmeniui skirta Sruogos drama „Milžino paunksmė“?",
+      "a": "Vytautui Didžiajam (500 m. mirties metinėms)",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "sruoga-7",
+      "q": "Kuriame universitete studijavo Sruoga?",
+      "a": "Miuncheno",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "sruoga-8",
+      "q": "Kurioje stovykloje vyksta „Dievų miško“ veiksmas?",
+      "a": "Štuthofo",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "sruoga-9",
+      "q": "Pagal kurią Sruogos dramą Dvarionas sukūrė operą „Dalia“?",
+      "a": "„Apyaušrio dalia“",
+      "room": 6,
+      "spot": "sruoga"
+    },
+    {
+      "id": "balta-drobule-1",
+      "q": "Kurio romano veikėjas Antanas Garšva ir kuo jis dirbo?",
+      "a": "„Balta drobulė“; liftininku",
+      "room": 7,
+      "spot": "balta-drobule"
+    },
+    {
+      "id": "balta-drobule-2",
+      "q": "Pirminis „Baltos drobulės“ pavadinimas?",
+      "a": "„Keltuvas“",
+      "room": 7,
+      "spot": "balta-drobule"
+    },
+    {
+      "id": "katiliskis-1",
+      "q": "Garsiausias Katiliškio romanas?",
+      "a": "„Miškais ateina ruduo“",
+      "room": 7,
+      "spot": "katiliskis"
+    },
+    {
+      "id": "katiliskis-2",
+      "q": "Kaip geriau žinomas Albinas (Marius) Vaitkus?",
+      "a": "Marius Katiliškis",
+      "room": 7,
+      "spot": "katiliskis"
+    },
+    {
+      "id": "katiliskis-3",
+      "q": "Kurio romano veikėjai Tilius Gelažius ir Monika Doveikienė?",
+      "a": "„Miškais ateina ruduo“",
+      "room": 7,
+      "spot": "katiliskis"
+    },
+    {
+      "id": "katiliskis-4",
+      "q": "Už kurio rašytojo ištekėjo Liūnė Sutema?",
+      "a": "Mariaus Katiliškio",
+      "room": 7,
+      "spot": "katiliskis"
+    },
+    {
+      "id": "macernis-1",
+      "q": "Ar Mačernis gimė Žemaitijoje?",
+      "a": "Taip (Šarnelėje)",
+      "room": 7,
+      "spot": "macernis"
+    },
+    {
+      "id": "macernis-2",
+      "q": "Kaip žuvo Vytautas Mačernis?",
+      "a": "Nuo atsitiktinės artilerijos sviedinio skeveldros (1944 m. spalio 7 d.)",
+      "room": 7,
+      "spot": "macernis"
+    },
+    {
+      "id": "macernis-3",
+      "q": "Kas turėjo važiuoti vežimu su Mačerniu jo žūties dieną?",
+      "a": "Aktorius Donatas Banionis",
+      "room": 7,
+      "spot": "macernis"
+    },
+    {
+      "id": "milosas-1",
+      "q": "Kaip susiję Milošas ir Mickevičius?",
+      "a": "Abu rašė lenkiškai, bet tėvyne laikė Lietuvą: Mickevičius – „lietuviška tautybė“, Milošas – Nevėžio slėnis „Isos slėnyje“.",
+      "room": 7,
+      "spot": "milosas"
+    },
+    {
+      "id": "milosas-2",
+      "q": "Kas buvo pirmasis iš Lietuvos kilęs Nobelio premijos laureatas?",
+      "a": "Česlovas Milošas (1980)",
+      "room": 7,
+      "spot": "milosas"
+    },
+    {
+      "id": "milosas-3",
+      "q": "Kokį išsilavinimą turėjo Milošas?",
+      "a": "Teisininko",
+      "room": 7,
+      "spot": "milosas"
+    },
+    {
+      "id": "milosas-4",
+      "q": "Kur gimė Milošas?",
+      "a": "Šeteniuose, Kėdainių r. (ne Raseinių)",
+      "room": 7,
+      "spot": "milosas"
+    },
+    {
+      "id": "milosas-5",
+      "q": "Kurią upę Milošas „Isos slėnyje“ vadina Isa?",
+      "a": "Nevėžį",
+      "room": 7,
+      "spot": "milosas"
+    },
+    {
+      "id": "radauskas-1",
+      "q": "Koks medis minimas Radausko „Dainos gimime“?",
+      "a": "Akacija",
+      "room": 7,
+      "spot": "radauskas"
+    },
+    {
+      "id": "radauskas-2",
+      "q": "Kuriam poetui priklauso rinktinė „Pasauliu netikiu, o pasaka tikiu“?",
+      "a": "Henrikui Radauskui",
+      "room": 7,
+      "spot": "radauskas"
+    },
+    {
+      "id": "radauskas-3",
+      "q": "Kurio poeto „Vakaras“ tapo Olego Ditkovskio daina?",
+      "a": "Henriko Radausko",
+      "room": 7,
+      "spot": "radauskas"
+    },
+    {
+      "id": "skema-1",
+      "q": "Debiutinė Škėmos novelė?",
+      "a": "„Baimė“",
+      "room": 7,
+      "spot": "skema"
+    },
+    {
+      "id": "skema-2",
+      "q": "Kaip baigėsi Škėmos (ir Camus) gyvenimas?",
+      "a": "Žuvo autoavarijoje",
+      "room": 7,
+      "spot": "skema"
+    },
+    {
+      "id": "skema-3",
+      "q": "Kaip Škėma susijęs su savo veikėju Garšva?",
+      "a": "Abu Antanai ir abu dirbo liftininkais Niujorke, todėl „Balta drobulė“ laikoma iš dalies autobiografine.",
+      "room": 7,
+      "spot": "skema"
+    },
+    {
+      "id": "skema-4",
+      "q": "Kuriame Niujorko viešbutyje liftininku dirbo Škėma?",
+      "a": "„Roosevelt“",
+      "room": 7,
+      "spot": "skema"
+    },
+    {
+      "id": "skema-5",
+      "q": "Kurio rašytojo kūriniu paremtas 2019 m. filmas „Izaokas“?",
+      "a": "Antano Škėmos",
+      "room": 7,
+      "spot": "skema"
+    },
+    {
+      "id": "skema-6",
+      "q": "Kurioje valstybėje gimė Antanas Škėma?",
+      "a": "Lenkijoje (Lodzėje)",
+      "room": 7,
+      "spot": "skema"
+    },
+    {
+      "id": "skema-7",
+      "q": "Kuris rašytojas karo metais parašė pjesę „Julijana“?",
+      "a": "Antanas Škėma",
+      "room": 7,
+      "spot": "skema"
+    },
+    {
+      "id": "sutema-1",
+      "q": "Kokiu slapyvardžiu žinoma Zinaida Nagytė-Katiliškienė?",
+      "a": "Liūnė Sutema",
+      "room": 7,
+      "spot": "sutema"
+    },
+    {
+      "id": "avyzius-1",
+      "q": "Kaip neapsirikti tarp Baltušio ir Avyžiaus?",
+      "a": "Baltušis – „Parduotos vasaros“, „Sakmė apie Juzą“; Avyžius – „Kaimas kryžkelėje“, „Sodybų tuštėjimo metas“.",
+      "room": 8,
+      "spot": "avyzius"
+    },
+    {
+      "id": "avyzius-2",
+      "q": "Kas parašė „Chameleono spalvos“?",
+      "a": "Jonas Avyžius",
+      "room": 8,
+      "spot": "avyzius"
+    },
+    {
+      "id": "avyzius-3",
+      "q": "Kas parašė „Kaimas kryžkelėje“, „Sodybų tuštėjimo metas“, „Į stiklo kalną“?",
+      "a": "Jonas Avyžius",
+      "room": 8,
+      "spot": "avyzius"
+    },
+    {
+      "id": "avyzius-4",
+      "q": "Kuris rašytojas 1976 m. gavo Lenino premiją?",
+      "a": "Jonas Avyžius",
+      "room": 8,
+      "spot": "avyzius"
+    },
+    {
+      "id": "baltakis-1",
+      "q": "Algimanto Baltakio eilės tapo kurios grupės daina „Daktarai“?",
+      "a": "„Hiperbolės“",
+      "room": 8,
+      "spot": "baltakis"
+    },
+    {
+      "id": "baltakis-2",
+      "q": "Kas parašė dainų tekstus „Aš dar dainuosiu“, „Gimiau pačiu laiku“?",
+      "a": "Algimantas Baltakis",
+      "room": 8,
+      "spot": "baltakis"
+    },
+    {
+      "id": "baltakis-3",
+      "q": "Kurio poeto eilės tapo daina „Boružėlė septyntaškė“?",
+      "a": "Algimanto Baltakio",
+      "room": 8,
+      "spot": "baltakis"
+    },
+    {
+      "id": "baltusis-1",
+      "q": "Ar Baltušis gimė Lietuvoje?",
+      "a": "Ne (Rygoje)",
+      "room": 8,
+      "spot": "baltusis"
+    },
+    {
+      "id": "baltusis-2",
+      "q": "Iš ko sudarytas Baltušio slapyvardis?",
+      "a": "Iš mamos ir tėvo pavardžių",
+      "room": 8,
+      "spot": "baltusis"
+    },
+    {
+      "id": "baltusis-3",
+      "q": "Kas parašė „Parduotos vasaros“?",
+      "a": "Juozas Baltušis",
+      "room": 8,
+      "spot": "baltusis"
+    },
+    {
+      "id": "baltusis-4",
+      "q": "Pabaikite Baltušio romaną „Sakmė apie …“",
+      "a": "Juzą",
+      "room": 8,
+      "spot": "baltusis"
+    },
+    {
+      "id": "baltusis-5",
+      "q": "Tikrasis Juozo Baltušio vardas ir pavardė?",
+      "a": "Albertas Juozėnas",
+      "room": 8,
+      "spot": "baltusis"
+    },
+    {
+      "id": "erlickas-1",
+      "q": "Kas parašė „Mano meilė stikliniais kaliošais“?",
+      "a": "Juozas Erlickas",
+      "room": 8,
+      "spot": "erlickas"
+    },
+    {
+      "id": "erlickas-2",
+      "q": "Kurio poeto „Vasara“ tapo Kernagio daina „Kaip gražu miške“?",
+      "a": "Juozo Erlicko",
+      "room": 8,
+      "spot": "erlickas"
+    },
+    {
+      "id": "geda-1",
+      "q": "Kas 1985 m. įsteigė Jotvingių premiją?",
+      "a": "Sigitas Geda",
+      "room": 8,
+      "spot": "geda"
+    },
+    {
+      "id": "geda-2",
+      "q": "Kas sukūrė „Baltojo nieko daineles“?",
+      "a": "Sigitas Geda",
+      "room": 8,
+      "spot": "geda"
+    },
+    {
+      "id": "geda-3",
+      "q": "Kieno knygos „Karalaitė ant svarstyklių“, „Mėlynas autobusiukas“?",
+      "a": "Sigito Gedos",
+      "room": 8,
+      "spot": "geda"
+    },
+    {
+      "id": "geda-4",
+      "q": "Kuris poetas išvertė Koraną ir Dantės „Dieviškąją komediją“?",
+      "a": "Sigitas Geda",
+      "room": 8,
+      "spot": "geda"
+    },
+    {
+      "id": "granauskas-1",
+      "q": "Kas parašė apysaką „Jaučio aukojimas“?",
+      "a": "Romualdas Granauskas",
+      "room": 8,
+      "spot": "granauskas"
+    },
+    {
+      "id": "granauskas-2",
+      "q": "Kuris rašytojas dirbo Mosėdyje, Skuode, Sėdoje betonuotoju ir dailide?",
+      "a": "Romualdas Granauskas",
+      "room": 8,
+      "spot": "granauskas"
+    },
+    {
+      "id": "granauskas-3",
+      "q": "Pabaikite Granausko pavadinimą „Gyvenimas po …“",
+      "a": "Klevu",
+      "room": 8,
+      "spot": "granauskas"
+    },
+    {
+      "id": "grusas-1",
+      "q": "Apie kurį asmenį Grušas dramos neparašė: Herkų Mantą, Švitrigailą, Steponą Batorą, Sierakauską?",
+      "a": "Steponą Batorą",
+      "room": 8,
+      "spot": "grusas"
+    },
+    {
+      "id": "grusas-2",
+      "q": "Kas parašė dramas „Herkus Mantas“ ir „Barbora Radvilaitė“?",
+      "a": "Juozas Grušas",
+      "room": 8,
+      "spot": "grusas"
+    },
+    {
+      "id": "grusas-3",
+      "q": "Kas parašė „Meilė, džiazas ir velnias“?",
+      "a": "Juozas Grušas",
+      "room": 8,
+      "spot": "grusas"
+    },
+    {
+      "id": "grusas-4",
+      "q": "Pabaikite Grušo tragikomediją „Pijus nebuvo …“",
+      "a": "Protingas",
+      "room": 8,
+      "spot": "grusas"
+    },
+    {
+      "id": "marcinkevicius-1",
+      "q": "Ką aprėpia Marcinkevičiaus trilogija?",
+      "a": "Valstybę („Mindaugas“), kultūrą („Katedra“) ir raštą („Mažvydas“); epilogas – „Daukantas“.",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-2",
+      "q": "Kam Druskininkuose atidengta skulptūra „Giedantis paukštis“?",
+      "a": "Justinui Marcinkevičiui",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-3",
+      "q": "Kas parašė dramas „Heroica, arba Prometėjo pasmerkimas“ ir „Ikaras“?",
+      "a": "Justinas Marcinkevičius",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-4",
+      "q": "Kas parašė „Grybų karą“?",
+      "a": "Justinas Marcinkevičius",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-5",
+      "q": "Kiek brolių Marcinkevičiaus baladžių poemoje?",
+      "a": "Devyni",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-6",
+      "q": "Kokia Marcinkevičiaus draminės trilogijos dalių tvarka?",
+      "a": "„Mindaugas“, „Katedra“, „Mažvydas“",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-7",
+      "q": "Koks trilogijos epilogas?",
+      "a": "„Daukantas“",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-8",
+      "q": "Kuo buvo vadinamas Justinas Marcinkevičius?",
+      "a": "Tautos sąžine",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-9",
+      "q": "Kurią gimnaziją baigė ir Marcinkevičius, ir Maceina?",
+      "a": "Prienų „Žiburio“",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-10",
+      "q": "Pabaikite: „Pušis, kuri …“",
+      "a": "Juokėsi",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "marcinkevicius-11",
+      "q": "Pagrindinis „Katedros“ veikėjas?",
+      "a": "Laurynas Stuoka-Gucevičius",
+      "room": 8,
+      "spot": "marcinkevicius"
+    },
+    {
+      "id": "martinaitis-1",
+      "q": "Kas parašė „Kai sirpsta vyšnios Suvalkijoj“?",
+      "a": "Marcelijus Martinaitis",
+      "room": 8,
+      "spot": "martinaitis"
+    },
+    {
+      "id": "martinaitis-2",
+      "q": "Kuris paukštis siejamas su Martinaičiu?",
+      "a": "Kukutis („Kukučio baladės“)",
+      "room": 8,
+      "spot": "martinaitis"
+    },
+    {
+      "id": "mikas-pupkus-1",
+      "q": "Kokios profesijos buvo Petkevičiaus Mikas Pupkus ir koks jo arklys?",
+      "a": "Medžiotojas; arklys Lupkus",
+      "room": 8,
+      "spot": "mikas-pupkus"
+    },
+    {
+      "id": "petkevicius-1",
+      "q": "Kas parašė „Durnių laivą“?",
+      "a": "Vytautas Petkevičius",
+      "room": 8,
+      "spot": "petkevicius"
+    },
+    {
+      "id": "petkevicius-2",
+      "q": "Koks veikėjas keliavo po Petkevičiaus Ydų šalį?",
+      "a": "Gilė",
+      "room": 8,
+      "spot": "petkevicius"
+    },
+    {
+      "id": "saja-1",
+      "q": "Kur vyksta Sajos „Ubagų salos“ veiksmas?",
+      "a": "Plateliuose",
+      "room": 8,
+      "spot": "saja"
+    },
+    {
+      "id": "saja-2",
+      "q": "Kuris signataras parašė „Šventežeris“ ir „Mamutų medžioklė“?",
+      "a": "Kazys Saja",
+      "room": 8,
+      "spot": "saja"
+    },
+    {
+      "id": "saja-3",
+      "q": "Pabaikite Sajos apysaką „Būrimas … sėklom“",
+      "a": "Obuolio",
+      "room": 8,
+      "spot": "saja"
+    },
+    {
+      "id": "saltenis-1",
+      "q": "Kurios apysakos veikėjai Kaminskų ir Šatų šeimos?",
+      "a": "„Riešutų duona“",
+      "room": 8,
+      "spot": "saltenis"
+    },
+    {
+      "id": "saltenis-2",
+      "q": "Kuris rašytojas – vienas „Šiaurės Atėnų“ įkūrėjų?",
+      "a": "Saulius Šaltenis",
+      "room": 8,
+      "spot": "saltenis"
+    },
+    {
+      "id": "saltenis-3",
+      "q": "Kuris signataras parašė „Riešutų duoną“?",
+      "a": "Saulius Šaltenis",
+      "room": 8,
+      "spot": "saltenis"
+    },
+    {
+      "id": "sieksnis-1",
+      "q": "„Sieksnis, sprindžio vaikas“ – kurio rašytojo knyga vaikams?",
+      "a": "Vytauto Petkevičiaus",
+      "room": 8,
+      "spot": "sieksnis"
+    },
+    {
+      "id": "sirvys-1",
+      "q": "Kas parašė rinkinį „Ir nusinešė saulę miškai“?",
+      "a": "Paulius Širvys",
+      "room": 8,
+      "spot": "sirvys"
+    },
+    {
+      "id": "sirvys-2",
+      "q": "Kurio poeto eilėraštis „Aš – beržas“?",
+      "a": "Pauliaus Širvio",
+      "room": 8,
+      "spot": "sirvys"
+    },
+    {
+      "id": "sodybu-tustejimo-metas-1",
+      "q": "Kas parašė romaną „Sodybų tuštėjimo metas“ – Baltušis ar Avyžius?",
+      "a": "Jonas Avyžius (ne Baltušis)",
+      "room": 8,
+      "spot": "sodybu-tustejimo-metas"
+    },
+    {
+      "id": "zaldokyne-1",
+      "q": "Kokios komedijos autorius – Borisas Dauguvietis: „Amerikos pirtyje“ ar „Žaldokynės“?",
+      "a": "„Žaldokynės“ (Amerika pirtyje – Keturakio)",
+      "room": 8,
+      "spot": "zaldokyne"
+    },
+    {
+      "id": "zilinskaite-1",
+      "q": "Kas parašė pasaką „Robotas ir peteliškė“ (vardas ir pavardė)?",
+      "a": "Vytautė Žilinskaitė",
+      "room": 8,
+      "spot": "zilinskaite"
+    },
+    {
+      "id": "gavelis-1",
+      "q": "Ar „Vilniaus pokeris“ ir „Vilniaus džiazas“ išleisti tais pačiais metais?",
+      "a": "Ne (1989 ir 1993)",
+      "room": 9,
+      "spot": "gavelis"
+    },
+    {
+      "id": "gavelis-2",
+      "q": "Kas parašė „Vilniaus džiazą“?",
+      "a": "Ričardas Gavelis",
+      "room": 9,
+      "spot": "gavelis"
+    },
+    {
+      "id": "gavelis-3",
+      "q": "Kieno knygos „Taikos balandis“, „Jauno žmogaus memuarai“, „Vilniaus pokeris“?",
+      "a": "Ričardo Gavelio",
+      "room": 9,
+      "spot": "gavelis"
+    },
+    {
+      "id": "gavelis-4",
+      "q": "Kokia buvo Gavelio profesija?",
+      "a": "Fizikas",
+      "room": 9,
+      "spot": "gavelis"
+    },
+    {
+      "id": "gavelis-5",
+      "q": "Kurie romanai apie Vilnių garsiausi?",
+      "a": "Gavelio „Vilniaus pokeris“ ir „Vilniaus džiazas“, Kunčino „Tūla“, Sabaliauskaitės „Silva rerum“.",
+      "room": 9,
+      "spot": "gavelis"
+    },
+    {
+      "id": "ivanauskaite-1",
+      "q": "Kieno romanai „Sapnų nublokšti“, „Placebas“, „Ragana ir lietus“?",
+      "a": "Jurgos Ivanauskaitės",
+      "room": 9,
+      "spot": "ivanauskaite"
+    },
+    {
+      "id": "ivanauskaite-2",
+      "q": "Kokio amžiaus autoriams skiriama Jurgos Ivanauskaitės premija?",
+      "a": "Ne vyresniems kaip 45 metų",
+      "room": 9,
+      "spot": "ivanauskaite"
+    },
+    {
+      "id": "ivanauskaite-3",
+      "q": "Kuris Ivanauskaitės romanas buvo pripažintas „pornografiniu“?",
+      "a": "„Ragana ir lietus“",
+      "room": 9,
+      "spot": "ivanauskaite"
+    },
+    {
+      "id": "ivanauskaite-4",
+      "q": "Pabaikite: Ivanauskaitės „Kelionė į …“",
+      "a": "Šambalą",
+      "room": 9,
+      "spot": "ivanauskaite"
+    },
+    {
+      "id": "ivanauskaite-5",
+      "q": "Pagal kurios rašytojos romanus sukurtas filmas „Nuodėmės užkalbėjimas“?",
+      "a": "Jurgos Ivanauskaitės",
+      "room": 9,
+      "spot": "ivanauskaite"
+    },
+    {
+      "id": "ivanauskaite-6",
+      "q": "Pirmoji Jurgos Ivanauskaitės knyga?",
+      "a": "„Pakalnučių metai“",
+      "room": 9,
+      "spot": "ivanauskaite"
+    },
+    {
+      "id": "kuncinas-1",
+      "q": "Kurio rašytojo atminimui Alytuje rengiami „Imbiero vakarai“?",
+      "a": "Jurgio Kunčino",
+      "room": 9,
+      "spot": "kuncinas"
+    },
+    {
+      "id": "kuncinas-2",
+      "q": "Žinomiausias Jurgio Kunčino romanas?",
+      "a": "„Tūla“",
+      "room": 9,
+      "spot": "kuncinas"
+    },
+    {
+      "id": "parulskis-1",
+      "q": "Ar Parulskis apdovanotas Nacionaline kultūros ir meno premija?",
+      "a": "Taip (2004 m.)",
+      "room": 9,
+      "spot": "parulskis"
+    },
+    {
+      "id": "parulskis-2",
+      "q": "Kas parašė romaną „Trys sekundės dangaus“?",
+      "a": "Sigitas Parulskis",
+      "room": 9,
+      "spot": "parulskis"
+    },
+    {
+      "id": "parulskis-3",
+      "q": "Kuris eilėraščių rinkinys priklauso Sigitui Parulskiui (ne Erlickui)?",
+      "a": "„Pagyvenusio vyro pagundos“",
+      "room": 9,
+      "spot": "parulskis"
+    },
+    {
+      "id": "parulskis-4",
+      "q": "Kuris iš Brazdžionio, Širvio, Parulskio, Venclovos nėra „Poezijos pavasario“ laureatas?",
+      "a": "Sigitas Parulskis",
+      "room": 9,
+      "spot": "parulskis"
+    },
+    {
+      "id": "sabaliauskaite-1",
+      "q": "Apie kurią šeimą pasakoja „Silva rerum“?",
+      "a": "Žemaitijos bajorų Norvaišų",
+      "room": 9,
+      "spot": "sabaliauskaite"
+    },
+    {
+      "id": "sabaliauskaite-2",
+      "q": "Kas parašė „Danielius Dalba ir kitos istorijos“?",
+      "a": "Kristina Sabaliauskaitė",
+      "room": 9,
+      "spot": "sabaliauskaite"
+    },
+    {
+      "id": "sabaliauskaite-3",
+      "q": "Kas yra „Petro imperatorės“ pagrindinė veikėja?",
+      "a": "Jekaterina I (ne Jekaterina Didžioji)",
+      "room": 9,
+      "spot": "sabaliauskaite"
+    },
+    {
+      "id": "sabaliauskaite-4",
+      "q": "Kiek dalių turi „Silva rerum“?",
+      "a": "Keturias",
+      "room": 9,
+      "spot": "sabaliauskaite"
+    },
+    {
+      "id": "sabaliauskaite-5",
+      "q": "Sabaliauskaitės debiutinis romanas ir jo metai?",
+      "a": "„Silva rerum“, 2008 m.",
+      "room": 9,
+      "spot": "sabaliauskaite"
+    },
+    {
+      "id": "sokolovaite-1",
+      "q": "Už ką Rašytojų sąjunga skiria Liudo Dovydėno premiją?",
+      "a": "Už geriausią lietuvišką romaną",
+      "room": 9,
+      "spot": "sokolovaite"
+    },
+    {
+      "id": "sokolovaite-2",
+      "q": "Už kokį romaną I. M. Sokolovaitė 2025 m. gavo Liudo Dovydėno premiją?",
+      "a": "„Pozuotoja“",
+      "room": 9,
+      "spot": "sokolovaite"
+    }
+  ],
   "skipped": [
     {
       "span": "Kodėl … nuolat klausiama apie Kernagio dainas",
-      "reason": "Klausimo formuluotė perrašyta, nes originale yra draudžiamas žodis; klausimas yra kambario 8 klausimuose."
+      "reason": "Klausimas perrašytas kambario 8 klausimuose."
     }
   ]
 }

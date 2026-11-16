@@ -48,6 +48,36 @@ Deno.test("subject named nowhere falls back to the first room", () => {
   assertEquals(questions[0].id, "room-1-1");
 });
 
+Deno.test("order is by room, spot id, room-only last, then front, whatever the card order", () => {
+  const more = [
+    card("a", "missed", "Rastas", "Žodis b?", "x"),
+    card("b", "fact", "Niekas", "Kas niekas?", "x"),
+    card("c", "fact", "Jonas Kitas", "Antras kitas?", "x"),
+    card("d", "fact", "Rastas", "Ąžuolas a?", "x"),
+    ...cards,
+  ];
+  const { questions } = cardsToQuestions(more, spots, rooms);
+  assertEquals(questions.map((q) => [q.id, q.q]), [
+    ["jonas-1", "Ąžuolas a?"],
+    ["jonas-2", "Kas parašė pirmą knygą?"],
+    ["jonas-3", "Žodis b?"],
+    ["room-1-1", "Kas niekas?"],
+    ["knyga-1", "Kodėl ji pirma?"],
+    ["room-2-1", "Antras kitas?"],
+    ["room-2-2", "Kas yra Jonas Kitas?"],
+  ]);
+  for (const seed of [1, 2, 3, 4, 5]) {
+    const shuffled = [...more];
+    let s = seed;
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      s = (s * 9301 + 49297) % 233280;
+      const j = s % (i + 1);
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    assertEquals(cardsToQuestions(shuffled, spots, rooms), cardsToQuestions(more, spots, rooms));
+  }
+});
+
 Deno.test("importCards writes questions into the pack and logs count and unmatched", async () => {
   const kit = await Deno.makeTempDir();
   const topic = await Deno.makeTempDir();

@@ -24,6 +24,7 @@ function roomTexts(spots: Json[], rooms: Json[]) {
  * One question per card. A subject matching a spot name or alias (folded, quotes ignored)
  * gives the spot and its room; otherwise the question goes to the room whose text names
  * the subject most often (first room when none does) and the subject is listed in `unmatched`.
+ * Questions are ordered and numbered in a neutral order, so the card order leaves no trace.
  */
 export function cardsToQuestions(cards: Json[], spots: Json[], rooms: Json[]) {
   const bySubject = new Map<string, Json>();
@@ -39,15 +40,28 @@ export function cardsToQuestions(cards: Json[], spots: Json[], rooms: Json[]) {
     seen.set(prefix, n);
     return `${prefix}-${n}`;
   };
-  const unmatched: string[] = [];
-  const questions: Question[] = cards.map((c) => {
+  const placed = cards.map((c) => {
     const spot = bySubject.get(key(c.subject));
-    if (spot) return { id: nextId(spot.id), q: c.front, a: c.back, room: spot.room, spot: spot.id };
-    if (!unmatched.includes(c.subject)) unmatched.push(c.subject);
+    if (spot) return { c, room: spot.room, spot: spot.id as string | undefined };
     const k = key(c.subject);
     let best = texts[0];
     for (const t of texts) if (count(t.text, k) > count(best.text, k)) best = t;
-    return { id: nextId(`room-${best.n}`), q: c.front, a: c.back, room: best.n };
+    return { c, room: best.n, spot: undefined };
+  });
+  // Neutral order, independent of the card order: room, spot id (room-only last), folded front, folded back.
+  const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+  placed.sort((x, y) =>
+    x.room - y.room ||
+    Number(!x.spot) - Number(!y.spot) ||
+    cmp(x.spot ?? "", y.spot ?? "") ||
+    cmp(fold(x.c.front), fold(y.c.front)) ||
+    cmp(fold(x.c.back), fold(y.c.back))
+  );
+  const unmatched: string[] = [];
+  const questions: Question[] = placed.map(({ c, room, spot }) => {
+    if (spot) return { id: nextId(spot), q: c.front, a: c.back, room, spot };
+    if (!unmatched.includes(c.subject)) unmatched.push(c.subject);
+    return { id: nextId(`room-${room}`), q: c.front, a: c.back, room };
   });
   return { questions, unmatched };
 }

@@ -5,6 +5,7 @@ const root = new URL("../", import.meta.url).pathname;
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const ignore = !Deno.env.get("PRIMER_CHROME");
 const MINI = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/mini/topic.json`));
+const STYLED = JSON.parse(await Deno.readTextFile(`${root}tests/fixtures/styles/topic.json`));
 
 const TYPES = {
   html: "text/html; charset=utf-8",
@@ -104,13 +105,18 @@ Deno.test({
   fn: async (t) => {
     // A listed pack without rooms passes the topic check, then fails while the world is built.
     const BROKEN = { slug: "broken", title: "Sugadinta", spots: [] };
-    await withSite([MINI, BROKEN], async (base) => {
+    await withSite([MINI, STYLED, BROKEN], async (base) => {
       const page = async (path, size) => htmlAttrs(await dumpDom(base + path, size));
 
       await t.step("world renders both rooms and all spots", async () => {
         const a = await page("world.html?topic=mini-test");
         assertEquals(a["data-error"], undefined);
         assertEquals([a["data-ready"], a["data-rooms"], a["data-spots"]], ["world", "2", "3"]);
+      });
+      await t.step("world renders a pack that uses all nine room styles", async () => {
+        const a = await page("world.html?topic=styles-test");
+        assertEquals(a["data-error"], undefined);
+        assertEquals([a["data-ready"], a["data-rooms"], a["data-spots"]], ["world", "9", "9"]);
       });
       await t.step("world on a phone-sized window", async () => {
         const a = await page("world.html?topic=mini-test", { w: 390, h: 844 });

@@ -32,3 +32,20 @@ export const LIGHT_BANDS = [
 export function lightFor(year) {
   return LIGHT_BANDS.find((b) => year <= b.until);
 }
+
+/** Scene-only settings: eye height (m), fog distances (m) and the base light under the room lights. */
+export const SCENE = {
+  eye: 1.7,
+  fog: { near: 16, far: 55 },
+  ambient: { sky: 0xc8d4f0, ground: 0x141e33, intensity: 1.1 },
+  fill: { color: 0xfff0d8, intensity: 0.9 },
+};
+
+/** Typography of canvas-drawn labels: font stack, pixel size on the canvas, height in metres, sprite opacity. */
+export const LABEL = {
+  font: 'Georgia, "Times New Roman", serif',
+  px: 48,
+  weight: 600,
+  height: 0.36,
+  opacity: 0.92,
+};

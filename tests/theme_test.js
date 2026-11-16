@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "@std/assert";
-import { COLORS, LIGHT_BANDS, lightFor, STYLE_NAMES } from "../site/lib/theme.js";
+import { COLORS, LIGHT_BANDS, lightFor, SCENE, STYLE_NAMES } from "../site/lib/theme.js";
 import { MOTIFS, motifSvg } from "../site/lib/motifs.js";
 import { BASEMAP, project } from "../site/lib/basemap.js";
 
@@ -15,6 +15,7 @@ Deno.test("theme data is complete", () => {
   assertEquals(COLORS.gold, 0xd9b25f);
   assertEquals(STYLE_NAMES.length, 9);
   assertEquals(LIGHT_BANDS.length, 5);
+  assert(SCENE.eye > 1 && SCENE.fog.near < SCENE.fog.far);
 });
 
 Deno.test("every motif is stroke-only SVG content", () => {

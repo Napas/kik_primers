@@ -77,3 +77,20 @@ details { margin: .5rem 0; }
 summary { cursor: pointer; }
 .room-text { max-width: 44rem; margin: 2rem auto; padding: 0 1rem; }
 .room-text .panel { margin: 1rem 0; transform: none; position: static; }
+
+/* Flat pages */
+.bar { padding: .75rem 1rem; border-bottom: 1px solid var(--path); }
+.page { max-width: 44rem; margin: 1.5rem auto; padding: 0 1rem; }
+.muted { color: var(--muted); font-size: .9rem; }
+.error { color: var(--gold); }
+ul.topics, ul.credits, ul.wrong { list-style: none; padding: 0; }
+.topic { background: var(--panel); border: 1px solid var(--path); border-radius: 8px; padding: .75rem 1rem; margin-bottom: 1rem; }
+.topic h2 { font-size: 1.2rem; }
+.card { background: var(--panel); border: 1px solid var(--path); border-radius: 8px; padding: 1rem 1.25rem; }
+.card img { max-width: 100%; max-height: 20rem; height: auto; border-radius: 4px; }
+ol.order { list-style: none; padding: 0; margin: 0; }
+ol.order li { display: flex; align-items: center; gap: .5rem; padding: .4rem 0; border-bottom: 1px solid var(--path); }
+ol.order .grip { cursor: grab; touch-action: none; user-select: none; padding: 0 .4rem; }
+ol.order li button:first-of-type { margin-left: auto; }
+.choices button { margin: 0 .4rem .4rem 0; }
+pre.licence { white-space: pre-wrap; font-size: .8rem; color: var(--muted); }

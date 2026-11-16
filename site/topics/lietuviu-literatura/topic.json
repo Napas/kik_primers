@@ -76,6 +76,30 @@
         1865
       ],
       "style": "log-chapel"
+    },
+    {
+      "n": 4,
+      "title": "Tautinis atgimimas: „Aušra“, „Varpas“, spaudos draudimo metai",
+      "intro": "1864–1904 m. Rusijos imperijoje galiojo lietuviškos spaudos lotyniškais rašmenimis draudimas. Knygos ir laikraščiai buvo spausdinami Mažojoje Lietuvoje (Prūsijoje) ir JAV, o knygnešiai juos slapta gabeno į Lietuvą. „Aušra“ – pirmasis lietuvių tautinis mėnraštis; „Varpas“ (nuo 1889 m.) – Vinco Kudirkos laikraštis. Šiuo laikotarpiu rašytojas dažnai buvo ir gydytojas, kunigas ar mokytojas, ir pasirašinėjo slapyvardžiu.",
+      "why": [
+        {
+          "q": "Kaip susiję Kudirka ir Maironis?",
+          "a": "Abu – tautinio atgimimo balsai, abu kūrė tėvynės giesmes: Kudirka – „Tautišką giesmę“ (1898), Maironis – „Lietuva brangi“. Kudirka mirė 1899 m., o Maironis gyveno iki 1932 m. ir sulaukė nepriklausomos Lietuvos."
+        },
+        {
+          "q": "Kodėl tiek slapyvardžių?",
+          "a": "Spaudos draudimo metais (1864–1904) lietuviška spauda buvo persekiojama, knygnešius gaudė ir Prūsijos policija, todėl slapyvardis slėpė autorių. Taip Kudirka tapo Kapsu, Baranauskas – Jurkštu Smalaūsiu, Žemaitė ir Bitė – „Dviem moterimis“."
+        },
+        {
+          "q": "Kaip Žemaitė ir Vaižgantas susiję su kaimu?",
+          "a": "Abu realistiškai vaizdavo kaimo gyvenimą: Žemaitė – šeimos dramas („Marti“), Vaižgantas – kaimo žmonių charakterius („Dėdės ir dėdienės“). Žemaitės premija iki šiol teikiama už kūrinius kaimo tema."
+        }
+      ],
+      "span": [
+        1864,
+        1904
+      ],
+      "style": "barn"
     }
   ],
   "spots": [
@@ -869,6 +893,803 @@
       "text": "Antanas Vienažindys taip pat buvo kunigas, kaip ir Strazdas, Valančius ir Baranauskas. Jo „Linksminkimos“ – vienas iš eilėraščių, kurie žmones pasiekė per dainas.",
       "links": [],
       "wikidata": "Q16444004"
+    },
+    {
+      "id": "spaudos-draudimas",
+      "room": 4,
+      "kind": "event",
+      "name": "Spaudos draudimas",
+      "aliases": [
+        "Spaudos draudimo metai"
+      ],
+      "years": [
+        1864,
+        1904
+      ],
+      "at": 1864,
+      "text": "1864–1904 m. Rusijos imperijoje galiojo lietuviškos spaudos lotyniškais rašmenimis draudimas. Knygos ir laikraščiai buvo spausdinami Mažojoje Lietuvoje (Prūsijoje) ir JAV, o knygnešiai juos slapta gabeno į Lietuvą. Lietuviška spauda buvo persekiojama, knygnešius gaudė ir Prūsijos policija, todėl slapyvardis slėpė autorių.",
+      "links": []
+    },
+    {
+      "id": "ausra",
+      "room": 4,
+      "kind": "thing",
+      "name": "„Aušra“",
+      "aliases": [],
+      "years": [
+        1883,
+        1886
+      ],
+      "at": 1883,
+      "text": "„Aušra“ (1883–1886) – pirmasis lietuvių tautinis mėnraštis.",
+      "links": [
+        {
+          "to": "varpas",
+          "label": "kitas atgimimo leidinys"
+        }
+      ]
+    },
+    {
+      "id": "varpas",
+      "room": 4,
+      "kind": "thing",
+      "name": "„Varpas“",
+      "aliases": [],
+      "years": [
+        1889
+      ],
+      "at": 1889,
+      "text": "„Varpas“ (nuo 1889 m.) – Vinco Kudirkos laikraštis. Kudirka buvo „Varpo“ steigėjas ir redaktorius. „Varpe“ 1898 m. paskelbta „Tautiška giesmė“.",
+      "links": [
+        {
+          "to": "kudirka",
+          "label": "steigėjas ir redaktorius"
+        },
+        {
+          "to": "tautiska-giesme",
+          "label": "paskelbta (1898)"
+        }
+      ]
+    },
+    {
+      "id": "kudirka",
+      "room": 4,
+      "kind": "person",
+      "name": "Vincas Kudirka",
+      "aliases": [
+        "Kapsas",
+        "Paežerių Vincas"
+      ],
+      "years": [
+        1858,
+        1899
+      ],
+      "at": 1889,
+      "text": "Vincas Kudirka (1858 m. Paežeriuose – 1899 m. Naumiestyje, dabar Kudirkos Naumiestis) buvo pašalintas iš kunigų seminarijos, studijavo mediciną ir dirbo gydytoju Šakiuose. Mokytoju nebuvo; gyveno Seinuose, Šakiuose, Varšuvoje, bet ne Kaune. Kudirka buvo „Varpo“ steigėjas ir redaktorius, vadovavo styginių kvartetui. Slapyvardžiai – Kapsas, Paežerių Vincas. Kūriniai: „Tautiška giesmė“ (paskelbta „Varpe“ 1898 m., taigi dar XIX a.); satyra „Lietuvos tilto atsiminimai“; eilėraščiai „Labora!“ (tapo moksleivių himnu), „Gražu, gražiau, gražiausia“, „Dėl ko žydai nevalgo kiaulienos“. Kudirka pirmasis į lietuvių kalbą išvertė visą Bairono kūrinį. Dramos neparašė. Gyveno tik XIX a. ir mirė anksčiau už M. K. Čiurlionį. Didžiajame Vilniaus Seime (1905) jau negalėjo dalyvauti. Gabrielė Petkevičaitė-Bitė apie jį rašė, kad jis nemėgo savo profesijos.",
+      "links": [
+        {
+          "to": "varpas",
+          "label": "įkūrė ir redagavo"
+        },
+        {
+          "to": "tautiska-giesme",
+          "label": "parašė"
+        },
+        {
+          "to": "maironis",
+          "label": "kitas atgimimo balsas"
+        }
+      ],
+      "wikidata": "Q342580"
+    },
+    {
+      "id": "tautiska-giesme",
+      "room": 4,
+      "kind": "work",
+      "name": "„Tautiška giesmė“",
+      "aliases": [],
+      "years": [
+        1898
+      ],
+      "at": 1898,
+      "text": "Vinco Kudirkos „Tautiška giesmė“ paskelbta „Varpe“ 1898 m., taigi dar XIX a. „Tautiškoje giesmėje“ Lietuva minima keturis kartus, žodis „tegul“ – taip pat keturis, Tėvynė – vieną kartą; minima saulė ir širdis.",
+      "links": [
+        {
+          "to": "kudirka",
+          "label": "autorius"
+        },
+        {
+          "to": "varpas",
+          "label": "paskelbta (1898)"
+        }
+      ],
+      "by": "kudirka"
+    },
+    {
+      "id": "maironis",
+      "room": 4,
+      "kind": "person",
+      "name": "Maironis",
+      "aliases": [
+        "Jonas Mačiulis",
+        "Zvalionis",
+        "Stanislovas Zanavykas",
+        "St. Garnys"
+      ],
+      "years": [
+        1862,
+        1932
+      ],
+      "at": 1895,
+      "text": "Maironis (tikrasis vardas Jonas Mačiulis; 1862 m. lapkričio 2 d. Pasandravyje – 1932 m. Kaune) – lietuvių tautinio atgimimo poetas. Pirmuosius eilėraščius rašė lenkiškai. Prieš tapdamas kunigu, 1883–1884 m. studijavo literatūrą. Nuo 1909 m. buvo Kauno kunigų seminarijos rektorius, bet ne vyskupas. 1909 m. Kaune įsigijo Siručio namą – dabar ten Maironio lietuvių literatūros muziejus. Palaidotas Kauno katedros kriptoje. Ankstyvieji slapyvardžiai – Zvalionis, Stanislovas Zanavykas, St. Garnys. Rinkinys „Pavasario balsai“ (1895) – jo garsiausias rinkinys. Žinomiausi eilėraščiai: „Lietuva brangi“, „Kur bėga Šešupė“, „Trakų pilis“, „Milžinų kapai“ („…ir juodbėrį žirgą balnoja“), „Vakaras ant ežero keturių kantonų“, „Vilnius prieš aušrą“, „Eina garsas“ (pagal Baranausko dainą); eilutės „Išnyksiu, kaip dūmas, neblaškomas vėjo“, „Nebeužtvenksi upės bėgimo“, „Oi neverk, motušėle“. Poemos: „Jaunoji Lietuva“, „Tarp skausmų į garbę“, „Nuo Birutės kalno“, „Ant Punės kalno, ties Nemunu“ (Pilėnų gynimas). Baladės „Čičinskas“ (apie parsidavusį bajorą) ir „Jūratė ir Kastytis“. Draminė trilogija: „Kęstučio mirtis“, „Vytautas pas kryžiuočius“, „Didysis Vytautas – karalius“. Parašė ir prozos. Satyrinis eilėraštis „Nuolat verkšlenantiems politikams“ taip pat jo. Valstybinės literatūros premijos negavo. Su Maironio kūriniais dažnai painiojami kitų autorių: „Margi sakalai“ ir „Tarp dviejų aušrų“ – Mykolaičio-Putino, „Yra šalis, kur upės teka“ – Vaičaičio, „Jūratė ir Kastytis“ – ne Nėries. „Anykščių šilelį“ jis vadino „tikru mūsų poezijos perlu“. Maironio vardu Kauno taryba skiria premiją už geriausią naują poezijos knygą. Nuo 2013 m. Maironio premija įteikiama ir „Poezijos pavasario“ laureatui; Brazdžionio premija jam neįteikiama.",
+      "links": [
+        {
+          "to": "pavasario-balsai",
+          "label": "parašė"
+        },
+        {
+          "to": "maironio-muziejus",
+          "label": "jo namai (Siručio namas)"
+        },
+        {
+          "to": "silelis",
+          "label": "„tikras mūsų poezijos perlas“"
+        },
+        {
+          "to": "baranauskas",
+          "label": "„Eina garsas“ pagal jo dainą"
+        },
+        {
+          "to": "kudirka",
+          "label": "kitas atgimimo balsas"
+        }
+      ],
+      "wikidata": "Q738888"
+    },
+    {
+      "id": "maironio-muziejus",
+      "room": 4,
+      "kind": "place",
+      "name": "Maironio lietuvių literatūros muziejus",
+      "aliases": [],
+      "years": null,
+      "at": 1904,
+      "aside": true,
+      "text": "1909 m. Maironis Kaune įsigijo Siručio namą – dabar ten Maironio lietuvių literatūros muziejus. Jam yra vadovavęs Bernardas Brazdžionis.",
+      "links": [
+        {
+          "to": "maironis",
+          "label": "jo namai"
+        }
+      ]
+    },
+    {
+      "id": "pavasario-balsai",
+      "room": 4,
+      "kind": "work",
+      "name": "„Pavasario balsai“",
+      "aliases": [],
+      "years": [
+        1895
+      ],
+      "at": 1895,
+      "text": "Rinkinys „Pavasario balsai“ (1895) – garsiausias Maironio rinkinys (jo pavadinime – pavasaris), ne pirmasis Nėries.",
+      "links": [
+        {
+          "to": "maironis",
+          "label": "autorius"
+        }
+      ],
+      "by": "maironis"
+    },
+    {
+      "id": "lietuva-brangi",
+      "room": 4,
+      "kind": "work",
+      "name": "„Lietuva brangi“",
+      "aliases": [],
+      "years": null,
+      "at": 1895,
+      "text": "Maironio „Lietuva brangi“ („Graži tu, mano brangi tėvyne, šalis, kur miega kapuos didvyriai“; minima rūta, Dubysa ir Nevėžis; baigiasi „Ne veltui dainiai plačiai išgyrė!“) – viena tėvynės giesmių, kaip ir Kudirkos „Tautiška giesmė“.",
+      "links": [
+        {
+          "to": "maironis",
+          "label": "autorius"
+        },
+        {
+          "to": "tautiska-giesme",
+          "label": "kita tėvynės giesmė"
+        }
+      ],
+      "by": "maironis"
+    },
+    {
+      "id": "kur-bega-sesupe",
+      "room": 4,
+      "kind": "work",
+      "name": "„Kur bėga Šešupė“",
+      "aliases": [],
+      "years": null,
+      "at": 1895,
+      "text": "Maironio „Kur bėga Šešupė“: dvi upės – Šešupė ir Nemunas; minimas Vytautas Didis ir Birutė, Mindaugas – ne.",
+      "links": [
+        {
+          "to": "maironis",
+          "label": "autorius"
+        }
+      ],
+      "by": "maironis"
+    },
+    {
+      "id": "traku-pilis",
+      "room": 4,
+      "kind": "work",
+      "name": "„Trakų pilis“",
+      "aliases": [],
+      "years": null,
+      "at": 1895,
+      "text": "Maironio „Trakų pilis“: „Pelėsiais ir kerpėm apaugus…“, „Kur tavo galia, garsi palikimais?“.",
+      "links": [
+        {
+          "to": "maironis",
+          "label": "autorius"
+        }
+      ],
+      "by": "maironis"
+    },
+    {
+      "id": "jurate-ir-kastytis",
+      "room": 4,
+      "kind": "work",
+      "name": "„Jūratė ir Kastytis“",
+      "aliases": [],
+      "years": null,
+      "at": 1895,
+      "text": "„Jūratė ir Kastytis“ – Maironio baladė, ne poema; Kastytis žūsta. Ji ne Nėries.",
+      "links": [
+        {
+          "to": "maironis",
+          "label": "autorius"
+        }
+      ],
+      "by": "maironis"
+    },
+    {
+      "id": "vaicaitis",
+      "room": 4,
+      "kind": "person",
+      "name": "Pranas Vaičaitis",
+      "aliases": [],
+      "years": [
+        1876,
+        1901
+      ],
+      "at": 1899,
+      "text": "Pranas Vaičaitis (1876–1901) – lyrikas, eilėraščio „Yra šalis, kur upės teka linksmai tarp girių ūžiančių“ ir dainos „Kur bakūžė samanota“ autorius. „Yra šalis, kur upės teka“ dažnai painiojama su Maironio kūriniais.",
+      "links": [
+        {
+          "to": "maironis",
+          "label": "painiojamas su juo"
+        }
+      ],
+      "wikidata": "Q12670106"
+    },
+    {
+      "id": "zemaite",
+      "room": 4,
+      "kind": "person",
+      "name": "Žemaitė",
+      "aliases": [
+        "Julija Beniuševičiūtė-Žymantienė"
+      ],
+      "years": [
+        1845,
+        1921
+      ],
+      "at": 1895,
+      "text": "Žemaitė (tikrasis vardas Julija Beniuševičiūtė-Žymantienė; 1845 m. Bukantėje – 1921 m. Marijampolėje, ten ir palaidota) pradėjo rašyti būdama 49 metų. Jos debiutas – apsakymas „Rudens vakaras“, išspausdintas 1895 m. kalendoriuje. Slapyvardį Žemaitė pasiūlė Jonas Jablonskis. Romanų ji neparašė. Kūriniai: „Marti“; „Sutkai“, „Topylis“, „Kunigo naudą velniai gaudo“, „Petras Kurmelis“ (apysaka, ne romanas); dokumentinė apybraiža „Kelionė į Šidlavą“; „Kalėjimo įspūdžiai“ (apie dvi savaites Lukiškių kalėjime). Su Gabriele Petkevičaite-Bite ji pasirašinėjo bendru slapyvardžiu „Dvi moteri“. Iš rašytojų Žemaitės vardu pavadinta daugiausia gatvių Lietuvos miestuose. Jos vardo premija teikiama už kūrinius kaimo tema. Apie ją dainuoja Klaipėdos jaunimo teatro grupė „Graži ir ta galinga“.",
+      "links": [
+        {
+          "to": "marti",
+          "label": "parašė"
+        },
+        {
+          "to": "rudens-vakaras",
+          "label": "debiutas"
+        },
+        {
+          "to": "dvi-moteri",
+          "label": "bendras slapyvardis"
+        },
+        {
+          "to": "jablonskis",
+          "label": "pasiūlė slapyvardį"
+        }
+      ],
+      "wikidata": "Q287069"
+    },
+    {
+      "id": "rudens-vakaras",
+      "room": 4,
+      "kind": "work",
+      "name": "„Rudens vakaras“",
+      "aliases": [],
+      "years": [
+        1895
+      ],
+      "at": 1895,
+      "text": "Apsakymas „Rudens vakaras“, išspausdintas 1895 m. kalendoriuje, – Žemaitės debiutas. Ji pradėjo rašyti būdama 49 metų.",
+      "links": [
+        {
+          "to": "zemaite",
+          "label": "autorė"
+        }
+      ],
+      "by": "zemaite"
+    },
+    {
+      "id": "marti",
+      "room": 4,
+      "kind": "work",
+      "name": "„Marti“",
+      "aliases": [],
+      "years": null,
+      "at": 1895,
+      "text": "Žemaitės „Marti“ – pagrindinė veikėja Driežų Katrė, vyras Vingių Jonas; supriešintos Vingių ir Driežų šeimos. Apsakymas priklauso ciklui „Laimė nutekėjimo“ (kartu su „Sučiuptas velnias“ ir „Petras Kurmelis“; „Trys mylimos“ į jį neįeina). Joje Žemaitė realistiškai vaizduoja kaimo šeimos dramą.",
+      "links": [
+        {
+          "to": "zemaite",
+          "label": "autorė"
+        }
+      ],
+      "by": "zemaite"
+    },
+    {
+      "id": "jablonskis",
+      "room": 4,
+      "kind": "person",
+      "name": "Jonas Jablonskis",
+      "aliases": [],
+      "years": [
+        1860,
+        1930
+      ],
+      "at": 1895,
+      "aside": true,
+      "text": "Kalbininkas Jonas Jablonskis pasiūlė Žemaitei jos slapyvardį.",
+      "links": [
+        {
+          "to": "zemaite",
+          "label": "pasiūlė slapyvardį"
+        }
+      ],
+      "wikidata": "Q975183"
+    },
+    {
+      "id": "dvi-moteri",
+      "room": 4,
+      "kind": "group",
+      "name": "„Dvi moteri“",
+      "aliases": [],
+      "years": null,
+      "at": 1895,
+      "text": "„Dvi moteri“ – bendras slapyvardis, kuriuo pasirašinėjo Žemaitė ir Gabrielė Petkevičaitė-Bitė.",
+      "links": [
+        {
+          "to": "zemaite",
+          "label": "narė"
+        },
+        {
+          "to": "bite",
+          "label": "narė"
+        }
+      ]
+    },
+    {
+      "id": "bite",
+      "room": 4,
+      "kind": "person",
+      "name": "Gabrielė Petkevičaitė-Bitė",
+      "aliases": [],
+      "years": [
+        1861,
+        1943
+      ],
+      "at": 1895,
+      "text": "Moterys rašytojos sudaro atskirą liniją. Gabrielė Petkevičaitė-Bitė (1861–1943) – viena moterų judėjimo (feminizmo) pradininkių. Apie Kudirką ji rašė, kad jis nemėgo savo profesijos. Su Žemaite ji pasirašinėjo bendru slapyvardžiu „Dvi moteri“.",
+      "links": [
+        {
+          "to": "dvi-moteri",
+          "label": "bendras slapyvardis"
+        },
+        {
+          "to": "kudirka",
+          "label": "rašė apie jį"
+        }
+      ],
+      "wikidata": "Q4972658"
+    },
+    {
+      "id": "lazdynu-peleda",
+      "room": 4,
+      "kind": "group",
+      "name": "Lazdynų Pelėda",
+      "aliases": [
+        "Sofija ir Marija Ivanauskaitės"
+      ],
+      "years": null,
+      "at": 1895,
+      "text": "Lazdynų Pelėda – seserų Sofijos Ivanauskaitės-Pšibiliauskienės ir Marijos Ivanauskaitės-Lastauskienės bendras slapyvardis. Ne Lastauskaitės ir ne Bačinskaitė. Kūriniai „Klaida“, „Ir pražuvo kaip sapnas“; jų vardu Akmenės rajonas skiria premiją už apysaką ar romaną.",
+      "links": [
+        {
+          "to": "sofija-ivanauskaite",
+          "label": "narė"
+        },
+        {
+          "to": "marija-ivanauskaite",
+          "label": "narė"
+        }
+      ]
+    },
+    {
+      "id": "sofija-ivanauskaite",
+      "room": 4,
+      "kind": "person",
+      "name": "Sofija Ivanauskaitė-Pšibiliauskienė",
+      "aliases": [],
+      "years": [
+        1867,
+        1926
+      ],
+      "at": 1895,
+      "text": "Sofija Ivanauskaitė-Pšibiliauskienė su seserimi Marija Ivanauskaite-Lastauskiene pasirašinėjo bendru slapyvardžiu Lazdynų Pelėda.",
+      "links": [
+        {
+          "to": "lazdynu-peleda",
+          "label": "bendras slapyvardis"
+        },
+        {
+          "to": "marija-ivanauskaite",
+          "label": "sesuo"
+        }
+      ],
+      "wikidata": "Q7553754"
+    },
+    {
+      "id": "marija-ivanauskaite",
+      "room": 4,
+      "kind": "person",
+      "name": "Marija Ivanauskaitė-Lastauskienė",
+      "aliases": [],
+      "years": [
+        1872,
+        1957
+      ],
+      "at": 1895,
+      "text": "Marija Ivanauskaitė-Lastauskienė su seserimi Sofija Ivanauskaite-Pšibiliauskiene pasirašinėjo bendru slapyvardžiu Lazdynų Pelėda.",
+      "links": [
+        {
+          "to": "lazdynu-peleda",
+          "label": "bendras slapyvardis"
+        },
+        {
+          "to": "sofija-ivanauskaite",
+          "label": "sesuo"
+        }
+      ],
+      "wikidata": "Q6763315"
+    },
+    {
+      "id": "didziuliene",
+      "room": 4,
+      "kind": "person",
+      "name": "Liudvika Didžiulienė",
+      "aliases": [
+        "Žmona"
+      ],
+      "years": [
+        1856,
+        1925
+      ],
+      "at": 1895,
+      "text": "Liudvika Didžiulienė – viena moterų rašytojų linijos atstovių; pasirašinėjo slapyvardžiu „Žmona“.",
+      "links": [],
+      "wikidata": "Q12663746"
+    },
+    {
+      "id": "satrijos-ragana",
+      "room": 4,
+      "kind": "person",
+      "name": "Šatrijos Ragana",
+      "aliases": [
+        "Marija Pečkauskaitė"
+      ],
+      "years": [
+        1877,
+        1930
+      ],
+      "at": 1904,
+      "aside": true,
+      "text": "Šatrijos Ragana (tikrasis vardas Marija Pečkauskaitė; 1877–1930) gimė Medingėnuose, augo Labūnavoje, vėliau Užvenčio dvare. Jį ji ir vaizduoja apysakoje „Sename dvare“ (1922; pagrindinė veikėja – Marija). Kiti kūriniai: „Irkos tragedija“, apysaka „Vincas Stonis“ – pirmasis kūrinys, skirtas specialiai paaugliams. Slapyvardis ne bendras su seserimi. Tarpukariu ji buvo vienintelė moteris, gavusi Vytauto Didžiojo universiteto garbės daktarės laipsnį. Palaidota Židikuose (Mažeikių r.); paminklas jai stovi Mažeikiuose.",
+      "links": [
+        {
+          "to": "sename-dvare",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q391323"
+    },
+    {
+      "id": "sename-dvare",
+      "room": 4,
+      "kind": "work",
+      "name": "„Sename dvare“",
+      "aliases": [],
+      "years": [
+        1922
+      ],
+      "at": 1904,
+      "aside": true,
+      "text": "Šatrijos Raganos apysaka „Sename dvare“ (1922) vaizduoja Užvenčio dvarą, kuriame augo autorė; pagrindinė veikėja – Marija.",
+      "links": [
+        {
+          "to": "satrijos-ragana",
+          "label": "autorė"
+        }
+      ],
+      "by": "satrijos-ragana"
+    },
+    {
+      "id": "amerika-pirtyje",
+      "room": 4,
+      "kind": "work",
+      "name": "„Amerika pirtyje“",
+      "aliases": [],
+      "years": [
+        1895
+      ],
+      "at": 1895,
+      "text": "Pirmoji lietuviška komedija – „Amerika pirtyje“. Ją parašė Keturakis, t. y. broliai Antanas ir Juozas Vilkutaičiai. Išleista 1895 m. 1899 m. Palangoje ji suvaidinta kaip pirmasis viešas lietuviškas spektaklis Lietuvoje. Nei Dauguvietis, nei Robertas Keturakis jos neparašė.",
+      "links": [
+        {
+          "to": "keturakis",
+          "label": "autorius"
+        },
+        {
+          "to": "robertas-keturakis",
+          "label": "ne jo"
+        }
+      ]
+    },
+    {
+      "id": "keturakis",
+      "room": 4,
+      "kind": "group",
+      "name": "Keturakis",
+      "aliases": [
+        "Vilkutaičiai"
+      ],
+      "years": null,
+      "at": 1895,
+      "text": "Keturakis – brolių Antano ir Juozo Vilkutaičių slapyvardis. Jie parašė pirmąją lietuvišką komediją „Amerika pirtyje“ (1895).",
+      "links": [
+        {
+          "to": "amerika-pirtyje",
+          "label": "parašė"
+        },
+        {
+          "to": "antanas-vilkutaitis",
+          "label": "brolis"
+        },
+        {
+          "to": "juozas-vilkutaitis",
+          "label": "brolis"
+        }
+      ]
+    },
+    {
+      "id": "antanas-vilkutaitis",
+      "room": 4,
+      "kind": "person",
+      "name": "Antanas Vilkutaitis",
+      "aliases": [],
+      "years": [
+        1864,
+        1903
+      ],
+      "at": 1895,
+      "text": "Antanas Vilkutaitis su broliu Juozu, pasirašę Keturakio slapyvardžiu, parašė pirmąją lietuvišką komediją „Amerika pirtyje“.",
+      "links": [
+        {
+          "to": "keturakis",
+          "label": "slapyvardis"
+        },
+        {
+          "to": "juozas-vilkutaitis",
+          "label": "brolis"
+        }
+      ],
+      "wikidata": "Q12861754"
+    },
+    {
+      "id": "juozas-vilkutaitis",
+      "room": 4,
+      "kind": "person",
+      "name": "Juozas Vilkutaitis",
+      "aliases": [],
+      "years": [
+        1869,
+        1948
+      ],
+      "at": 1895,
+      "text": "Juozas Vilkutaitis su broliu Antanu, pasirašę Keturakio slapyvardžiu, parašė pirmąją lietuvišką komediją „Amerika pirtyje“.",
+      "links": [
+        {
+          "to": "keturakis",
+          "label": "slapyvardis"
+        },
+        {
+          "to": "antanas-vilkutaitis",
+          "label": "brolis"
+        }
+      ],
+      "wikidata": "Q12658702"
+    },
+    {
+      "id": "robertas-keturakis",
+      "room": 4,
+      "kind": "person",
+      "name": "Robertas Keturakis",
+      "aliases": [],
+      "years": [
+        1935,
+        2021
+      ],
+      "at": 1904,
+      "aside": true,
+      "text": "Robertas Keturakis „Amerikos pirtyje“ neparašė: ją parašė Keturakis, t. y. broliai Vilkutaičiai.",
+      "links": [
+        {
+          "to": "keturakis",
+          "label": "ne tas Keturakis"
+        }
+      ],
+      "wikidata": "Q12671519"
+    },
+    {
+      "id": "pietaris",
+      "room": 4,
+      "kind": "person",
+      "name": "Vincas Pietaris",
+      "aliases": [],
+      "years": [
+        1850,
+        1902
+      ],
+      "at": 1904,
+      "text": "Vincas Pietaris (1850–1902) – gydytojas, pirmojo lietuviško istorinio romano „Algimantas“ autorius (išleistas 1904–1906 m.). Jis siūlė lietuviams kurtis Argentinoje.",
+      "links": [
+        {
+          "to": "algimantas",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q4360145"
+    },
+    {
+      "id": "algimantas",
+      "room": 4,
+      "kind": "work",
+      "name": "„Algimantas“",
+      "aliases": [],
+      "years": [
+        1904,
+        1906
+      ],
+      "at": 1904,
+      "text": "Vinco Pietario „Algimantas“ (išleistas 1904–1906 m.) – pirmasis lietuviškas istorinis romanas.",
+      "links": [
+        {
+          "to": "pietaris",
+          "label": "autorius"
+        }
+      ],
+      "by": "pietaris"
+    },
+    {
+      "id": "vaizgantas",
+      "room": 4,
+      "kind": "person",
+      "name": "Juozas Tumas-Vaižgantas",
+      "aliases": [
+        "Vaižgantas",
+        "Juozas Tumas"
+      ],
+      "years": [
+        1869,
+        1933
+      ],
+      "at": 1904,
+      "aside": true,
+      "text": "Juozas Tumas-Vaižgantas (1869 m. Maleišiuose, Svėdasų apylinkėse, dabar Anykščių r. – 1933 m. Kaune) – kunigas, rašytojas, visuomenės veikėjas, Žemaitijoje negimęs. Slapyvardį pasirinko pagal senovės lietuvių linų (ir kanapių) dievą; pasirašinėjo ir tikruoju vardu. Kūriniai: „Pragiedruliai“ (1918–1920) – jo žinomiausias romanas; „Dėdės ir dėdienės“ – apysaka, ne romanas; „Rimai ir nerimai“, „Žemaičių Robinzonas“ (1932). Vaižgantas buvo vienas „Tėvynės sargo“ steigėjų. Redagavo „Tautą“, „Lietuvos aidą“, bet ne „Kuntaplį“. Buvo pirmasis Lietuvos rašytojų ir žurnalistų sąjungos pirmininkas (1922) ir „Rašliavos“ muziejaus iniciatorius. Jis sugalvojo mineralinių vandenų „Vytautas“ ir „Birutė“ pavadinimus. Jo taksas vadinosi Kaukas; Vaižgantas parašė jam nekrologą. Vaikščiojo po Kauną basas, ant durų kabino raštelį „Pinigų neskolinu, patsai skolinuosi“. Mirė vėliau už Maironį. Memorialinis muziejus yra Kaune.",
+      "links": [
+        {
+          "to": "pragiedruliai",
+          "label": "parašė"
+        },
+        {
+          "to": "dedes-ir-dedienes",
+          "label": "parašė"
+        },
+        {
+          "to": "zemaiciu-robinzonas",
+          "label": "parašė"
+        },
+        {
+          "to": "zemaite",
+          "label": "abu vaizdavo kaimą"
+        }
+      ],
+      "wikidata": "Q1958817"
+    },
+    {
+      "id": "pragiedruliai",
+      "room": 4,
+      "kind": "work",
+      "name": "„Pragiedruliai“",
+      "aliases": [],
+      "years": [
+        1918,
+        1920
+      ],
+      "at": 1904,
+      "aside": true,
+      "text": "„Pragiedruliai“ (1918–1920) – žinomiausias Vaižganto romanas; veiksmas vyksta ne Abiejų Tautų Respublikoje.",
+      "links": [
+        {
+          "to": "vaizgantas",
+          "label": "autorius"
+        }
+      ],
+      "by": "vaizgantas"
+    },
+    {
+      "id": "dedes-ir-dedienes",
+      "room": 4,
+      "kind": "work",
+      "name": "„Dėdės ir dėdienės“",
+      "aliases": [],
+      "years": null,
+      "at": 1904,
+      "aside": true,
+      "text": "Vaižganto „Dėdės ir dėdienės“ – apysaka, ne romanas; veikėjai Mykoliukas, Severiutė, Rapolas Geišė. Joje vaizduojami kaimo žmonių charakteriai. Ji ne Krėvės.",
+      "links": [
+        {
+          "to": "vaizgantas",
+          "label": "autorius"
+        }
+      ],
+      "by": "vaizgantas"
+    },
+    {
+      "id": "zemaiciu-robinzonas",
+      "room": 4,
+      "kind": "work",
+      "name": "„Žemaičių Robinzonas“",
+      "aliases": [],
+      "years": [
+        1932
+      ],
+      "at": 1904,
+      "aside": true,
+      "text": "Vaižganto „Žemaičių Robinzonas“ išleistas 1932 m.",
+      "links": [
+        {
+          "to": "vaizgantas",
+          "label": "autorius"
+        }
+      ],
+      "by": "vaizgantas"
     }
   ],
   "questions": [],

@@ -93,7 +93,6 @@ for (const g of topo.objects.countries.geometries) {
       let far = 0, fd = 0;
       px.forEach((p, i) => { const q = Math.hypot(p[0] - px[0][0], p[1] - px[0][1]); if (q > fd) [fd, far] = [q, i]; });
       const s = [...simplify(px.slice(0, far + 1)).slice(0, -1), ...simplify([...px.slice(far), px[0]]).slice(0, -1)];
-      // Round, drop consecutive duplicates, emit relative deltas.
       let cx = NaN, cy = NaN, start = "";
       const deltas: number[] = [];
       for (const [x0, y0] of s) {

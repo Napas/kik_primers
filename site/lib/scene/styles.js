@@ -24,7 +24,6 @@ const MARKER_LABEL = { y: MARKER_H + 0.3, out: 0.15 }; // the year above its pos
 const ARC = { r: 0.035, lift: 0.8, perMetre: 0.25, maxLift: 6, segments: 40, opacity: 0.9 };
 const LIFESPAN = { h: 0.08, d: 0.06 }; // as deep as a year marker post
 
-// ---------- shared part helpers ----------
 
 /** Deterministic pseudo-random numbers in [0, 1), so textures look the same on every load. */
 function rng(seed) {
@@ -267,7 +266,6 @@ function lantern(THREE, color) {
   return group(box(0.13, 0.2, 0.13, glow(color)), box(0.17, 0.03, 0.17, iron, 0, -0.11, 0), cap);
 }
 
-// ---------- landmarks: built around x=0, z=0, floor at y=0, front facing +z ----------
 
 const LANDMARKS = {
   printingPress(THREE) {
@@ -426,7 +424,6 @@ const LANDMARKS = {
   },
 };
 
-// ---------- the nine styles ----------
 
 /**
  * Glowing windows on the back wall: each from `pts` (built from y=0), at height y; `bars` are [w, h, dx, dy]
@@ -702,7 +699,6 @@ export function plainRoom(THREE, r, C) {
   return shell(THREE, frame(r), { wall: surface(THREE, null, { color: C.path }), floor: surface(THREE, null, { color: C.floor, roughness: 1 }) });
 }
 
-// ---------- path lamps: one model per light band kind ----------
 
 /** A lamp on a post beside the path, its light in the band's colour; userData.headY is the light's height. */
 export function pathLamp(THREE, band, C) {

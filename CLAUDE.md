@@ -37,7 +37,7 @@ site/index.html, world.html, test.html, about.html
 site/topics/index.json                  built by tools/build-index.ts
 site/topics/<slug>/topic.json, img/     one content pack per topic
 site/lib/                               our ES modules: layout, render, quiz, progress, storage, theme, text, motifs, basemap, site.css
-site/lib/scene/                         Three.js world: world, styles, spots, light, controls, labels, arcs, nearby
+site/lib/scene/                         Three.js world: world, lanes, styles, spots, light, controls, labels, arcs, nearby
 site/lib/pages/                         page wiring: index, overview, selection, world, test, about, common
 site/lib/three/                         vendored pinned Three.js + licence
 coverage/<slug>.json                    private skip entries for masked primer spans (not deployed)

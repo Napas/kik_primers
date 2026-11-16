@@ -17,7 +17,6 @@ const DZ = steps(2, 6, 0.25);
 const OFFSETS = DZ.flatMap((dz) => DX.map((dx) => ({ dx, dz })))
   .sort((a, b) => Math.hypot(a.dx, a.dz - STAND.front) - Math.hypot(b.dx, b.dz - STAND.front));
 
-// Floor distance from p to the segment a-b.
 function toSegment(p, a, b) {
   const [vx, vz] = [b.x - a.x, b.z - a.z];
   const len2 = vx * vx + vz * vz;

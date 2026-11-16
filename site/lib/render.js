@@ -1,6 +1,6 @@
 // Pure HTML-string renderers for the spot panel, room panel and text view.
 // Every pack string goes through esc(). Clicks are wired by the page code via data-* attributes.
-import { esc } from "./text.js";
+import { esc, isHttp } from "./text.js";
 import { motifSvg } from "./motifs.js";
 import { BASEMAP, project } from "./basemap.js";
 
@@ -11,7 +11,6 @@ export const imgUrl = (pack, file) => {
   if (!parts.length || parts.some((p) => !p || p === "." || p === ".." || p.includes(":") || p.includes("\\"))) return "";
   return `topics/${encodeURIComponent(pack.slug)}/${parts.map(encodeURIComponent).join("/")}`;
 };
-const isHttp = (u) => /^https?:\/\//i.test(u ?? "");
 const safeUrl = (u) => (isHttp(u) ? u : "#");
 const pct = (f) => `${+(f * 100).toFixed(2)}%`;
 const extLink = (url, text) => `<a href="${esc(url)}" rel="noopener" target="_blank">${text}</a>`;

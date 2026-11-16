@@ -1,9 +1,7 @@
 // One model per spot kind. Origin at floor level, front faces +z. Sizes in metres.
 // Pick spheres (pickY, pickRadius) stay under half the layout's 1.4 m row gap, so neighbours' spheres never overlap.
 import { textTexture } from "./labels.js";
-import { SCENE, spotlightLevel } from "../theme.js";
-
-const css = (n) => `#${n.toString(16).padStart(6, "0")}`;
+import { cssColor, SCENE, spotlightLevel } from "../theme.js";
 
 /** First letters of the first and last word, upper case; "?" for an empty name. */
 export function initials(name) {
@@ -58,7 +56,7 @@ const MODELS = {
     const g = new THREE.Group();
     g.add(mesh(new THREE.BoxGeometry(0.6, 1, 0.6), stone, 0, 0.5, 0));
     g.add(mesh(new THREE.BoxGeometry(0.8, 1, 0.06), gold, 0, 1.6, 0));
-    const portrait = textPlane(initials(spot.name), PORTRAIT.w, PORTRAIT.h, { px: 150, w: 256, h: 334, fg: css(C.gold) });
+    const portrait = textPlane(initials(spot.name), PORTRAIT.w, PORTRAIT.h, { px: 150, w: 256, h: 334, fg: cssColor(C.gold) });
     portrait.position.set(0, 1.6, 0.031);
     g.add(portrait);
     g.userData.portrait = portrait;
@@ -91,7 +89,7 @@ const MODELS = {
     g.add(rock);
     const year = spot.at ?? spot.years?.[0];
     if (year !== undefined) {
-      const plate = textPlane(String(year), 0.5, 0.22, { px: 80, w: 256, h: 112, fg: css(C.gold) });
+      const plate = textPlane(String(year), 0.5, 0.22, { px: 80, w: 256, h: 112, fg: cssColor(C.gold) });
       plate.position.set(0, 0.6, 0.38);
       g.add(plate);
     }

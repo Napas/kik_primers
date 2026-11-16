@@ -8,6 +8,7 @@
 // because a parallel lane's path runs right behind it. A room with a parallel lane's room behind it gets a
 // low back wall (layout room `low: true`): a lintel between the end walls carries the signature, the
 // opening stays clear so the far lane shows through, and only the floor pools of the window light stay.
+import { cssColor } from "../theme.js";
 import { makeLabel } from "./labels.js";
 import { MARGIN, WALL_T } from "./lanes.js";
 
@@ -30,8 +31,6 @@ function rng(seed) {
   let s = seed >>> 0;
   return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);
 }
-
-const css = (n) => `#${n.toString(16).padStart(6, "0")}`;
 
 /** Repeating canvas texture of `w`×`h` px drawn by draw(ctx, w, h); `tile` is its size in metres. */
 function canvasTex(THREE, w, h, draw, tile = 1) {
@@ -59,12 +58,12 @@ const TEX = {
   blocks(THREE, { mortar, faces, rows = 4, cols = 3, seed = 1, tile = 1 }) {
     return canvasTex(THREE, 128, 128, (g, w, h) => {
       const r = rng(seed);
-      g.fillStyle = css(mortar);
+      g.fillStyle = cssColor(mortar);
       g.fillRect(0, 0, w, h);
       const bh = h / rows, bw = w / cols;
       for (let y = 0; y < rows; y++) {
         for (let x = -1; x <= cols; x++) {
-          g.fillStyle = css(faces[Math.floor(r() * faces.length)]);
+          g.fillStyle = cssColor(faces[Math.floor(r() * faces.length)]);
           g.fillRect(x * bw + (y % 2) * bw / 2 + 2, y * bh + 2, bw - 4, bh - 4);
         }
       }
@@ -76,7 +75,7 @@ const TEX = {
       const r = rng(seed);
       const step = (vertical ? w : h) / n;
       for (let i = 0; i < n; i++) {
-        const c = css(faces[Math.floor(r() * faces.length)]);
+        const c = cssColor(faces[Math.floor(r() * faces.length)]);
         const [x, y, bw, bh] = vertical ? [i * step, 0, step - 2, h] : [0, i * step, w, step - 2];
         if (round) {
           const grad = vertical ? g.createLinearGradient(x, 0, x + bw, 0) : g.createLinearGradient(0, y, 0, y + bh);
@@ -95,10 +94,10 @@ const TEX = {
   wash(THREE, { base, spots, n = 30, seams = 0, seed = 3, tile = 1 }) {
     return canvasTex(THREE, 128, 128, (g, w, h) => {
       const r = rng(seed);
-      g.fillStyle = css(base);
+      g.fillStyle = cssColor(base);
       g.fillRect(0, 0, w, h);
       for (let i = 0; i < n; i++) {
-        g.fillStyle = css(spots[i % spots.length]);
+        g.fillStyle = cssColor(spots[i % spots.length]);
         g.globalAlpha = 0.15 + r() * 0.2;
         g.beginPath();
         g.arc(r() * w, r() * h, 4 + r() * 14, 0, Math.PI * 2);

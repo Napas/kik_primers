@@ -8,6 +8,9 @@ export const COLORS = {
   panel: "#0b1220",
 };
 
+/** A colour number (0xRRGGBB) as a CSS hex string, for canvas drawing. */
+export const cssColor = (n) => `#${n.toString(16).padStart(6, "0")}`;
+
 export const STYLE_NAMES = [
   "print-shop",
   "brick-church",

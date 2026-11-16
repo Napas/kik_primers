@@ -21,3 +21,6 @@ export function esc(s) {
 export function isSlug(s) {
   return /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s);
 }
+
+/** True for an http(s) URL; false for other schemes and missing values. */
+export const isHttp = (u) => /^https?:\/\//i.test(u ?? "");

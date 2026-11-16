@@ -1,5 +1,5 @@
 // About page: photo credits from every pack and the Three.js licence.
-import { esc } from "../text.js";
+import { esc, isHttp } from "../text.js";
 import { licenseHtml } from "../render.js";
 import { loadIndex, loadPack, markReady, run } from "./common.js";
 
@@ -9,8 +9,6 @@ const AI_NOTE = "Turinys parengtas padedant dirbtiniam intelektui; jame gali bū
 function creditsOf(pack) {
   return pack.spots.filter((s) => s.photo).map((s) => ({ name: s.name, ...s.photo }));
 }
-
-const isHttp = (u) => /^https?:\/\//i.test(u);
 
 function creditItem(c) {
   const src = isHttp(c.source_url) ? `<a href="${esc(c.source_url)}" rel="noopener">šaltinis</a>` : "";

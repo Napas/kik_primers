@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "@std/assert";
-import { COLORS, LIGHT_BANDS, lightFor, SCENE, spotlightLevel, STYLE_NAMES } from "../site/lib/theme.js";
+import { COLORS, cssColor, LIGHT_BANDS, lightFor, SCENE, spotlightLevel, STYLE_NAMES } from "../site/lib/theme.js";
 import { MOTIFS, motifSvg } from "../site/lib/motifs.js";
 import { BASEMAP, project } from "../site/lib/basemap.js";
 import { STYLE_KEYS } from "../site/lib/scene/styles.js";
@@ -17,6 +17,11 @@ Deno.test("theme data is complete", () => {
   assertEquals(STYLE_NAMES.length, 9);
   assertEquals(LIGHT_BANDS.length, 5);
   assert(SCENE.eye > 1 && SCENE.fog.near < SCENE.fog.far);
+});
+
+Deno.test("cssColor writes a colour number as a 6-digit CSS hex", () => {
+  assertEquals(cssColor(0xd9b25f), "#d9b25f");
+  assertEquals(cssColor(0x0000ff), "#0000ff");
 });
 
 Deno.test("styles.js builds exactly the theme's style names", () => {

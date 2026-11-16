@@ -3,7 +3,8 @@
 // glows and casts a pool on the floor; only MAX_REAL_LIGHTS of them, spread along the lanes, are real
 // lights, since each real light adds shader cost to every lit pixel. No path light casts shadows.
 import { COLORS, lightFor, SCENE } from "../theme.js";
-import { lightPool, pathLamp, pathLanes, poolTexture } from "./styles.js";
+import { lightPool, pathLamp, poolTexture } from "./styles.js";
+import { pathLanes } from "./lanes.js";
 
 const LAMP_STEP = 6; // metres between lamps, about
 const LAMP_INSET = 1.05; // lamps stand this far from the path centre, towards the rooms

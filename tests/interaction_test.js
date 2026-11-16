@@ -5,7 +5,7 @@ import { buildWorld } from "../site/lib/scene/world.js";
 import { drawLifespan, drawLinks, lifespanRange, removeDrawn } from "../site/lib/scene/arcs.js";
 import { clearance, LABEL_NEAR, LABEL_RANGE, labelFit, labelScale, PHOTO_RANGE, sizeLabels, STAND, standPoint, updateNearby } from "../site/lib/scene/nearby.js";
 import { LABEL, SCENE } from "../site/lib/theme.js";
-import { yearLineZ } from "../site/lib/scene/styles.js";
+import { yearLineZ } from "../site/lib/scene/lanes.js";
 import { markerLeft, overviewHtml, roomAt, roomCounts } from "../site/lib/pages/overview.js";
 import { makeSelection, roomVisit } from "../site/lib/pages/selection.js";
 import { makeStore } from "../site/lib/storage.js";

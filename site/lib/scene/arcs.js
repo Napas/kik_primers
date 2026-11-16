@@ -1,7 +1,8 @@
 // What a selected spot draws in the world: gold arcs to the spots it links to, and a person's lifespan
 // on the year markers of their lane. The shapes come from styles.js; this module places them and removes them again.
 import { COLORS } from "../theme.js";
-import { lifespanBar, linkArc, yearLineZ } from "./styles.js";
+import { lifespanBar, linkArc } from "./styles.js";
+import { yearLineZ } from "./lanes.js";
 
 const MIN_BAR = 0.3; // metres; a lifespan of one known year still shows
 

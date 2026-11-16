@@ -5,7 +5,8 @@ import { layoutTime } from "../site/lib/layout.js";
 import { initials, makeSpot, setPhoto } from "../site/lib/scene/spots.js";
 import { makeLabel } from "../site/lib/scene/labels.js";
 import { buildWorld } from "../site/lib/scene/world.js";
-import { ground, lifespanBar, lowBackWalls, path, plainRoom, STYLES, yearLineZ, yearMarker, yearMarks } from "../site/lib/scene/styles.js";
+import { ground, lifespanBar, path, plainRoom, STYLES, yearMarker } from "../site/lib/scene/styles.js";
+import { lowBackWalls, pathLanes, pathZ, yearLineZ, yearMarks } from "../site/lib/scene/lanes.js";
 import { STYLE_NAMES } from "../site/lib/theme.js";
 import { installFakeCanvas } from "./fake_canvas.js";
 
@@ -290,6 +291,21 @@ Deno.test("buildWorld dims each spot's cone by the light band at its place", () 
   } finally {
     restore();
   }
+});
+
+Deno.test("lanes.js is pure placement: it imports nothing", () => {
+  const src = Deno.readTextFileSync(`${root}site/lib/scene/lanes.js`);
+  assert(!/^\s*import\b/m.test(src));
+});
+
+Deno.test("pathLanes: one entry per lane with its rooms' x extent and its path's z", () => {
+  const r = (n, lane, x0, x1, z1) => ({ n, lane, x0, x1, z0: z1 - 4, z1 });
+  const rooms = [r(1, 1, 5, 15, -5), r(2, 0, 0, 10, 2), r(3, 0, 10, 20, 2)];
+  assertEquals(pathLanes({ rooms }), [
+    { lane: 0, x0: 0, x1: 20, z: pathZ(rooms[1]) },
+    { lane: 1, x0: 5, x1: 15, z: pathZ(rooms[0]) },
+  ]);
+  assertEquals(pathZ(rooms[1]), 2 + 1.4);
 });
 
 Deno.test("lowBackWalls: a back wall is low where the next lane has a room behind it, overlapping in x", () => {

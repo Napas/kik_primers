@@ -1,7 +1,7 @@
 // Overview of the path: a strip of rooms with a "you are here" marker, and a list of rooms to jump to,
 // each with how many of its spots were opened. Pure helpers first, DOM wiring last.
 import { esc } from "../text.js";
-import { pathZ } from "../scene/styles.js";
+import { pathZ } from "../scene/lanes.js";
 
 const pct = (f) => `${+(Math.min(1, Math.max(0, f)) * 100).toFixed(2)}%`;
 const countText = (c) => `atidaryta ${c?.opened ?? 0}/${c?.total ?? 0}`;

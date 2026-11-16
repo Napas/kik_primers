@@ -1,13 +1,13 @@
 // Builds the 3D world from a pack and its time layout: rooms along x, a path in front of each lane,
-// year markers along each lane's back walls, one model and label per spot. Only placement lives here;
-// the look comes from styles.js and spots.js, the light along the path from light.js. Builders take THREE as an argument.
+// year markers along each lane's back walls, one model and label per spot. Only placement lives here and
+// in lanes.js; the look comes from styles.js and spots.js, the light along the path from light.js.
+// Builders take THREE as an argument.
 import { COLORS, lightFor, SCENE } from "../theme.js";
 import { makeSpot, setPhoto } from "./spots.js";
 import { makeLabel } from "./labels.js";
-import { ground, lowBackWalls, path, pathLanes, pathZ, plainRoom, STYLES, yearMarker, yearMarks } from "./styles.js";
+import { ground, path, plainRoom, STYLES, yearMarker } from "./styles.js";
+import { lowBackWalls, pathLanes, pathZ, yearMarks } from "./lanes.js";
 import { addPathLights, yearAt } from "./light.js";
-
-export { pathZ };
 
 const TITLE_FRONT = 0.6; // room title in front of a room's z1
 const ROOM_TITLE_Y = 2.9;

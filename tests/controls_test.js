@@ -1,9 +1,11 @@
 import { assert, assertAlmostEquals, assertEquals } from "@std/assert";
+import * as THREE from "../site/lib/three/three.module.min.js";
 import {
   clampPitch,
   clampToBounds,
   ease,
   floorHit,
+  makeControls,
   MAX_FLOOR,
   MAX_MOVE,
   MAX_PITCH,
@@ -92,6 +94,48 @@ Deno.test("a far floor tap is clamped to MAX_FLOOR metres, then into the bounds"
   assertEquals(clampToBounds({ x: -9, z: 7 }, bounds), { x: -5, z: 3 });
   assertEquals(clampToBounds({ x: 1, z: 2 }, bounds), { x: 1, z: 2 });
   assertEquals(clampToBounds({ x: 1, z: 2 }, undefined), { x: 1, z: 2 });
+});
+
+// A camera at the origin looking down -z, a dom stand-in 100×100 px, one spot straight ahead.
+function rig(opts = {}) {
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  camera.position.set(0, 1.7, 0);
+  const dom = new EventTarget();
+  dom.getBoundingClientRect = () => ({ left: 0, top: 0, width: 100, height: 100 });
+  const spot = new THREE.Object3D();
+  spot.position.set(0, 0, -5);
+  spot.userData = { pickY: 1.7, pickRadius: 0.5 };
+  const controls = makeControls(camera, dom, { targets: new Map([["s", spot]]), ...opts });
+  const pointer = (type, x, y) => dom.dispatchEvent(Object.assign(new Event(type), { pointerId: 1, clientX: x, clientY: y }));
+  return { camera, controls, pointer };
+}
+
+Deno.test("hovering reports the spot under the pointer, then null when it leaves", () => {
+  const hovers = [];
+  const { controls, pointer } = rig({ onHover: (id) => hovers.push(id) });
+  try {
+    pointer("pointermove", 50, 50);
+    pointer("pointermove", 51, 50); // same spot: no repeat
+    pointer("pointermove", 50, 95);
+    pointer("pointermove", 50, 50);
+    pointer("pointerleave", 50, 50);
+    assertEquals(hovers, ["s", null, "s", null]);
+  } finally {
+    controls.dispose();
+  }
+});
+
+Deno.test("moving() is true while an eased walk runs", () => {
+  const { controls } = rig();
+  try {
+    assertEquals(controls.moving(), false);
+    controls.walkTo({ x: 0, z: -3 });
+    assertEquals(controls.moving(), true);
+    controls.update(MAX_MOVE + 0.1);
+    assertEquals(controls.moving(), false);
+  } finally {
+    controls.dispose();
+  }
 });
 
 Deno.test("a wall in front blocks spots and floor behind it", () => {

@@ -138,6 +138,28 @@ Deno.test({
         assertEquals(a["data-error"], undefined);
         assertEquals(a["data-ready"], "index");
       });
+      await t.step("a spot id in the hash opens that spot", async () => {
+        const a = await page("world.html?topic=mini-test#jonas-rastas");
+        assertEquals(a["data-error"], undefined);
+        assertEquals([a["data-ready"], a["data-open"]], ["world", "jonas-rastas"]);
+      });
+      await t.step("an unknown spot id in the hash stays at the start", async () => {
+        const a = await page("world.html?topic=mini-test#no-such");
+        assertEquals(a["data-error"], undefined);
+        assertEquals([a["data-ready"], a["data-open"]], ["world", undefined]);
+      });
+      await t.step("world works when storage throws on every call", async () => {
+        const a = await page("world.html?topic=mini-test&nostore=1#jonas-rastas");
+        assertEquals(a["data-error"], undefined);
+        assertEquals([a["data-ready"], a["data-open"]], ["world", "jonas-rastas"]);
+      });
+      for (const [p, ready] of [["test.html?topic=mini-test&nostore=1", "test"], ["index.html?nostore=1", "index"]]) {
+        await t.step(`${ready} page works when storage throws on every call`, async () => {
+          const a = await page(p);
+          assertEquals(a["data-error"], undefined);
+          assertEquals(a["data-ready"], ready);
+        });
+      }
       await t.step("a failure while building the world leaves the error visible", async () => {
         const dom = await dumpDom(`${base}world.html?topic=broken`);
         assert(htmlAttrs(dom)["data-error"], "no data-error");
@@ -152,6 +174,113 @@ Deno.test({
           assertEquals(a["data-ready"], undefined);
         });
       }
+    });
+  },
+});
+
+/** Opens `url` in headless Chrome with reduced motion and runs fn({ev, sleep, errors}) over the DevTools protocol. */
+async function withPage(url, fn) {
+  const profile = await Deno.makeTempDir();
+  const chrome = new Deno.Command(CHROME, {
+    args: [
+      "--headless=new",
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--force-prefers-reduced-motion",
+      "--remote-debugging-port=0",
+      "--window-size=1280,800",
+      `--user-data-dir=${profile}`,
+      "--no-first-run",
+      "--no-default-browser-check",
+      "about:blank",
+    ],
+    stdout: "null",
+    stderr: "null",
+  }).spawn();
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  let ws;
+  try {
+    let port;
+    for (let i = 0; i < 100 && !port; i++) {
+      port = await Deno.readTextFile(`${profile}/DevToolsActivePort`).then((t) => t.split("\n")[0]).catch(() => null);
+      if (!port) await sleep(100);
+    }
+    const targets = await (await fetch(`http://127.0.0.1:${port}/json`)).json();
+    ws = new WebSocket(targets.find((t) => t.type === "page").webSocketDebuggerUrl);
+    await new Promise((r, j) => ((ws.onopen = r), (ws.onerror = j)));
+    let seq = 0;
+    const pending = new Map();
+    const errors = [];
+    ws.onmessage = (m) => {
+      const d = JSON.parse(m.data);
+      pending.get(d.id)?.(d);
+      if (d.method === "Runtime.exceptionThrown") errors.push(d.params.exceptionDetails.exception?.description);
+    };
+    const send = (method, params = {}) =>
+      new Promise((r) => {
+        pending.set(++seq, r);
+        ws.send(JSON.stringify({ id: seq, method, params }));
+      });
+    const ev = async (expression) =>
+      (await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true })).result?.result?.value;
+    await send("Runtime.enable");
+    await send("Page.navigate", { url });
+    for (let i = 0; i < 100 && (await ev("document.documentElement.dataset.ready")) === undefined; i++) await sleep(100);
+    await fn({ ev, sleep, errors });
+  } finally {
+    ws?.close();
+    chrome.kill();
+    await chrome.status;
+    await Deno.remove(profile, { recursive: true }).catch(() => {});
+  }
+}
+
+Deno.test({
+  name: "world panel: room list, Esc, reveal, panel links and close in headless Chrome",
+  ignore,
+  sanitizeResources: false,
+  sanitizeOps: false,
+  fn: async () => {
+    await withSite([MINI], async (base) => {
+      await withPage(`${base}world.html?topic=mini-test&nostore=1`, async ({ ev, sleep, errors }) => {
+        const state = async () =>
+          JSON.parse(
+            await ev(`JSON.stringify({
+              open: document.documentElement.dataset.open ?? null,
+              shown: panel.classList.contains("is-open"),
+              inert: panel.inert,
+              room: document.querySelector("#panel-body article[data-room]")?.dataset.room ?? null,
+              spot: document.querySelector("#panel-body article[data-spot]")?.dataset.spot ?? null,
+              answer: document.querySelector("#panel .answer")?.textContent ?? null,
+              hash: location.hash,
+            })`),
+          );
+        const act = async (js) => {
+          await ev(js);
+          await sleep(400); // a few frames
+          return state();
+        };
+        assertEquals(await ev("document.documentElement.dataset.ready"), "world");
+        let s = await act(`document.querySelector('#overview button[data-room="2"]').click()`);
+        assertEquals([s.shown, s.room], [true, "2"], "the room list opens a room");
+        s = await act(`dispatchEvent(new KeyboardEvent("keydown", {key: "Escape"}))`);
+        assertEquals([s.shown, s.inert], [false, true], "Esc closes");
+        await sleep(400);
+        assertEquals((await state()).shown, false, "standing in the room does not reopen it");
+        await act(`document.querySelector('#overview button[data-room="1"]').click()`);
+        s = await act(`document.querySelector('#panel [data-reveal="1:0"]').click()`);
+        assertEquals(s.answer, "Nes tai pradžia.", "reveal shows the answer");
+        s = await act(`document.querySelector('#panel button[data-spot="jonas-rastas"]').click()`);
+        assertEquals([s.open, s.spot], ["jonas-rastas", "jonas-rastas"], "a room's spot button opens the spot");
+        await ev(`document.querySelector('#panel article').dataset.mark = "kept"`);
+        await act(`document.querySelector('#panel article p').click()`);
+        assertEquals(await ev(`document.querySelector('#panel article').dataset.mark`), "kept", "a click on panel text is not a spot link");
+        s = await act(`document.querySelector('#panel a[data-spot="pirma-knyga"]').click()`);
+        assertEquals([s.open, s.hash], ["pirma-knyga", ""], "a panel link opens its spot without following the href");
+        s = await act(`document.querySelector('#panel [data-close]').click()`);
+        assertEquals([s.open, s.shown, s.inert], [null, false, true], "the close button closes");
+        assertEquals(errors, []);
+      });
     });
   },
 });

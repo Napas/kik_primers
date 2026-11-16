@@ -1,5 +1,6 @@
-import { assertEquals } from "@std/assert";
-import { lastScore, topicFromUrl } from "../site/lib/pages/common.js";
+import { assertEquals, assertThrows } from "@std/assert";
+import { hashId, lastScore, storageBackend, topicFromUrl } from "../site/lib/pages/common.js";
+import { makeStore } from "../site/lib/storage.js";
 import { move, orderRight, shift, summarize } from "../site/lib/pages/test.js";
 
 const root = new URL("../", import.meta.url).pathname;
@@ -18,6 +19,24 @@ Deno.test("topicFromUrl rejects traversal, unknown, missing and unlisted input",
   }
   assertEquals(typeof topicFromUrl(url("?topic=mini-test"), null).error, "string");
   assertEquals(typeof topicFromUrl(url("?topic=mini-test"), {}).error, "string");
+});
+
+Deno.test("storageBackend: the default storage, or with ?nostore=1 one that throws on every call", () => {
+  assertEquals(storageBackend(url("?topic=mini-test")), undefined, "undefined lets makeStore pick localStorage");
+  const be = storageBackend(url("?topic=mini-test&nostore=1"));
+  assertThrows(() => be.getItem("pw:x"));
+  assertThrows(() => be.setItem("pw:x", "1"));
+  assertThrows(() => be.removeItem("pw:x"));
+  const store = makeStore(be);
+  store.set("k", [1]);
+  assertEquals(store.get("k", []), [1], "the store keeps working in memory");
+});
+
+Deno.test("hashId decodes the hash without its #; bad escapes give an empty id", () => {
+  assertEquals(hashId("#jonas-rastas"), "jonas-rastas");
+  assertEquals(hashId("#%C5%BE"), "ž");
+  assertEquals(hashId(""), "");
+  assertEquals(hashId("#%E0%A4%A"), "");
 });
 
 Deno.test("lastScore formats the newest session or returns null", () => {

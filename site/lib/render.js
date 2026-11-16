@@ -67,11 +67,15 @@ export function lifeStrip(spot, pack) {
   if (spot.motif) html += `<span class="motif">${motifSvg(spot.motif, 40)}</span>`;
   if (life.length) {
     const first = life[0].year, span = life[life.length - 1].year - first;
-    const events = life.map((e) => {
+    // Dots stand on the track by year; the text goes in a list below, so close events never collide.
+    const dots = life.map((e) => {
       const f = span ? (e.year - first) / span : 0.5;
-      return `<li class="event" style="left:${pct(f)}"><b>${esc(e.year)}</b><span class="lbl">${esc(e.label)}</span>${e.place ? ` <i>${esc(e.place)}</i>` : ""}</li>`;
+      return `<li class="event" style="left:${pct(f)}" title="${esc(e.year)}: ${esc(e.label)}"></li>`;
     }).join("");
-    html += `<h3>Gyvenimas</h3><ol class="track">${events}</ol>`;
+    const events = life.map((e) =>
+      `<li><b>${esc(e.year)}</b> <span class="lbl">${esc(e.label)}</span>${e.place ? ` <i>${esc(e.place)}</i>` : ""}</li>`
+    ).join("");
+    html += `<h3>Gyvenimas</h3><ol class="track" aria-hidden="true">${dots}</ol><ol class="events">${events}</ol>`;
   }
   if (places.length) {
     const pts = places.map((p) => ({ ...p, ...project(p.lat, p.lon) }));

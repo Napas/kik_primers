@@ -115,6 +115,15 @@ Deno.test("life event label has its own element", () => {
   assertMatch(h, /<span class="lbl">Gimė<\/span>/);
   assertMatch(h, /<span class="lbl">Mirė<\/span>/);
 });
+Deno.test("life strip: dots on the track by year, the events' text in a list below it", () => {
+  const life = [{ year: 1700, label: "Gimė", place: "Vilnius" }, { year: 1798, label: "Išvyko" }, { year: 1800, label: "<b>Mirė</b>" }];
+  const h = lifeStrip(person({ life }), pack());
+  assertMatch(h, /<ol class="track" aria-hidden="true">/);
+  const dots = [...h.matchAll(/<li class="event" style="left:([^"]+)" title="([^"]*)"><\/li>/g)].map((m) => [m[1], m[2]]);
+  assertEquals(dots, [["0%", "1700: Gimė"], ["98%", "1798: Išvyko"], ["100%", "1800: &lt;b&gt;Mirė&lt;/b&gt;"]]);
+  assertMatch(h, /<ol class="events"><li><b>1700<\/b> <span class="lbl">Gimė<\/span> <i>Vilnius<\/i><\/li><li><b>1798<\/b> <span class="lbl">Išvyko<\/span><\/li>/);
+  assert(!h.includes("<b>Mirė</b>"), "labels are escaped");
+});
 Deno.test("life strip carries the room's style class", () => {
   const h = lifeStrip(person({ room: 2, life: [{ year: 1, label: "A" }] }), pack());
   assertMatch(h, /class="life style-print-shop"/);

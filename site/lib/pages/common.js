@@ -19,6 +19,26 @@ export function lastScore(sessions) {
   return s ? `${s.right}/${s.total}` : null;
 }
 
+const BLOCKED = new Proxy({}, {
+  get() {
+    throw new Error("storage blocked");
+  },
+});
+
+/** Backend for makeStore: undefined (localStorage), or with ?nostore=1 one that throws on every call. */
+export function storageBackend(url) {
+  return url.searchParams.get("nostore") === "1" ? BLOCKED : undefined;
+}
+
+/** The id named by a location hash, decoded; "" when absent or badly escaped. */
+export function hashId(hash) {
+  try {
+    return decodeURIComponent(hash.replace(/^#/, ""));
+  } catch {
+    return "";
+  }
+}
+
 async function fetchJson(path) {
   const res = await fetch(path);
   if (!res.ok) throw new Error(`${path}: ${res.status}`);

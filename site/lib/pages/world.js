@@ -1,11 +1,18 @@
 // World page: the 3D world for ?topic=, or the text view with ?view=text or without WebGL.
-import { imgUrl, textView } from "../render.js";
+// In the world, picking a spot (or #<spot-id> on load) walks to it and opens its panel with link arcs and,
+// for a person, the lifespan; entering a room opens the room's panel once per visit.
+import { imgUrl, plotExplainer, textView } from "../render.js";
 import { layoutTime } from "../layout.js";
-import { buildWorld } from "../scene/world.js";
+import { SCENE } from "../theme.js";
+import { makeStore } from "../storage.js";
+import { makeProgress } from "../progress.js";
+import { buildWorld, pathZ } from "../scene/world.js";
 import { makeControls } from "../scene/controls.js";
-import { loadIndex, loadPack, markReady, run, showError, topicFromUrl } from "./common.js";
+import { standPoint, updateNearby } from "../scene/nearby.js";
+import { overview, roomAt, roomCounts } from "./overview.js";
+import { makeSelection, roomVisit } from "./selection.js";
+import { hashId, loadIndex, loadPack, markReady, run, showError, storageBackend, topicFromUrl } from "./common.js";
 
-const STAND_OFF = 2.5; // metres in front of a picked spot
 const MAX_DT = 0.1; // seconds; longer frame gaps (hidden tab) don't jump the camera
 
 function hasWebGL() {
@@ -40,9 +47,10 @@ async function main() {
   }
   // The 3D layer stays hidden until its first frame renders, so a failure leaves the error in #app visible.
   const host = document.getElementById("world");
+  const layout = layoutTime(pack);
   let world;
   try {
-    world = buildScene(THREE, renderer, pack);
+    world = buildScene(THREE, renderer, pack, layout);
     host.append(renderer.domElement);
     renderer.render(world.scene, world.camera);
   } catch (e) {
@@ -56,29 +64,129 @@ async function main() {
   link.hidden = false;
   markReady("world", { rooms: world.roomGroups.size, spots: world.spotMeshes.size });
 
-  const resize = () => sizeTo(renderer, world.camera);
-  addEventListener("resize", resize);
-  const controls = makeControls(world.camera, renderer.domElement, {
-    floorY: 0,
-    targets: world.spotMeshes,
-    occluders: world.walls,
-    bounds: world.bounds,
-    onPick(id, point) {
-      if (id === null) return controls.walkTo(point);
-      const obj = world.spotMeshes.get(id);
-      const p = obj.position;
-      controls.walkTo({ x: p.x, y: 0, z: p.z + STAND_OFF });
-      controls.lookAt({ x: p.x, y: p.y + obj.userData.pickY, z: p.z });
-    },
-  });
+  addEventListener("resize", () => sizeTo(renderer, world.camera));
+  const ui = interact(THREE, world, pack, layout, renderer.domElement, makeProgress(makeStore(storageBackend(url))));
+  const start = hashId(location.hash);
+  if (world.spotMeshes.has(start)) ui.goTo(start);
 
   const clock = new THREE.Clock();
   renderer.setAnimationLoop(() => {
     const dt = Math.min(clock.getDelta(), MAX_DT);
-    controls.update(dt);
+    ui.controls.update(dt);
     world.update(dt);
+    ui.frame();
     renderer.render(world.scene, world.camera);
   });
+}
+
+// Controls, the side panel, the overview and progress. Returns {controls, goTo(id), frame()}.
+function interact(THREE, world, pack, layout, canvas, progress) {
+  const root = document.documentElement;
+  const panel = document.getElementById("panel");
+  const body = document.getElementById("panel-body");
+  const spotsAt = [...world.spotMeshes].map(([id, o]) => ({ id, x: o.position.x, z: o.position.z }));
+  let room = { visit: null, quiet: false }; // roomVisit state; quiet while walking to a chosen spot or room
+  let hovered = null;
+
+  const counts = () => roomCounts(pack, progress.opened(pack.slug));
+  const map = overview(document.getElementById("overview"), layout, { rooms: pack.rooms, counts: counts(), onJump: jumpTo });
+  const selection = makeSelection(THREE, {
+    world,
+    pack,
+    layout,
+    progress,
+    view: {
+      show(html, focus) {
+        body.innerHTML = html;
+        panel.classList.add("is-open");
+        panel.inert = false;
+        if (focus) panel.focus({ preventScroll: true });
+      },
+      hide() {
+        panel.classList.remove("is-open");
+        if (panel.contains(document.activeElement)) document.activeElement.blur();
+        panel.inert = true;
+      },
+      opened(id) {
+        if (id === null) delete root.dataset.open;
+        else root.dataset.open = id;
+        map.setCounts(counts());
+      },
+    },
+  });
+  const controls = makeControls(world.camera, canvas, {
+    floorY: 0,
+    targets: world.spotMeshes,
+    occluders: world.walls,
+    bounds: world.bounds,
+    onPick: (id, point) => (id === null ? controls.walkTo(point) : goTo(id)),
+    onHover(id) {
+      hovered = id;
+      canvas.style.cursor = id ? "pointer" : "";
+    },
+  });
+
+  function goTo(id) {
+    if (!world.spotMeshes.has(id)) return;
+    const obj = world.spotMeshes.get(id);
+    const p = obj.position;
+    const at = standPoint(p, spotsAt.filter((s) => s.id !== id));
+    controls.walkTo({ x: at.x, y: 0, z: at.z });
+    controls.lookAt({ x: p.x, y: p.y + obj.userData.pickY, z: p.z });
+    room.quiet = true;
+    selection.openSpot(id);
+  }
+
+  function jumpTo(n) {
+    const r = layout.rooms.find((l) => l.n === n);
+    const x = (r.x0 + r.x1) / 2;
+    controls.walkTo({ x, z: pathZ(r) });
+    controls.lookAt({ x, y: SCENE.eye - 0.6, z: (r.z0 + r.z1) / 2 });
+    room.quiet = true;
+    selection.openRoom(n, true);
+  }
+
+  function reveal(key) {
+    selection.reveal(key);
+    (body.querySelector("[data-reveal]") ?? panel).focus({ preventScroll: true });
+  }
+
+  // Redraws the plot explainer at the button's step; focus stays on the same side's button while it is enabled.
+  function step(button) {
+    const plot = selection.spot?.plot;
+    if (!plot) return;
+    const section = button.closest(".plot");
+    const side = [...section.querySelectorAll("[data-step]")].indexOf(button);
+    section.outerHTML = plotExplainer(plot, { step: Number(button.dataset.step) });
+    const buttons = body.querySelectorAll(".plot [data-step]");
+    (buttons[side]?.disabled ? buttons[1 - side] : buttons[side])?.focus();
+  }
+
+  // The spot panel's root carries data-spot too, so only links and buttons count as spot targets.
+  panel.addEventListener("click", (e) => {
+    const el = e.target.closest("[data-close], [data-reveal], [data-step], a[data-spot], button[data-spot]");
+    if (!el) return;
+    if (el.tagName === "A") e.preventDefault();
+    const d = el.dataset;
+    if ("close" in d) selection.close();
+    else if ("spot" in d) goTo(d.spot);
+    else if ("reveal" in d) reveal(d.reveal);
+    else if ("step" in d) step(el);
+  });
+  addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && panel.classList.contains("is-open")) selection.close();
+  });
+
+  function frame() {
+    const eye = world.camera.position;
+    const n = roomAt(layout, eye.x, eye.z);
+    room = roomVisit(room.visit, n, room.quiet, controls.moving());
+    if (room.open) selection.openRoom(n, false);
+    map.mark(eye.x, n);
+    updateNearby(world.spotMeshes, eye, hovered, selection.spot?.id ?? null);
+  }
+
+  return { controls, goTo, frame };
 }
 
 // The canvas fills the window (#world is fixed to the viewport), so size from the window, not the hidden host.
@@ -89,9 +197,9 @@ function sizeTo(renderer, camera) {
   camera.updateProjectionMatrix();
 }
 
-function buildScene(THREE, renderer, pack) {
+function buildScene(THREE, renderer, pack, layout) {
   const loader = new THREE.TextureLoader();
-  const world = buildWorld(THREE, pack, layoutTime(pack), {
+  const world = buildWorld(THREE, pack, layout, {
     loadPhoto: (file, apply) =>
       loader.load(imgUrl(pack, file), (tex) => {
         tex.colorSpace = THREE.SRGBColorSpace;

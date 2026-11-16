@@ -107,11 +107,13 @@ const isTyping = (el) => el?.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.te
 
 /**
  * Drives `camera` from pointer events on `dom` and keys on the window.
- * opts: floorY; onPick(id | null, point) on click/tap; targets: Map<id, Object3D> of pickable spots
+ * opts: floorY; onPick(id | null, point) on click/tap; onHover(id | null) when the spot under a mouse
+ * pointer changes; targets: Map<id, Object3D> of pickable spots
  * (each with userData.pickY and userData.pickRadius, as makeSpot sets them); occluders: [{min, max}]
  * wall boxes that block picks; bounds: {x0, x1, z0, z1} the camera stays inside.
+ * Returns {walkTo, lookAt, update(dt), moving() (an eased walk is running), dispose}.
  */
-export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, targets = new Map(), occluders = [], bounds } = {}) {
+export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, onHover = () => {}, targets = new Map(), occluders = [], bounds } = {}) {
   camera.rotation.reorder("YXZ");
   let yaw = camera.rotation.y;
   let pitch = clampPitch(camera.rotation.x);
@@ -120,11 +122,13 @@ export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, targe
   let glide = null; // {from, to, t, dur} on x/z
   let turn = null; // {yaw0, pitch0, dyaw, dpitch, t, dur}
   let press = null; // {id, x, y, moved}
+  let hovered = null;
   const reduceMotion = () => globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
   const held = (set) => [...set].some((k) => keys.has(k));
   const apply = () => camera.rotation.set(pitch, yaw, 0);
 
-  function pick(e) {
+  // What the pointer at e points at: {id, point} or null, as pickRay returns it.
+  function hitAt(e) {
     const rect = dom.getBoundingClientRect();
     const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     const ny = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -136,8 +140,18 @@ export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, targe
       center.y += obj.userData.pickY ?? 1;
       return { id, center, r: obj.userData.pickRadius ?? 0.8 };
     });
-    const hit = pickRay(origin, dir, { targets: list, floorY, occluders, bounds });
+    return pickRay(origin, dir, { targets: list, floorY, occluders, bounds });
+  }
+
+  function pick(e) {
+    const hit = hitAt(e);
     if (hit) onPick(hit.id, hit.point);
+  }
+
+  function hover(id) {
+    if (id === hovered) return;
+    hovered = id;
+    onHover(id);
   }
 
   const onDown = (e) => {
@@ -145,7 +159,8 @@ export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, targe
     dom.setPointerCapture?.(e.pointerId);
   };
   const onMove = (e) => {
-    if (!press || e.pointerId !== press.id) return;
+    if (!press) return hover(hitAt(e)?.id ?? null);
+    if (e.pointerId !== press.id) return;
     if (Math.hypot(e.clientX - press.x, e.clientY - press.y) > CLICK_PX) press.moved = true;
     if (!press.moved) return;
     yaw -= (e.clientX - press.lastX) * LOOK_PER_PX;
@@ -168,11 +183,13 @@ export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, targe
   };
   const onKeyUp = (e) => keys.delete(e.code);
   const onBlur = () => keys.clear();
+  const onLeave = () => hover(null);
 
   dom.addEventListener("pointerdown", onDown);
   dom.addEventListener("pointermove", onMove);
   dom.addEventListener("pointerup", onUp);
   dom.addEventListener("pointercancel", onUp);
+  dom.addEventListener("pointerleave", onLeave);
   globalThis.addEventListener("keydown", onKeyDown);
   globalThis.addEventListener("keyup", onKeyUp);
   globalThis.addEventListener("blur", onBlur);
@@ -248,10 +265,11 @@ export function makeControls(camera, dom, { floorY = 0, onPick = () => {}, targe
     dom.removeEventListener("pointermove", onMove);
     dom.removeEventListener("pointerup", onUp);
     dom.removeEventListener("pointercancel", onUp);
+    dom.removeEventListener("pointerleave", onLeave);
     globalThis.removeEventListener("keydown", onKeyDown);
     globalThis.removeEventListener("keyup", onKeyUp);
     globalThis.removeEventListener("blur", onBlur);
   }
 
-  return { walkTo, lookAt, update, dispose };
+  return { walkTo, lookAt, update, moving: () => glide !== null, dispose };
 }

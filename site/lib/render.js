@@ -117,9 +117,9 @@ export function lifeStrip(spot, pack, { text = false } = {}) {
 }
 
 /** The panel for one spot. Sections without data are left out. `text`: as part of the text view. */
-export function spotPanel(spot, pack, { opened = false, text = false } = {}) {
+export function spotPanel(spot, pack, { text = false } = {}) {
   const years = yearsText(spot.years);
-  let html = `<article class="panel${opened ? " is-open" : ""}" data-spot="${esc(spot.id)}" id="spot-${esc(spot.id)}">`;
+  let html = `<article class="panel" data-spot="${esc(spot.id)}" id="spot-${esc(spot.id)}">`;
   html += `<h2>${esc(spot.name)}</h2>`;
   if (years) html += `<p class="years">${esc(years)}</p>`;
   if (spot.aliases?.length) html += `<p class="aliases">Dar: ${spot.aliases.map(esc).join(", ")}</p>`;

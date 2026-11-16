@@ -67,10 +67,6 @@ Deno.test("years and aliases and links", () => {
   assert(h.includes("1714–1780") && h.includes("Kristijonas"));
   assertMatch(h, /data-spot="metai"/);
 });
-Deno.test("opened flag marks the panel", () => {
-  assert(spotPanel(person(), pack(), { opened: true }).includes("is-open"));
-  assert(!spotPanel(person(), pack()).includes("is-open"));
-});
 Deno.test("life strip lists places outside the map", () => {
   assertMatch(lifeStrip(person({ places: [{ name: "Niujorkas", lat: 40.7, lon: -74 }] }), pack()), /Toliau: Niujorkas/);
 });

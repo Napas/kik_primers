@@ -52,6 +52,14 @@ Deno.test("coverage finds missing bold span", () =>
 Deno.test("coverage folds case and diacritics", () =>
   assertEquals(checkCoverage(packWithText("Žemaitė"), "**ZEMAITE**"), []));
 Deno.test("skipped span passes coverage", () => assertEquals(checkCoverage(withSkipped("X"), "**X**"), []));
+const FORBIDDEN_SPAN = "**Kodėl laidoje klausiama apie X**";
+const withMaskedSkip = (span) => edit((p) => p.skipped.push({ span, reason: "r" }));
+Deno.test("forbidden-term span passes via a masked skip entry", () =>
+  assertEquals(checkCoverage(withMaskedSkip("Kodėl … klausiama apie X"), FORBIDDEN_SPAN), []));
+Deno.test("forbidden-term span without a masked skip is reported", () =>
+  assertEquals(checkCoverage(mini(), FORBIDDEN_SPAN), ["not in pack: Kodėl laidoje klausiama apie X"]));
+Deno.test("an unmasked skip entry does not cover a forbidden-term span", () =>
+  assertEquals(checkCoverage(withMaskedSkip("Kodėl laidoje klausiama apie X"), FORBIDDEN_SPAN), ["not in pack: Kodėl laidoje klausiama apie X"]));
 Deno.test("mini primer is fully covered", () =>
   assertEquals(checkCoverage(mini(), Deno.readTextFileSync(new URL("./fixtures/mini/primer.md", import.meta.url))), []));
 Deno.test("boldSpans strips trailing punctuation", () =>

@@ -185,10 +185,22 @@ export function boldSpans(md) {
     .filter((s) => s !== "");
 }
 
-/** Bold spans of the primer that appear neither in the pack text nor in `skipped`. */
+/**
+ * Bold spans of the primer that are not covered. A span with a forbidden term
+ * can't be copied into the pack, so it is covered only by a `skipped` entry whose
+ * span equals it with each forbidden match replaced by "…" (compared folded).
+ * Any other span is covered when it appears in the pack text or in `skipped`.
+ */
 export function checkCoverage(pack, primerMd) {
   const text = packText(pack);
-  return boldSpans(primerMd).filter((s) => !text.includes(fold(s))).map((s) => `not in pack: ${s}`);
+  const masked = new Set((Array.isArray(pack.skipped) ? pack.skipped : []).map((k) => fold(String(k?.span ?? ""))));
+  return boldSpans(primerMd)
+    .filter((s) => {
+      const f = fold(s);
+      const m = maskForbidden(f);
+      return m === f ? !text.includes(f) : !masked.has(m);
+    })
+    .map((s) => `not in pack: ${s}`);
 }
 
 // Terms that must never appear on the public site, matched on folded text.
@@ -204,6 +216,11 @@ const FORBIDDEN = [
   ["archive id", word("\\d{9,10}:\\d+(?:\\.\\d+)?")],
   ["missed", word("missed")],
 ];
+
+/** Folded text with every forbidden-term match replaced by "…". */
+function maskForbidden(folded) {
+  return FORBIDDEN.reduce((t, [, re]) => t.replace(new RegExp(re.source, "g"), "…"), folded);
+}
 
 /** Problems for forbidden terms in file paths and (text) contents. */
 export function scanSite(files) {

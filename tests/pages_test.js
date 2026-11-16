@@ -1,7 +1,7 @@
-import { assertEquals, assertThrows } from "@std/assert";
+import { assertEquals, assertMatch, assertThrows } from "@std/assert";
 import { hashId, lastScore, storageBackend, topicFromUrl } from "../site/lib/pages/common.js";
 import { makeStore } from "../site/lib/storage.js";
-import { move, orderRight, shift, summarize } from "../site/lib/pages/test.js";
+import { facePrompt, move, orderRight, shift, summarize } from "../site/lib/pages/test.js";
 
 const root = new URL("../", import.meta.url).pathname;
 const idx = { topics: [{ slug: "mini-test" }, { slug: "kita" }] };
@@ -114,4 +114,9 @@ Deno.test("shift moves the item with the given id by its current position", () =
   assertEquals(shift(a, "x", 1), ["y", "x", "z"]);
   assertEquals(shift(a, "x", -1), ["x", "y", "z"]);
   assertEquals(shift(a, "nera", 1), ["x", "y", "z"]);
+});
+
+Deno.test("facePrompt asks who it is above the photo", () => {
+  const h = facePrompt({ slug: "mini-test" }, { name: "Jonas", photo: { file: "img/jonas.jpg" } });
+  assertMatch(h, /^<p>Kas tai\?<\/p><img src="topics\/mini-test\/img\/jonas\.jpg" alt="">$/);
 });

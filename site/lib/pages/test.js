@@ -34,6 +34,9 @@ export function summarize(results) {
   return { right: results.filter((r) => r.right).length, total: results.length, wrong };
 }
 
+/** The question side of a face card: the prompt and the person's photo. */
+export const facePrompt = (pack, spot) => `<p>Kas tai?</p><img src="${esc(imgUrl(pack, spot.photo.file))}" alt="">`;
+
 if (globalThis.document) run(main);
 
 async function main() {
@@ -150,7 +153,7 @@ async function main() {
     if (item.type === "recall") flip(item, esc(item.q), esc(item.a));
     else if (item.type === "face") {
       const spot = pack.spots.find((s) => s.id === item.spot);
-      flip(item, `<img src="${esc(imgUrl(pack, spot.photo.file))}" alt="">`, esc(spot.name));
+      flip(item, facePrompt(pack, spot), esc(spot.name));
     } else if (item.type === "order") showOrder(item);
     else showEra(item);
   }

@@ -120,6 +120,30 @@
         1918
       ],
       "style": "farmstead"
+    },
+    {
+      "n": 6,
+      "title": "Tarpukaris (1918–1940): simbolistai, avangardistai, realistai",
+      "intro": "Nepriklausomoje Lietuvoje literatūros centras buvo Kaunas: 1922 m. įkurta rašytojų ir žurnalistų sąjunga, čia gyveno ir kūrė dauguma rašytojų. Svarbiausios trys kryptys: simbolizmas (Putinas, Sruoga), avangardas („Keturi vėjai“) ir kaimo bei miesto realizmas (Simonaitytė, Cvirka, Boruta).",
+      "why": [
+        {
+          "q": "Kodėl „Keturi vėjai“ svarbūs?",
+          "a": "Tai pirmasis lietuvių avangardo (futuristų) sąjūdis, o Binkis buvo jo iniciatorius ir vadovas. Binkio „100 pavasarių“ yra jo ženklas. Sruoga, nors modernistas, prie grupės nepriklausė."
+        },
+        {
+          "q": "Kaip susiję Sruoga ir Krėvė?",
+          "a": "Abu rašė istorines dramas apie LDK kunigaikščius, o Kauno studentai juos vadino Patu ir Patašonu. Juos dažnai supainioja: „Skirgaila“ – Krėvės, „Apyaušrio dalia“ – Sruogos."
+        },
+        {
+          "q": "Kaip Nėris susijusi su „Poezijos pavasariu“?",
+          "a": "Festivalis gimė jos atminimui (1965). Pirmuoju laureatu tapo Justinas Marcinkevičius už poemą „Donelaitis“. Maironio vardo premija laureatui teikiama tik nuo 2013 m."
+        }
+      ],
+      "span": [
+        1918,
+        1940
+      ],
+      "style": "kaunas-modern"
     }
   ],
   "spots": [
@@ -2092,6 +2116,1040 @@
         }
       ],
       "wikidata": "Q188271"
+    },
+    {
+      "id": "simbolizmas",
+      "room": 6,
+      "kind": "group",
+      "name": "Simbolizmas",
+      "aliases": [],
+      "years": null,
+      "at": 1927,
+      "text": "Simbolizmas (Putinas, Sruoga) – viena iš trijų svarbiausių tarpukario krypčių. Vinco Mykolaičio-Putino „Tarp dviejų aušrų“ (1927) – pirmasis ir žymiausias simbolistinės poezijos rinkinys.",
+      "links": [
+        {
+          "to": "putinas",
+          "label": "„Tarp dviejų aušrų“"
+        },
+        {
+          "to": "sruoga",
+          "label": "atstovas"
+        }
+      ]
+    },
+    {
+      "id": "putinas",
+      "room": 6,
+      "kind": "person",
+      "name": "Vincas Mykolaitis-Putinas",
+      "aliases": [
+        "Putinas",
+        "Mykolaitis-Putinas"
+      ],
+      "years": [
+        1893,
+        1967
+      ],
+      "at": 1927,
+      "text": "Vincas Mykolaitis-Putinas (1893–1967) įšventintas į kunigus; gimė ne Žemaitijoje. Jo kūriniai: „Tarp dviejų aušrų“ (1927) – pirmasis ir žymiausias simbolistinės poezijos rinkinys; „Margi sakalai“ – ne Maironio ir ne Dariui ir Girėnui; poema apie Prometėją, drama „Valdovas“; romanai „Altorių šešėly“ (1933) ir „Sukilėliai“. Putinas vasarį vadino apgaviku, prisidengusiu vasaros vardu. 1935 m. jis Rygoje vedė Emiliją Kvedaraitę; apie jo gyvenimo moteris Ruseckaitė parašė romaną „Emmi“.",
+      "links": [
+        {
+          "to": "tarp-dvieju-ausru",
+          "label": "parašė"
+        },
+        {
+          "to": "margi-sakalai",
+          "label": "parašė"
+        },
+        {
+          "to": "altoriu-seseli",
+          "label": "parašė"
+        },
+        {
+          "to": "sukileliai",
+          "label": "parašė"
+        },
+        {
+          "to": "simbolizmas",
+          "label": "atstovas"
+        },
+        {
+          "to": "ruseckaite",
+          "label": "romanas apie jo moteris"
+        }
+      ],
+      "wikidata": "Q1124485"
+    },
+    {
+      "id": "tarp-dvieju-ausru",
+      "room": 6,
+      "kind": "work",
+      "name": "„Tarp dviejų aušrų“",
+      "aliases": [],
+      "years": [
+        1927
+      ],
+      "at": 1927,
+      "text": "Vinco Mykolaičio-Putino „Tarp dviejų aušrų“ (1927) – pirmasis ir žymiausias simbolistinės poezijos rinkinys. Jis dažnai painiojamas su Maironio kūriniais.",
+      "links": [
+        {
+          "to": "putinas",
+          "label": "autorius"
+        }
+      ],
+      "by": "putinas"
+    },
+    {
+      "id": "margi-sakalai",
+      "room": 6,
+      "kind": "work",
+      "name": "„Margi sakalai“",
+      "aliases": [],
+      "years": null,
+      "at": 1927,
+      "text": "Vinco Mykolaičio-Putino „Margi sakalai“ („Lydėdami gęstančią žarą vėlai / pakilo į dangų margi sakalai“) – ne Maironio ir ne Dariui ir Girėnui.",
+      "links": [
+        {
+          "to": "putinas",
+          "label": "autorius"
+        }
+      ],
+      "by": "putinas"
+    },
+    {
+      "id": "altoriu-seseli",
+      "room": 6,
+      "kind": "work",
+      "name": "„Altorių šešėly“",
+      "aliases": [],
+      "years": [
+        1933
+      ],
+      "at": 1933,
+      "text": "Vinco Mykolaičio-Putino romanas „Altorių šešėly“ (1933) turi tris dalis: „Bandymų dienos“, „Eina gyvenimas“, „Išsivadavimas“. Pagrindinis veikėjas – kunigas ir poetas Liudas Vasaris; iš pradžių autorius jį vadino Jonu Sėkla. Pirmoji jį įsimylėjusi moteris – Liucija (Liucė), baronienė – Rainakienė. Romano pabaigoje Vasaris neveda. 1935 m. „Literatūros gražuolių“ konkurse romanas surinko daugiausia skaitytojų balsų. Atsaku į jį laikomas Justino Staugaičio romanas „Tiesiu keliu“. Jis ne Škėmos.",
+      "links": [
+        {
+          "to": "putinas",
+          "label": "autorius"
+        },
+        {
+          "to": "staugaitis",
+          "label": "atsakas – „Tiesiu keliu“"
+        }
+      ],
+      "by": "putinas"
+    },
+    {
+      "id": "sukileliai",
+      "room": 6,
+      "kind": "work",
+      "name": "„Sukilėliai“",
+      "aliases": [],
+      "years": null,
+      "at": 1933,
+      "text": "Vinco Mykolaičio-Putino romanas „Sukilėliai“ vaizduoja 1863 m. sukilimą, ne 1831 m. Jis ne Krėvės.",
+      "links": [
+        {
+          "to": "putinas",
+          "label": "autorius"
+        }
+      ],
+      "by": "putinas"
+    },
+    {
+      "id": "staugaitis",
+      "room": 6,
+      "kind": "person",
+      "name": "Justinas Staugaitis",
+      "aliases": [],
+      "years": [
+        1866,
+        1943
+      ],
+      "at": 1933,
+      "aside": true,
+      "text": "Justino Staugaičio romanas „Tiesiu keliu“ laikomas atsaku į Putino „Altorių šešėly“.",
+      "links": [
+        {
+          "to": "altoriu-seseli",
+          "label": "atsakas"
+        }
+      ],
+      "wikidata": "Q1714258"
+    },
+    {
+      "id": "ruseckaite",
+      "room": 6,
+      "kind": "person",
+      "name": "Aldona Ruseckaitė",
+      "aliases": [],
+      "years": [
+        1950,
+        null
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Aldona Ruseckaitė parašė romaną „Emmi“ apie Vinco Mykolaičio-Putino gyvenimo moteris.",
+      "links": [
+        {
+          "to": "putinas",
+          "label": "romanas apie jo moteris"
+        }
+      ],
+      "wikidata": "Q16443027"
+    },
+    {
+      "id": "sruoga",
+      "room": 6,
+      "kind": "person",
+      "name": "Balys Sruoga",
+      "aliases": [
+        "Graiboneranda",
+        "Davatka Padurkevičius Kryžostomas",
+        "Valys Dauga",
+        "Akėčkuolis"
+      ],
+      "years": [
+        1896,
+        1947
+      ],
+      "at": 1930,
+      "text": "Balys Sruoga (1896–1947) studijavo Miuncheno universitete; iš pradžių rinkosi miškininkystę. Buvo filosofijos mokslų daktaras. Pirmasis jo kūrinys – poema „Deivė iš ežero“. Dramos: „Milžino paunksmė“, „Apyaušrio dalia“, „Aitvaras teisėjas“; taip pat poema „Giesmė apie Gediminą“. 1943 m. Sruoga paimtas įkaitu į Štuthofo koncentracijos stovyklą. 1945 m. Birštone parašė „Dievų mišką“ (išleistas 1957 m.). Sruoga turėjo daug humoristinių slapyvardžių: Graiboneranda, Davatka Padurkevičius Kryžostomas, Valys Dauga, Akėčkuolis. „Keturiems vėjams“ jis nepriklausė. Aktorė Unė Babickaitė prisiminė jį su graikiškais sandalais ir ilgais plaukais. Kauno studentai jį ir Krėvę vadino „Patu ir Patašonu“.",
+      "links": [
+        {
+          "to": "milzino-paunksme",
+          "label": "parašė"
+        },
+        {
+          "to": "apyausrio-dalia",
+          "label": "parašė"
+        },
+        {
+          "to": "dievu-miskas",
+          "label": "parašė"
+        },
+        {
+          "to": "kreve",
+          "label": "„Patas ir Patašonas“"
+        },
+        {
+          "to": "babickaite",
+          "label": "prisiminė jį"
+        }
+      ],
+      "wikidata": "Q571888"
+    },
+    {
+      "id": "milzino-paunksme",
+      "room": 6,
+      "kind": "work",
+      "name": "„Milžino paunksmė“",
+      "aliases": [],
+      "years": null,
+      "at": 1930,
+      "text": "Balio Sruogos drama „Milžino paunksmė“ parašyta Vytauto Didžiojo mirties 500 metų proga (ne apie Mindaugą, ne Maironio).",
+      "links": [
+        {
+          "to": "sruoga",
+          "label": "autorius"
+        }
+      ],
+      "by": "sruoga"
+    },
+    {
+      "id": "apyausrio-dalia",
+      "room": 6,
+      "kind": "work",
+      "name": "„Apyaušrio dalia“",
+      "aliases": [],
+      "years": null,
+      "at": 1930,
+      "text": "Balio Sruogos drama „Apyaušrio dalia“ – pagal ją Balys Dvarionas sukūrė operą „Dalia“. Ji dažnai painiojama su Krėvės „Skirgaila“.",
+      "links": [
+        {
+          "to": "sruoga",
+          "label": "autorius"
+        },
+        {
+          "to": "dvarionas",
+          "label": "opera „Dalia“"
+        }
+      ],
+      "by": "sruoga"
+    },
+    {
+      "id": "dievu-miskas",
+      "room": 6,
+      "kind": "work",
+      "name": "„Dievų miškas“",
+      "aliases": [],
+      "years": [
+        1945
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Balys Sruoga 1943 m. paimtas įkaitu į Štuthofo koncentracijos stovyklą. 1945 m. Birštone jis parašė „Dievų mišką“ (išleistas 1957 m.). Tai ne romanas apie partizanus; veiksmas vyksta ne Osvencime. „Dievų miškas“ išleistas didžiausiu tiražu iš lietuviškų romanų, o Lietuvos šimtmečio knygos rinkimuose skaitytojai jį išrinko pirmuoju.",
+      "links": [
+        {
+          "to": "sruoga",
+          "label": "autorius"
+        }
+      ],
+      "by": "sruoga"
+    },
+    {
+      "id": "dvarionas",
+      "room": 6,
+      "kind": "person",
+      "name": "Balys Dvarionas",
+      "aliases": [],
+      "years": [
+        1904,
+        1972
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Kompozitorius Balys Dvarionas pagal Balio Sruogos „Apyaušrio dalią“ sukūrė operą „Dalia“.",
+      "links": [
+        {
+          "to": "apyausrio-dalia",
+          "label": "opera „Dalia“"
+        }
+      ],
+      "wikidata": "Q805870"
+    },
+    {
+      "id": "babickaite",
+      "room": 6,
+      "kind": "person",
+      "name": "Unė Babickaitė",
+      "aliases": [],
+      "years": [
+        1897,
+        1961
+      ],
+      "at": 1930,
+      "aside": true,
+      "text": "Aktorė Unė Babickaitė prisiminė Balį Sruogą su graikiškais sandalais ir ilgais plaukais.",
+      "links": [
+        {
+          "to": "sruoga",
+          "label": "prisiminė jį"
+        }
+      ],
+      "wikidata": "Q4074389"
+    },
+    {
+      "id": "binkis",
+      "room": 6,
+      "kind": "person",
+      "name": "Kazys Binkis",
+      "aliases": [
+        "K. Alijošius",
+        "K. Papilietis",
+        "Nelatvis",
+        "Nepartyvis"
+      ],
+      "years": [
+        1893,
+        1942
+      ],
+      "at": 1923,
+      "text": "Kazys Binkis (1893–1942) – avangardistinės grupės „Keturi vėjai“ iniciatorius ir vadovas. Kūriniai: rinkinys „100 pavasarių“ (1923) – pateko į šimtmečio knygų šimtuką; pjesė „Atžalynas“ (1938) ir drama „Generalinė repeticija“; poema vaikams „Kiškių sukilimas“ (ne Mieželaičio); poema apie Tamošių Bekepurį (Vytauto Kernagio daina „Tamošiaus Bekepurio piršlybos“). Slapyvardžiai: K. Alijošius, K. Papilietis, Nelatvis, Nepartyvis. Romano Binkis neparašė. Su žmona Sofija gelbėjo žydus. 1988 m. jam suteiktas Pasaulio tautų teisuolio vardas; Sofija Binkienė parašė knygą apie žydų gelbėtojus „Ir be ginklo kariai“. Mirė Lietuvoje, palaidotas Kaune. Prie jo kapo Algirdas Julius Greimas prisaikdino Antaną Miškinį kovoti su okupantais. Kita avangardistų grupė – trečiafrontininkai, leidę žurnalą „Trečias frontas“.",
+      "links": [
+        {
+          "to": "keturi-vejai",
+          "label": "iniciatorius ir vadovas"
+        },
+        {
+          "to": "simtas-pavasariu",
+          "label": "parašė"
+        },
+        {
+          "to": "atzalynas",
+          "label": "parašė"
+        },
+        {
+          "to": "kiskiu-sukilimas",
+          "label": "parašė"
+        },
+        {
+          "to": "binkiene",
+          "label": "žmona"
+        }
+      ],
+      "wikidata": "Q1959702"
+    },
+    {
+      "id": "keturi-vejai",
+      "room": 6,
+      "kind": "group",
+      "name": "„Keturi vėjai“",
+      "aliases": [],
+      "years": [
+        1924,
+        1928
+      ],
+      "at": 1924,
+      "text": "„Keturi vėjai“ – pirmasis lietuvių avangardo (futuristų) sąjūdis; Kazys Binkis buvo jo iniciatorius ir vadovas. Grupė leido futuristų žurnalą 1924–1928 m.; jame rašė ir Teofilis Tilvytis, Salys Šemerys. Binkio „100 pavasarių“ yra jo ženklas. Balys Sruoga, nors modernistas, prie grupės nepriklausė.",
+      "links": [
+        {
+          "to": "binkis",
+          "label": "iniciatorius ir vadovas"
+        },
+        {
+          "to": "tilvytis",
+          "label": "rašė žurnale"
+        },
+        {
+          "to": "semerys",
+          "label": "rašė žurnale"
+        },
+        {
+          "to": "sruoga",
+          "label": "nepriklausė"
+        }
+      ]
+    },
+    {
+      "id": "simtas-pavasariu",
+      "room": 6,
+      "kind": "work",
+      "name": "„100 pavasarių“",
+      "aliases": [],
+      "years": [
+        1923
+      ],
+      "at": 1923,
+      "text": "Kazio Binkio rinkinys „100 pavasarių“ (1923) pateko į šimtmečio knygų šimtuką; jis – „Keturių vėjų“ ženklas.",
+      "links": [
+        {
+          "to": "binkis",
+          "label": "autorius"
+        }
+      ],
+      "by": "binkis"
+    },
+    {
+      "id": "atzalynas",
+      "room": 6,
+      "kind": "work",
+      "name": "„Atžalynas“",
+      "aliases": [],
+      "years": [
+        1938
+      ],
+      "at": 1938,
+      "text": "Kazio Binkio pjesė „Atžalynas“ (1938) – apie nekaltai vagyste apkaltintą gimnazistą; pagrindinis veikėjas – Petras Keraitis.",
+      "links": [
+        {
+          "to": "binkis",
+          "label": "autorius"
+        }
+      ],
+      "by": "binkis"
+    },
+    {
+      "id": "kiskiu-sukilimas",
+      "room": 6,
+      "kind": "work",
+      "name": "„Kiškių sukilimas“",
+      "aliases": [],
+      "years": null,
+      "at": 1923,
+      "text": "„Kiškių sukilimas“ – Kazio Binkio poema vaikams (ne Mieželaičio).",
+      "links": [
+        {
+          "to": "binkis",
+          "label": "autorius"
+        }
+      ],
+      "by": "binkis"
+    },
+    {
+      "id": "tilvytis",
+      "room": 6,
+      "kind": "person",
+      "name": "Teofilis Tilvytis",
+      "aliases": [],
+      "years": [
+        1904,
+        1969
+      ],
+      "at": 1924,
+      "text": "Teofilis Tilvytis rašė „Keturių vėjų“ futuristų žurnale (1924–1928).",
+      "links": [
+        {
+          "to": "keturi-vejai",
+          "label": "rašė žurnale"
+        }
+      ],
+      "wikidata": "Q4457286"
+    },
+    {
+      "id": "semerys",
+      "room": 6,
+      "kind": "person",
+      "name": "Salys Šemerys",
+      "aliases": [],
+      "years": [
+        1898,
+        1981
+      ],
+      "at": 1924,
+      "text": "Salys Šemerys rašė „Keturių vėjų“ futuristų žurnale (1924–1928).",
+      "links": [
+        {
+          "to": "keturi-vejai",
+          "label": "rašė žurnale"
+        }
+      ],
+      "wikidata": "Q12672268"
+    },
+    {
+      "id": "binkiene",
+      "room": 6,
+      "kind": "person",
+      "name": "Sofija Binkienė",
+      "aliases": [],
+      "years": [
+        1902,
+        1984
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Sofija Binkienė su vyru Kaziu Binkiu gelbėjo žydus. Ji parašė knygą apie žydų gelbėtojus „Ir be ginklo kariai“.",
+      "links": [
+        {
+          "to": "binkis",
+          "label": "vyras"
+        }
+      ],
+      "wikidata": "Q106614835"
+    },
+    {
+      "id": "greimas",
+      "room": 6,
+      "kind": "person",
+      "name": "Algirdas Julius Greimas",
+      "aliases": [],
+      "years": [
+        1917,
+        1992
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Prie Kazio Binkio kapo Algirdas Julius Greimas prisaikdino Antaną Miškinį kovoti su okupantais.",
+      "links": [
+        {
+          "to": "miskinis",
+          "label": "prisaikdino"
+        },
+        {
+          "to": "binkis",
+          "label": "prie jo kapo"
+        }
+      ],
+      "wikidata": "Q313379"
+    },
+    {
+      "id": "miskinis",
+      "room": 6,
+      "kind": "person",
+      "name": "Antanas Miškinis",
+      "aliases": [],
+      "years": [
+        1905,
+        1983
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Antaną Miškinį prie Kazio Binkio kapo Algirdas Julius Greimas prisaikdino kovoti su okupantais.",
+      "links": [
+        {
+          "to": "greimas",
+          "label": "prisaikdino"
+        }
+      ],
+      "wikidata": "Q16443899"
+    },
+    {
+      "id": "kernagis",
+      "room": 6,
+      "kind": "person",
+      "name": "Vytautas Kernagis",
+      "aliases": [],
+      "years": [
+        1951,
+        2008
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Daug poezijos pasiekė žmones per Vytauto Kernagio dainas: Binkio Tamošius Bekepuris („Tamošiaus Bekepurio piršlybos“), Gedos baltojo nieko avinėlis, Erlicko „Vasara“ („Kaip gražu miške“), Brazdžionio „Šaukiu aš tautą“ (vienas Atgimimo himnų).",
+      "links": [
+        {
+          "to": "binkis",
+          "label": "daina apie Tamošių Bekepurį"
+        },
+        {
+          "to": "brazdzionis",
+          "label": "daina pagal „Šaukiu aš tautą“"
+        }
+      ],
+      "wikidata": "Q5110456"
+    },
+    {
+      "id": "boruta",
+      "room": 6,
+      "kind": "person",
+      "name": "Kazys Boruta",
+      "aliases": [
+        "Vincas Dovinė",
+        "Antanas Avižienis",
+        "Anupras Paketuris"
+      ],
+      "years": [
+        1905,
+        1965
+      ],
+      "at": 1938,
+      "text": "Kazys Boruta (1905–1965) buvo pašalintas ir iš Marijampolės mokytojų seminarijos, ir iš universiteto. Gimė netoli Liudvinavo, gyveno Ražiškių kaime. Kūriniai: romanas „Mediniai stebuklai“ (1938); apysaka „Baltaragio malūnas“ (išleista 1945 m.); liaudies pasakų rinkinys „Dangus griūva“ (ne Sajos). Slapyvardžiai – Vincas Dovinė, Antanas Avižienis, Anupras Paketuris.",
+      "links": [
+        {
+          "to": "mediniai-stebuklai",
+          "label": "parašė"
+        },
+        {
+          "to": "baltaragio-malunas",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q1961038"
+    },
+    {
+      "id": "mediniai-stebuklai",
+      "room": 6,
+      "kind": "work",
+      "name": "„Mediniai stebuklai“",
+      "aliases": [],
+      "years": [
+        1938
+      ],
+      "at": 1938,
+      "text": "Kazio Borutos romanas „Mediniai stebuklai“ (1938) – apie dievdirbį Vincą Dovinę (vienas Borutos slapyvardžių – taip pat Vincas Dovinė); ne Krėvės ir ne Cvirkos.",
+      "links": [
+        {
+          "to": "boruta",
+          "label": "autorius"
+        }
+      ],
+      "by": "boruta"
+    },
+    {
+      "id": "baltaragio-malunas",
+      "room": 6,
+      "kind": "work",
+      "name": "„Baltaragio malūnas“",
+      "aliases": [],
+      "years": [
+        1945
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Kazio Borutos apysaka „Baltaragio malūnas, arba Kas dėjosi anuo metu Paudruvės krašte“ (išleista 1945 m., ne tarpukariu; veiksmas ne Žemaitijoje). Malūnininkas Baltrus Baltaragis, jo žmona Marcelė Jaudegytė, velnias Pinčukas, Jurgis Girdvainis, arkliavagis Raupys. Pagal apysaką sukurti baletas ir kino miuziklas „Velnio nuotaka“.",
+      "links": [
+        {
+          "to": "boruta",
+          "label": "autorius"
+        }
+      ],
+      "by": "boruta"
+    },
+    {
+      "id": "neris",
+      "room": 6,
+      "kind": "person",
+      "name": "Salomėja Nėris",
+      "aliases": [
+        "Salomėja Bačinskaitė",
+        "Jūraitė",
+        "Liūdytė"
+      ],
+      "years": [
+        1904,
+        1945
+      ],
+      "at": 1938,
+      "text": "Salomėja Nėris (tikroji pavardė Bačinskaitė, po santuokos Bučienė; 1904–1945) mirė nesulaukusi 45 metų; gimė XX a. Slapyvardžiai – Jūraitė, Liūdytė. Rinkiniai: „Pėdos smėly“, „Per lūžtantį ledą“, „Diemedžiu žydėsiu“ (1938, ketvirtasis). Paskutinis rinkinys – „Lakštingala negali nečiulbėti“ (autorė jį vadino „Prie didelio kelio“). Kūriniai: poema „Eglė žalčių karalienė“ (1940); „Senelės pasaka“; eilės „Mūsų dienos kaip šventė, kaip žydėjimas vyšnios“, „Sustabdęs juodbėrį staiga…“. „Kur pažvelgsi, visur balta“ – Juliaus Janonio, ne Nėries. Ji mirė Maskvoje ir palaidota Kaune. „Poezijos pavasaris“ pradėtas rengti 1965 m., minint 20-ąsias jos mirties metines. Marius Ivaškevičius pjesėje „Madagaskaras“ ją pavaizdavo kaip Salę. Nėris rašė eilėraštį apie Donelaitį, kuris priešo kumščiui priešpriešino gimtosios kalbos grožį.",
+      "links": [
+        {
+          "to": "diemedziu-zydesiu",
+          "label": "parašė"
+        },
+        {
+          "to": "lakstingala",
+          "label": "parašė"
+        },
+        {
+          "to": "egle",
+          "label": "parašė"
+        },
+        {
+          "to": "seneles-pasaka",
+          "label": "parašė"
+        },
+        {
+          "to": "poezijos-pavasaris",
+          "label": "rengiamas jos atminimui"
+        },
+        {
+          "to": "donelaitis",
+          "label": "eilėraštis apie jį"
+        },
+        {
+          "to": "janonis",
+          "label": "painiojama su juo"
+        }
+      ],
+      "wikidata": "Q462166"
+    },
+    {
+      "id": "diemedziu-zydesiu",
+      "room": 6,
+      "kind": "work",
+      "name": "„Diemedžiu žydėsiu“",
+      "aliases": [],
+      "years": [
+        1938
+      ],
+      "at": 1938,
+      "text": "Salomėjos Nėries rinkinys „Diemedžiu žydėsiu“ (1938) – ketvirtasis jos rinkinys.",
+      "links": [
+        {
+          "to": "neris",
+          "label": "autorė"
+        }
+      ],
+      "by": "neris"
+    },
+    {
+      "id": "lakstingala",
+      "room": 6,
+      "kind": "work",
+      "name": "„Lakštingala negali nečiulbėti“",
+      "aliases": [],
+      "years": null,
+      "at": 1940,
+      "text": "„Lakštingala negali nečiulbėti“ – paskutinis Salomėjos Nėries rinkinys; autorė jį vadino „Prie didelio kelio“.",
+      "links": [
+        {
+          "to": "neris",
+          "label": "autorė"
+        }
+      ],
+      "by": "neris"
+    },
+    {
+      "id": "egle",
+      "room": 6,
+      "kind": "work",
+      "name": "„Eglė žalčių karalienė“",
+      "aliases": [],
+      "years": [
+        1940
+      ],
+      "at": 1940,
+      "text": "Salomėjos Nėries poema „Eglė žalčių karalienė“ (1940) pripažinta geriausiu visų laikų kūriniu vaikams.",
+      "links": [
+        {
+          "to": "neris",
+          "label": "autorė"
+        }
+      ],
+      "by": "neris"
+    },
+    {
+      "id": "seneles-pasaka",
+      "room": 6,
+      "kind": "work",
+      "name": "„Senelės pasaka“",
+      "aliases": [],
+      "years": null,
+      "at": 1938,
+      "text": "Salomėjos Nėries „Senelės pasaka“ – „Apšerkšniję mūsų žiemos“; nykštukai miega pusnynuos, žąsinas vardu Moliūgas.",
+      "links": [
+        {
+          "to": "neris",
+          "label": "autorė"
+        }
+      ],
+      "by": "neris"
+    },
+    {
+      "id": "poezijos-pavasaris",
+      "room": 6,
+      "kind": "event",
+      "name": "„Poezijos pavasaris“",
+      "aliases": [],
+      "years": [
+        1965
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "„Poezijos pavasaris“ pradėtas rengti 1965 m., minint 20-ąsias Salomėjos Nėries mirties metines: festivalis gimė jos atminimui. Pirmuoju laureatu tapo Justinas Marcinkevičius už poemą „Donelaitis“. Maironio vardo premija laureatui teikiama tik nuo 2013 m.",
+      "links": [
+        {
+          "to": "neris",
+          "label": "rengiamas jos atminimui"
+        }
+      ]
+    },
+    {
+      "id": "janonis",
+      "room": 6,
+      "kind": "person",
+      "name": "Julius Janonis",
+      "aliases": [],
+      "years": [
+        1896,
+        1917
+      ],
+      "at": 1918,
+      "aside": true,
+      "text": "„Kur pažvelgsi, visur balta“ – Juliaus Janonio, ne Salomėjos Nėries eilėraštis.",
+      "links": [
+        {
+          "to": "neris",
+          "label": "painiojamas su ja"
+        }
+      ],
+      "wikidata": "Q1960969"
+    },
+    {
+      "id": "cvirka",
+      "room": 6,
+      "kind": "person",
+      "name": "Petras Cvirka",
+      "aliases": [
+        "Klangių Petras"
+      ],
+      "years": [
+        1909,
+        1947
+      ],
+      "at": 1934,
+      "text": "Petras Cvirka (1909–1947) – Cvirka yra tikroji jo pavardė; slapyvardis Klangių Petras. Romanai: „Frank Kruk“ (1934; grabdirbys Pranas Krukelis) ir „Meisteris ir sūnūs“ (1936). Kūriniai vaikams – „Mikučio vargai“, „Strakalas ir Makalas“. Mirė vėliau už Nėrį.",
+      "links": [
+        {
+          "to": "frank-kruk",
+          "label": "parašė"
+        },
+        {
+          "to": "meisteris-ir-sunus",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q2496710"
+    },
+    {
+      "id": "frank-kruk",
+      "room": 6,
+      "kind": "work",
+      "name": "„Frank Kruk“",
+      "aliases": [],
+      "years": [
+        1934
+      ],
+      "at": 1934,
+      "text": "Petro Cvirkos romanas „Frank Kruk“ (1934) – apie grabdirbį Praną Krukelį.",
+      "links": [
+        {
+          "to": "cvirka",
+          "label": "autorius"
+        }
+      ],
+      "by": "cvirka"
+    },
+    {
+      "id": "meisteris-ir-sunus",
+      "room": 6,
+      "kind": "work",
+      "name": "„Meisteris ir sūnūs“",
+      "aliases": [],
+      "years": [
+        1936
+      ],
+      "at": 1936,
+      "text": "„Meisteris ir sūnūs“ (1936) – Petro Cvirkos romanas.",
+      "links": [
+        {
+          "to": "cvirka",
+          "label": "autorius"
+        }
+      ],
+      "by": "cvirka"
+    },
+    {
+      "id": "brazdzionis",
+      "room": 6,
+      "kind": "person",
+      "name": "Bernardas Brazdžionis",
+      "aliases": [
+        "Vytė Nemunėlis",
+        "J. Brazaitis"
+      ],
+      "years": [
+        1907,
+        2002
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Bernardas Brazdžionis (1907 m. Stebeikėliuose, tuometinėje Biržų apskrityje – 2002 m. Los Andžele) palaidotas Kaune (Petrašiūnuose). Jis yra vadovavęs Maironio lietuvių literatūros muziejui. Vaikams rašė Vytės Nemunėlio slapyvardžiu (pvz., „Šliumpu-pumpu… Rudanosis takeliu“); kitas slapyvardis – J. Brazaitis. Rinkinys „Šaukiu aš tautą“ (1941) – pagal jį Vytautas Kernagis sukūrė vieną Atgimimo himnų. Kiti rinkiniai: „Per pasaulį keliauja žmogus“, eilės „Tikiu aš dieną, didelę ir šviesią“, „Aš čia – gyva“. Iš kelių tarpukario laureatų jis paskutinis gavo Lietuvos valstybinę literatūros premiją. 2020 m. Pasvalyje jam atidengtas paminklas.",
+      "links": [
+        {
+          "to": "saukiu-as-tauta",
+          "label": "parašė"
+        },
+        {
+          "to": "maironio-muziejus",
+          "label": "vadovavo"
+        }
+      ],
+      "wikidata": "Q2240208"
+    },
+    {
+      "id": "saukiu-as-tauta",
+      "room": 6,
+      "kind": "work",
+      "name": "„Šaukiu aš tautą“",
+      "aliases": [],
+      "years": [
+        1941
+      ],
+      "at": 1940,
+      "aside": true,
+      "text": "Bernardo Brazdžionio rinkinys „Šaukiu aš tautą“ (1941) – pagal jį Vytautas Kernagis sukūrė vieną Atgimimo himnų. Jis ne Marcinkevičiaus.",
+      "links": [
+        {
+          "to": "brazdzionis",
+          "label": "autorius"
+        },
+        {
+          "to": "kernagis",
+          "label": "daina"
+        }
+      ],
+      "by": "brazdzionis"
+    },
+    {
+      "id": "simonaityte",
+      "room": 6,
+      "kind": "person",
+      "name": "Ieva Simonaitytė",
+      "aliases": [
+        "Bemokslė Vanagiškė"
+      ],
+      "years": [
+        1897,
+        1978
+      ],
+      "at": 1935,
+      "text": "Ieva Simonaitytė (1897–1978) – „Mažosios Lietuvos metraštininkė“, žymiausia Mažosios Lietuvos rašytoja. Pirmoji Lietuvos valstybinės literatūros premijos laureatė; premija gauta už romaną „Aukštujų Šimonių likimas“ (1935; aprašoma maro epidemija). Kiti romanai: „Vilius Karalius“ (ne pirmasis jos romanas), „Pikčiurnienė“, „Be tėvo“, „Pavasarių audroj“. Slapyvardis – Bemokslė Vanagiškė. Ant jos antkapio užrašyta: „Jau lazdą padėjau, kelionė baigta“. Paminklas jai stovi Priekulėje. Jos vardo premija skiriama už kūrinius, atspindinčius Klaipėdos krašto dvasią.",
+      "links": [
+        {
+          "to": "aukstuju-simoniu-likimas",
+          "label": "parašė"
+        },
+        {
+          "to": "vilius-karalius",
+          "label": "parašė"
+        },
+        {
+          "to": "vydunas",
+          "label": "Mažosios Lietuvos linija"
+        }
+      ],
+      "wikidata": "Q459271"
+    },
+    {
+      "id": "aukstuju-simoniu-likimas",
+      "room": 6,
+      "kind": "work",
+      "name": "„Aukštujų Šimonių likimas“",
+      "aliases": [],
+      "years": [
+        1935
+      ],
+      "at": 1935,
+      "text": "Ievos Simonaitytės romanas „Aukštujų Šimonių likimas“ (1935) aprašo maro epidemiją. Už jį autorė tapo pirmąja Lietuvos valstybinės literatūros premijos laureate.",
+      "links": [
+        {
+          "to": "simonaityte",
+          "label": "autorė"
+        }
+      ],
+      "by": "simonaityte"
+    },
+    {
+      "id": "vilius-karalius",
+      "room": 6,
+      "kind": "work",
+      "name": "„Vilius Karalius“",
+      "aliases": [],
+      "years": null,
+      "at": 1935,
+      "text": "„Vilius Karalius“ – Ievos Simonaitytės romanas, ne pirmasis jos romanas.",
+      "links": [
+        {
+          "to": "simonaityte",
+          "label": "autorė"
+        }
+      ],
+      "by": "simonaityte"
+    },
+    {
+      "id": "seinius",
+      "room": 6,
+      "kind": "person",
+      "name": "Ignas Šeinius",
+      "aliases": [
+        "Ignas Jurkūnas",
+        "Irvis Gedainis",
+        "Tadas Brasta"
+      ],
+      "years": [
+        1889,
+        1959
+      ],
+      "at": 1940,
+      "text": "Ignas Šeinius (tikroji pavardė Jurkūnas; 1889–1959) slapyvardį pasirinko pagal gimtąjį kaimą. Žymiausias romanas – „Kuprelis“ (1913). Jis gyveno Švedijoje ir leido knygas švediškai. Kiti kūriniai: memuarai-publicistika „Raudonasis tvanas“ (1940), fantastinis romanas prieš nacizmą „Siegfried Immerselbe atsijaunina“. Istorikas Dambrauskas jį vadina „lietuviškuoju Orvelu“. Slapyvardžiai – Irvis Gedainis, Tadas Brasta.",
+      "links": [
+        {
+          "to": "kuprelis",
+          "label": "parašė"
+        }
+      ],
+      "wikidata": "Q6097324"
+    },
+    {
+      "id": "kuprelis",
+      "room": 6,
+      "kind": "work",
+      "name": "„Kuprelis“",
+      "aliases": [],
+      "years": [
+        1913
+      ],
+      "at": 1918,
+      "aside": true,
+      "text": "„Kuprelis“ (1913) – žymiausias Igno Šeiniaus romanas; pilname pavadinime – „Vienos pavasario dienos pasaka“.",
+      "links": [
+        {
+          "to": "seinius",
+          "label": "autorius"
+        }
+      ],
+      "by": "seinius"
     }
   ],
   "questions": [],

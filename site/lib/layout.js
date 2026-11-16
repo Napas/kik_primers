@@ -60,15 +60,30 @@ function buildScale(spanned, targets, gapLen) {
 }
 
 // Each spot goes to the row whose last x is smallest, no closer than `gap` to its predecessor.
-function placeSpots(spots, xOfYear, o) {
+// A backward pass then pulls each spot back so its row's later spots still fit before x1.
+// `needed` is the width the fullest row requires.
+function placeSpots(spots, xOfYear, x1, o) {
   const lastX = Array(o.rows).fill(-Infinity);
-  return [...spots].sort((a, b) => a.at - b.at || byId(a, b)).map((s) => {
+  const rows = Array.from({ length: o.rows }, () => []);
+  const placed = [...spots].sort((a, b) => a.at - b.at || byId(a, b)).map((s) => {
     let row = 0;
     for (let i = 1; i < o.rows; i++) if (lastX[i] < lastX[row]) row = i;
     const x = Math.max(xOfYear(s.at), lastX[row] + o.gap);
     lastX[row] = x;
-    return { id: s.id, x, row };
+    const p = { id: s.id, x, row };
+    rows[row].push(p);
+    return p;
   });
+  let needed = 0;
+  for (const list of rows) {
+    needed = Math.max(needed, (list.length - 1) * o.gap);
+    let cap = x1;
+    for (let i = list.length - 1; i >= 0; i--) {
+      list[i].x = Math.min(list[i].x, cap);
+      cap = list[i].x - o.gap;
+    }
+  }
+  return { placed, needed };
 }
 
 export function layoutTime(pack, opts = {}) {
@@ -89,11 +104,12 @@ export function layoutTime(pack, opts = {}) {
     placed = new Map();
     let grew = false;
     for (const r of spanned) {
-      const ps = placeSpots(spotsOf.get(r.n), scale.xOfYear, o);
-      placed.set(r.n, ps);
+      const x0 = scale.xOfYear(r.span[0]);
       const x1 = scale.xOfYear(r.span[1]);
-      if (ps.some((p) => p.x > x1 + EPS)) {
-        targets.set(r.n, targets.get(r.n) * GROWTH);
+      const { placed: ps, needed } = placeSpots(spotsOf.get(r.n), scale.xOfYear, x1, o);
+      placed.set(r.n, ps);
+      if (needed > x1 - x0 + EPS) {
+        targets.set(r.n, targets.get(r.n) * Math.max(GROWTH, needed / Math.max(x1 - x0, EPS)));
         grew = true;
       }
     }

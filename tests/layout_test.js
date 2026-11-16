@@ -43,9 +43,11 @@ function noOverlap(L, gap) {
     for (let i = 1; i < xs.length; i++) assert(xs[i] - xs[i - 1] >= gap - EPS);
   }
 }
-function allInside(L) {
+function allInside(L, p) {
+  const roomN = new Map(p.spots.map((s) => [s.id, s.room]));
   for (const s of L.spots) {
-    assert(s.x >= L.rooms[0].x0 - EPS && s.x <= L.rooms[0].x1 + EPS);
+    const r = roomOf(L, roomN.get(s.id));
+    assert(s.x >= r.x0 - EPS && s.x <= r.x1 + EPS, `${s.id} outside room ${r.n}`);
   }
 }
 
@@ -71,10 +73,29 @@ Deno.test("an uncrowded spot stands exactly at its year", () => {
   assertAlmostEquals(spotX(L, "a"), L.xOfYear(1743));
 });
 Deno.test("crowded spots never overlap within a row and stay inside the room", () => {
-  const L = layoutTime(fxCrowd(30, 1950));
+  const p = fxCrowd(30, 1950);
+  const L = layoutTime(p);
   assertEquals(L.spots.length, 30);
   noOverlap(L, 1.6);
-  allInside(L);
+  allInside(L, p);
+});
+for (const k of [4, 12]) {
+  Deno.test(`${k} spots at the end year stay inside the room`, () => {
+    const p = fxCrowd(k, 2000);
+    const L = layoutTime(p);
+    noOverlap(L, 1.6);
+    allInside(L, p);
+  });
+}
+Deno.test("end-of-room clusters inside parallel lanes stay inside their rooms", () => {
+  const spots = [
+    ...Array.from({ length: 12 }, (_, i) => spot(`e${i}`, 1, 1990)),
+    ...Array.from({ length: 12 }, (_, i) => spot(`s${i}`, 2, 1991)),
+  ];
+  const p = pack([room(1, [1944, 1990]), room(2, [1944, 1991])], spots);
+  const L = layoutTime(p);
+  noOverlap(L, 1.6);
+  allInside(L, p);
 });
 Deno.test("a sparse century is not longer than a crowded one", () => {
   const L = layoutTime(fxSparseThenDense());

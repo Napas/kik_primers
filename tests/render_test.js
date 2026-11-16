@@ -1,5 +1,5 @@
 import { assert, assertEquals, assertMatch } from "@std/assert";
-import { lifeStrip, plotExplainer, roomPanel, spotPanel, textView, worksOf } from "../site/lib/render.js";
+import { imgUrl, lifeStrip, plotExplainer, roomPanel, spotPanel, textView, worksOf } from "../site/lib/render.js";
 import { COLORS, STYLE_NAMES } from "../site/lib/theme.js";
 
 const bare = (kind, extra = {}) => ({ id: "x", room: 1, kind, name: "Vardas", aliases: [], years: null, text: "Tekstas.", links: [], ...extra });
@@ -147,4 +147,15 @@ Deno.test("site.css defines the theme colours", async () => {
   const css = await Deno.readTextFile(new URL("../site/lib/site.css", import.meta.url));
   const hex = (n) => typeof n === "number" ? "#" + n.toString(16).padStart(6, "0") : n;
   for (const [k, v] of Object.entries(COLORS)) assert(css.includes(`--${k}: ${hex(v)}`), k);
+});
+
+Deno.test("imgUrl: pack-relative path, segments encoded, slashes kept", () => {
+  assertEquals(imgUrl({ slug: "mini" }, "img/a b.jpg"), "topics/mini/img/a%20b.jpg");
+  assertEquals(imgUrl({ slug: "mini" }, "img/works/x.png"), "topics/mini/img/works/x.png");
+});
+
+Deno.test("imgUrl: rejects traversal, absolute paths and schemes", () => {
+  for (const f of ["../x.jpg", "img/../../x.jpg", "/x.jpg", "https://e.com/x.jpg", "javascript:alert(1)", "", undefined]) {
+    assertEquals(imgUrl({ slug: "mini" }, f), "", String(f));
+  }
 });

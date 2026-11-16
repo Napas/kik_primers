@@ -11,7 +11,7 @@
   "spots": [
     {"id": "jonas-rastas", "room": 1, "kind": "person", "name": "Jonas Rašytojas", "aliases": ["Rastas"], "years": [1520, 1580], "at": 1547,
      "text": "Pirmasis autorius.", "links": [{"to": "pirma-knyga", "label": "parašė"}],
-     "photo": {"file": "jonas.jpg", "author": "Petras Fotografas", "license": "CC BY-SA 4.0", "source_url": "https://commons.wikimedia.org/wiki/File:Jonas.jpg"},
+     "photo": {"file": "img/jonas.jpg", "author": "Petras Fotografas", "license": "CC BY-SA 4.0", "source_url": "https://commons.wikimedia.org/wiki/File:Jonas.jpg"},
      "life": [{"year": 1520, "label": "gimė", "place": "Vilnius"}, {"year": 1547, "label": "išleido knygą"}],
      "places": [{"name": "Vilnius", "lat": 54.69, "lon": 25.28}]},
     {"id": "pirma-knyga", "room": 1, "kind": "work", "name": "Pirma knyga", "aliases": [], "years": [1547], "at": 1547,

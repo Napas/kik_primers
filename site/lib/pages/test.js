@@ -3,6 +3,7 @@ import { makeStore } from "../storage.js";
 import { makeProgress } from "../progress.js";
 import { buildSession } from "../quiz.js";
 import { esc } from "../text.js";
+import { imgUrl } from "../render.js";
 import { loadIndex, loadPack, markReady, run, showError, topicFromUrl } from "./common.js";
 
 /** Copy of arr with the item at `from` moved to `to`; out-of-range moves change nothing. */
@@ -149,7 +150,7 @@ async function main() {
     if (item.type === "recall") flip(item, esc(item.q), esc(item.a));
     else if (item.type === "face") {
       const spot = pack.spots.find((s) => s.id === item.spot);
-      flip(item, `<img src="topics/${esc(t.slug)}/img/${esc(spot.photo.file)}" alt="">`, esc(spot.name));
+      flip(item, `<img src="${esc(imgUrl(pack, spot.photo.file))}" alt="">`, esc(spot.name));
     } else if (item.type === "order") showOrder(item);
     else showEra(item);
   }

@@ -5,7 +5,12 @@ import { motifSvg } from "./motifs.js";
 import { BASEMAP, project } from "./basemap.js";
 
 const byAtThenId = (a, b) => (a.at ?? Infinity) - (b.at ?? Infinity) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
-export const imgUrl = (pack, file) => `topics/${encodeURIComponent(pack.slug)}/img/${encodeURIComponent(file)}`;
+/** URL of a pack file (path relative to the topic folder); "" for anything that could leave it. */
+export const imgUrl = (pack, file) => {
+  const parts = typeof file === "string" ? file.split("/") : [];
+  if (!parts.length || parts.some((p) => !p || p === "." || p === ".." || p.includes(":") || p.includes("\\"))) return "";
+  return `topics/${encodeURIComponent(pack.slug)}/${parts.map(encodeURIComponent).join("/")}`;
+};
 const safeUrl = (u) => (/^https?:\/\//i.test(u ?? "") ? u : "#");
 const pct = (f) => `${+(f * 100).toFixed(2)}%`;
 

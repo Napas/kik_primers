@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { importPhotos } from "../tools/import-photos.ts";
+import { HttpError, importPhotos } from "../tools/import-photos.ts";
 
 const info = (n) => ({
   query: { pages: { 1: { imageinfo: [JSON.parse(
@@ -90,4 +90,47 @@ Deno.test("a failing request does not stop the run", async () => {
   assertEquals(pack.spots[0].photo.file, "img/a.jpg");
   assertEquals(log.includes("b: error 503"), true);
   assertEquals(log.at(-1), "set 1, dropped 1, no portrait 1");
+});
+
+// A fetch that answers `statuses` in turn (with optional Retry-After), then the normal body.
+function flaky(statuses, retryAfter = null) {
+  const ok = deps([]).fetchJson;
+  let i = 0;
+  return (url) =>
+    i < statuses.length ? Promise.reject(new HttpError(statuses[i++], url, retryAfter)) : ok(url);
+}
+
+async function runWith(fetchJson) {
+  const { kit, topic } = await setup();
+  const log = [];
+  const sleeps = [];
+  const d = { fetchJson, sleep: (ms) => (sleeps.push(ms), Promise.resolve()), log: (l) => log.push(l) };
+  await importPhotos(kit, topic, { deps: d });
+  return { log, sleeps, pack: JSON.parse(await Deno.readTextFile(`${topic}/topic.json`)) };
+}
+
+Deno.test("429 twice then 200 sets the photo after 5 s and 10 s backoff", async () => {
+  const { log, sleeps, pack } = await runWith(flaky([429, 429]));
+  assertEquals(pack.spots[0].photo.file, "img/a.jpg");
+  assertEquals(sleeps.slice(0, 2), [5000, 10000]);
+  assertEquals(log.some((l) => l.startsWith("a: error")), false);
+});
+
+Deno.test("503 is retried like 429", async () => {
+  const { sleeps, pack } = await runWith(flaky([503]));
+  assertEquals(pack.spots[0].photo.file, "img/a.jpg");
+  assertEquals(sleeps[0], 5000);
+});
+
+Deno.test("Retry-After in seconds is honoured", async () => {
+  const { sleeps } = await runWith(flaky([429], "7"));
+  assertEquals(sleeps[0], 7000);
+});
+
+Deno.test("six 429s drop the photo with 'request failed (429)'", async () => {
+  const { log, sleeps, pack } = await runWith(flaky([429, 429, 429, 429, 429, 429]));
+  assertEquals(sleeps.slice(0, 5), [5000, 10000, 20000, 40000, 80000]);
+  assertEquals(log.includes("a: error request failed (429)"), true);
+  assertEquals(pack.spots[0].photo, { file: "old" }); // a failed request leaves the pack as it was
+  assertEquals(log.at(-1), "set 0, dropped 2, no portrait 1");
 });

@@ -69,3 +69,18 @@ export function dropReason(info) {
   if (!info.descriptionurl) return "no source url";
   return null;
 }
+
+const MIN_WAIT_MS = 1000;
+const MAX_WAIT_MS = 120000;
+const clampWait = (ms) => Math.min(MAX_WAIT_MS, Math.max(MIN_WAIT_MS, ms));
+
+/** Milliseconds to wait before retry number `attempt` (0-based): Retry-After (seconds or HTTP date) if valid, else 5 s doubling; always within 1-120 s. */
+export function retryDelayMs(retryAfter, attempt, now = Date.now()) {
+  const h = String(retryAfter ?? "").trim();
+  if (/^\d+$/.test(h)) return clampWait(Number(h) * 1000);
+  if (/GMT$/.test(h)) {
+    const date = Date.parse(h);
+    if (!Number.isNaN(date)) return clampWait(date - now);
+  }
+  return clampWait(5000 * 2 ** attempt);
+}

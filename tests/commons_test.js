@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { creditsFrom, dropReason, photoFor, stripHtml, infoUrl } from "../tools/commons.js";
+import { creditsFrom, dropReason, photoFor, stripHtml, infoUrl, retryDelayMs } from "../tools/commons.js";
 
 const sample = (n) =>
   JSON.parse(Deno.readTextFileSync(new URL(`./fixtures/commons/${n}.json`, import.meta.url)));
@@ -72,4 +72,21 @@ Deno.test("dropReason names why credits are unusable", () => {
     "no source url",
   );
   assertEquals(dropReason(sample("cc-by-sa-html-author")), null);
+});
+
+Deno.test("retryDelayMs: Retry-After seconds, HTTP date, else 5 s doubling", () => {
+  assertEquals(retryDelayMs("7", 0), 7000);
+  const now = Date.parse("2026-11-16T10:00:00Z");
+  assertEquals(retryDelayMs("Mon, 16 Nov 2026 10:00:30 GMT", 0, now), 30000);
+  assertEquals(retryDelayMs("Mon, 16 Nov 2026 09:00:00 GMT", 0, now), 1000);
+  assertEquals([null, undefined, "junk"].map((h) => retryDelayMs(h, 2)), [20000, 20000, 20000]);
+  assertEquals([0, 1, 2, 3, 4].map((n) => retryDelayMs(null, n)), [5000, 10000, 20000, 40000, 80000]);
+});
+
+Deno.test("retryDelayMs: caps long waits, rejects loose formats, floors at 1 s", () => {
+  const now = Date.parse("2026-11-16T10:00:00Z");
+  assertEquals(retryDelayMs("86400", 0), 120000);
+  assertEquals(retryDelayMs("Fri, 01 Jan 2100 00:00:00 GMT", 0, now), 120000);
+  assertEquals(retryDelayMs("0", 0), 1000);
+  assertEquals(["-5", "1.5", "1 2", "12/25/2030"].map((h) => retryDelayMs(h, 1, now)), [10000, 10000, 10000, 10000]);
 });

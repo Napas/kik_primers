@@ -1,0 +1,59 @@
+// Helpers shared by the page scripts. Pure parts first, DOM wiring last.
+import { esc, isSlug } from "../text.js";
+
+const BACK = '<a href="index.html">Temų sąrašas</a>';
+
+/** The listed topic named by ?topic=, or {error}. */
+export function topicFromUrl(url, index) {
+  const slug = url.searchParams.get("topic");
+  if (!slug) return { error: "Nenurodyta tema." };
+  if (!isSlug(slug) || !Array.isArray(index?.topics) || !index.topics.some((t) => t.slug === slug)) {
+    return { error: "Tokios temos nėra." };
+  }
+  return { slug };
+}
+
+/** "right/total" of the newest session, or null. */
+export function lastScore(sessions) {
+  const s = sessions.at(-1);
+  return s ? `${s.right}/${s.total}` : null;
+}
+
+async function fetchJson(path) {
+  const res = await fetch(path);
+  if (!res.ok) throw new Error(`${path}: ${res.status}`);
+  return res.json();
+}
+
+export async function loadIndex() {
+  const index = await fetchJson("topics/index.json");
+  if (!Array.isArray(index?.topics)) throw new Error("topics/index.json: no topics");
+  return index;
+}
+
+export function loadPack(slug) {
+  if (!isSlug(slug)) throw new Error(`bad slug ${slug}`);
+  return fetchJson(`topics/${slug}/topic.json`);
+}
+
+/** Marks the page ready for tests; counts become data-* attributes. */
+export function markReady(kind, counts = {}) {
+  const d = document.documentElement.dataset;
+  for (const [k, v] of Object.entries(counts)) d[k] = String(v);
+  d.ready = kind;
+}
+
+export function showError(msg) {
+  document.documentElement.dataset.error = msg;
+  const app = document.getElementById("app");
+  if (app) app.innerHTML = `<p class="error">${esc(msg)} ${BACK}</p>`;
+}
+
+/** Runs a page's main; any failure becomes a visible error message. */
+export async function run(main) {
+  try {
+    await main();
+  } catch {
+    showError("Nepavyko įkelti turinio.");
+  }
+}

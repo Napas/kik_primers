@@ -179,8 +179,8 @@ Deno.test({
   },
 });
 
-/** Opens `url` in headless Chrome with reduced motion and runs fn({ev, sleep, errors}) over the DevTools protocol. */
-async function withPage(url, fn) {
+/** Opens `url` in headless Chrome (w×h, reduced motion) and runs fn({ev, sleep, errors}) over the DevTools protocol. */
+async function withPage(url, fn, { w = 1280, h = 800 } = {}) {
   const profile = await Deno.makeTempDir();
   const chrome = new Deno.Command(CHROME, {
     args: [
@@ -189,7 +189,7 @@ async function withPage(url, fn) {
       "--enable-unsafe-swiftshader",
       "--force-prefers-reduced-motion",
       "--remote-debugging-port=0",
-      "--window-size=1280,800",
+      `--window-size=${w},${h}`,
       `--user-data-dir=${profile}`,
       "--no-first-run",
       "--no-default-browser-check",
@@ -225,6 +225,8 @@ async function withPage(url, fn) {
     const ev = async (expression) =>
       (await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true })).result?.result?.value;
     await send("Runtime.enable");
+    // Headless windows have a minimum width (500 px); the override gives the exact viewport.
+    await send("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile: false });
     await send("Page.navigate", { url });
     for (let i = 0; i < 100 && (await ev("document.documentElement.dataset.ready")) === undefined; i++) await sleep(100);
     await fn({ ev, sleep, errors });
@@ -301,13 +303,12 @@ Deno.test({
       });
       for (const { slug } of index.topics) {
         const pack = JSON.parse(await Deno.readTextFile(`${site}/topics/${slug}/topic.json`));
-        for (const [w, h] of [[1400, 800], [390, 844]]) {
-          await t.step(`${slug}: world at ${w}×${h} builds every room and spot`, async () => {
-            const a = htmlAttrs(await dumpDom(`${base}world.html?topic=${slug}`, { w, h }));
-            assertEquals(a["data-error"], undefined);
-            assertEquals([a["data-ready"], a["data-rooms"], a["data-spots"]], ["world", `${pack.rooms.length}`, `${pack.spots.length}`]);
-          });
-        }
+        // The 390×844 phone run is the CDP test below: headless windows are at least 500 px wide.
+        await t.step(`${slug}: world at 1400×800 builds every room and spot`, async () => {
+          const a = htmlAttrs(await dumpDom(`${base}world.html?topic=${slug}`, { w: 1400, h: 800 }));
+          assertEquals(a["data-error"], undefined);
+          assertEquals([a["data-ready"], a["data-rooms"], a["data-spots"]], ["world", `${pack.rooms.length}`, `${pack.spots.length}`]);
+        });
         await t.step(`${slug}: test page`, async () => {
           const a = htmlAttrs(await dumpDom(`${base}test.html?topic=${slug}`));
           assertEquals([a["data-error"], a["data-ready"]], [undefined, "test"]);
@@ -329,6 +330,45 @@ Deno.test({
           assert(dom.includes(`src="${imgUrl(pack, person.photo.file)}"`), "no photo in the panel");
         });
       }
+    } finally {
+      await server.shutdown();
+    }
+  },
+});
+
+Deno.test({
+  name: "real pack on a 390×844 phone: every room and spot built, close button stays in view, photo leaves room for text",
+  ignore,
+  sanitizeResources: false,
+  sanitizeOps: false,
+  fn: async () => {
+    const site = `${root}site`;
+    const { slug } = JSON.parse(await Deno.readTextFile(`${site}/topics/index.json`)).topics[0];
+    const pack = JSON.parse(await Deno.readTextFile(`${site}/topics/${slug}/topic.json`));
+    const person = pack.spots.find((s) => s.kind === "person" && s.photo);
+    const server = serveDir(site);
+    try {
+      const url = `http://127.0.0.1:${server.addr.port}/world.html?topic=${slug}&nostore=1#${person.id}`;
+      await withPage(url, async ({ ev, sleep, errors }) => {
+        assertEquals(await ev("innerWidth"), 390);
+        const built = JSON.parse(await ev(`JSON.stringify(document.documentElement.dataset)`));
+        assertEquals(built.error, undefined);
+        assertEquals([built.ready, built.rooms, built.spots], ["world", `${pack.rooms.length}`, `${pack.spots.length}`]);
+        const loaded = `document.documentElement.dataset.open === "${person.id}" && panel.querySelector("figure img")?.naturalHeight > 0`;
+        for (let i = 0; i < 100 && !(await ev(loaded)); i++) await sleep(100);
+        assert(await ev(loaded), "the panel opens with its photo loaded");
+        const r = JSON.parse(await ev(`(() => {
+          panel.scrollTop = panel.scrollHeight;
+          const c = panel.querySelector("[data-close]").getBoundingClientRect();
+          const p = panel.getBoundingClientRect();
+          const img = panel.querySelector("figure img").getBoundingClientRect();
+          return JSON.stringify({ scrolled: panel.scrollTop, close: [c.top, c.bottom], panel: [p.top, p.bottom], img: img.height, h: innerHeight });
+        })()`));
+        assert(r.scrolled > 0, "the panel scrolls");
+        assert(r.close[0] >= r.panel[0] && r.close[1] <= r.panel[1], `close button out of view: ${JSON.stringify(r)}`);
+        assert(r.img <= 0.3 * r.h + 1, `photo ${r.img}px tall in a ${r.h}px view`);
+        assertEquals(errors, []);
+      }, { w: 390, h: 844 });
     } finally {
       await server.shutdown();
     }

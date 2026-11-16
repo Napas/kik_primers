@@ -29,7 +29,7 @@ button:disabled { opacity: .4; cursor: default; }
 }
 .panel .years, .panel .aliases, .panel .sources { margin: 0 0 .5rem; color: var(--muted); font-size: .9rem; }
 .panel figure { margin: .75rem 0; }
-.panel img { max-width: 100%; height: auto; border-radius: 4px; }
+.panel img { display: block; max-width: 100%; max-height: min(22rem, 30vh); width: auto; height: auto; border-radius: 4px; }
 .panel figcaption { font-size: .8rem; color: var(--muted); }
 .panel ul { padding-left: 1.1rem; }
 .panel ul.spines, .panel ul.spots { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -102,7 +102,7 @@ pre.licence { white-space: pre-wrap; font-size: .8rem; color: var(--muted); }
 .world canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
 
 /* World panel and overview */
-#panel .close { float: right; margin: 0 0 .5rem .5rem; }
+#panel .close { position: sticky; top: 0; z-index: 1; float: right; margin: 0 0 .5rem .5rem; } /* stays in view while the panel scrolls */
 #panel-body > .panel { border: 0; padding: 0; background: none; overflow: visible; }
 .overview { position: fixed; z-index: 5; top: 3.5rem; left: 1rem; width: min(22rem, calc(100% - 2rem)); }
 .overview .strip { position: relative; height: 1.4rem; background: color-mix(in srgb, var(--panel) 80%, transparent); border: 1px solid var(--path); border-radius: 4px; }

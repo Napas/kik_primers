@@ -1,5 +1,6 @@
 // Headless Chrome smoke tests. Run only with PRIMER_CHROME=1 (needs Chrome and a local port).
 import { assert, assertEquals } from "@std/assert";
+import { imgUrl } from "../site/lib/render.js";
 
 const root = new URL("../", import.meta.url).pathname;
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
@@ -282,5 +283,54 @@ Deno.test({
         assertEquals(errors, []);
       });
     });
+  },
+});
+
+Deno.test({
+  name: "the real packs in site/ render in headless Chrome",
+  ignore,
+  fn: async (t) => {
+    const site = `${root}site`;
+    const index = JSON.parse(await Deno.readTextFile(`${site}/topics/index.json`));
+    const server = serveDir(site);
+    const base = `http://127.0.0.1:${server.addr.port}/`;
+    try {
+      await t.step("index page", async () => {
+        const a = htmlAttrs(await dumpDom(`${base}index.html`));
+        assertEquals([a["data-error"], a["data-ready"]], [undefined, "index"]);
+      });
+      for (const { slug } of index.topics) {
+        const pack = JSON.parse(await Deno.readTextFile(`${site}/topics/${slug}/topic.json`));
+        for (const [w, h] of [[1400, 800], [390, 844]]) {
+          await t.step(`${slug}: world at ${w}×${h} builds every room and spot`, async () => {
+            const a = htmlAttrs(await dumpDom(`${base}world.html?topic=${slug}`, { w, h }));
+            assertEquals(a["data-error"], undefined);
+            assertEquals([a["data-ready"], a["data-rooms"], a["data-spots"]], ["world", `${pack.rooms.length}`, `${pack.spots.length}`]);
+          });
+        }
+        await t.step(`${slug}: test page`, async () => {
+          const a = htmlAttrs(await dumpDom(`${base}test.html?topic=${slug}`));
+          assertEquals([a["data-error"], a["data-ready"]], [undefined, "test"]);
+        });
+        const withPhoto = pack.spots.filter((s) => s.photo);
+        await t.step(`${slug}: every photo is served at its imgUrl`, async () => {
+          for (const s of withPhoto) {
+            const res = await fetch(base + imgUrl(pack, s.photo.file));
+            await res.body?.cancel();
+            assertEquals(res.status, 200, `${s.id}: ${s.photo.file}`);
+            assert(res.headers.get("content-type").startsWith("image/"), `${s.id}: not an image`);
+          }
+        });
+        const person = withPhoto.find((s) => s.kind === "person");
+        if (!person) continue;
+        await t.step(`${slug}: #${person.id} opens its panel with the photo`, async () => {
+          const dom = await dumpDom(`${base}world.html?topic=${slug}#${person.id}`);
+          assertEquals(htmlAttrs(dom)["data-open"], person.id);
+          assert(dom.includes(`src="${imgUrl(pack, person.photo.file)}"`), "no photo in the panel");
+        });
+      }
+    } finally {
+      await server.shutdown();
+    }
   },
 });

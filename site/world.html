@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pasaulis</title>
+<link rel="stylesheet" href="lib/site.css">
+<script type="importmap">{"imports": {"three": "./lib/three/three.module.min.js"}}</script>
+</head>
+<body class="world-page">
+<header class="bar"><a href="index.html">Temų sąrašas</a> <a href="about.html">Apie</a> <a id="text-link" hidden>Tekstinis vaizdas</a></header>
+<div id="world" class="world" hidden></div>
+<nav id="overview" class="overview" aria-label="Salės" hidden></nav>
+<aside id="panel" class="panel" aria-label="Aprašymas" tabindex="-1" inert>
+<div class="panel-bar"><button type="button" class="close" data-close aria-label="Uždaryti">×</button></div>
+<div id="panel-body"></div>
+</aside>
+<main id="app" class="page"></main>
+<script type="module" src="lib/pages/world.js"></script>
+</body>
+</html>

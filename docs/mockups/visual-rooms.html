@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Primer world: distinct rooms</title>
+<style>
+  body { margin: 0; font-family: system-ui, sans-serif; background: #0b1220; color: #e9e4d8; }
+  header { padding: 14px 16px; }
+  header h1 { margin: 0 0 4px; font-size: 19px; }
+  header p { margin: 0; color: #aab; font-size: 13px; max-width: 900px; }
+  #v { position: relative; height: calc(100vh - 80px); min-height: 480px; }
+  #v canvas { display: block; width: 100%; height: 100%; }
+  .panel { position: absolute; right: 14px; bottom: 14px; width: 210px; padding: 12px 14px; border-radius: 8px;
+           font-size: 13px; line-height: 1.4; background: #0b1220e6; border: 1px solid #d9b25f55; }
+  .panel h2 { margin: 0 0 2px; font-size: 17px; }
+  .panel .yrs { opacity: .7; margin-bottom: 6px; }
+  .panel .ph { height: 56px; margin: 6px 0; display: grid; place-items: center; font-size: 26px; font-weight: 700; background: #1b2740; color: #d9b25f; }
+  .panel .cr { font-size: 10px; opacity: .6; }
+  .panel .ln span { color: #d9b25f; text-decoration: underline; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<header>
+  <h1>B · Night museum, with a distinct room per era</h1>
+  <p>Room 2 "Mažoji Lietuva" is a red-brick Lutheran hall (like Tolminkiemis church), with warm lancet windows. Room 3 "Žemaičiai" is a log chapel with a roadside shrine pillar, in cooler moonlight. Same path, years and spots as before. Drag to turn, scroll to zoom.</p>
+</header>
+<div id="v">
+  <div class="panel"><h2>Kristijonas Donelaitis</h2><div class="yrs">1714–1780</div><div class="ph">KD</div><div class="cr">Nuotrauka: autorius, CC BY-SA 4.0</div>
+  Poemos „Metai“ autorius, lietuvių grožinės literatūros pradininkas, Tolminkiemio klebonas.<div class="ln">Ryšiai: <span>Rėza</span> · <span>Nėris</span></div></div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const BG = 0x0e1726, GOLD = 0xd9b25f, TEXT = '#e9e4d8';
+const X = y => (y - 1790) * 0.14;
+
+const host = document.getElementById('v');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true;
+host.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(BG); scene.fog = new THREE.Fog(BG, 22, 45);
+const cam = new THREE.PerspectiveCamera(40, 1, 0.1, 100); cam.position.set(-4, 11, 19);
+const ctl = new OrbitControls(cam, renderer.domElement); ctl.target.set(X(1815), 0.8, -0.5);
+ctl.enableDamping = true; ctl.maxPolarAngle = 1.35; ctl.autoRotate = true; ctl.autoRotateSpeed = 0.4;
+scene.add(new THREE.AmbientLight(0x8899cc, 0.3));
+
+function canvasTex(w, h, draw, repeat) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'));
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  if (repeat) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(...repeat); } return t;
+}
+const brick = rep => canvasTex(128, 64, g => {
+  g.fillStyle = '#3a1d17'; g.fillRect(0, 0, 128, 64);
+  for (let r = 0; r < 4; r++) for (let c = -1; c < 4; c++) {
+    g.fillStyle = ['#8a3a28', '#7a3122', '#933f2b'][(r + c + 3) % 3];
+    g.fillRect(c * 40 + (r % 2) * 20 + 2, r * 16 + 2, 36, 12);
+  }
+}, rep);
+const planks = rep => canvasTex(128, 128, g => {
+  for (let i = 0; i < 8; i++) { g.fillStyle = ['#4a3424', '#3f2c1f', '#523a28'][i % 3]; g.fillRect(0, i * 16, 128, 15); }
+}, rep);
+const std = (o) => new THREE.MeshStandardMaterial({ roughness: 0.9, ...o });
+function add(geo, mat, pos, rotY = 0) {
+  const m = new THREE.Mesh(geo, mat); m.position.set(...pos); m.rotation.y = rotY;
+  m.castShadow = m.receiveShadow = true; scene.add(m); return m;
+}
+function label(text, size = 56, w = 640) {
+  const t = canvasTex(w, 128, g => { g.fillStyle = TEXT; g.font = `600 ${size}px system-ui`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(text, w / 2, 64); });
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false })); s.scale.set(w / 128, 1, 1); return s;
+}
+function put(obj, pos, k) { obj.position.set(...pos); obj.scale.multiplyScalar(k); scene.add(obj); return obj; }
+
+// floor, path, years
+add(new THREE.BoxGeometry(60, 0.1, 24), std({ color: 0x141e33 }), [5, -0.05, 0]);
+add(new THREE.BoxGeometry(46, 0.06, 1.4), std({ color: 0x26355a }), [5, 0.03, 3.4]);
+for (const y of [1700, 1750, 1800, 1850, 1900]) {
+  add(new THREE.BoxGeometry(0.06, 0.08, 1.4), std({ color: GOLD }), [X(y), 0.06, 3.4]);
+  put(label(String(y)), [X(y), 0.5, 4.6], 0.5);
+}
+
+// ROOM 2: red-brick Lutheran hall, stepped gable, warm lancet windows
+{
+  const a = X(1725), b = X(1830), m = (a + b) / 2, L = b - a;
+  add(new THREE.BoxGeometry(L, 0.04, 4.8), std({ map: brick([L / 1.2, 4]), color: 0x6b3a30 }), [m, 0.02, -0.4]);
+  const wall = std({ map: brick([L / 1.6, 2.2]) });
+  add(new THREE.BoxGeometry(L, 2.4, 0.3), wall, [m, 1.2, -2.8]);
+  for (const x of [a, b]) add(new THREE.BoxGeometry(0.3, 2.4, 4.8), std({ map: brick([3, 2.2]) }), [x, 1.2, -0.4]);
+  // stepped gable above the back wall
+  for (let i = 0; i < 4; i++) add(new THREE.BoxGeometry(L * (0.5 - i * 0.11), 0.45, 0.3), wall, [m, 2.62 + i * 0.45, -2.8]);
+  // lancet windows glowing
+  for (let i = 0; i < 4; i++) {
+    const x = a + L * (0.2 + i * 0.2);
+    add(new THREE.BoxGeometry(0.45, 1.3, 0.05), std({ color: 0xffc46b, emissive: 0xffa640, emissiveIntensity: 1.2 }), [x, 1.3, -2.62]);
+    add(new THREE.ConeGeometry(0.32, 0.4, 4), std({ color: 0xffc46b, emissive: 0xffa640, emissiveIntensity: 1.2 }), [x, 2.12, -2.62], Math.PI / 4);
+  }
+  const warm = new THREE.PointLight(0xffb060, 25, 12); warm.position.set(m, 3, -1); scene.add(warm);
+  put(label('2 · Mažoji Lietuva', 60, 768), [m, 4.7, -2.7], 0.75);
+}
+
+// ROOM 3: Samogitian log chapel, roadside shrine pillar, moonlight
+{
+  const a = X(1830) + 0.6, b = X(1880), m = (a + b) / 2, L = b - a;
+  add(new THREE.BoxGeometry(L, 0.04, 4.8), std({ map: planks([2, L / 1.5]) }), [m, 0.02, -0.4]);
+  const log = std({ color: 0x5a4030 });
+  for (let i = 0; i < 6; i++) {
+    const back = add(new THREE.CylinderGeometry(0.2, 0.2, L + 0.4, 10), log, [m, 0.2 + i * 0.4, -2.8]); back.rotation.z = Math.PI / 2;
+    for (const x of [a, b]) { const s = add(new THREE.CylinderGeometry(0.2, 0.2, 5.2, 10), log, [x, 0.2 + i * 0.4, -0.4]); s.rotation.x = Math.PI / 2; }
+  }
+  // gable roof outline over the back wall
+  const roof = std({ color: 0x3a2a1f });
+  for (const s of [-1, 1]) { const r = add(new THREE.BoxGeometry(L * 0.62, 0.18, 0.5), roof, [m + s * L * 0.24, 3.3, -2.8]); r.rotation.z = -s * 0.5; }
+  // koplytstulpis: carved pole with a little roofed shrine
+  const px = a + L * 0.78, pz = 0.9;
+  add(new THREE.BoxGeometry(0.22, 2.6, 0.22), std({ color: 0x6a4c36 }), [px, 1.3, pz]);
+  add(new THREE.BoxGeometry(0.6, 0.55, 0.45), std({ color: 0x6a4c36 }), [px, 2.75, pz]);
+  add(new THREE.ConeGeometry(0.55, 0.5, 4), std({ color: 0x3a2a1f }), [px, 3.25, pz], Math.PI / 4);
+  add(new THREE.BoxGeometry(0.06, 0.4, 0.06), std({ color: GOLD }), [px, 3.65, pz]);
+  const moon = new THREE.SpotLight(0x9fc4ff, 70, 16, 0.6, 0.7); moon.position.set(m, 7, 3); moon.target.position.set(m, 0, -0.5);
+  moon.castShadow = true; scene.add(moon, moon.target);
+  put(label('3 · Žemaičiai', 60, 640), [m, 4.4, -2.7], 0.7);
+}
+
+// spots
+function portrait(initials) {
+  return canvasTex(256, 320, g => { g.fillStyle = '#1b2740'; g.fillRect(0, 0, 256, 320); g.fillStyle = '#d9b25f';
+    g.font = '700 110px system-ui'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(initials, 128, 165); });
+}
+function spot(x, z, initials, name) {
+  add(new THREE.BoxGeometry(0.9, 0.8, 0.9), std({ color: 0x2c3b5e }), [x, 0.4, z]);
+  add(new THREE.BoxGeometry(0.9, 1.15, 0.08), std({ color: GOLD, metalness: 0.6, roughness: 0.4 }), [x, 1.4, z]);
+  const pic = new THREE.Mesh(new THREE.PlaneGeometry(0.75, 0.98), new THREE.MeshBasicMaterial({ map: portrait(initials) }));
+  pic.position.set(x, 1.4, z + 0.05); scene.add(pic);
+  put(label(name, 52, 512), [x, 2.4, z], 0.5);
+  const sp = new THREE.SpotLight(0xffe2a8, 30, 8, 0.45, 0.6); sp.position.set(x, 5, z + 2); sp.target.position.set(x, 0.8, z); scene.add(sp, sp.target);
+}
+spot(X(1743), 0, 'KD', 'Donelaitis');
+spot(X(1818), -0.8, 'LR', 'Rėza');
+add(new THREE.BoxGeometry(0.5, 0.12, 0.7), std({ color: GOLD }), [X(1818) + 1.4, 0.06, 0.9]);
+put(label('„Metai“ 1818', 50, 512), [X(1818) + 1.4, 0.6, 0.9], 0.45);
+spot(X(1850), -0.6, 'MV', 'Valančius');
+spot(X(1859), 0.6, 'AB', 'Baranauskas');
+
+// selected: Donelaitis lifespan on the path + link arc
+add(new THREE.BoxGeometry(X(1780) - X(1714), 0.03, 0.35), std({ color: GOLD, emissive: GOLD, emissiveIntensity: 0.4 }), [(X(1714) + X(1780)) / 2, 0.08, 3.4]);
+const p = new THREE.Vector3(X(1743), 2.0, 0), q = new THREE.Vector3(X(1818), 2.0, -0.8);
+const c = p.clone().add(q).multiplyScalar(0.5); c.y = 4.2;
+scene.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.QuadraticBezierCurve3(p, c, q), 40, 0.035, 8), new THREE.MeshBasicMaterial({ color: GOLD })));
+
+const resize = () => { const w = host.clientWidth, h = host.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); };
+new ResizeObserver(resize).observe(host); resize();
+renderer.setAnimationLoop(() => { ctl.update(); renderer.render(scene, cam); });
+</script>
+</body>
+</html>

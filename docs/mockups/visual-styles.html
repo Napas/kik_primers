@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Primer world: visual styles</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; font-family: system-ui, sans-serif; background: #ddd; color: #222; }
+  header { padding: 16px; }
+  header h1 { margin: 0 0 4px; font-size: 20px; }
+  header p { margin: 0; color: #555; font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; padding: 0 16px 16px; }
+  .opt { position: relative; height: 560px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px #0003; }
+  .opt canvas { display: block; width: 100%; height: 100%; }
+  .tag { position: absolute; top: 12px; left: 12px; padding: 6px 10px; border-radius: 6px; font-size: 14px; font-weight: 600; }
+  .panel { position: absolute; right: 12px; bottom: 12px; width: 190px; padding: 12px 14px; border-radius: 8px; font-size: 13px; line-height: 1.4; }
+  .panel h2 { margin: 0 0 2px; font-size: 17px; }
+  .panel .yrs { opacity: .7; margin-bottom: 6px; }
+  .panel .ph { height: 56px; margin: 6px 0; display: grid; place-items: center; font-size: 28px; font-weight: 700; }
+  .panel .cr { font-size: 10px; opacity: .6; }
+  .panel .ln { margin-top: 6px; }
+  .panel .ln span { text-decoration: underline; cursor: pointer; }
+  /* A: paper maquette */
+  #a .tag, #a .panel { background: #fffaf0ee; color: #3b2f25; font-family: Georgia, serif; }
+  #a .panel .ph { background: #e9dcc5; color: #c0573e; }
+  #a .panel .ln span { color: #c0573e; }
+  /* B: night museum */
+  #b .tag, #b .panel { background: #0b1220e6; color: #e9e4d8; border: 1px solid #d9b25f55; }
+  #b .panel .ph { background: #1b2740; color: #d9b25f; }
+  #b .panel .ln span { color: #d9b25f; }
+  /* C: woodcut / folk */
+  #c .tag, #c .panel { background: #f7f3ea; color: #111; font-family: Georgia, serif; border: 2px solid #111; border-radius: 0; }
+  #c .panel .ph { background: #fff; color: #b3261e; border: 2px solid #111; }
+  #c .panel .ln span { color: #b3261e; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<header>
+  <h1>Three looks for the same room</h1>
+  <p>The same content in each: the "Mažoji Lietuva" room on the time path, Donelaitis and Rėza, "Metai" (1818), Donelaitis's lifespan and his link to Rėza. Drag to turn, scroll to zoom. Placeholder initials instead of photos.</p>
+</header>
+<div class="grid">
+  <div class="opt" id="a"><div class="tag">A · Popierinis maketas</div>
+    <div class="panel"><h2>Kristijonas Donelaitis</h2><div class="yrs">1714–1780</div><div class="ph">KD</div><div class="cr">Nuotrauka: autorius, CC BY-SA 4.0</div>
+    Poemos „Metai“ autorius, lietuvių grožinės literatūros pradininkas, Tolminkiemio klebonas.<div class="ln">Ryšiai: <span>Rėza</span> · <span>Nėris</span></div></div></div>
+  <div class="opt" id="b"><div class="tag">B · Naktinis muziejus</div>
+    <div class="panel"><h2>Kristijonas Donelaitis</h2><div class="yrs">1714–1780</div><div class="ph">KD</div><div class="cr">Nuotrauka: autorius, CC BY-SA 4.0</div>
+    Poemos „Metai“ autorius, lietuvių grožinės literatūros pradininkas, Tolminkiemio klebonas.<div class="ln">Ryšiai: <span>Rėza</span> · <span>Nėris</span></div></div></div>
+  <div class="opt" id="c"><div class="tag">C · Raižinys</div>
+    <div class="panel"><h2>Kristijonas Donelaitis</h2><div class="yrs">1714–1780</div><div class="ph">KD</div><div class="cr">Nuotrauka: autorius, CC BY-SA 4.0</div>
+    Poemos „Metai“ autorius, lietuvių grožinės literatūros pradininkas, Tolminkiemio klebonas.<div class="ln">Ryšiai: <span>Rėza</span> · <span>Nėris</span></div></div></div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const STYLES = {
+  a: { bg: 0xf3ede2, floor: 0xe8dcc6, path: 0xd9c8a9, wall: 0xfbf6ec, wall2: 0xefe4d0, plinth: 0xf6efe2,
+       accent: 0xc0573e, text: '#3b2f25', font: 'Georgia, serif', mat: 'std', light: 'soft', frame: '#e9dcc5', ink: '#c0573e' },
+  b: { bg: 0x0e1726, floor: 0x1b2740, path: 0x26355a, wall: 0x24324f, wall2: 0x1f2b45, plinth: 0x2c3b5e,
+       accent: 0xd9b25f, text: '#e9e4d8', font: 'system-ui, sans-serif', mat: 'std', light: 'spots', frame: '#1b2740', ink: '#d9b25f' },
+  c: { bg: 0xf7f3ea, floor: 0xf7f3ea, path: 0xe9e1cf, wall: 0xffffff, wall2: 0xf1ead9, plinth: 0xffffff,
+       accent: 0xb3261e, text: '#111', font: 'Georgia, serif', mat: 'toon', light: 'flat', frame: '#ffffff', ink: '#b3261e' },
+};
+
+const X = y => (y - 1760) * 0.12;            // years -> metres along the path
+
+function label(text, s, size = 64, w = 512) {
+  const c = document.createElement('canvas'); c.width = w; c.height = 128;
+  const g = c.getContext('2d'); g.fillStyle = s.text; g.font = `600 ${size}px ${s.font}`;
+  g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(text, w / 2, 64);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
+  sp.scale.set(w / 128, 1, 1); return sp;
+}
+function portrait(initials, s) {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 320;
+  const g = c.getContext('2d'); g.fillStyle = s.frame; g.fillRect(0, 0, 256, 320);
+  g.fillStyle = s.ink; g.font = `700 110px ${s.font}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillText(initials, 128, 165); return new THREE.CanvasTexture(c);
+}
+
+function build(id) {
+  const s = STYLES[id], host = document.getElementById(id);
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true;
+  host.prepend(renderer.domElement);
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(s.bg);
+  if (id === 'b') scene.fog = new THREE.Fog(s.bg, 14, 30);
+  const cam = new THREE.PerspectiveCamera(40, 1, 0.1, 100); cam.position.set(-6, 9, 15);
+  const ctl = new OrbitControls(cam, renderer.domElement); ctl.target.set(2.5, 0.6, 0.5);
+  ctl.enableDamping = true; ctl.maxPolarAngle = 1.35; ctl.autoRotate = true; ctl.autoRotateSpeed = 0.6;
+
+  const gradient = new THREE.DataTexture(new Uint8Array([140, 140, 140, 255, 255, 255, 255, 255]), 2, 1);
+  gradient.minFilter = gradient.magFilter = THREE.NearestFilter; gradient.needsUpdate = true;
+  const M = color => s.mat === 'toon' ? new THREE.MeshToonMaterial({ color, gradientMap: gradient })
+                                      : new THREE.MeshStandardMaterial({ color, roughness: 0.95 });
+  const add = (geo, color, pos, cast = true) => {
+    const m = new THREE.Mesh(geo, M(color)); m.position.set(...pos); m.castShadow = cast; m.receiveShadow = true;
+    if (s.mat === 'toon') m.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({ color: 0x111111 })));
+    scene.add(m); return m;
+  };
+
+  // lights
+  if (s.light === 'spots') {
+    scene.add(new THREE.AmbientLight(0x8899cc, 0.35));
+    for (const x of [X(1743), X(1818)]) {
+      const sp = new THREE.SpotLight(0xffe2a8, 60, 12, 0.5, 0.6); sp.position.set(x, 6, 2.5); sp.target.position.set(x, 0, 0);
+      sp.castShadow = true; scene.add(sp, sp.target);
+    }
+  } else {
+    scene.add(new THREE.HemisphereLight(0xffffff, s.bg, s.light === 'flat' ? 1.6 : 1.1));
+    const sun = new THREE.DirectionalLight(0xffffff, s.light === 'flat' ? 0.8 : 1.6); sun.position.set(-6, 10, 6);
+    sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+    Object.assign(sun.shadow.camera, { left: -14, right: 14, top: 10, bottom: -10 }); scene.add(sun);
+  }
+
+  // floor, path, year ticks
+  add(new THREE.BoxGeometry(40, 0.1, 20), s.floor, [0, -0.05, 0], false);
+  add(new THREE.BoxGeometry(34, 0.06, 1.4), s.path, [0, 0.03, 3.2], false);
+  for (const y of [1700, 1750, 1800, 1850]) {
+    add(new THREE.BoxGeometry(0.06, 0.08, 1.4), s.accent, [X(y), 0.06, 3.2], false);
+    const l = label(String(y), s, 56); l.position.set(X(y), 0.5, 4.3); l.scale.multiplyScalar(0.55); scene.add(l);
+  }
+
+  // room: back wall + side walls with a gap toward the path, title over the entrance
+  const r0 = X(1725), r1 = X(1830), mid = (r0 + r1) / 2, len = r1 - r0;
+  add(new THREE.BoxGeometry(len, 1.6, 0.2), s.wall, [mid, 0.8, -2.2]);
+  add(new THREE.BoxGeometry(0.2, 1.6, 3.6), s.wall2, [r0, 0.8, -0.5]);
+  add(new THREE.BoxGeometry(0.2, 1.6, 3.6), s.wall2, [r1, 0.8, -0.5]);
+  const t = label('2 · Mažoji Lietuva', s, 60, 768); t.position.set(mid, 2.3, -2.1); t.scale.multiplyScalar(0.7); scene.add(t);
+  // next room, partly visible
+  add(new THREE.BoxGeometry(5, 1.6, 0.2), s.wall2, [r1 + 3.6, 0.8, -2.2]);
+  const t2 = label('3 · Žemaičiai', s, 60, 512); t2.position.set(r1 + 3.6, 2.3, -2.1); t2.scale.multiplyScalar(0.6); scene.add(t2);
+
+  // spots
+  const spot = (x, z, initials, name) => {
+    add(new THREE.BoxGeometry(0.9, 0.8, 0.9), s.plinth, [x, 0.4, z]);
+    add(new THREE.BoxGeometry(0.9, 1.15, 0.08), s.accent, [x, 1.4, z]);
+    const pic = new THREE.Mesh(new THREE.PlaneGeometry(0.75, 0.98), new THREE.MeshBasicMaterial({ map: portrait(initials, s) }));
+    pic.position.set(x, 1.4, z + 0.05); scene.add(pic);
+    const l = label(name, s, 52); l.position.set(x, 2.35, z); l.scale.multiplyScalar(0.5); scene.add(l);
+  };
+  spot(X(1743), 0, 'KD', 'Donelaitis');
+  spot(X(1818), -0.6, 'LR', 'Rėza');
+  // a work: the book "Metai" (1818)
+  add(new THREE.BoxGeometry(0.5, 0.12, 0.7), s.accent, [X(1818) + 1.3, 0.06, 0.8]);
+  const bl = label('„Metai“ 1818', s, 50); bl.position.set(X(1818) + 1.3, 0.6, 0.8); bl.scale.multiplyScalar(0.45); scene.add(bl);
+  // Donelaitis selected: lifespan on the path, link arc to Rėza
+  const life = add(new THREE.BoxGeometry(X(1780) - X(1714), 0.03, 0.35), s.accent, [(X(1714) + X(1780)) / 2, 0.08, 3.2], false);
+  if (s.mat !== 'toon') { life.material.emissive = new THREE.Color(s.accent); life.material.emissiveIntensity = 0.35; }
+  const a = new THREE.Vector3(X(1743), 2.0, 0), b = new THREE.Vector3(X(1818), 2.0, -0.6);
+  const ctrl = a.clone().add(b).multiplyScalar(0.5); ctrl.y = 4;
+  const curve = new THREE.QuadraticBezierCurve3(a, ctrl, b);
+  scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 40, 0.035, 8), new THREE.MeshBasicMaterial({ color: s.accent })));
+
+  const resize = () => { const w = host.clientWidth, h = host.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); };
+  new ResizeObserver(resize).observe(host); resize();
+  renderer.setAnimationLoop(() => { ctl.update(); renderer.render(scene, cam); });
+}
+['a', 'b', 'c'].forEach(build);
+</script>
+</body>
+</html>

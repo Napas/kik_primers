@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "slug": "mini-test",
+  "title": "Mažas bandymas",
+  "intro": "Trumpa tema bandymams.",
+  "layout": "time",
+  "rooms": [
+    {"n": 1, "title": "Spaustuvė", "intro": "Pirmosios knygos.", "why": [{"q": "Kodėl spausdinta?", "a": "Nes tai pradžia."}], "span": [1500, 1600], "style": "print-shop"},
+    {"n": 2, "title": "Bažnyčia", "intro": "Vėlesni laikai.", "why": [], "span": [1700, 1800], "style": "brick-church"}
+  ],
+  "spots": [
+    {"id": "jonas-rastas", "room": 1, "kind": "person", "name": "Jonas Rašytojas", "aliases": ["Rastas"], "years": [1520, 1580], "at": 1547,
+     "text": "Pirmasis autorius.", "links": [{"to": "pirma-knyga", "label": "parašė"}],
+     "photo": {"file": "img/jonas.jpg", "author": "Petras Fotografas", "license": "CC BY-SA 4.0", "source_url": "https://commons.wikimedia.org/wiki/File:Jonas.jpg"},
+     "life": [{"year": 1520, "label": "gimė", "place": "Vilnius"}, {"year": 1547, "label": "išleido knygą"}],
+     "places": [{"name": "Vilnius", "lat": 54.69, "lon": 25.28}]},
+    {"id": "pirma-knyga", "room": 1, "kind": "work", "name": "Pirma knyga", "aliases": [], "years": [1547], "at": 1547,
+     "text": "Pirmoji knyga.", "links": [{"to": "jonas-rastas", "label": "autorius"}], "by": "jonas-rastas",
+     "plot": {"characters": [{"name": "Vaikas", "role": "herojus"}, {"name": "Senelis", "role": "mokytojas"}],
+       "relations": [{"a": "Vaikas", "b": "Senelis", "label": "anūkas"}],
+       "beats": [{"text": "Vaikas išeina.", "characters": ["Vaikas"]}, {"text": "Sutinka senelį.", "characters": ["Vaikas", "Senelis"]}, {"text": "Mokosi.", "characters": ["Vaikas"]}, {"text": "Grįžta.", "characters": ["Vaikas"]}],
+       "sources": ["https://example.org/knyga"]}},
+    {"id": "didysis-sukilimas", "room": 2, "kind": "event", "name": "Didysis sukilimas", "aliases": [], "years": [1794], "at": 1794,
+     "text": "Sukilimas.", "links": []}
+  ],
+  "questions": [
+    {"id": "q-pirma", "q": "Kas parašė pirmąją knygą?", "a": "Jonas Rašytojas", "room": 1, "spot": "jonas-rastas"},
+    {"id": "q-sukilimas", "q": "Kada įvyko sukilimas?", "a": "1794", "room": 2}
+  ],
+  "skipped": []
+}

@@ -1,0 +1,126 @@
+import { assertEquals } from "@std/assert";
+import { authorFor, cleanAuthor, creditsFrom, dropReason, isFreeLicense, photoFor, stripHtml, infoUrl, retryDelayMs } from "../tools/commons.js";
+
+const sample = (n) =>
+  JSON.parse(Deno.readTextFileSync(new URL(`./fixtures/commons/${n}.json`, import.meta.url)));
+const meta = (n) => sample(n).extmetadata;
+
+Deno.test("CC BY-SA with HTML author link", () => {
+  assertEquals(creditsFrom(meta("cc-by-sa-html-author")), {
+    author: "Melancolicsphere",
+    license: "CC BY-SA 3.0",
+    license_url: "https://creativecommons.org/licenses/by-sa/3.0",
+  });
+});
+
+Deno.test("public domain without LicenseUrl omits license_url", () => {
+  assertEquals(creditsFrom(meta("pd-no-license-url")), {
+    author: "Edward Mateusz Jan Römer",
+    license: "Public domain",
+  });
+});
+
+Deno.test("public domain without Artist is nežinomas", () => {
+  assertEquals(creditsFrom(meta("pd-no-author")), { author: "nežinomas", license: "Public domain" });
+});
+
+Deno.test("CC BY-SA without Artist gives null", () => {
+  assertEquals(creditsFrom(meta("cc-by-sa-no-author")), null);
+});
+
+Deno.test("no licence gives null", () => {
+  assertEquals(creditsFrom({ Artist: { value: "X" } }), null);
+  assertEquals(creditsFrom(undefined), null);
+});
+
+Deno.test("CC0 without Artist is nežinomas", () => {
+  assertEquals(creditsFrom({ LicenseShortName: { value: "CC0" } }), {
+    author: "nežinomas",
+    license: "CC0",
+  });
+});
+
+Deno.test("stripHtml drops hidden spans, tags and entities", () => {
+  assertEquals(stripHtml(meta("pd-hidden-span-author").Artist.value), "Unknown author");
+  assertEquals(stripHtml('<a href="x">A &amp; B</a>\n <b>C</b>'), "A & B C");
+});
+
+Deno.test("photoFor builds the pack photo object", () => {
+  assertEquals(photoFor("mini-person", "jpg", sample("cc-by-sa-html-author")), {
+    file: "img/mini-person.jpg",
+    author: "Melancolicsphere",
+    license: "CC BY-SA 3.0",
+    license_url: "https://creativecommons.org/licenses/by-sa/3.0",
+    source_url: "https://commons.wikimedia.org/wiki/File:Steponas.JPG",
+  });
+  assertEquals(photoFor("x", "jpg", sample("cc-by-sa-no-author")), null);
+});
+
+Deno.test("infoUrl encodes the Commons title", () => {
+  const u = new URL(infoUrl("Jonas Biliunas.jpg"));
+  assertEquals(u.origin, "https://commons.wikimedia.org");
+  assertEquals(u.searchParams.get("titles"), "File:Jonas Biliunas.jpg");
+  assertEquals(u.searchParams.get("iiprop"), "extmetadata|url");
+});
+
+Deno.test("dropReason names why credits are unusable", () => {
+  assertEquals(dropReason(null), "file not found");
+  assertEquals(dropReason({ descriptionurl: "u", extmetadata: {} }), "no licence");
+  assertEquals(dropReason(sample("cc-by-sa-no-author")), "no author, licence CC BY-SA 3.0");
+  assertEquals(
+    dropReason({ extmetadata: meta("cc-by-sa-html-author") }),
+    "no source url",
+  );
+  assertEquals(dropReason(sample("cc-by-sa-html-author")), null);
+});
+
+Deno.test("retryDelayMs: Retry-After seconds, HTTP date, else 5 s doubling", () => {
+  assertEquals(retryDelayMs("7", 0), 7000);
+  const now = Date.parse("2026-11-16T10:00:00Z");
+  assertEquals(retryDelayMs("Mon, 16 Nov 2026 10:00:30 GMT", 0, now), 30000);
+  assertEquals(retryDelayMs("Mon, 16 Nov 2026 09:00:00 GMT", 0, now), 1000);
+  assertEquals([null, undefined, "junk"].map((h) => retryDelayMs(h, 2)), [20000, 20000, 20000]);
+  assertEquals([0, 1, 2, 3, 4].map((n) => retryDelayMs(null, n)), [5000, 10000, 20000, 40000, 80000]);
+});
+
+Deno.test("retryDelayMs: caps long waits, rejects loose formats, floors at 1 s", () => {
+  const now = Date.parse("2026-11-16T10:00:00Z");
+  assertEquals(retryDelayMs("86400", 0), 120000);
+  assertEquals(retryDelayMs("Fri, 01 Jan 2100 00:00:00 GMT", 0, now), 120000);
+  assertEquals(retryDelayMs("0", 0), 1000);
+  assertEquals(["-5", "1.5", "1 2", "12/25/2030"].map((h) => retryDelayMs(h, 1, now)), [10000, 10000, 10000, 10000]);
+});
+
+Deno.test("cleanAuthor drops unknown-author placeholders and Commons boilerplate", () => {
+  const cases = [
+    ["Unknown author", ""], ["unknown", ""], ["Anonymous", ""], ["неизвестно", ""], ["н.", ""], ["  ", ""],
+    ["ltwiki", ""], ["nežinomas", ""], ["Nežinomas", ""], ["Uploaded by Arz", ""],
+    ["Rights: Maironio lietuvių literatūros muziejus", "Maironio lietuvių literatūros muziejus"],
+    ["Adomas Kliučinskis, uploaded by Rimantas Lazdynas", "Adomas Kliučinskis"],
+    ["The original uploader was Ganto at Esperanto Wikipedia.", "Ganto"],
+    ["ru:User:Russianname", "Russianname"],
+    ["User:Someone", "Someone"],
+    ["Andrius_Tapinas.jpg: Eetuatyv derivative work: Homo ergaster (talk)", "Eetuatyv, Homo ergaster"],
+    ["Jonas Zenkevičius / Jan Zienkiewicz (1825-1888)", "Jonas Zenkevičius / Jan Zienkiewicz (1825-1888)"],
+    ["Oswald Lange, Mitau", "Oswald Lange, Mitau"],
+    ["T. Dragunas", "T. Dragunas"],
+  ];
+  for (const [raw, want] of cases) assertEquals(cleanAuthor(raw), want, raw);
+});
+
+Deno.test("authorFor: nežinomas only on public domain or CC0, otherwise null", () => {
+  assertEquals(authorFor("Unknown author", "Public domain"), "nežinomas");
+  assertEquals(authorFor("неизвестно", "CC0"), "nežinomas");
+  assertEquals(authorFor("Anonymous", "PD-old"), "nežinomas");
+  assertEquals(authorFor("Unknown author", "CC BY-SA 4.0"), null);
+  assertEquals(authorFor("ru:User:Russianname", "CC BY-SA 3.0"), "Russianname");
+  assertEquals(isFreeLicense("Not public domain"), false);
+});
+
+Deno.test("creditsFrom normalises a placeholder author, and drops it on a non-free licence", () => {
+  assertEquals(creditsFrom({ LicenseShortName: { value: "Public domain" }, Artist: { value: "Anonymous" } }), {
+    author: "nežinomas",
+    license: "Public domain",
+  });
+  assertEquals(creditsFrom({ LicenseShortName: { value: "CC BY 4.0" }, Artist: { value: "Unknown author" } }), null);
+});
